@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hela Puzzle Web</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="floating-snouts" aria-hidden="true">
+    <span class="snout-roamer-x x1"><span class="snout-roamer-y y1"><span class="floating-snout s1"></span></span></span>
+    <span class="snout-roamer-x x2"><span class="snout-roamer-y y2"><span class="floating-snout s2"></span></span></span>
+    <span class="snout-roamer-x x3"><span class="snout-roamer-y y3"><span class="floating-snout s3"></span></span></span>
+    <span class="snout-roamer-x x4"><span class="snout-roamer-y y4"><span class="floating-snout s4"></span></span></span>
+    <span class="snout-roamer-x x5"><span class="snout-roamer-y y5"><span class="floating-snout s5"></span></span></span>
+    <span class="snout-roamer-x x6"><span class="snout-roamer-y y6"><span class="floating-snout s6"></span></span></span>
+    <span class="snout-roamer-x x7"><span class="snout-roamer-y y7"><span class="floating-snout s7"></span></span></span>
+    <span class="snout-roamer-x x8"><span class="snout-roamer-y y8"><span class="floating-snout s8"></span></span></span>
+    <span class="snout-roamer-x x9"><span class="snout-roamer-y y9"><span class="floating-snout s9"></span></span></span>
+    <span class="snout-roamer-x x10"><span class="snout-roamer-y y10"><span class="floating-snout s10"></span></span></span>
+  </div>
+
+  <div class="app-shell">
+    <header class="top-header">
+      <div class="brand-wrap">
+        <h1>Hela Puzzle Web</h1>
+        <p class="brand-subtitle">Farma Świnek i Dzików</p>
+      </div>
+      <div class="header-tools">
+        <span id="solvedCounter" class="counter-chip" aria-live="polite">Rozwiązane 0 / 64</span>
+        <button id="backToMenuBtn" class="small-btn hidden" type="button">Powrót do Menu</button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section id="menuView" class="view" aria-labelledby="menuHeading">
+        <div class="section-banner">
+          <h2 id="menuHeading" class="view-title">Tablica Zagadek Zagrodę Dzików</h2>
+          <div class="snout-badge" aria-hidden="true"></div>
+        </div>
+        <div id="puzzleGrid" class="puzzle-grid" role="grid" aria-label="Siatka wyboru zagadek"></div>
+      </section>
+
+      <section id="puzzleView" class="view hidden" aria-labelledby="puzzleTitle">
+        <div class="puzzle-top">
+          <div class="section-banner">
+            <h2 id="puzzleTitle" class="view-title">Zagadka 1: Coś na rozgrzewkę</h2>
+            <div class="tusk-badge" aria-hidden="true"></div>
+          </div>
+
+          <div class="answer-panel">
+            <label for="solutionInput" class="sr-only">Wejście rozwiązania</label>
+            <input id="solutionInput" type="text" placeholder="Wpisz swoje rozwiązanie">
+            <button id="markSolvedBtn" type="button">Sprawdź / Oznacz jako Rozwiązane</button>
+            <span id="statusBadge" class="status unsolved" aria-live="polite">Nierozwiązane</span>
+            <button id="resetPuzzleBtn" class="danger-btn" type="button">Resetuj Zagadkę</button>
+          </div>
+
+          <div class="puzzle-nav" aria-label="Nawigacja między zagadkami">
+            <button id="prevPuzzleBtn" class="small-btn" type="button">◀ Poprzednia</button>
+            <button id="nextPuzzleBtn" class="small-btn" type="button">Następna ▶</button>
+          </div>
+        </div>
+
+        <div class="puzzle-middle">
+          <div id="puzzleContent" class="puzzle-content">
+            <p><strong>Treść zagadki pojawia się tutaj...</strong></p>
+            <p>Szablon łamigłówki: "Mówię bez ust i słyszę bez uszu. Czym jestem?"</p>
+          </div>
+
+          
+
+        <div class="puzzle-bottom">
+          <label for="notesInput">Notatki</label>
+          <textarea id="notesInput" rows="8" placeholder="Wpisz notatki do zagadki tutaj..."></textarea>
+          <div class="notes-meta">
+            <span id="saveIndicator">Brak ostatnich zmian</span>
+          </div>
+        </div>
+        <div class="puzzle-pieces">
+            <div class="puzzle-piece" id="puzzlePiece1">
+              <img src="" alt="Element zagadki 1" class="piece-image">
+            </div>
+            <div class="puzzle-piece" id="puzzlePiece2">
+              <img src="" alt="Element zagadki 2" class="piece-image">
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="hint-menu">
+      <details id="hintsDetails">
+        <summary>Ukryte Podpowiedzi</summary>
+        <div id="hintsButtons" class="hints-buttons"></div>
+        <p id="hintsEmpty" class="hints-empty">Brak podpowiedzi dla tej zagadki.</p>
+      </details>
+    </footer>
+
+    <footer class="debug-menu">
+      <details>
+        <summary>Menu Debugowania</summary>
+        <div class="debug-buttons">
+          <button id="solveAllBtn" type="button" class="debug-btn">Rozwiąż Wszystkie Zagadki</button>
+          <button id="unsolveAllBtn" type="button" class="debug-btn">Usuń Rozwiązania Wszystkich Zagadek</button>
+          <button id="exportProgressBtn" type="button" class="debug-btn" title="Pobierz postęp">Eksportuj postęp</button>
+          <button id="importProgressBtn" type="button" class="debug-btn" title="Załaduj postęp">Importuj postęp</button>
+        </div>
+      </details>
+    </footer>
+  </div>
+
+  <div id="checkFeedback" class="check-feedback" aria-live="assertive" aria-hidden="true">
+    <div class="check-feedback-card">
+      <p id="checkFeedbackTitle" class="check-feedback-title">Wynik</p>
+      <p id="checkFeedbackText" class="check-feedback-text">Sprawdź odpowiedź.</p>
+    </div>
+  </div>
+
+  <div id="hintPopup" class="hint-popup" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="hintPopupTitle">
+    <div class="hint-popup-card">
+      <p id="hintPopupTitle" class="hint-popup-title">Podpowiedź</p>
+      <p id="hintPopupText" class="hint-popup-text">Ta podpowiedź jest ukryta.</p>
+      <div class="hint-popup-actions">
+        <button id="hintRevealBtn" type="button">Okryj podpowiedź</button>
+        <button id="hintCloseBtn" type="button" class="small-btn">Zamknij</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
