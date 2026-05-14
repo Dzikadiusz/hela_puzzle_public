@@ -32,6 +32,7 @@
   };
   const PUZZLE_6_TARGET_MELODY = ["C4", "E4", "G4", "E4", "C4"];
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const PUZZLE_12_DEBUG_MODE = true;
 
   // Centralized puzzle data: define title, content and solution for each puzzle (1-64)
   // Edit these to customize each puzzle
@@ -52,11 +53,8 @@
   };
   PUZZLE_DATA[2] = {
     title: "Zagadka 2: Na głowie",
-    content: `<div style="position: relative; background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><defs><style>.map-bg { fill: %23e8f4f8; stroke: %23999; stroke-width: 1; } .map-label { font-size: 12px; fill: %23666; }</style></defs><rect width=%22400%22 height=%22300%22 fill=%22%23f0f8ff%22/><path d=%22M50 80 L120 60 L150 90 L140 140 L80 150 Z%22 class=%22map-bg%22/><path d=%22M160 70 L200 60 L220 100 L200 130 Z%22 class=%22map-bg%22/><path d=%22M70 180 L150 170 L160 220 L90 230 Z%22 class=%22map-bg%22/><text x=%2280%22 y=%22110%22 class=%22map-label%22>Polska</text></svg>') center/cover no-repeat; background-attachment: fixed; transform: rotate(180deg); padding: 60px 20px; border-radius: 8px; opacity: 0.8; min-height: 200px; display: flex; align-items: center; justify-content: center;">
-<div style="transform: rotate(180deg); text-align: center;">
-<p style="font-size: 18px; margin: 0; color: %23333;"></p>
-<div style="font-family: 'Courier New', 'Courier Prime', monospace; font-size: 120px; font-weight: bold; letter-spacing: 15px; text-align: center; line-height: 1; color: %23333; margin-top: 20px;">8079</div>
-</div>
+    content: `<div style="display: grid; place-items: center;">
+  <img src="img/Z2.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
 </div>`,
     solution: "test"
   };
@@ -111,9 +109,9 @@
     solution: "fortepian"
   };
   PUZZLE_DATA[7] = {
-    title: "Zagadka 7: Szyfr Cezara",
+    title: "Zagadka 7: Pechowy cesarz",
     content: `<div class="caesar-helper">
-  <p><strong>TODO</p>
+  <p><strong>xelcgbtensvn</p>
   <div class="caesar-row-wrap">
     <div class="caesar-row">
       <button type="button" class="caesar-shift-btn" data-caesar-row="top" data-caesar-shift="-1" aria-label="Przesun wiersz A w lewo">◀</button>
@@ -137,10 +135,10 @@
   
   <button type="button" id="puzzle7Reset" class="small-btn">Resetuj przesuniecia</button>
 </div>`,
-    solution: ""
+    solution: "kryptografia"
   };
   PUZZLE_DATA[8] = {
-    title: "Zagadka 8",
+    title: "Zagadka 8: Dziwne liczby",
     content: `<p><strong><center>43.51474950100621, 16.443521243705444</strong></p>`,
     solution: "Split"
   };
@@ -152,11 +150,12 @@
     solution: "Rabat"
   };
   PUZZLE_DATA[10] = {
-    title: "Zagadka 10",
-    content: `<div style="display: grid; place-items: center;">
-  <img src="img/dachy.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
+    title: "Zagadka 10: Gdzie on się podział?",
+    content: `<div class="puzzle10-image-wrap">
+  <img src="img/dachy.png" alt="" class="puzzle10-image">
+  <button type="button" class="puzzle-hotspot-btn" aria-label="Ukryty punkt na obrazku" title="Ukryty punkt na obrazku"></button>
 </div>`,
-    solution: ""
+    solution: "Filuś"
   };
   PUZZLE_DATA[11] = {
     title: "Zagadka 11: Czas Prawdy",
@@ -166,7 +165,50 @@
   <p><strong>Dwa filary, dwie przepaście...</strong></p>
   <p id="puzzle11RevealStatus" aria-live="polite"></p>
 </div>`,
-    solution: "jedenasciejedenascie"
+    solution: "todo"
+  };
+  PUZZLE_DATA[12] = {
+    title: "Zagadka 12: Stare zamki są pełne potworów...",
+    content: `<div class="puzzle12-image-wrap">
+  <img src="img/20230610_140159.jpg" alt="" class="puzzle12-image">
+  <div class="puzzle-hover-hint" title="Łeeeee, co to jest???"></div>
+</div>`,
+    solution: "pająk",
+    hint1: "W starych zamkach jest bardzo ciemno...",
+    hint2: "Skup się na ciemniejszych obszarach zdjęcia, a może znajdziesz podpowiedź odnośnie tego gdzie szukać rozwiązania...",
+    hint3: "Może jest jakiś sposób żeby wydobyć więcej informacji z tego zdjęcia?", 
+    hint4: "Pobaw się jasnością, kontrastem, nasyceniem..."
+  };
+  PUZZLE_DATA[13] = {
+    title: "Zagadka 13: Hej, ale to przecież nie są mapy!",
+    content: `<div style="display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); align-items:start;">
+  <img src="https://flagcdn.com/w320/ke.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/ao.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/ro.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/tr.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/om.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/gr.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/rw.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/af.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/fi.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/in.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+  <img src="https://flagcdn.com/w320/ad.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
+</div>`,
+    solution: "weksylologia"
+  };
+  PUZZLE_DATA[19] = {
+    //TODO
+    title: "Zagadka 19: Czy go słyszysz?",
+    content: `<div class="time-lock-puzzle">
+  <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
+  <p id="puzzle19MoonStatus" aria-live="polite"></p>
+</div>`,
+    solution: "TODO"
+  };
+  PUZZLE_DATA[20] = {
+    title: "Zagadka 20",
+    content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
+    solution: "panika"
   };
   const App = {
     state: null,
@@ -174,6 +216,8 @@
     checkFeedbackTimer: null,
     activeHintContext: null,
     audioContext: null,
+    meowAudio: null,
+    howlAudio: null,
     puzzle6PlayedNotes: [],
     puzzle7Shifts: {
       top: 0,
@@ -199,6 +243,7 @@
     },
 
     init() {
+      document.body.classList.toggle("puzzle12-debug-mode", PUZZLE_12_DEBUG_MODE);
       this.cacheElements();
       this.state = this.loadState();
       this.ensureHintsState();
@@ -384,6 +429,12 @@
       });
 
       this.els.puzzleContent.addEventListener("click", (event) => {
+        const hotspotButton = event.target.closest(".puzzle-hotspot-btn");
+        if (hotspotButton) {
+          this.handlePuzzle10HotspotClick();
+          return;
+        }
+
         const caesarShiftBtn = event.target.closest("[data-caesar-row][data-caesar-shift]");
         if (caesarShiftBtn) {
           this.handlePuzzle7Shift(
@@ -401,6 +452,11 @@
 
         if (event.target.id === "puzzle11RevealBtn") {
           this.handlePuzzle11RevealAttempt();
+          return;
+        }
+
+        if (event.target.id === "puzzle19MoonBtn") {
+          this.handlePuzzle19MoonAttempt();
           return;
         }
 
@@ -524,12 +580,17 @@
       this.saveState();
       this.renderPuzzleView();
       this.showPuzzleView();
+
+      if (this.state.selectedPuzzle === 19) {
+        this.playHowlSound();
+      }
     },
 
     showMenuView() {
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
       this.els.backToMenuBtn.classList.add("hidden");
+      document.body.classList.remove("puzzle19-night-sky");
       this.playViewEntrance(this.els.menuView);
       this.renderMenuSelectionState();
     },
@@ -616,6 +677,8 @@
         title: `Zagadka ${id}`,
         content: `<p><strong>Treść zagadki dla zagadki ${id}...</strong></p>`
       };
+
+      document.body.classList.toggle("puzzle19-night-sky", id === 19);
 
       this.els.puzzleTitle.textContent = puzzleData.title;
       this.els.solutionInput.value = puzzle.solution;
@@ -849,7 +912,7 @@
           statusEl.textContent = message;
         }
         this.setSaveIndicator("Przycisk działa tylko czasem");
-        this.showCheckFeedback("error", "Za wcześnie lub za późno", "Spróbuj o innej godzinie");
+        this.showCheckFeedback("error", "Za wcześnie lub za późno", "");
         return;
       }
 
@@ -860,6 +923,159 @@
       }
       this.setSaveIndicator("Rozwiązanie ujawnione o 11:11.");
       this.showCheckFeedback("success", "Czas trafiony!", "Rozwiązanie zostało ujawnione.");
+    },
+
+    getMoonPhaseFraction(date = new Date()) {
+      const synodicMonthDays = 29.530588853;
+      const knownNewMoonUtc = Date.UTC(2000, 0, 6, 18, 14, 0);
+      const daysSinceKnownNewMoon = (date.getTime() - knownNewMoonUtc) / 86400000;
+      const currentCycleDay = ((daysSinceKnownNewMoon % synodicMonthDays) + synodicMonthDays) % synodicMonthDays;
+      return currentCycleDay / synodicMonthDays;
+    },
+
+    isFullMoon(date = new Date()) {
+      const phase = this.getMoonPhaseFraction(date);
+      return Math.abs(phase - 0.5) <= 0.035;
+    },
+
+    getMoonPhaseRepresentation(phaseFraction) {
+      const normalizedPhase = ((phaseFraction % 1) + 1) % 1;
+      const phaseIndex = Math.floor((((normalizedPhase + 0.0625) % 1) * 8));
+      const phaseVariants = [
+        { icon: "🌑", label: "Now" },
+        { icon: "🌒", label: "Przybywajacy sierp" },
+        { icon: "🌓", label: "Pierwsza kwadra" },
+        { icon: "🌔", label: "Przybywajacy garb" },
+        { icon: "🌕", label: "Pelnia" },
+        { icon: "🌖", label: "Ubywajacy garb" },
+        { icon: "🌗", label: "Ostatnia kwadra" },
+        { icon: "🌘", label: "Ubywajacy sierp" }
+      ];
+
+      return phaseVariants[phaseIndex];
+    },
+
+    handlePuzzle19MoonAttempt() {
+      if (this.state.selectedPuzzle !== 19) {
+        return;
+      }
+
+      const statusEl = document.getElementById("puzzle19MoonStatus");
+      const phase = this.getMoonPhaseFraction(new Date());
+      const illuminationPercent = Math.round(((1 - Math.cos(2 * Math.PI * phase)) / 2) * 100);
+      const phaseView = this.getMoonPhaseRepresentation(phase);
+      const phaseText = `${phaseView.icon} ${phaseView.label} (${illuminationPercent}%)`;
+
+      if (statusEl) {
+        statusEl.textContent = `Aktualna faza Ksiezyca: ${phaseText}`;
+      }
+
+      if (!this.isFullMoon()) {
+        const message = `To jeszcze nie pelnia. ${phaseText}`;
+        this.setSaveIndicator("Przycisk aktywny tylko podczas pelni.");
+        this.showMoonPhasePopup("error", phaseView.icon, "To jeszcze nie czas...");
+        return;
+      }
+
+      if (statusEl) {
+        statusEl.textContent = `Pelnia! ${phaseText}`;
+      }
+
+      const solution = this.getExpectedSolution(19);
+      if (solution) {
+        this.els.solutionInput.value = solution;
+      }
+
+      this.setSaveIndicator("Pelnia wykryta.");
+      this.showMoonPhasePopup("success", phaseView.icon, "Dzis jest pelnia!");
+    },
+
+    showMoonPhasePopup(type, phaseIcon, labelText) {
+      const overlay = this.els.checkFeedback;
+      const titleEl = this.els.checkFeedbackTitle;
+      const textEl = this.els.checkFeedbackText;
+      if (!overlay || !titleEl || !textEl) {
+        return;
+      }
+
+      window.clearTimeout(this.checkFeedbackTimer);
+      titleEl.textContent = phaseIcon;
+      textEl.textContent = labelText || "";
+      overlay.classList.remove("success", "error", "show");
+      overlay.classList.add(type, "moon-phase-only");
+
+      void overlay.offsetWidth;
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden", "false");
+
+      this.checkFeedbackTimer = window.setTimeout(() => {
+        overlay.classList.remove("show", "moon-phase-only");
+        overlay.setAttribute("aria-hidden", "true");
+      }, 1600);
+    },
+
+    playSynthMeowFallback() {
+      const context = this.ensureAudioContext();
+      if (!context) {
+        return;
+      }
+
+      const now = context.currentTime;
+      const gainNode = context.createGain();
+      const oscillator = context.createOscillator();
+
+      oscillator.type = "sawtooth";
+      oscillator.frequency.setValueAtTime(640, now);
+      oscillator.frequency.exponentialRampToValueAtTime(300, now + 0.09);
+      oscillator.frequency.exponentialRampToValueAtTime(430, now + 0.2);
+
+      gainNode.gain.setValueAtTime(0.0001, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.2, now + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(context.destination);
+      oscillator.start(now);
+      oscillator.stop(now + 0.26);
+    },
+
+    playMeowSound() {
+      if (!this.meowAudio) {
+        this.meowAudio = new Audio("sounds/meow.mp3");
+        this.meowAudio.preload = "auto";
+      }
+
+      this.meowAudio.currentTime = 0;
+      const playPromise = this.meowAudio.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          this.playSynthMeowFallback();
+        });
+      }
+    },
+
+    playHowlSound() {
+      if (!this.howlAudio) {
+        this.howlAudio = new Audio("sounds/howl.mp3");
+        this.howlAudio.preload = "auto";
+      }
+
+      this.howlAudio.currentTime = 0;
+      const playPromise = this.howlAudio.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          // Ignore blocked autoplay or missing codec errors.
+        });
+      }
+    },
+
+    handlePuzzle10HotspotClick() {
+      if (this.state.selectedPuzzle !== 10) {
+        return;
+      }
+
+      this.playMeowSound();
+      this.showCheckFeedback("success", "Miau!", "Znalazłaś Filusia!");
     },
 
     getPuzzleHintEntries(puzzleId) {
@@ -1058,7 +1274,7 @@
       window.clearTimeout(this.checkFeedbackTimer);
       titleEl.textContent = title;
       textEl.textContent = message;
-      overlay.classList.remove("success", "error", "show");
+      overlay.classList.remove("success", "error", "show", "moon-phase-only");
       overlay.classList.add(type);
 
       // Force reflow so the animation can retrigger when checking quickly.
