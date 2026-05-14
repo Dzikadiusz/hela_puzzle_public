@@ -34,14 +34,20 @@
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const PUZZLE_12_DEBUG_MODE = true;
 
-  // Centralized puzzle data: define title, content and solution for each puzzle (1-64)
+  // Centralized puzzle data: define title, content, solution and optional partial_solution for each puzzle (1-64)
   // Edit these to customize each puzzle
   const PUZZLE_DATA = {};
   for (let i = 1; i <= TOTAL_PUZZLES; i += 1) {
     PUZZLE_DATA[i] = {
       title: `Zagadka ${i}`,
       content: `<p><strong>Treść zagadki ${i}...</strong></p><p>Dodaj specjalną treść dla tej zagadki tutaj.</p>`,
-      solution: ""
+      solution: "",
+      // Optional shape - array of partial solutions:
+      // partial_solution: [
+      //   { key: "fragment1", message: "To dobry trop." },
+      //   { key: "fragment2", message: "Prawie!" }
+      // ]
+      partial_solution: []
     };
   }
 
@@ -49,14 +55,22 @@
   PUZZLE_DATA[1] = {
     title: "Zagadka 1: Na Rozgrzewkę",
     content: `<p><strong>Aby zaliczyć zagadkę musisz wymyślić rozwiązanie, wpisać je w pole powyżej  i naciśnij przycisk Sprawdź. Rozwiązanie tej zagadki to hasło: początek</strong></p>`,
-    solution: "początek"
+    solution: "początek",
+    partial_solution: [
+      { key: "pocz", message: "Dobry początek! Dodaj jeszcze liter." },
+      { key: "począ", message: "Bardzo blisko! Dokończ wyraz." }
+    ]
   };
   PUZZLE_DATA[2] = {
+    //TODO hint
     title: "Zagadka 2: Na głowie",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/Z2.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
 </div>`,
-    solution: "test"
+    solution: "glob",
+    partial_solution: [
+      { key: "glo", message: "Bardzo blisko! Dodaj jeszcze jedną literę na koniec." }
+    ]
   };
   PUZZLE_DATA[3] = {
     title: "Zagadka 3: Coś Szybkiego",
@@ -67,12 +81,20 @@
 <p>KWIECIEŃ = 9  
 <p>MAJ = ?
 </p>`,
-    solution: "3"
+    solution: "3",
+    partial_solution: [
+      { key: "2", message: "Blisko! Ale liczba jest mniejsza." },
+      { key: "4", message: "Blisko! Ale liczba jest większa." }
+    ]
   };
   PUZZLE_DATA[4] = {
    title: "Zagadka 4: Coś tu nie pasuje...",
     content: "<p><strong>2, 4, 8, 16, 31, 64, 128",
-    solution: "31"
+    solution: "31",
+    partial_solution: [
+      { key: "3", message: "Znaleźliśmy pierwszą cyfrę! Która druga?" },
+      { key: "1", message: "To druga cyfra, ale gdzie pierwsza?" }
+    ]
   };
   PUZZLE_DATA[5] = {
    title: "Zagadka 5: Bez sensu?",
@@ -84,7 +106,7 @@
 <p>4 = 6
 <p>5 = ?
 </p>`,
-    solution: "31"
+    solution: "4"
   };
   PUZZLE_DATA[6] = {
     title: "Zagadka 6: Pianino",
@@ -135,7 +157,11 @@
   
   <button type="button" id="puzzle7Reset" class="small-btn">Resetuj przesuniecia</button>
 </div>`,
-    solution: "kryptografia"
+    solution: "kryptografia",
+    partial_solution: [
+      { key: "krypto", message: "Połowa drogi! Dodaj 6 liter na koniec." },
+      { key: "kryptogr", message: "Bardzo blisko! Jeszcze 2 litery." }
+    ]
   };
   PUZZLE_DATA[8] = {
     title: "Zagadka 8: Dziwne liczby",
@@ -194,7 +220,34 @@
   <img src="https://flagcdn.com/w320/in.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
   <img src="https://flagcdn.com/w320/ad.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
 </div>`,
-    solution: "weksylologia"
+    solution: "weksylologia",
+    partial_solution: [
+      { key: "weksylo", message: "Bardzo dobrze! Dokończ ostatnie litery." },
+      { key: "weksyleg", message: "Prawie! Jeszcze jedna litera na koniec." }
+    ],
+    hint1: "Ta zagadka dotyczy państw...",
+    hint2: "Nie wszystkie literki będą ci potrzebne...",
+
+  };
+  PUZZLE_DATA[15] = {
+    title: "Zagadka 15: Sonar",
+    content: `<div class="sonar-puzzle">
+  <p><strong>Włącz sonar i naprowadź łódź podwodną na cel.</strong></p>
+  <div class="sonar-controls">
+    <button type="button" id="puzzle15SonarToggle" class="small-btn" aria-pressed="false">Sonar: OFF</button>
+    <p id="puzzle15Status" class="sonar-status" aria-live="polite">Sonar wyłączony.</p>
+  </div>
+  <div id="puzzle15Field" class="sonar-field" role="img" aria-label="Pole sonaru z łodzią podwodną i celem">
+    <div id="puzzle15Target" class="sonar-target" aria-hidden="true"></div>
+    <div id="puzzle15Submarine" class="sonar-submarine" aria-hidden="true">
+      <span class="sonar-submarine-tower"></span>
+      <span class="sonar-submarine-tail"></span>
+      <span class="sonar-submarine-window w1"></span>
+      <span class="sonar-submarine-window w2"></span>
+    </div>
+  </div>
+</div>`,
+    solution: ""
   };
   PUZZLE_DATA[19] = {
     //TODO
@@ -218,11 +271,13 @@
     audioContext: null,
     meowAudio: null,
     howlAudio: null,
+    sonarAudio: null,
     puzzle6PlayedNotes: [],
     puzzle7Shifts: {
       top: 0,
       bottom: 0
     },
+    puzzle15State: null,
 
     els: {
       menuView: null,
@@ -338,6 +393,17 @@
         // If a solution is configured, require exact match. If not, allow any answer.
         if (expectedSolution !== null) {
           if (!this.isMatchingSolution(inputValue, expectedSolution)) {
+            const partialSolution = this.getPartialSolution(this.state.selectedPuzzle, inputValue);
+            if (partialSolution) {
+              this.setSaveIndicator("To jest częściowe rozwiązanie. Spróbuj dopisać resztę.");
+              this.showCheckFeedback(
+                "warning",
+                partialSolution.title,
+                partialSolution.message
+              );
+              return;
+            }
+
             this.setSaveIndicator("Niepoprawne rozwiązanie. Spróbuj ponownie.");
             this.showCheckFeedback(
               "error",
@@ -457,6 +523,11 @@
 
         if (event.target.id === "puzzle19MoonBtn") {
           this.handlePuzzle19MoonAttempt();
+          return;
+        }
+
+        if (event.target.id === "puzzle15SonarToggle") {
+          this.togglePuzzle15Sonar();
           return;
         }
 
@@ -587,6 +658,7 @@
     },
 
     showMenuView() {
+      this.stopPuzzle15Simulation();
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
       this.els.backToMenuBtn.classList.add("hidden");
@@ -671,6 +743,7 @@
     },
 
     renderPuzzleView() {
+      this.stopPuzzle15Simulation();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
       const puzzleData = PUZZLE_DATA[id] || {
@@ -703,6 +776,10 @@
 
       if (id === 7) {
         this.resetPuzzle7Helper();
+      }
+
+      if (id === 15) {
+        this.initPuzzle15Simulation();
       }
 
       if (puzzle.lastUpdated) {
@@ -1001,7 +1078,7 @@
       window.clearTimeout(this.checkFeedbackTimer);
       titleEl.textContent = phaseIcon;
       textEl.textContent = labelText || "";
-      overlay.classList.remove("success", "error", "show");
+      overlay.classList.remove("success", "warning", "error", "show");
       overlay.classList.add(type, "moon-phase-only");
 
       void overlay.offsetWidth;
@@ -1076,6 +1153,207 @@
 
       this.playMeowSound();
       this.showCheckFeedback("success", "Miau!", "Znalazłaś Filusia!");
+    },
+
+    initPuzzle15Simulation() {
+      if (this.state.selectedPuzzle !== 15) {
+        return;
+      }
+
+      const fieldEl = document.getElementById("puzzle15Field");
+      const subEl = document.getElementById("puzzle15Submarine");
+      const targetEl = document.getElementById("puzzle15Target");
+      const toggleEl = document.getElementById("puzzle15SonarToggle");
+      const statusEl = document.getElementById("puzzle15Status");
+      if (!fieldEl || !subEl || !targetEl || !toggleEl) {
+        return;
+      }
+
+      const bounds = fieldEl.getBoundingClientRect();
+      const margin = 28;
+      const targetX = margin + Math.random() * Math.max(1, bounds.width - margin * 2);
+      const targetY = margin + Math.random() * Math.max(1, bounds.height - margin * 2);
+
+      this.puzzle15State = {
+        enabled: false,
+        fieldEl,
+        subEl,
+        targetEl,
+        toggleEl,
+        statusEl,
+        targetX,
+        targetY,
+        cursorX: bounds.width * 0.5,
+        cursorY: bounds.height * 0.5,
+        subX: bounds.width * 0.25,
+        subY: bounds.height * 0.75,
+        velX: 0,
+        velY: 0,
+        rafId: null,
+        pingTimerId: null,
+        pointerHandler: null
+      };
+
+      targetEl.style.left = `${targetX}px`;
+      targetEl.style.top = `${targetY}px`;
+      subEl.style.left = `${this.puzzle15State.subX}px`;
+      subEl.style.top = `${this.puzzle15State.subY}px`;
+      fieldEl.classList.remove("sonar-active");
+      if (statusEl) {
+        statusEl.textContent = "Sonar wyłączony.";
+      }
+      toggleEl.setAttribute("aria-pressed", "false");
+      toggleEl.textContent = "Sonar: OFF";
+    },
+
+    togglePuzzle15Sonar() {
+      const sonar = this.puzzle15State;
+      if (!sonar || this.state.selectedPuzzle !== 15) {
+        return;
+      }
+
+      sonar.enabled = !sonar.enabled;
+      sonar.toggleEl.setAttribute("aria-pressed", sonar.enabled ? "true" : "false");
+      sonar.toggleEl.textContent = sonar.enabled ? "Sonar: ON" : "Sonar: OFF";
+      sonar.fieldEl.classList.toggle("sonar-active", sonar.enabled);
+
+      if (!sonar.enabled) {
+        this.stopPuzzle15TimersAndAudio();
+        if (sonar.statusEl) {
+          sonar.statusEl.textContent = "Sonar wyłączony.";
+        }
+        return;
+      }
+
+      sonar.pointerHandler = (event) => {
+        const rect = sonar.fieldEl.getBoundingClientRect();
+        sonar.cursorX = event.clientX - rect.left;
+        sonar.cursorY = event.clientY - rect.top;
+      };
+      sonar.fieldEl.addEventListener("pointermove", sonar.pointerHandler);
+      if (sonar.statusEl) {
+        sonar.statusEl.textContent = "Sonar aktywny. Prowadź łódź kursorem.";
+      }
+
+      this.updatePuzzle15Frame();
+      this.schedulePuzzle15Ping(120);
+    },
+
+    stopPuzzle15TimersAndAudio() {
+      const sonar = this.puzzle15State;
+      if (!sonar) {
+        return;
+      }
+
+      if (sonar.rafId) {
+        window.cancelAnimationFrame(sonar.rafId);
+        sonar.rafId = null;
+      }
+
+      if (sonar.pingTimerId) {
+        window.clearTimeout(sonar.pingTimerId);
+        sonar.pingTimerId = null;
+      }
+
+      if (sonar.pointerHandler) {
+        sonar.fieldEl.removeEventListener("pointermove", sonar.pointerHandler);
+        sonar.pointerHandler = null;
+      }
+
+      if (this.sonarAudio) {
+        this.sonarAudio.pause();
+        this.sonarAudio.currentTime = 0;
+      }
+    },
+
+    stopPuzzle15Simulation() {
+      if (!this.puzzle15State) {
+        return;
+      }
+
+      this.stopPuzzle15TimersAndAudio();
+      this.puzzle15State = null;
+    },
+
+    updatePuzzle15Frame() {
+      const sonar = this.puzzle15State;
+      if (!sonar || !sonar.enabled || this.state.selectedPuzzle !== 15) {
+        return;
+      }
+
+      const rect = sonar.fieldEl.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+      const desiredX = clamp(sonar.cursorX, 20, width - 20);
+      const desiredY = clamp(sonar.cursorY, 20, height - 20);
+      const accel = 0.012;
+      const drag = 0.94;
+      const maxSpeed = 0.24;
+
+      sonar.velX += (desiredX - sonar.subX) * accel;
+      sonar.velY += (desiredY - sonar.subY) * accel;
+      sonar.velX *= drag;
+      sonar.velY *= drag;
+
+      const speed = Math.hypot(sonar.velX, sonar.velY);
+      if (speed > maxSpeed) {
+        const speedScale = maxSpeed / speed;
+        sonar.velX *= speedScale;
+        sonar.velY *= speedScale;
+      }
+
+      sonar.subX = clamp(sonar.subX + sonar.velX, 16, width - 16);
+      sonar.subY = clamp(sonar.subY + sonar.velY, 16, height - 16);
+
+      sonar.subEl.style.left = `${sonar.subX}px`;
+      sonar.subEl.style.top = `${sonar.subY}px`;
+      sonar.subEl.style.transform = "translate(-50%, -50%)";
+
+      sonar.rafId = window.requestAnimationFrame(() => {
+        this.updatePuzzle15Frame();
+      });
+    },
+
+    schedulePuzzle15Ping(delayMs = 220) {
+      const sonar = this.puzzle15State;
+      if (!sonar || !sonar.enabled || this.state.selectedPuzzle !== 15) {
+        return;
+      }
+
+      sonar.pingTimerId = window.setTimeout(() => {
+        const activeSonar = this.puzzle15State;
+        if (!activeSonar || !activeSonar.enabled || this.state.selectedPuzzle !== 15) {
+          return;
+        }
+
+        if (!this.sonarAudio) {
+          this.sonarAudio = new Audio("sounds/sonar.mp3");
+          this.sonarAudio.preload = "auto";
+        }
+
+        this.sonarAudio.currentTime = 0;
+        const playPromise = this.sonarAudio.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {
+            // Ignore blocked autoplay or rapid replay errors.
+          });
+        }
+
+        const dx = activeSonar.targetX - activeSonar.subX;
+        const dy = activeSonar.targetY - activeSonar.subY;
+        const distance = Math.hypot(dx, dy);
+        const maxDistance = Math.hypot(activeSonar.fieldEl.clientWidth, activeSonar.fieldEl.clientHeight) || 1;
+        const normalized = Math.min(1, distance / maxDistance);
+        const nextDelay = Math.round(220 + normalized * 1480);
+
+        if (activeSonar.statusEl) {
+          activeSonar.statusEl.textContent = `Dystans do celu: ${Math.round(distance)} px`;
+        }
+
+        this.schedulePuzzle15Ping(nextDelay);
+      }, delayMs);
     },
 
     getPuzzleHintEntries(puzzleId) {
@@ -1238,6 +1516,32 @@
       return solution.length > 0 ? solution : null;
     },
 
+    getPartialSolution(puzzleId, inputValue) {
+      const puzzleData = PUZZLE_DATA[puzzleId];
+      if (!puzzleData || !Array.isArray(puzzleData.partial_solution) || puzzleData.partial_solution.length === 0) {
+        return null;
+      }
+
+      for (const partial of puzzleData.partial_solution) {
+        if (typeof partial === "object" && partial !== null) {
+          const key = typeof partial.key === "string" ? partial.key.trim() : "";
+          if (key.length > 0 && inputValue === key) {
+            const message = typeof partial.message === "string" && partial.message.trim().length > 0
+              ? partial.message.trim()
+              : "To część poprawnej odpowiedzi. Dopracuj hasło.";
+
+            return {
+              key,
+              message,
+              title: "Prawie!"
+            };
+          }
+        }
+      }
+
+      return null;
+    },
+
     isMatchingSolution(inputValue, expectedSolution) {
       // Strict, case-sensitive match. You can adjust to .toLowerCase() for case-insensitive if needed.
       return inputValue.trim() === expectedSolution;
@@ -1274,7 +1578,7 @@
       window.clearTimeout(this.checkFeedbackTimer);
       titleEl.textContent = title;
       textEl.textContent = message;
-      overlay.classList.remove("success", "error", "show", "moon-phase-only");
+      overlay.classList.remove("success", "warning", "error", "show", "moon-phase-only");
       overlay.classList.add(type);
 
       // Force reflow so the animation can retrigger when checking quickly.
@@ -1285,7 +1589,7 @@
       this.checkFeedbackTimer = window.setTimeout(() => {
         overlay.classList.remove("show");
         overlay.setAttribute("aria-hidden", "true");
-      }, type === "success" ? 1800 : 1400);
+      }, type === "success" ? 1800 : (type === "warning" ? 2200 : 1400));
     },
 
     playViewEntrance(viewEl) {

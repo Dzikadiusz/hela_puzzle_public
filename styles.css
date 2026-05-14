@@ -619,6 +619,116 @@ textarea:focus-visible {
   display: block;
 }
 
+.sonar-puzzle {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sonar-controls {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sonar-status {
+  margin: 0;
+  color: #5b4530;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.sonar-field {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  border-radius: 0.7rem;
+  border: 1px solid #b7d6da;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(53, 143, 164, 0.22) 0%, rgba(16, 68, 92, 0.42) 55%, rgba(7, 26, 40, 0.7) 100%),
+    repeating-radial-gradient(circle at center, rgba(112, 205, 217, 0.16) 0 14px, rgba(28, 91, 112, 0.08) 14px 28px);
+}
+
+.sonar-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(169, 230, 240, 0.04), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+.sonar-target {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #f43f5e;
+  box-shadow: 0 0 0 7px rgba(244, 63, 94, 0.18), 0 0 10px rgba(244, 63, 94, 0.55);
+  transform: translate(-50%, -50%);
+}
+
+.sonar-submarine {
+  position: absolute;
+  width: 54px;
+  height: 24px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffe7a0 0%, #e2b84f 60%, #c08a2f 100%);
+  border: 1px solid rgba(78, 51, 12, 0.45);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.28);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.sonar-submarine-tower {
+  position: absolute;
+  width: 18px;
+  height: 11px;
+  left: 18px;
+  top: -8px;
+  border-radius: 5px 5px 2px 2px;
+  background: linear-gradient(180deg, #f8d57d 0%, #cb9a34 100%);
+  border: 1px solid rgba(78, 51, 12, 0.4);
+}
+
+.sonar-submarine-tail {
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  right: -8px;
+  top: 6px;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  background: #c58d2f;
+}
+
+.sonar-submarine-window {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  top: 9px;
+  background: #3bb6d5;
+  border: 1px solid rgba(26, 59, 76, 0.75);
+}
+
+.sonar-submarine-window.w1 {
+  left: 14px;
+}
+
+.sonar-submarine-window.w2 {
+  left: 24px;
+}
+
+.sonar-field.sonar-active {
+  cursor: crosshair;
+}
+
+.sonar-field.sonar-active .sonar-submarine {
+  opacity: 1;
+}
+
 .puzzle10-image-wrap {
   position: relative;
   width: 100%;
@@ -1011,6 +1121,12 @@ body.hotspot-debug-mode .puzzle-hotspot-btn:focus-visible {
   animation: errorShake 560ms cubic-bezier(0.19, 0.78, 0.3, 0.98) both;
 }
 
+.check-feedback.warning .check-feedback-card {
+  background: linear-gradient(150deg, #8a5a00, #e3ad1f 55%, #ffe88a 100%);
+  color: #3d2800;
+  animation: successBlast 820ms cubic-bezier(0.2, 0.75, 0.24, 1) both;
+}
+
 .check-feedback.moon-phase-only .check-feedback-title {
   font-size: clamp(4.2rem, 13vw, 7.2rem);
   line-height: 1;
@@ -1050,6 +1166,10 @@ body.hotspot-debug-mode .puzzle-hotspot-btn:focus-visible {
   .caesar-alphabet {
     letter-spacing: 0.16em;
     font-size: 1.44rem;
+  }
+
+  .sonar-field {
+    min-height: 220px;
   }
 
   .header-tools {
