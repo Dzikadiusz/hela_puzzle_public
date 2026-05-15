@@ -1,25 +1,27 @@
+
+  
 (() => {
   const TOTAL_PUZZLES = 64;
   const STORAGE_KEY = "puzzleAppState";
   // Map each puzzle (1-64) to a color from the workflow icon. When solved, displays this color.
   // Grid layout: 8 cols × 8 rows
   const PUZZLE_COLORS = {
-    // Row 1: Empty(bg), Box, Box, Box, Box, Box, Box, Empty
-    1: "#f0f0f0", 2: "#4a90e2", 3: "#4a90e2", 4: "#4a90e2", 5: "#4a90e2", 6: "#4a90e2", 7: "#4a90e2", 8: "#f0f0f0",
-    // Row 2: Box, Box, Arrow, Arrow, Arrow, Arrow, Arrow, Box
-    9: "#4a90e2", 10: "#4a90e2", 11: "#f39c12", 12: "#f39c12", 13: "#f39c12", 14: "#f39c12", 15: "#f39c12", 16: "#7cb342",
-    // Row 3: Empty, Empty, Empty, Box, Box, Box, Empty, Empty
-    17: "#f0f0f0", 18: "#f0f0f0", 19: "#f0f0f0", 20: "#e74c3c", 21: "#e74c3c", 22: "#e74c3c", 23: "#f0f0f0", 24: "#f0f0f0",
-    // Row 4: Empty, Arrow, Arrow, Arrow, Arrow, Arrow, Arrow, Empty
-    25: "#f0f0f0", 26: "#f39c12", 27: "#f39c12", 28: "#f39c12", 29: "#f39c12", 30: "#f39c12", 31: "#f39c12", 32: "#f0f0f0",
-    // Row 5: Box, Box, Arrow, Arrow, Arrow, Arrow, Arrow, Box
-    33: "#9b59b6", 34: "#9b59b6", 35: "#f39c12", 36: "#f39c12", 37: "#f39c12", 38: "#f39c12", 39: "#f39c12", 40: "#1abc9c",
-    // Row 6: Empty, Empty, Empty, Box, Box, Box, Empty, Empty
-    41: "#f0f0f0", 42: "#f0f0f0", 43: "#f0f0f0", 44: "#3498db", 45: "#3498db", 46: "#3498db", 47: "#f0f0f0", 48: "#f0f0f0",
-    // Row 7: Empty, Arrow, Arrow, Arrow, Arrow, Arrow, Arrow, Empty
-    49: "#f0f0f0", 50: "#f39c12", 51: "#f39c12", 52: "#f39c12", 53: "#f39c12", 54: "#f39c12", 55: "#f39c12", 56: "#f0f0f0",
-    // Row 8: Empty, Empty, Empty, Box, Box, Box, Empty, Empty
-    57: "#f0f0f0", 58: "#f0f0f0", 59: "#f0f0f0", 60: "#2ecc71", 61: "#2ecc71", 62: "#2ecc71", 63: "#f0f0f0", 64: "#f0f0f0"
+    // Row 1
+    1: "#FFFFFF", 2: "#DD6B2F", 3: "#F59A2A", 4: "#DD6B2F", 5: "#F59A2A", 6: "#DD6B2F", 7: "#F59A2A", 8: "#FFFFFF",
+    // Row 2
+    9: "#F59A2A", 10: "#4A5573", 11: "#5A6686", 12: "#4A5573", 13: "#6B7696", 14: "#4A5573", 15: "#7380A0", 16: "#DD6B2F",
+    // Row 3
+    17: "#DD6B2F", 18: "#5A6686", 19: "#4A5573", 20: "#8A95B0", 21: "#4A5573", 22: "#7380A0", 23: "#4A5573", 24: "#F59A2A",
+    // Row 4
+    25: "#F59A2A", 26: "#4A5573", 27: "#8A95B0", 28: "#4A5573", 29: "#A0A9C0", 30: "#4A5573", 31: "#6B7696", 32: "#DD6B2F",
+    // Row 5
+    33: "#FFFFFF", 34: "#DD6B2F", 35: "#F59A2A", 36: "#DD6B2F", 37: "#F59A2A", 38: "#DD6B2F", 39: "#F59A2A", 40: "#FFFFFF",
+    // Row 6
+    41: "#2F7F2F", 42: "#3A8F3A", 43: "#2F7F2F", 44: "#2F7F2F", 45: "#2F7F2F", 46: "#2F7F2F", 47: "#2F7F2F", 48: "#3A8F3A",
+    // Row 7
+    49: "#d6ffd6", 50: "#2F7F2F", 51: "#3A8F3A", 52: "#3A8F3A", 53: "#2F7F2F", 54: "#3A8F3A", 55: "#3A8F3A", 56: "#d6ffd6",
+    // Row 8
+    57: "#FFFFFF", 58: "#FFFFFF", 59: "#FFFFFF", 60: "#3A8F3A", 61: "#2F7F2F", 62: "#FFFFFF", 63: "#FFFFFF", 64: "#FFFFFF"
   };
   const PUZZLE_6_NOTE_FREQUENCIES = {
     C4: 261.63,
@@ -33,23 +35,12 @@
   const PUZZLE_6_TARGET_MELODY = ["C4", "E4", "G4", "E4", "C4"];
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const PUZZLE_12_DEBUG_MODE = true;
+  const PUZZLE_14_DEBUG_MODE = true;
 
   // Centralized puzzle data: define title, content, solution and optional partial_solution for each puzzle (1-64)
   // Edit these to customize each puzzle
   const PUZZLE_DATA = {};
-  for (let i = 1; i <= TOTAL_PUZZLES; i += 1) {
-    PUZZLE_DATA[i] = {
-      title: `Zagadka ${i}`,
-      content: `<p><strong>Treść zagadki ${i}...</strong></p><p>Dodaj specjalną treść dla tej zagadki tutaj.</p>`,
-      solution: "",
-      // Optional shape - array of partial solutions:
-      // partial_solution: [
-      //   { key: "fragment1", message: "To dobry trop." },
-      //   { key: "fragment2", message: "Prawie!" }
-      // ]
-      partial_solution: []
-    };
-  }
+
 
 //   Example: Custom puzzle data (uncomment and modify to override defaults)
   PUZZLE_DATA[1] = {
@@ -222,12 +213,44 @@
 </div>`,
     solution: "weksylologia",
     partial_solution: [
-      { key: "weksylo", message: "Bardzo dobrze! Dokończ ostatnie litery." },
-      { key: "weksyleg", message: "Prawie! Jeszcze jedna litera na koniec." }
+      { key: "kartografia", message: "Świetnie! Odczytałaś hasło, ale czy ono tu na prawdę ma sens?" },
+      { key: "heraldyka", message: "Bardzo blisko! Poszukaj jeszcze trochę" },
+      { key: "geografia", message: "Blisko! Ale chodzi o coś nieco innego" }
     ],
     hint1: "Ta zagadka dotyczy państw...",
     hint2: "Nie wszystkie literki będą ci potrzebne...",
 
+  };
+
+  //TODO - finis the map!
+  PUZZLE_DATA[14] = {
+    title: "Zagadka 14: Ukryte pomniki",
+    content: `
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
+        <div class="puzzle14-map-wrap">
+          <img src="img/mapa.jpg" alt="Mapa Polski" class="puzzle14-map-image">
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="M" data-debug="210,130" style="--x: 27.6%; --y: 26.0%;" aria-label="Ukryta litera M"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="A" data-debug="330,170" style="--x: 43.4%; --y: 34.0%;" aria-label="Ukryta litera A"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="R" data-debug="450,210" style="--x: 59.2%; --y: 42.0%;" aria-label="Ukryta litera R"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="M" data-debug="520,290" style="--x: 68.4%; --y: 58.0%;" aria-label="Ukryta litera M"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="U" data-debug="380,330" style="--x: 50.0%; --y: 66.0%;" aria-label="Ukryta litera U"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="R" data-debug="250,280" style="--x: 32.9%; --y: 56.0%;" aria-label="Ukryta litera R"></button>
+        </div>
+        <p id="puzzle14Letters" class="puzzle14-letters" aria-live="polite">Kliknij ukryte punkty na mapie.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; width: 100%; max-width: 700px;">
+          <img src="img/pomniki/chopin.jpg" alt="Pomnik Chopina" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
+          <img src="img/pomniki/chrystus.jpg" alt="Pomnik Chrystusa" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
+          <img src="img/pomniki/dzik-w-calej-okazalosci.jpg" alt="Pomnik Dzika" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
+          <img src="img/pomniki/morswin.jpg" alt="Pomnik Morświna" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
+          <img src="img/pomniki/pieeeesek.jpg" alt="Pomnik Pieska" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
+          <img src="img/pomniki/zwierzątka.jpg" alt="Pomnik Zwierzątka" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
+        </div>
+      </div>
+    `,
+    solution: "pomnik",
+    hint1: "Przyjrzyj się uważnie wszystkim pomnikom.",
+    hint2: "Czy któryś z nich jest szczególnie znany?",
+    hint3: "Może chodzi o miejsce, w którym się znajdują?"
   };
   PUZZLE_DATA[15] = {
     title: "Zagadka 15: Sonar",
@@ -248,6 +271,45 @@
   </div>
 </div>`,
     solution: ""
+  };
+  PUZZLE_DATA[16] = {
+    title: "Zagadka 16: Kolorowy Obraz",
+    content: `<div class="puzzle16-container">
+  <div class="puzzle16-grid" id="puzzle16Grid"></div>
+  <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
+    <div class="puzzle16-happy-bg"></div>
+  </div>
+</div>`,
+    solution: "dynia"
+  };
+  PUZZLE_DATA[27] = {
+    //TODO test and adjust hours
+    title: "Zagadka 18: Zagubione w czasie",
+    content: `<div class="clocks-puzzle">
+  <div class="clocks-grid">
+    <div class="clock-container" data-hour="7" data-letter="C">
+      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(215.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(66 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
+    </div>
+    <div class="clock-container" data-hour="10" data-letter="H">
+      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(300 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(0 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
+    </div>
+    <div class="clock-container" data-hour="12" data-letter="R">
+      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(17.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(210 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
+    </div>
+    <div class="clock-container" data-hour="12" data-letter="O">
+      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(24.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(294 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
+    </div>
+    <div class="clock-container" data-hour="2" data-letter="N">
+      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(82.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(270 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
+    </div>
+    <div class="clock-container" data-hour="5" data-letter="O">
+      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(157.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(90 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
+    </div>
+  </div>
+  <div id="puzzle18Letters" class="revealed-letters"></div>
+  <p id="puzzle18Status" class="puzzle-status" aria-live="polite">Czekam na prawidłową godzinę...</p>
+</div>`,
+    solution: "chrono"
   };
   PUZZLE_DATA[19] = {
     //TODO
@@ -272,12 +334,14 @@
     meowAudio: null,
     howlAudio: null,
     sonarAudio: null,
+    puzzle18IntervalId: null,
     puzzle6PlayedNotes: [],
     puzzle7Shifts: {
       top: 0,
       bottom: 0
     },
     puzzle15State: null,
+    puzzle16State: null,
 
     els: {
       menuView: null,
@@ -495,6 +559,12 @@
       });
 
       this.els.puzzleContent.addEventListener("click", (event) => {
+        const puzzle14HotspotButton = event.target.closest(".puzzle14-hotspot-btn");
+        if (puzzle14HotspotButton) {
+          this.handlePuzzle14HotspotClick(puzzle14HotspotButton);
+          return;
+        }
+
         const hotspotButton = event.target.closest(".puzzle-hotspot-btn");
         if (hotspotButton) {
           this.handlePuzzle10HotspotClick();
@@ -528,6 +598,12 @@
 
         if (event.target.id === "puzzle15SonarToggle") {
           this.togglePuzzle15Sonar();
+          return;
+        }
+
+        const puzzle16Btn = event.target.closest(".puzzle16-btn");
+        if (puzzle16Btn) {
+          this.handlePuzzle16ButtonClick(puzzle16Btn);
           return;
         }
 
@@ -659,10 +735,13 @@
 
     showMenuView() {
       this.stopPuzzle15Simulation();
+      this.stopPuzzle16Grid();
+      this.stopPuzzle18Timer();
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
       this.els.backToMenuBtn.classList.add("hidden");
       document.body.classList.remove("puzzle19-night-sky");
+      document.body.classList.remove("puzzle14-debug-mode");
       this.playViewEntrance(this.els.menuView);
       this.renderMenuSelectionState();
     },
@@ -700,10 +779,15 @@
         const id = Number(button.dataset.puzzleId);
         const puzzle = this.state.puzzles[String(id)];
         const puzzleColor = PUZZLE_COLORS[id] || "#f0f0f0";
-        
+        const puzzleData = PUZZLE_DATA[id];
+
+        // Undefined = missing PUZZLE_DATA or missing content/solution
+        const isUndefined = !puzzleData || (!puzzleData.content && !puzzleData.solution);
+        button.classList.toggle("undefined", isUndefined);
+
         button.classList.toggle("solved", puzzle.solved);
         button.classList.toggle("selected", id === selected);
-        
+
         // Apply color if solved
         if (puzzle.solved) {
           button.style.backgroundColor = puzzleColor;
@@ -712,8 +796,8 @@
           button.style.backgroundColor = "";
           button.style.color = "";
         }
-        
-        button.setAttribute("aria-label", `Puzzle ${id} ${puzzle.solved ? "solved" : "unsolved"}`);
+
+        button.setAttribute("aria-label", `Puzzle ${id} ${puzzle.solved ? "solved" : "unsolved"}${isUndefined ? ", undefined" : ""}`);
       });
 
       this.checkImageCompletion();
@@ -744,6 +828,8 @@
 
     renderPuzzleView() {
       this.stopPuzzle15Simulation();
+      this.stopPuzzle16Grid();
+      this.stopPuzzle18Timer();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
       const puzzleData = PUZZLE_DATA[id] || {
@@ -752,6 +838,7 @@
       };
 
       document.body.classList.toggle("puzzle19-night-sky", id === 19);
+      document.body.classList.toggle("puzzle14-debug-mode", id === 14 && PUZZLE_14_DEBUG_MODE);
 
       this.els.puzzleTitle.textContent = puzzleData.title;
       this.els.solutionInput.value = puzzle.solution;
@@ -780,6 +867,14 @@
 
       if (id === 15) {
         this.initPuzzle15Simulation();
+      }
+
+      if (id === 16) {
+        this.initPuzzle16Grid();
+      }
+
+      if (id === 27) {
+        this.startPuzzle18Timer();
       }
 
       if (puzzle.lastUpdated) {
@@ -1155,6 +1250,34 @@
       this.showCheckFeedback("success", "Miau!", "Znalazłaś Filusia!");
     },
 
+    handlePuzzle14HotspotClick(buttonEl) {
+      if (this.state.selectedPuzzle !== 14 || !buttonEl) {
+        return;
+      }
+
+      const letter = buttonEl.dataset.letter || "";
+      if (!letter) {
+        return;
+      }
+
+      buttonEl.classList.add("revealed");
+      buttonEl.textContent = letter;
+
+      const lettersEl = document.getElementById("puzzle14Letters");
+      const mapWrapEl = this.els.puzzleContent.querySelector(".puzzle14-map-wrap");
+      if (!lettersEl || !mapWrapEl) {
+        return;
+      }
+
+      const revealedLetters = Array.from(mapWrapEl.querySelectorAll(".puzzle14-hotspot-btn.revealed"))
+        .map((hotspot) => hotspot.dataset.letter || "")
+        .join("");
+
+      lettersEl.textContent = revealedLetters
+        ? `Odkryte litery: ${revealedLetters}`
+        : "Kliknij ukryte punkty na mapie.";
+    },
+
     initPuzzle15Simulation() {
       if (this.state.selectedPuzzle !== 15) {
         return;
@@ -1236,7 +1359,7 @@
       }
 
       this.updatePuzzle15Frame();
-      this.schedulePuzzle15Ping(120);
+      this.schedulePuzzle15Ping(600);
     },
 
     stopPuzzle15TimersAndAudio() {
@@ -1273,6 +1396,143 @@
 
       this.stopPuzzle15TimersAndAudio();
       this.puzzle15State = null;
+    },
+
+    initPuzzle16Grid() {
+      this.stopPuzzle16Grid();
+      const gridEl = document.getElementById("puzzle16Grid");
+      if (!gridEl) {
+        return;
+      }
+
+      const PUZZLE16_COLORS = ["#EAE5E0", "#BF4E2F", "#F57522", "#265C42"];
+      const PUZZLE16_TARGET = [
+        ["#EAE5E0","#BF4E2F","#BF4E2F","#F57522","#F57522","#BF4E2F","#F57522","#EAE5E0"],
+        ["#BF4E2F","#F57522","#F57522","#265C42","#265C42","#F57522","#BF4E2F","#F57522"],
+        ["#BF4E2F","#F57522","#265C42","#265C42","#265C42","#265C42","#F57522","#F57522"],
+        ["#BF4E2F","#BF4E2F","#F57522","#265C42","#265C42","#F57522","#BF4E2F","#F57522"],
+        ["#BF4E2F","#F57522","#BF4E2F","#BF4E2F","#BF4E2F","#BF4E2F","#F57522","#BF4E2F"],
+        ["#BF4E2F","#F57522","#BF4E2F","#F57522","#F57522","#BF4E2F","#F57522","#BF4E2F"],
+        ["#BF4E2F","#BF4E2F","#BF4E2F","#F57522","#F57522","#BF4E2F","#F57522","#F57522"],
+        ["#EAE5E0","#BF4E2F","#BF4E2F","#BF4E2F","#BF4E2F","#BF4E2F","#BF4E2F","#EAE5E0"]
+      ];
+
+      gridEl.innerHTML = "";
+      const fragment = document.createDocumentFragment();
+      this.puzzle16State = { colors: [], isSolved: false };
+
+      for (let row = 0; row < 8; row += 1) {
+        for (let col = 0; col < 8; col += 1) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "puzzle16-btn";
+          button.dataset.row = String(row);
+          button.dataset.col = String(col);
+          const targetColor = PUZZLE16_TARGET[row][col];
+          const targetColorIndex = PUZZLE16_COLORS.indexOf(targetColor);
+          const targetLabel = String(targetColorIndex);
+          button.dataset.colorIndex = "0";
+          button.dataset.targetColor = targetColor;
+          button.dataset.currentColor = PUZZLE16_COLORS[0];
+          button.style.setProperty("background", PUZZLE16_COLORS[0], "important");
+          button.style.setProperty("background-color", PUZZLE16_COLORS[0], "important");
+          button.textContent = targetLabel;
+          fragment.appendChild(button);
+          this.puzzle16State.colors.push(0);
+        }
+      }
+
+      gridEl.appendChild(fragment);
+      this.puzzle16State.gridEl = gridEl;
+      this.puzzle16State.colors = PUZZLE16_COLORS;
+      this.setPuzzle16SolvedVisual(false);
+    },
+
+    stopPuzzle16Grid() {
+      this.puzzle16State = null;
+    },
+
+    handlePuzzle16ButtonClick(btn) {
+      if (!this.puzzle16State || this.state.selectedPuzzle !== 16) {
+        return;
+      }
+
+      const PUZZLE16_COLORS = ["#EAE5E0", "#BF4E2F", "#F57522", "#265C42"];
+      let currentIndex = Number(btn.dataset.colorIndex) || 0;
+      currentIndex = (currentIndex + 1) % 4;
+      const newColor = PUZZLE16_COLORS[currentIndex];
+      btn.dataset.colorIndex = String(currentIndex);
+      btn.dataset.currentColor = newColor;
+      btn.style.setProperty("background", newColor, "important");
+      btn.style.setProperty("background-color", newColor, "important");
+
+      this.checkPuzzle16Solution();
+    },
+
+    checkPuzzle16Solution() {
+      if (!this.puzzle16State || this.state.selectedPuzzle !== 16) {
+        return;
+      }
+
+      const gridEl = document.getElementById("puzzle16Grid");
+      if (!gridEl) {
+        return;
+      }
+
+      const buttons = gridEl.querySelectorAll(".puzzle16-btn");
+      let allMatch = true;
+
+      buttons.forEach((btn) => {
+        const targetColor = btn.dataset.targetColor;
+        const currentColor = btn.dataset.currentColor;
+        if (currentColor !== targetColor) {
+          allMatch = false;
+        }
+      });
+
+      if (allMatch && !this.puzzle16State.isSolved) {
+        this.puzzle16State.isSolved = true;
+        this.setPuzzle16SolvedVisual(true);
+        this.triggerPuzzle16Celebration();
+        return;
+      }
+
+      if (!allMatch && this.puzzle16State.isSolved) {
+        this.puzzle16State.isSolved = false;
+        this.setPuzzle16SolvedVisual(false);
+      }
+    },
+
+    setPuzzle16SolvedVisual(isSolved) {
+      const container = this.els.puzzleContent.querySelector(".puzzle16-container");
+      const celebration = document.getElementById("puzzle16Celebration");
+
+      if (container) {
+        container.classList.toggle("puzzle16-solved", Boolean(isSolved));
+      }
+
+      if (!isSolved && celebration) {
+        celebration.classList.remove("play");
+        celebration.style.display = "none";
+      }
+    },
+
+    triggerPuzzle16Celebration() {
+      const celebration = document.getElementById("puzzle16Celebration");
+      if (celebration) {
+        celebration.classList.remove("play");
+        celebration.style.display = "block";
+        void celebration.offsetWidth;
+        celebration.classList.add("play");
+
+        window.setTimeout(() => {
+          if (!this.puzzle16State || this.state.selectedPuzzle !== 16) {
+            return;
+          }
+          celebration.style.display = "none";
+          celebration.classList.remove("play");
+        }, 900);
+      }
     },
 
     updatePuzzle15Frame() {
@@ -1316,7 +1576,7 @@
       });
     },
 
-    schedulePuzzle15Ping(delayMs = 220) {
+    schedulePuzzle15Ping(delayMs = 1100) {
       const sonar = this.puzzle15State;
       if (!sonar || !sonar.enabled || this.state.selectedPuzzle !== 15) {
         return;
@@ -1346,7 +1606,7 @@
         const distance = Math.hypot(dx, dy);
         const maxDistance = Math.hypot(activeSonar.fieldEl.clientWidth, activeSonar.fieldEl.clientHeight) || 1;
         const normalized = Math.min(1, distance / maxDistance);
-        const nextDelay = Math.round(220 + normalized * 1480);
+        const nextDelay = Math.round((220 + normalized * 1480) * 5);
 
         if (activeSonar.statusEl) {
           activeSonar.statusEl.textContent = `Dystans do celu: ${Math.round(distance)} px`;
@@ -1354,6 +1614,60 @@
 
         this.schedulePuzzle15Ping(nextDelay);
       }, delayMs);
+    },
+
+    startPuzzle18Timer() {
+      if (this.state.selectedPuzzle !== 27) {
+        return;
+      }
+
+      this.stopPuzzle18Timer();
+      this.updatePuzzle18Display();
+      this.puzzle18IntervalId = window.setInterval(() => {
+        this.updatePuzzle18Display();
+      }, 1000);
+    },
+
+    stopPuzzle18Timer() {
+      if (this.puzzle18IntervalId) {
+        window.clearInterval(this.puzzle18IntervalId);
+        this.puzzle18IntervalId = null;
+      }
+    },
+
+    updatePuzzle18Display() {
+      if (this.state.selectedPuzzle !== 27) {
+        return;
+      }
+
+      const now = new Date();
+      const currentHour = now.getHours();
+      const lettersEl = document.getElementById("puzzle18Letters");
+      const statusEl = document.getElementById("puzzle18Status");
+      if (!lettersEl || !statusEl) {
+        return;
+      }
+
+      const containers = document.querySelectorAll("[data-hour][data-letter]");
+      const revealed = new Map();
+
+      containers.forEach((container) => {
+        const clockHour = Number(container.getAttribute("data-hour"));
+        const letter = container.getAttribute("data-letter");
+
+        if (clockHour === currentHour) {
+          revealed.set(letter, true);
+        }
+      });
+
+      const revealedLetters = Array.from(revealed.keys()).sort().join("");
+      lettersEl.textContent = revealedLetters;
+
+      if (revealed.size > 0) {
+        statusEl.textContent = `Liczba ujawnionych liter: ${revealed.size}/6`;
+      } else {
+        statusEl.textContent = "Czekam na prawidłową godzinę...";
+      }
     },
 
     getPuzzleHintEntries(puzzleId) {
@@ -1543,8 +1857,7 @@
     },
 
     isMatchingSolution(inputValue, expectedSolution) {
-      // Strict, case-sensitive match. You can adjust to .toLowerCase() for case-insensitive if needed.
-      return inputValue.trim() === expectedSolution;
+      return inputValue.trim().toLowerCase() === expectedSolution.trim().toLowerCase();
     },
 
     normalizePuzzleId(value) {
