@@ -1331,6 +1331,62 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   }
 }
 
+/* Puzzle 18: Pamiętaj */
+.puzzle18-wrap {
+  display: grid;
+  place-items: center;
+  padding: 0.35rem;
+}
+
+.puzzle18-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 0.25rem;
+  width: min(100%, 430px);
+  aspect-ratio: 1 / 1;
+  padding: 0.7rem;
+  border: 1px solid #1a1a1a;
+  border-radius: 0.75rem;
+  background: #000000;
+}
+
+.puzzle18-cell {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 0.45rem;
+  background: #000000;
+  color: transparent;
+}
+
+.puzzle18-cell.puzzle18-empty {
+  color: transparent;
+  background: #000000;
+}
+
+.puzzle18-indicator {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #f0f0f0);
+  border: 2px solid #e8e8e8;
+  color: #2a2a2a;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-shadow: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset -1px -1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.puzzle18-indicator:hover {
+  transform: scale(1.08);
+}
+
 /* Puzzle 16: Color Grid */
 .puzzle16-container {
   display: flex;
@@ -1478,6 +1534,19 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
 
   .puzzle17-cell {
     font-size: 1.35rem;
+  }
+
+  .puzzle18-grid {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 0.2rem;
+    width: 100%;
+    max-width: 360px;
+    padding: 0.5rem;
+  }
+
+  .puzzle18-indicator {
+    font-size: 1.1rem;
   }
 
   .header-tools {

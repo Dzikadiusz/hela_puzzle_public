@@ -36,7 +36,7 @@
   const PUZZLE_6_SECRET_MELODY = ["G4", "E4", "E4", "F4", "D4", "D4", "C4", "E4", "G4"];
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const PUZZLE_12_DEBUG_MODE = true;
-  const PUZZLE_14_DEBUG_MODE = true;
+  const PUZZLE_14_DEBUG_MODE = false;
 
   // Centralized puzzle data: define title, content, solution and optional partial_solution for each puzzle (1-64)
   // Edit these to customize each puzzle
@@ -228,19 +228,18 @@
 
   //TODO - finis the map!
   PUZZLE_DATA[14] = {
-    title: "WIP Zagadka 14: Ukryte pomniki",
+    title: "Zagadka 14: Ukryte pomniki",
     content: `
       <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
         <div class="puzzle14-map-wrap">
           <img src="img/mapa.jpg" alt="Mapa Polski" class="puzzle14-map-image">
-          <button type="button" class="puzzle14-hotspot-btn" data-letter="M" data-debug="210,130" style="--x: 27.6%; --y: 26.0%;" aria-label="Ukryta litera M"></button>
-          <button type="button" class="puzzle14-hotspot-btn" data-letter="A" data-debug="330,170" style="--x: 43.4%; --y: 34.0%;" aria-label="Ukryta litera A"></button>
-          <button type="button" class="puzzle14-hotspot-btn" data-letter="R" data-debug="450,210" style="--x: 59.2%; --y: 42.0%;" aria-label="Ukryta litera R"></button>
-          <button type="button" class="puzzle14-hotspot-btn" data-letter="M" data-debug="520,290" style="--x: 68.4%; --y: 58.0%;" aria-label="Ukryta litera M"></button>
-          <button type="button" class="puzzle14-hotspot-btn" data-letter="U" data-debug="380,330" style="--x: 50.0%; --y: 66.0%;" aria-label="Ukryta litera U"></button>
-          <button type="button" class="puzzle14-hotspot-btn" data-letter="R" data-debug="250,280" style="--x: 32.9%; --y: 56.0%;" aria-label="Ukryta litera R"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="M" data-debug="330,170" style="--x: 16.9%; --y: 46.5%;" aria-label="Ukryta litera A"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="A" data-debug="520,290" style="--x: 31%; --y: 65.0%;" aria-label="Ukryta litera M"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="R" data-debug="210,130" style="--x: 44.6%; --y: 8%;" aria-label="Ukryta litera M"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="M" data-debug="380,330" style="--x: 65.4%; --y: 69%;" aria-label="Ukryta litera U"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="U" data-debug="450,210" style="--x: 69.4%; --y: 47.0%;" aria-label="Ukryta litera R"></button>
+          <button type="button" class="puzzle14-hotspot-btn" data-letter="R" data-debug="250,280" style="--x: 78.2%; --y: 62.0%;" aria-label="Ukryta litera R"></button>
         </div>
-        <p id="puzzle14Letters" class="puzzle14-letters" aria-live="polite">Kliknij ukryte punkty na mapie.</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; width: 100%; max-width: 700px;">
           <img src="img/pomniki/chopin.jpg" alt="Pomnik Chopina" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
           <img src="img/pomniki/chrystus.jpg" alt="Pomnik Chrystusa" style="width:100%; height:auto; display:block; border-radius:8px; border:1.5px solid #d8c8b5; background:#fff;" loading="lazy">
@@ -340,6 +339,61 @@
   </div>
 </div>`,
     solution: "8461259"
+  };
+  PUZZLE_DATA[18] = {
+    title: "Zagadka 18: Memento",
+    content: `<div class="puzzle18-wrap">
+  <div class="puzzle18-grid" role="img" aria-label="Siatka ze wskaźnikami 7 na 6">
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell puzzle18-empty"></span>
+    <span class="puzzle18-cell puzzle18-empty"></span>
+    <span class="puzzle18-cell puzzle18-empty"></span>
+    <span class="puzzle18-cell puzzle18-empty"></span>
+    <span class="puzzle18-cell puzzle18-empty"></span>
+    <span class="puzzle18-cell puzzle18-empty"></span>
+
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-indicator" data-number="8">8</span>
+    <span class="puzzle18-cell"></span>
+
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+
+    <span class="puzzle18-indicator" data-number="3">3</span>
+    <span class="puzzle18-indicator" data-number="2">2,7</span>
+    <span class="puzzle18-indicator" data-number="1">1</span>
+    <span class="puzzle18-indicator" data-number="4">4</span>
+    <span class="puzzle18-indicator" data-number="5">5</span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-indicator" data-number="6">6</span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+    <span class="puzzle18-cell"></span>
+  </div>
+</div>`,
+    solution: "pamiętaj"
   };
   PUZZLE_DATA[19] = {
     //TODO
