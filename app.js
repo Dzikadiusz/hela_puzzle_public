@@ -33,6 +33,7 @@
     B4: 493.88
   };
   const PUZZLE_6_TARGET_MELODY = ["C4", "E4", "G4", "E4", "C4"];
+  const PUZZLE_6_SECRET_MELODY = ["G4", "E4", "E4", "F4", "D4", "D4", "C4", "E4", "G4"];
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const PUZZLE_12_DEBUG_MODE = true;
   const PUZZLE_14_DEBUG_MODE = true;
@@ -100,7 +101,7 @@
     solution: "4"
   };
   PUZZLE_DATA[6] = {
-    title: "Zagadka 6: Pianino",
+    title: "WIP Zagadka 6: Pianino",
     content: `<div class="piano-puzzle">
   <p><strong>Zagraj poprawną melodię, aby odkryć hasło.</strong></p>
   <p class="piano-instruction">Podpowiedź: zacznij od C i wróć do C po trzech kolejnych dźwiękach.</p>
@@ -164,7 +165,10 @@
     content: `<div style="display: grid; place-items: center;">
   <img src="img/shape.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
 </div>`,
-    solution: "Rabat"
+    solution: "Rabat",
+    partial_solution: [
+      { key: "Maroko", message: "Prawie! Czy coś przeoczyłaś?" }
+    ]
   };
   PUZZLE_DATA[10] = {
     title: "Zagadka 10: Gdzie on się podział?",
@@ -224,7 +228,7 @@
 
   //TODO - finis the map!
   PUZZLE_DATA[14] = {
-    title: "Zagadka 14: Ukryte pomniki",
+    title: "WIP Zagadka 14: Ukryte pomniki",
     content: `
       <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
         <div class="puzzle14-map-wrap">
@@ -253,7 +257,7 @@
     hint3: "Może chodzi o miejsce, w którym się znajdują?"
   };
   PUZZLE_DATA[15] = {
-    title: "Zagadka 15: Sonar",
+    title: "WIP Zagadka 15: Sonar",
     content: `<div class="sonar-puzzle">
   <p><strong>Włącz sonar i naprowadź łódź podwodną na cel.</strong></p>
   <div class="sonar-controls">
@@ -273,7 +277,7 @@
     solution: ""
   };
   PUZZLE_DATA[16] = {
-    title: "Zagadka 16: Kolorowy Obraz",
+    title: "Zagadka 16",
     content: `<div class="puzzle16-container">
   <div class="puzzle16-grid" id="puzzle16Grid"></div>
   <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
@@ -282,9 +286,117 @@
 </div>`,
     solution: "dynia"
   };
+  PUZZLE_DATA[17] = {
+    title: "Zagadka 17: Zacznij od góry",
+    content: `<div class="puzzle17-wrap">
+  <div class="puzzle17-grid" role="img" aria-label="Siatka liter 7 na 6">
+    <span class="puzzle17-cell">o</span>
+    <span class="puzzle17-cell puzzle17-empty"></span>
+    <span class="puzzle17-cell puzzle17-empty"></span>
+    <span class="puzzle17-cell puzzle17-empty"></span>
+    <span class="puzzle17-cell puzzle17-empty"></span>
+    <span class="puzzle17-cell puzzle17-empty"></span>
+    <span class="puzzle17-cell puzzle17-empty"></span>
+
+    <span class="puzzle17-cell">s</span>
+    <span class="puzzle17-cell">n</span>
+    <span class="puzzle17-cell">e</span>
+    <span class="puzzle17-cell">d</span>
+    <span class="puzzle17-cell">e</span>
+    <span class="puzzle17-cell">j</span>
+    <span class="puzzle17-cell">ć</span>
+
+    <span class="puzzle17-cell">i</span>
+    <span class="puzzle17-cell">d</span>
+    <span class="puzzle17-cell">w</span>
+    <span class="puzzle17-cell">e</span>
+    <span class="puzzle17-cell">i</span>
+    <span class="puzzle17-cell">z</span>
+    <span class="puzzle17-cell">ś</span>
+
+    <span class="puzzle17-cell">e</span>
+    <span class="puzzle17-cell">w</span>
+    <span class="puzzle17-cell">i</span>
+    <span class="puzzle17-cell">ę</span>
+    <span class="puzzle17-cell">ć</span>
+    <span class="puzzle17-cell">d</span>
+    <span class="puzzle17-cell">e</span>
+
+    <span class="puzzle17-cell">m</span>
+    <span class="puzzle17-cell">a</span>
+    <span class="puzzle17-cell">p</span>
+    <span class="puzzle17-cell">i</span>
+    <span class="puzzle17-cell">ę</span>
+    <span class="puzzle17-cell">ć</span>
+    <span class="puzzle17-cell">z</span>
+
+    <span class="puzzle17-cell">c</span>
+    <span class="puzzle17-cell">z</span>
+    <span class="puzzle17-cell">t</span>
+    <span class="puzzle17-cell">e</span>
+    <span class="puzzle17-cell">r</span>
+    <span class="puzzle17-cell">y</span>
+    <span class="puzzle17-cell">s</span>
+  </div>
+</div>`,
+    solution: "8461259"
+  };
+  PUZZLE_DATA[19] = {
+    //TODO
+    title: "WIP Zagadka 19: Czy go słyszysz?",
+    content: `<div class="time-lock-puzzle">
+  <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
+  <p id="puzzle19MoonStatus" aria-live="polite"></p>
+</div>`,
+    solution: "TODO"
+  };
+  PUZZLE_DATA[20] = {
+    title: "Zagadka 20",
+    content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
+    solution: "panika"
+  };
+  PUZZLE_DATA[21] = {
+    title: "Zagadka 21: Kurczaczek",
+    content: `<div style="position: relative; display: grid; gap: 14px; place-items: center; text-align: center; padding: 0.6rem 0.9rem 2.2rem 0.9rem;">
+  <div style="position: absolute; right: 0.65rem; bottom: 0.35rem; transform: rotate(-7deg); font-family: 'Segoe Script', 'Lucida Handwriting', 'Brush Script MT', cursive; font-size: 0.95rem; color: #6b4630; opacity: 0.88; letter-spacing: 0.02em; white-space: nowrap; pointer-events: none;">
+    coś tu się nie zgadza...
+  </div>
+  <p><strong>3,141592 653589 793238 462643 383279 502884 197169 399375 105820 974944 592307 816406 286208 998628 034825 342117 067982 148086 513282 306647 093844 609550 582231 725359 408128 377606 450284 102701 938521 105559 644622 948954 930381 964428 810975 665933 446128</strong></p>
+</div>`,
+    solution: "377606"
+  };
+
+  PUZZLE_DATA[22] = {
+    title: "Zagadka 22: Mały głód",
+    content: `<div style="display: grid; gap: 0.7em; justify-items: center; font-size: 1.18rem; line-height: 1.5;">
+  <div>Bar+Sód+Azot</div>
+  <div>Sód</div>
+  <div>Lutet+Azot+Węgiel+Wodór</div>
+</div>`,
+    solution: "banan na lunch"
+  };
+  PUZZLE_DATA[23] = {
+    title: "Zagadka 23",
+    content: `<div style="display: grid; place-items: center;">
+  <img src="img/belt.jpg" alt="Pasek" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
+</div>`,
+    solution: "mars"
+  };
+  PUZZLE_DATA[24] = {
+    title: "Zagadka 24: Łatwiej będzie na telefonie...",
+    content: `<div style="display: grid; place-items: center;">
+  <img src="img/pochyl.png" alt="Podpowiedź: pochyl telefon" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
+</div>`,
+    solution: "bezmiar"
+  };
+  PUZZLE_DATA[25] = {
+    title: "Zagadka 25: Dostał się Filuś na małe ogrodzenie",
+    content: `<p><strong>gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
+    solution: "złaź sierściuchu"
+  };
   PUZZLE_DATA[27] = {
     //TODO test and adjust hours
-    title: "Zagadka 18: Zagubione w czasie",
+    title: "Zagadka 27: Zagubione w czasie",
     content: `<div class="clocks-puzzle">
   <div class="clocks-grid">
     <div class="clock-container" data-hour="7" data-letter="C">
@@ -311,20 +423,7 @@
 </div>`,
     solution: "chrono"
   };
-  PUZZLE_DATA[19] = {
-    //TODO
-    title: "Zagadka 19: Czy go słyszysz?",
-    content: `<div class="time-lock-puzzle">
-  <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
-  <p id="puzzle19MoonStatus" aria-live="polite"></p>
-</div>`,
-    solution: "TODO"
-  };
-  PUZZLE_DATA[20] = {
-    title: "Zagadka 20",
-    content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
-    solution: "panika"
-  };
+  
   const App = {
     state: null,
     notesSaveTimer: null,
@@ -336,6 +435,7 @@
     sonarAudio: null,
     puzzle18IntervalId: null,
     puzzle6PlayedNotes: [],
+    puzzle6RecentNotes: [],
     puzzle7Shifts: {
       top: 0,
       bottom: 0
@@ -954,6 +1054,7 @@
 
       this.playPianoTone(frequency);
       this.flashPuzzle6Key(note);
+      this.trackPuzzle6SecretMelody(note);
 
       const expectedIndex = this.puzzle6PlayedNotes.length;
       const expectedNote = PUZZLE_6_TARGET_MELODY[expectedIndex];
@@ -996,6 +1097,7 @@
 
     resetPuzzle6MelodyProgress() {
       this.puzzle6PlayedNotes = [];
+      this.puzzle6RecentNotes = [];
       this.updatePuzzle6ProgressLabel();
 
       const resultEl = document.getElementById("puzzle6Result");
@@ -1015,6 +1117,27 @@
 
       this.setSaveIndicator("Sekwencja poprawna! Hasło zostało ujawnione.");
       this.showCheckFeedback("success", "Brawo!", "Poprawna melodia. Hasło pojawiło się w polu odpowiedzi.");
+    },
+
+    trackPuzzle6SecretMelody(note) {
+      this.puzzle6RecentNotes.push(note);
+      if (this.puzzle6RecentNotes.length > PUZZLE_6_SECRET_MELODY.length) {
+        this.puzzle6RecentNotes.shift();
+      }
+
+      if (this.puzzle6RecentNotes.length < PUZZLE_6_SECRET_MELODY.length) {
+        return;
+      }
+
+      const matchesSecretMelody = PUZZLE_6_SECRET_MELODY.every((melodyNote, index) => {
+        return this.puzzle6RecentNotes[index] === melodyNote;
+      });
+
+      if (!matchesSecretMelody) {
+        return;
+      }
+
+      this.showCheckFeedback("warning", "", "złaź sierściuchu");
     },
 
     getShiftedAlphabet(shift) {
