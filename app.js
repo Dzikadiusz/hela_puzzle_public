@@ -102,6 +102,7 @@
   };
   PUZZLE_DATA[6] = {
     title: "WIP Zagadka 6: Pianino",
+    work_in_progress: true,
     content: `<div class="piano-puzzle">
   <p><strong>Zagraj poprawną melodię, aby odkryć hasło.</strong></p>
   <p class="piano-instruction">Podpowiedź: zacznij od C i wróć do C po trzech kolejnych dźwiękach.</p>
@@ -257,6 +258,7 @@
   };
   PUZZLE_DATA[15] = {
     title: "WIP Zagadka 15: Sonar",
+    work_in_progress: true,
     content: `<div class="sonar-puzzle">
   <p><strong>Włącz sonar i naprowadź łódź podwodną na cel.</strong></p>
   <div class="sonar-controls">
@@ -398,6 +400,7 @@
   PUZZLE_DATA[19] = {
     //TODO
     title: "WIP Zagadka 19: Czy go słyszysz?",
+    work_in_progress: true,
     content: `<div class="time-lock-puzzle">
   <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
   <p id="puzzle19MoonStatus" aria-live="polite"></p>
@@ -445,7 +448,7 @@
   };
   PUZZLE_DATA[25] = {
     title: "Zagadka 25: Dostał się Filuś na małe ogrodzenie",
-    content: `<p><strong>gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
+    content: `<p><strong>Gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
     solution: "złaź sierściuchu"
   };
   PUZZLE_DATA[27] = {
@@ -477,6 +480,93 @@
 </div>`,
     solution: "chrono"
   };
+  PUZZLE_DATA[28] = {
+    title: "WIP Zagadka 28: Gra w życie",
+    work_in_progress: true,
+    content: `<div class="puzzle28-wrap">
+  <p><strong>Klikaj komórki, aby je ożywić. Uruchom symulację i obserwuj kolejne pokolenia.</strong></p>
+  <div class="puzzle28-controls">
+    <button type="button" id="puzzle28StartBtn" class="small-btn">Start</button>
+    <button type="button" id="puzzle28StopBtn" class="small-btn">Stop</button>
+    <button type="button" id="puzzle28ClearBtn" class="small-btn">Clear</button>
+    <button type="button" id="puzzle28RandomBtn" class="small-btn">Random</button>
+    <label for="puzzle28SpeedRange" class="puzzle28-speed-label">Szybkość: <span id="puzzle28SpeedValue">6</span></label>
+    <input id="puzzle28SpeedRange" type="range" min="1" max="20" step="1" value="6" aria-label="Szybkość symulacji">
+    <p id="puzzle28StepCounter" class="puzzle28-step" aria-live="polite">Krok: 0</p>
+  </div>
+  <div id="puzzle28Board" class="puzzle28-board" role="grid" aria-label="Siatka gry w życie 40 na 40"></div>
+</div>`,
+    solution: ""
+  };
+  PUZZLE_DATA[29] = {
+    title: "Zagadka 29",
+    content: `<div style="display: grid; gap: 0.7rem; justify-items: center; text-align: center;">
+  <p style="font-size: 300%; line-height: 1.2;"><strong>^=&gt;<br>N=Z<br>:=..<br>8=?</strong></p>
+</div>`,
+    solution: "nieskończoność"
+  };
+  PUZZLE_DATA[30] = {
+    title: "Zagadka 30",
+    content: `<div style="display: grid; place-items: center;">
+  <img src="img/numery.png" alt="Numery" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
+</div>`,
+    solution: "360"
+  };
+  PUZZLE_DATA[31] = {
+    title: "Zagadka 31: Wzór",
+    content: `<div style="display: grid; place-items: center;">
+  <img src="img/formula.png" alt="Wzór" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
+</div>`,
+    solution: "ekosystem"
+  };
+  PUZZLE_DATA[32] = {
+    title: "Zagadka 32: Biała Roszada",
+    content: `<div class="puzzle32-wrap">
+  <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
+  <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
+</div>`,
+    starting_board: [
+      ["♜", "", "♝", "♛", "♚", "♝", "", "♜"],
+      ["", "", "♟", "♟", "♟", "♟", "♟", "♟"],
+      ["", "♟", "♞", "", "", "", "", "♞"],
+      ["♟", "", "", "", "", "", "", ""],
+      ["", "", "", "", "♙", "", "", ""],
+      ["", "", "", "♗", "", "", "", "♘"],
+      ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
+      ["♖", "♘", "♗", "", "♔", "", "", "♖"]
+    ],
+    solution_board: [
+      ["♜", "", "♝", "♛", "♚", "♝", "", "♜"],
+      ["", "", "♟", "♟", "♟", "♟", "♟", "♟"],
+      ["", "♟", "♞", "", "", "", "", "♞"],
+      ["♟", "", "", "", "", "", "", ""],
+      ["", "", "", "", "♙", "", "", ""],
+      ["", "", "", "♗", "", "", "", "♘"],
+      ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
+      ["♖", "♘", "♗", "", "", "♖", "♔", ""]
+    ],
+    solution: ""
+  };
+  PUZZLE_DATA[33] = {
+    title: "Zagadka 33: Szach-mat!",
+    work_in_progress: true,
+    content: `<div class="puzzle32-wrap">
+  <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
+  <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
+</div>`,
+    starting_board: [
+      ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+      ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+      ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
+    ],
+    solution_board: null,
+    solution: ""
+  };
   
   const App = {
     state: null,
@@ -496,6 +586,8 @@
     },
     puzzle15State: null,
     puzzle16State: null,
+    puzzle28State: null,
+    puzzle32State: null,
 
     els: {
       menuView: null,
@@ -768,6 +860,45 @@
 
         if (event.target.id === "puzzle7Reset") {
           this.resetPuzzle7Helper();
+          return;
+        }
+
+        if (event.target.id === "puzzle28StartBtn") {
+          this.startPuzzle28Simulation();
+          return;
+        }
+
+        if (event.target.id === "puzzle28StopBtn") {
+          this.stopPuzzle28Simulation();
+          return;
+        }
+
+        if (event.target.id === "puzzle28ClearBtn") {
+          this.clearPuzzle28Board();
+          return;
+        }
+
+        if (event.target.id === "puzzle28RandomBtn") {
+          this.randomizePuzzle28Board();
+          return;
+        }
+
+        const puzzle28Cell = event.target.closest(".puzzle28-cell");
+        if (puzzle28Cell) {
+          this.togglePuzzle28Cell(puzzle28Cell);
+          return;
+        }
+
+        const puzzle32Square = event.target.closest(".puzzle32-square");
+        if (puzzle32Square) {
+          this.handlePuzzle32SquareClick(puzzle32Square);
+          return;
+        }
+      });
+
+      this.els.puzzleContent.addEventListener("input", (event) => {
+        if (event.target.id === "puzzle28SpeedRange") {
+          this.updatePuzzle28Speed(event.target.value);
         }
       });
 
@@ -891,11 +1022,14 @@
       this.stopPuzzle15Simulation();
       this.stopPuzzle16Grid();
       this.stopPuzzle18Timer();
+      this.stopPuzzle28Simulation();
+      this.stopPuzzle32Board();
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
       this.els.backToMenuBtn.classList.add("hidden");
       document.body.classList.remove("puzzle19-night-sky");
       document.body.classList.remove("puzzle14-debug-mode");
+      document.body.classList.remove("puzzle30-white-content");
       this.playViewEntrance(this.els.menuView);
       this.renderMenuSelectionState();
     },
@@ -937,7 +1071,9 @@
 
         // Undefined = missing PUZZLE_DATA or missing content/solution
         const isUndefined = !puzzleData || (!puzzleData.content && !puzzleData.solution);
+        const isWorkInProgress = Boolean(puzzleData && puzzleData.work_in_progress);
         button.classList.toggle("undefined", isUndefined);
+        button.classList.toggle("wip", isWorkInProgress);
 
         button.classList.toggle("solved", puzzle.solved);
         button.classList.toggle("selected", id === selected);
@@ -951,7 +1087,7 @@
           button.style.color = "";
         }
 
-        button.setAttribute("aria-label", `Puzzle ${id} ${puzzle.solved ? "solved" : "unsolved"}${isUndefined ? ", undefined" : ""}`);
+        button.setAttribute("aria-label", `Puzzle ${id} ${puzzle.solved ? "solved" : "unsolved"}${isUndefined ? ", undefined" : ""}${isWorkInProgress ? ", work in progress" : ""}`);
       });
 
       this.checkImageCompletion();
@@ -984,6 +1120,8 @@
       this.stopPuzzle15Simulation();
       this.stopPuzzle16Grid();
       this.stopPuzzle18Timer();
+      this.stopPuzzle28Simulation();
+      this.stopPuzzle32Board();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
       const puzzleData = PUZZLE_DATA[id] || {
@@ -993,6 +1131,7 @@
 
       document.body.classList.toggle("puzzle19-night-sky", id === 19);
       document.body.classList.toggle("puzzle14-debug-mode", id === 14 && PUZZLE_14_DEBUG_MODE);
+      document.body.classList.toggle("puzzle30-white-content", id === 30);
 
       this.els.puzzleTitle.textContent = puzzleData.title;
       this.els.solutionInput.value = puzzle.solution;
@@ -1007,6 +1146,17 @@
       this.els.statusBadge.classList.toggle("unsolved", !puzzle.solved);
 
       this.els.puzzleContent.innerHTML = puzzleData.content;
+      if (puzzleData.work_in_progress) {
+        const wipBanner = document.createElement("div");
+        wipBanner.className = "puzzle-wip-banner";
+        wipBanner.setAttribute("role", "status");
+        const bannerMessage = typeof puzzleData.work_in_progress_message === "string"
+          && puzzleData.work_in_progress_message.trim().length > 0
+          ? puzzleData.work_in_progress_message.trim()
+          : "PRACA W TOKU: ta zagadka jest jeszcze w trakcie przygotowania.";
+        wipBanner.textContent = bannerMessage;
+        this.els.puzzleContent.prepend(wipBanner);
+      }
       this.closeHintPopup();
       this.renderHintButtons();
       this.renderPuzzleNavigationState();
@@ -1029,6 +1179,14 @@
 
       if (id === 27) {
         this.startPuzzle18Timer();
+      }
+
+      if (id === 28) {
+        this.initPuzzle28Game();
+      }
+
+      if (id === 32 || id === 33) {
+        this.initPuzzle32Board();
       }
 
       if (puzzle.lastUpdated) {
@@ -1845,6 +2003,388 @@
       } else {
         statusEl.textContent = "Czekam na prawidłową godzinę...";
       }
+    },
+
+    initPuzzle28Game() {
+      if (this.state.selectedPuzzle !== 28) {
+        return;
+      }
+
+      this.stopPuzzle28Simulation();
+      const boardEl = document.getElementById("puzzle28Board");
+      const stepCounterEl = document.getElementById("puzzle28StepCounter");
+      const speedRangeEl = document.getElementById("puzzle28SpeedRange");
+      const speedValueEl = document.getElementById("puzzle28SpeedValue");
+      if (!boardEl || !stepCounterEl || !speedRangeEl || !speedValueEl) {
+        return;
+      }
+
+      const size = 40;
+      const totalCells = size * size;
+      const cells = new Uint8Array(totalCells);
+      const nextCells = new Uint8Array(totalCells);
+
+      boardEl.innerHTML = "";
+      const fragment = document.createDocumentFragment();
+      for (let index = 0; index < totalCells; index += 1) {
+        const cell = document.createElement("button");
+        cell.type = "button";
+        cell.className = "puzzle28-cell";
+        cell.dataset.p28Index = String(index);
+        cell.setAttribute("role", "gridcell");
+        cell.setAttribute("aria-label", `Komórka ${index + 1}`);
+        fragment.appendChild(cell);
+      }
+      boardEl.appendChild(fragment);
+
+      this.puzzle28State = {
+        size,
+        cells,
+        nextCells,
+        boardEl,
+        stepCounterEl,
+        speedRangeEl,
+        speedValueEl,
+        speedValue: Number(speedRangeEl.value) || 6,
+        speedMs: 300,
+        step: 0,
+        intervalId: null
+      };
+
+      this.updatePuzzle28Speed(this.puzzle28State.speedValue);
+      this.renderPuzzle28Board();
+      this.updatePuzzle28StepCounter();
+    },
+
+    getPuzzle28SpeedMs(speedValue) {
+      const clamped = Math.min(20, Math.max(1, Number(speedValue) || 1));
+      return 70 + (20 - clamped) * 45;
+    },
+
+    updatePuzzle28Speed(rawValue) {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28) {
+        return;
+      }
+
+      const speedValue = Math.min(20, Math.max(1, Number(rawValue) || 1));
+      state.speedValue = speedValue;
+      state.speedMs = this.getPuzzle28SpeedMs(speedValue);
+      state.speedRangeEl.value = String(speedValue);
+      state.speedValueEl.textContent = String(speedValue);
+
+      if (state.intervalId) {
+        this.stopPuzzle28Simulation();
+        this.startPuzzle28Simulation();
+      }
+    },
+
+    startPuzzle28Simulation() {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28 || state.intervalId) {
+        return;
+      }
+
+      state.intervalId = window.setInterval(() => {
+        this.stepPuzzle28Simulation();
+      }, state.speedMs);
+    },
+
+    stopPuzzle28Simulation() {
+      const state = this.puzzle28State;
+      if (!state || !state.intervalId) {
+        return;
+      }
+
+      window.clearInterval(state.intervalId);
+      state.intervalId = null;
+    },
+
+    clearPuzzle28Board() {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28) {
+        return;
+      }
+
+      state.cells.fill(0);
+      state.nextCells.fill(0);
+      state.step = 0;
+      this.renderPuzzle28Board();
+      this.updatePuzzle28StepCounter();
+    },
+
+    randomizePuzzle28Board() {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28) {
+        return;
+      }
+
+      for (let index = 0; index < state.cells.length; index += 1) {
+        state.cells[index] = Math.random() < 0.3 ? 1 : 0;
+      }
+
+      state.step = 0;
+      this.renderPuzzle28Board();
+      this.updatePuzzle28StepCounter();
+    },
+
+    togglePuzzle28Cell(cellButton) {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28 || !cellButton) {
+        return;
+      }
+
+      const index = Number(cellButton.dataset.p28Index);
+      if (Number.isNaN(index) || index < 0 || index >= state.cells.length) {
+        return;
+      }
+
+      state.cells[index] = state.cells[index] ? 0 : 1;
+      cellButton.classList.toggle("alive", Boolean(state.cells[index]));
+    },
+
+    stepPuzzle28Simulation() {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28) {
+        return;
+      }
+
+      const { size, cells, nextCells } = state;
+      for (let row = 0; row < size; row += 1) {
+        for (let col = 0; col < size; col += 1) {
+          const index = row * size + col;
+          let neighbors = 0;
+
+          for (let dRow = -1; dRow <= 1; dRow += 1) {
+            for (let dCol = -1; dCol <= 1; dCol += 1) {
+              if (dRow === 0 && dCol === 0) {
+                continue;
+              }
+
+              const nRow = row + dRow;
+              const nCol = col + dCol;
+              if (nRow < 0 || nRow >= size || nCol < 0 || nCol >= size) {
+                continue;
+              }
+
+              neighbors += cells[nRow * size + nCol];
+            }
+          }
+
+          if (cells[index] === 1) {
+            nextCells[index] = neighbors === 2 || neighbors === 3 ? 1 : 0;
+          } else {
+            nextCells[index] = neighbors === 3 ? 1 : 0;
+          }
+        }
+      }
+
+      cells.set(nextCells);
+      state.step += 1;
+      this.renderPuzzle28Board();
+      this.updatePuzzle28StepCounter();
+    },
+
+    renderPuzzle28Board() {
+      const state = this.puzzle28State;
+      if (!state || !state.boardEl) {
+        return;
+      }
+
+      const cellElements = state.boardEl.children;
+      for (let index = 0; index < cellElements.length; index += 1) {
+        const cellElement = cellElements[index];
+        cellElement.classList.toggle("alive", Boolean(state.cells[index]));
+      }
+    },
+
+    updatePuzzle28StepCounter() {
+      const state = this.puzzle28State;
+      if (!state || !state.stepCounterEl) {
+        return;
+      }
+
+      state.stepCounterEl.textContent = `Krok: ${state.step}`;
+    },
+
+    initPuzzle32Board() {
+      if (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33) {
+        return;
+      }
+
+      const puzzleData = PUZZLE_DATA[this.state.selectedPuzzle] || {};
+      const boardEl = document.getElementById("puzzle32Board");
+      const statusEl = document.getElementById("puzzle32Status");
+      if (!boardEl || !statusEl) {
+        return;
+      }
+
+      const defaultBoard = [
+        ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+        ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+        ["", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", ""],
+        ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+        ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
+      ];
+      const startSquares = this.normalizePuzzle32BoardLayout(puzzleData.starting_board, defaultBoard);
+      const solutionSquares = this.normalizePuzzle32BoardLayout(puzzleData.solution_board, null);
+
+      boardEl.innerHTML = "";
+      const fragment = document.createDocumentFragment();
+      for (let index = 0; index < startSquares.length; index += 1) {
+        const square = document.createElement("button");
+        square.type = "button";
+        square.className = "puzzle32-square";
+        square.dataset.p32Index = String(index);
+        square.setAttribute("role", "gridcell");
+        fragment.appendChild(square);
+      }
+      boardEl.appendChild(fragment);
+
+      this.puzzle32State = {
+        boardEl,
+        statusEl,
+        squares: startSquares.slice(),
+        startingSquares: startSquares.slice(),
+        solutionSquares,
+        selectedIndex: null,
+        solutionShown: false
+      };
+
+      this.renderPuzzle32Board();
+      this.updatePuzzle32Status("Kliknij pole z figurą, aby rozpocząć ruch.");
+    },
+
+    normalizePuzzle32BoardLayout(layout, fallbackLayout) {
+      if (!Array.isArray(layout) || layout.length !== 8) {
+        return Array.isArray(fallbackLayout)
+          ? fallbackLayout.flat().map((piece) => typeof piece === "string" ? piece : "")
+          : null;
+      }
+
+      const flattened = [];
+      for (const row of layout) {
+        if (!Array.isArray(row) || row.length !== 8) {
+          return Array.isArray(fallbackLayout)
+            ? fallbackLayout.flat().map((piece) => typeof piece === "string" ? piece : "")
+            : null;
+        }
+
+        row.forEach((piece) => {
+          flattened.push(typeof piece === "string" ? piece : "");
+        });
+      }
+
+      return flattened;
+    },
+
+    stopPuzzle32Board() {
+      this.puzzle32State = null;
+    },
+
+    handlePuzzle32SquareClick(squareEl) {
+      const state = this.puzzle32State;
+      if (!state || (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33) || !squareEl) {
+        return;
+      }
+
+      const index = Number(squareEl.dataset.p32Index);
+      if (Number.isNaN(index) || index < 0 || index >= state.squares.length) {
+        return;
+      }
+
+      if (state.selectedIndex === null) {
+        state.selectedIndex = index;
+        this.renderPuzzle32Board();
+        this.updatePuzzle32Status(`Wybrane pole ${this.getPuzzle32SquareLabel(index)}.`);
+        return;
+      }
+
+      if (state.selectedIndex === index) {
+        state.selectedIndex = null;
+        this.renderPuzzle32Board();
+        this.updatePuzzle32Status("Wybór anulowany.");
+        return;
+      }
+
+      const fromIndex = state.selectedIndex;
+      const fromPiece = state.squares[fromIndex];
+      const toPiece = state.squares[index];
+
+      state.squares[fromIndex] = toPiece;
+      state.squares[index] = fromPiece;
+      state.selectedIndex = null;
+
+      this.renderPuzzle32Board();
+      this.updatePuzzle32Status(
+        toPiece
+          ? `Zamieniono pola ${this.getPuzzle32SquareLabel(fromIndex)} i ${this.getPuzzle32SquareLabel(index)}.`
+          : `Przeniesiono figurę z ${this.getPuzzle32SquareLabel(fromIndex)} na ${this.getPuzzle32SquareLabel(index)}.`
+      );
+      this.checkPuzzle32Solution();
+    },
+
+    renderPuzzle32Board() {
+      const state = this.puzzle32State;
+      if (!state || !state.boardEl) {
+        return;
+      }
+
+      const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
+      const squares = state.boardEl.children;
+      for (let index = 0; index < squares.length; index += 1) {
+        const row = Math.floor(index / 8);
+        const col = index % 8;
+        const rank = 8 - row;
+        const squareEl = squares[index];
+        const piece = state.squares[index];
+        const isDark = (row + col) % 2 === 1;
+
+        squareEl.classList.toggle("dark", isDark);
+        squareEl.classList.toggle("light", !isDark);
+        squareEl.classList.toggle("selected", state.selectedIndex === index);
+        squareEl.classList.toggle("occupied", Boolean(piece));
+        squareEl.textContent = piece || "";
+        squareEl.setAttribute("aria-label", `${files[col]}${rank}${piece ? ` ${piece}` : " puste pole"}`);
+      }
+    },
+
+    getPuzzle32SquareLabel(index) {
+      const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
+      const row = Math.floor(index / 8);
+      const col = index % 8;
+      return `${files[col]}${8 - row}`;
+    },
+
+    updatePuzzle32Status(message) {
+      const state = this.puzzle32State;
+      if (!state || !state.statusEl) {
+        return;
+      }
+
+      state.statusEl.textContent = message;
+    },
+
+    checkPuzzle32Solution() {
+      const state = this.puzzle32State;
+      if (!state || !Array.isArray(state.solutionSquares) || state.solutionShown) {
+        return;
+      }
+
+      const isSolved = state.squares.every((piece, index) => {
+        return piece === state.solutionSquares[index];
+      });
+
+      if (!isSolved) {
+        return;
+      }
+
+      state.solutionShown = true;
+      this.updatePuzzle32Status("Zumzwang");
+      this.showCheckFeedback("success", "Brawo!", "Wykonałaś roszadę!");
     },
 
     getPuzzleHintEntries(puzzleId) {

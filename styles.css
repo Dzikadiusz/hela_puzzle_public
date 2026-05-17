@@ -370,12 +370,31 @@ textarea:focus-visible {
   border: 1px solid var(--ink-dark);
   border-radius: 0;
   margin: 0;
+  position: relative;
   background: #c8c0b5;
   color: #2f2419;
   font-weight: 600;
   padding: 0;
   box-shadow: none;
   transition: filter 140ms ease, transform 140ms ease;
+}
+
+.puzzle-btn.wip::after {
+  content: "WIP";
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  border: 1px solid #7a1f0f;
+  background: linear-gradient(90deg, #ffef45 0%, #ff9f1c 45%, #ff5a36 100%);
+  color: #2e1307;
+  font-size: 0.54rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .puzzle-btn.solved {
@@ -496,6 +515,23 @@ textarea:focus-visible {
   box-shadow: 0 8px 24px rgba(83, 58, 25, 0.07);
   position: relative;
   text-align: center;
+}
+
+.puzzle-wip-banner {
+  margin: 0 0 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.7rem;
+  border: 2px solid #7a1f0f;
+  background: linear-gradient(90deg, #ffef45 0%, #ff9f1c 45%, #ff5a36 100%);
+  color: #2e1307;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 18px rgba(186, 66, 13, 0.28);
+}
+
+body.puzzle30-white-content .puzzle-content {
+  background: #ffffff;
 }
 
 .piano-puzzle {
@@ -1467,6 +1503,149 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   animation: puzzle16-happy-pulse 0.8s ease-out forwards;
 }
 
+/* Puzzle 28: Gra w zycie */
+.puzzle28-wrap {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.puzzle28-wrap p {
+  margin: 0;
+}
+
+.puzzle28-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.55rem;
+  border: 1px solid #d8c8b5;
+  border-radius: 0.6rem;
+  background: linear-gradient(180deg, #fff9ee 0%, #f8ead8 100%);
+}
+
+.puzzle28-speed-label {
+  font-size: 0.9rem;
+  color: #5d4530;
+  font-weight: 700;
+}
+
+#puzzle28SpeedRange {
+  width: min(220px, 58vw);
+}
+
+.puzzle28-step {
+  margin: 0;
+  min-width: 88px;
+  text-align: right;
+  color: #5d4530;
+  font-weight: 700;
+}
+
+.puzzle28-board {
+  --puzzle28-size: min(84vw, 640px);
+  width: var(--puzzle28-size);
+  height: var(--puzzle28-size);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(40, 1fr);
+  border: 1px solid #7f6a56;
+  background: #f4ede2;
+  box-shadow: 0 8px 22px rgba(63, 45, 27, 0.12);
+}
+
+.puzzle28-cell {
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid rgba(78, 55, 33, 0.25);
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  background: #fefbf6;
+  box-shadow: none;
+  transform: none;
+}
+
+.puzzle28-cell:hover,
+.puzzle28-cell:active,
+.puzzle28-cell:focus-visible {
+  transform: none;
+  box-shadow: none;
+}
+
+.puzzle28-cell.alive {
+  background: #1f9d55;
+}
+
+.puzzle32-wrap {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.puzzle32-wrap p {
+  margin: 0;
+}
+
+.puzzle32-board {
+  --puzzle32-size: min(84vw, 560px);
+  width: var(--puzzle32-size);
+  height: var(--puzzle32-size);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border: 8px solid #5b3a22;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(63, 45, 27, 0.18);
+}
+
+.puzzle32-square {
+  min-width: 0;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.45rem, 4vw, 2.65rem);
+  line-height: 1;
+  box-shadow: none;
+  transform: none;
+  color: #24170d;
+}
+
+.puzzle32-square.light {
+  background: #f1d9b5;
+}
+
+.puzzle32-square.dark {
+  background: #8d5f3a;
+}
+
+.puzzle32-square:hover,
+.puzzle32-square:active,
+.puzzle32-square:focus-visible {
+  transform: none;
+  box-shadow: none;
+}
+
+.puzzle32-square.selected {
+  box-shadow: inset 0 0 0 4px #ff8c3b;
+}
+
+.puzzle32-square.occupied {
+  cursor: pointer;
+}
+
+.puzzle32-status {
+  color: #5d4530;
+  font-weight: 700;
+}
+
 @keyframes puzzle16-happy-pulse {
   0% {
     opacity: 0;
@@ -1547,6 +1726,23 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
 
   .puzzle18-indicator {
     font-size: 1.1rem;
+  }
+
+  .puzzle28-controls {
+    justify-content: flex-start;
+  }
+
+  .puzzle28-step {
+    text-align: left;
+  }
+
+  .puzzle28-board {
+    --puzzle28-size: min(92vw, 540px);
+  }
+
+  .puzzle32-board {
+    --puzzle32-size: min(92vw, 420px);
+    border-width: 6px;
   }
 
   .header-tools {
