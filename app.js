@@ -23,6 +23,16 @@
     // Row 8
     57: "#FFFFFF", 58: "#FFFFFF", 59: "#FFFFFF", 60: "#3A8F3A", 61: "#2F7F2F", 62: "#FFFFFF", 63: "#FFFFFF", 64: "#FFFFFF"
   };
+  // [
+//   ["#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E"],
+//   ["#4B2A2E","#4B2A2E","#4B2A2E","#E0663A","#E0663A","#4B2A2E","#4B2A2E","#4B2A2E"],
+//   ["#4B2A2E","#4B2A2E","#4B2A2E","#E0663A","#E0663A","#4B2A2E","#4B2A2E","#4B2A2E"],
+//   ["#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E"],
+//   ["#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E"],
+//   ["#4B2A2E","#F47C2C","#4B2A2E","#4B2A2E","#4B2A2E","#4B2A2E","#F47C2C","#4B2A2E"],
+//   ["#F47C2C","#F47C2C","#F47C2C","#F47C2C","#F47C2C","#F47C2C","#F47C2C","#F47C2C"],
+//   ["#FFFFFF","#F47C2C","#F47C2C","#F47C2C","#F47C2C","#F47C2C","#F47C2C","#FFFFFF"]
+// ]
   const PUZZLE_6_NOTE_FREQUENCIES = {
     C4: 261.63,
     D4: 293.66,
@@ -87,7 +97,7 @@
 </div>`,
     solution: "glob",
     partial_solution: [
-      { key: "glo", message: "Bardzo blisko! Dodaj jeszcze jedną literę na koniec." }
+      { key: "8079", message: "To byłoby za proste:)" }
     ]
   };
   PUZZLE_DATA[3] = {
@@ -250,6 +260,9 @@
     ],
     hint1: "Ta zagadka dotyczy państw...",
     hint2: "Nie wszystkie literki będą ci potrzebne...",
+    hint3: "Zwróć uwagę na pierwsze litery nazw państw przedstawionych na obrazku",
+    hint4: "Słowo, które odczytałaś nie odnosi się do flag"
+
 
   };
 
@@ -278,9 +291,12 @@
       </div>
     `,
     solution: "pomnik",
-    hint1: "Przyjrzyj się uważnie wszystkim pomnikom.",
-    hint2: "Czy któryś z nich jest szczególnie znany?",
-    hint3: "Może chodzi o miejsce, w którym się znajdują?"
+    hint1: "Czy potrafisz rozpoznać te pomniki?",
+    hint2: "Czy wiesz gdzie się znajdują?",
+    hint3: "Spróbuj zlokalizować je na mapie.",
+    hint4: "Coś powinno się pokazać",
+    hint5: "Czytaj od zachodu"
+
   };
   PUZZLE_DATA[15] = {
     title: "WIP Zagadka 15: Sonar",
@@ -311,7 +327,12 @@
     <div class="puzzle16-happy-bg"></div>
   </div>
 </div>`,
-    solution: "dynia"
+    solution: "dynia",
+    hint1: "Czy potrafisz rozpoznać te pomniki?",
+    hint2: "Czy wiesz gdzie się znajdują?",
+    hint3: "Spróbuj zlokalizować je na mapie.",
+    hint4: "Coś powinno się pokazać",
+    hint5: "Czytaj od zachodu"
   };
   PUZZLE_DATA[17] = {
     title: "Zagadka 17: Zacznij od góry",
@@ -630,6 +651,89 @@
 </div>`,
     solution: "przyda się później?"
   };
+  PUZZLE_DATA[36] = {
+    title: "Zagadka 36: Mystery",
+    work_in_progress: true,
+    content: `<div class="puzzle36-wrap">
+  <div class="puzzle36-casefile">
+    <p class="puzzle36-casefile-kicker">Archiwum detektywistyczne</p>
+    <p><strong>Sprawa: Tajemnica znikajacego artefaktu</strong></p>
+    <p>Zaznaczaj dedukcje w siatce i odtworz przebieg zdarzen jak rasowy detektyw.</p>
+  </div>
+
+  <ul class="puzzle36-clues">
+    <li>W galerii znaleziono lupę.</li>
+    <li>Osoba w bibliotece miała klucz.</li>
+    <li>Bartek nie był w bibliotece.</li>
+    <li>Ada nie była w galerii.</li>
+    <li>W wieży nie było klucza.</li>
+    <li>Celina nie była w galerii.</li>
+    <li>Sprawca to osoba, która miała lupę.</li>
+  </ul>
+  <div id="puzzle36Board" class="puzzle36-board" aria-label="Siatka dedukcyjna zagadki 36"></div>
+  <div class="puzzle36-actions">
+    <button type="button" id="puzzle36CheckBtn" class="small-btn">Sprawdź siatkę</button>
+    <button type="button" id="puzzle36ResetBtn" class="small-btn">Wyczyść siatkę</button>
+  </div>
+  <div class="puzzle36-guess">
+    <label>
+      Osoba
+      <select id="puzzle36GuessPerson">
+        <option value="">Wybierz...</option>
+        <option value="Ada">Ada</option>
+        <option value="Bartek">Bartek</option>
+        <option value="Celina">Celina</option>
+      </select>
+    </label>
+    <label>
+      Narzędzie
+      <select id="puzzle36GuessTool">
+        <option value="">Wybierz...</option>
+        <option value="Klucz">Klucz</option>
+        <option value="Lupa">Lupa</option>
+        <option value="Babeczka">Babeczka</option>
+      </select>
+    </label>
+    <label>
+      Miejsce
+      <select id="puzzle36GuessPlace">
+        <option value="">Wybierz...</option>
+        <option value="Biblioteka">Biblioteka</option>
+        <option value="Galeria">Galeria</option>
+        <option value="Wieza">Wieża</option>
+      </select>
+    </label>
+    <button type="button" id="puzzle36GuessCheckBtn" class="small-btn">Sprawdź rozwiązanie</button>
+  </div>
+  <p id="puzzle36Status" class="puzzle36-status" aria-live="polite">Zaznaczaj wskazówki w siatce.</p>
+</div>`,
+    solution: "zbrodnia"
+  };
+  PUZZLE_DATA[64] = {
+    title: "Zagadka 64: Na deser",
+    work_in_progress: true,
+    content: `<p><strong>Czy pamiętasz warzywo?</strong></p>`,
+    solution: "słonecznik",
+    hint1: "Tej zagadki nie da się rozwiązać bez ukończenia większości poprzednich",
+    hint2: "Gdzie najczęściej szukamy deseru w restauracji?",
+    hint3: "Karta dań to inaczej...",
+    hint4: "Spójrz na główne menu",
+    hint5: "TODO: Podpowiedź 5"
+  };
+
+  Object.keys(PUZZLE_DATA).forEach((puzzleKey) => {
+    const puzzleData = PUZZLE_DATA[puzzleKey];
+    if (!puzzleData || typeof puzzleData !== "object") {
+      return;
+    }
+
+    const hasAnyHint = Object.keys(puzzleData).some((key) => /^hint\d+$/i.test(key));
+    if (hasAnyHint) {
+      return;
+    }
+
+    
+  });
   
   const App = {
     state: null,
@@ -651,6 +755,7 @@
     puzzle16State: null,
     puzzle28State: null,
     puzzle32State: null,
+    puzzle36State: null,
 
     els: {
       menuView: null,
@@ -667,7 +772,8 @@
       resetPuzzleBtn: null,
       notesInput: null,
       saveIndicator: null,
-      solvedCounter: null
+      solvedCounter: null,
+      hintsUsedCounter: null
     },
 
     init() {
@@ -698,6 +804,7 @@
       this.els.notesInput = document.getElementById("notesInput");
       this.els.saveIndicator = document.getElementById("saveIndicator");
       this.els.solvedCounter = document.getElementById("solvedCounter");
+      this.els.hintsUsedCounter = document.getElementById("hintsUsedCounter");
       this.els.puzzlePiece1 = document.getElementById("puzzlePiece1");
       this.els.puzzlePiece2 = document.getElementById("puzzlePiece2");
       this.els.exportProgressBtn = document.getElementById("exportProgressBtn");
@@ -959,6 +1066,27 @@
           this.handlePuzzle32SquareClick(puzzle32Square);
           return;
         }
+
+        const puzzle36Cell = event.target.closest(".puzzle36-cell");
+        if (puzzle36Cell) {
+          this.handlePuzzle36CellClick(puzzle36Cell);
+          return;
+        }
+
+        if (event.target.id === "puzzle36CheckBtn") {
+          this.checkPuzzle36Mystery();
+          return;
+        }
+
+        if (event.target.id === "puzzle36ResetBtn") {
+          this.resetPuzzle36Mystery();
+          return;
+        }
+
+        if (event.target.id === "puzzle36GuessCheckBtn") {
+          this.checkPuzzle36CombinationGuess();
+          return;
+        }
       });
 
       this.els.puzzleContent.addEventListener("input", (event) => {
@@ -1089,12 +1217,14 @@
       this.stopPuzzle18Timer();
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
+      this.stopPuzzle36Mystery();
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
       this.els.backToMenuBtn.classList.add("hidden");
       document.body.classList.remove("puzzle19-night-sky");
       document.body.classList.remove("puzzle14-debug-mode");
       document.body.classList.remove("puzzle30-white-content");
+      document.body.classList.remove("puzzle36-mystery-theme");
       this.playViewEntrance(this.els.menuView);
       this.renderMenuSelectionState();
     },
@@ -1179,6 +1309,24 @@
       }, 0);
 
       this.els.solvedCounter.textContent = `Rozwiązane ${solvedCount} / ${TOTAL_PUZZLES}`;
+      const solvedProgress = (solvedCount / TOTAL_PUZZLES) * 100;
+      this.els.solvedCounter.style.setProperty("--progress", `${solvedProgress}%`);
+
+      if (!this.els.hintsUsedCounter) {
+        return;
+      }
+
+      const hintsUsedCount = Object.values(this.state.hints || {}).reduce((count, puzzleHints) => {
+        if (!puzzleHints || typeof puzzleHints !== "object") {
+          return count;
+        }
+
+        return count + Object.keys(puzzleHints).reduce((hintCount, hintKey) => {
+          return hintCount + (Boolean(puzzleHints[hintKey]) ? 1 : 0);
+        }, 0);
+      }, 0);
+
+      this.els.hintsUsedCounter.textContent = `Użyte Podpowiedzi ${hintsUsedCount}`;
     },
 
     renderPuzzleView() {
@@ -1187,6 +1335,7 @@
       this.stopPuzzle18Timer();
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
+      this.stopPuzzle36Mystery();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
       const puzzleData = PUZZLE_DATA[id] || {
@@ -1197,6 +1346,7 @@
       document.body.classList.toggle("puzzle19-night-sky", id === 19);
       document.body.classList.toggle("puzzle14-debug-mode", id === 14 && PUZZLE_14_DEBUG_MODE);
       document.body.classList.toggle("puzzle30-white-content", id === 30);
+      document.body.classList.toggle("puzzle36-mystery-theme", id === 36);
 
       this.els.puzzleTitle.textContent = puzzleData.title;
       this.els.solutionInput.value = puzzle.solution;
@@ -1253,6 +1403,10 @@
 
       if (id === 32 || id === 33) {
         this.initPuzzle32Board();
+      }
+
+      if (id === 36) {
+        this.initPuzzle36Mystery();
       }
 
       if (puzzle.lastUpdated) {
@@ -1817,6 +1971,8 @@
         ["#BF4E2F","#BF4E2F","#BF4E2F","#F57522","#F57522","#BF4E2F","#F57522","#F57522"],
         ["#EAE5E0","#BF4E2F","#BF4E2F","#BF4E2F","#BF4E2F","#BF4E2F","#BF4E2F","#EAE5E0"]
       ];
+
+      
 
       gridEl.innerHTML = "";
       const fragment = document.createDocumentFragment();
@@ -2451,6 +2607,278 @@
       state.solutionShown = true;
       this.updatePuzzle32Status("Zumzwang");
       this.showCheckFeedback("success", "Brawo!", "Wykonałaś roszadę!");
+    },
+
+    initPuzzle36Mystery() {
+      if (this.state.selectedPuzzle !== 36) {
+        return;
+      }
+
+      const boardEl = document.getElementById("puzzle36Board");
+      const statusEl = document.getElementById("puzzle36Status");
+      if (!boardEl || !statusEl) {
+        return;
+      }
+
+      const panels = [
+        {
+          id: "suspectPlace",
+          title: "Osoba x Miejsce",
+          left: ["Ada", "Bartek", "Celina"],
+          right: ["Biblioteka", "Galeria", "Wieza"]
+        },
+        {
+          id: "suspectItem",
+          title: "Osoba x Narzędzie",
+          left: ["Ada", "Bartek", "Celina"],
+          right: ["Klucz", "Lupa", "Babeczka"]
+        },
+        {
+          id: "placeItem",
+          title: "Miejsce x Narzędzie",
+          left: ["Biblioteka", "Galeria", "Wieza"],
+          right: ["Klucz", "Lupa", "Babeczka"]
+        }
+      ];
+
+      const marks = {};
+      panels.forEach((panel) => {
+        marks[panel.id] = {};
+        panel.left.forEach((rowKey) => {
+          marks[panel.id][rowKey] = {};
+          panel.right.forEach((colKey) => {
+            marks[panel.id][rowKey][colKey] = "";
+          });
+        });
+      });
+
+      this.puzzle36State = {
+        boardEl,
+        statusEl,
+        panels,
+        marks,
+        solved: false,
+        solution: {
+          suspectPlace: {
+            Ada: "Biblioteka",
+            Bartek: "Galeria",
+            Celina: "Wieza"
+          },
+          suspectItem: {
+            Ada: "Klucz",
+            Bartek: "Lupa",
+            Celina: "Babeczka"
+          },
+          placeItem: {
+            Biblioteka: "Klucz",
+            Galeria: "Lupa",
+            Wieza: "Babeczka"
+          }
+        }
+      };
+
+      this.renderPuzzle36Board();
+      this.updatePuzzle36Status("Zaznaczaj wskazówki w siatce.");
+    },
+
+    stopPuzzle36Mystery() {
+      this.puzzle36State = null;
+    },
+
+    getNextPuzzle36Mark(currentMark) {
+      if (currentMark === "") {
+        return "x";
+      }
+      if (currentMark === "x") {
+        return "o";
+      }
+      return "";
+    },
+
+    handlePuzzle36CellClick(cellEl) {
+      const state = this.puzzle36State;
+      if (!state || this.state.selectedPuzzle !== 36 || !cellEl) {
+        return;
+      }
+
+      const panelId = cellEl.dataset.p36Panel;
+      const rowKey = cellEl.dataset.p36Row;
+      const colKey = cellEl.dataset.p36Col;
+      if (!panelId || !rowKey || !colKey) {
+        return;
+      }
+
+      const panelMarks = state.marks[panelId];
+      if (!panelMarks || !panelMarks[rowKey] || typeof panelMarks[rowKey][colKey] !== "string") {
+        return;
+      }
+
+      panelMarks[rowKey][colKey] = this.getNextPuzzle36Mark(panelMarks[rowKey][colKey]);
+      state.solved = false;
+      this.renderPuzzle36Board();
+    },
+
+    resetPuzzle36Mystery() {
+      const state = this.puzzle36State;
+      if (!state || this.state.selectedPuzzle !== 36) {
+        return;
+      }
+
+      state.panels.forEach((panel) => {
+        panel.left.forEach((rowKey) => {
+          panel.right.forEach((colKey) => {
+            state.marks[panel.id][rowKey][colKey] = "";
+          });
+        });
+      });
+
+      state.solved = false;
+      this.renderPuzzle36Board();
+      this.updatePuzzle36Status("Siatka wyczyszczona.");
+    },
+
+    renderPuzzle36Board() {
+      const state = this.puzzle36State;
+      if (!state || !state.boardEl) {
+        return;
+      }
+
+      state.boardEl.innerHTML = "";
+      const fragment = document.createDocumentFragment();
+
+      state.panels.forEach((panel) => {
+        const panelWrap = document.createElement("section");
+        panelWrap.className = "puzzle36-panel";
+
+        const title = document.createElement("h4");
+        title.className = "puzzle36-panel-title";
+        title.textContent = panel.title;
+        panelWrap.appendChild(title);
+
+        const table = document.createElement("table");
+        table.className = "puzzle36-table";
+
+        const headRow = document.createElement("tr");
+        const corner = document.createElement("th");
+        corner.className = "puzzle36-corner";
+        corner.textContent = "";
+        headRow.appendChild(corner);
+
+        panel.right.forEach((colKey) => {
+          const colHead = document.createElement("th");
+          colHead.textContent = colKey === "Wieza" ? "Wieża" : colKey;
+          headRow.appendChild(colHead);
+        });
+
+        const thead = document.createElement("thead");
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        panel.left.forEach((rowKey) => {
+          const row = document.createElement("tr");
+          const rowHead = document.createElement("th");
+          rowHead.textContent = rowKey === "Wieza" ? "Wieża" : rowKey;
+          row.appendChild(rowHead);
+
+          panel.right.forEach((colKey) => {
+            const mark = state.marks[panel.id][rowKey][colKey];
+            const td = document.createElement("td");
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "puzzle36-cell";
+            button.dataset.p36Panel = panel.id;
+            button.dataset.p36Row = rowKey;
+            button.dataset.p36Col = colKey;
+            button.classList.toggle("mark-x", mark === "x");
+            button.classList.toggle("mark-o", mark === "o");
+            button.textContent = mark === "x" ? "X" : (mark === "o" ? "O" : "");
+            button.setAttribute("aria-label", `${rowKey} i ${colKey}: ${mark || "puste"}`);
+            td.appendChild(button);
+            row.appendChild(td);
+          });
+
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        panelWrap.appendChild(table);
+        fragment.appendChild(panelWrap);
+      });
+
+      state.boardEl.appendChild(fragment);
+    },
+
+    updatePuzzle36Status(message) {
+      const state = this.puzzle36State;
+      if (!state || !state.statusEl) {
+        return;
+      }
+
+      state.statusEl.textContent = message;
+    },
+
+    checkPuzzle36Mystery() {
+      const state = this.puzzle36State;
+      if (!state || this.state.selectedPuzzle !== 36) {
+        return;
+      }
+
+      for (const panel of state.panels) {
+        const panelSolution = state.solution[panel.id];
+
+        for (const rowKey of panel.left) {
+          const selectedCols = panel.right.filter((colKey) => state.marks[panel.id][rowKey][colKey] === "o");
+          const expectedCol = panelSolution[rowKey];
+          if (selectedCols.length !== 1 || selectedCols[0] !== expectedCol) {
+            this.updatePuzzle36Status("Jeszcze nie wszystko się zgadza. Sprawdź zaznaczenia O.");
+            return;
+          }
+        }
+
+        for (const colKey of panel.right) {
+          const selectedRows = panel.left.filter((rowKey) => state.marks[panel.id][rowKey][colKey] === "o");
+          if (selectedRows.length !== 1 || panelSolution[selectedRows[0]] !== colKey) {
+            this.updatePuzzle36Status("Każda kolumna powinna mieć dokładnie jedno O.");
+            return;
+          }
+        }
+      }
+
+      state.solved = true;
+      this.updatePuzzle36Status("Brawo! Dedukcja poprawna. Wybierz kombinację i sprawdź rozwiązanie.");
+    },
+
+    checkPuzzle36CombinationGuess() {
+      if (this.state.selectedPuzzle !== 36 || !this.puzzle36State) {
+        return;
+      }
+
+      const personEl = document.getElementById("puzzle36GuessPerson");
+      const toolEl = document.getElementById("puzzle36GuessTool");
+      const placeEl = document.getElementById("puzzle36GuessPlace");
+      if (!personEl || !toolEl || !placeEl) {
+        return;
+      }
+
+      const person = String(personEl.value || "");
+      const tool = String(toolEl.value || "");
+      const place = String(placeEl.value || "");
+      if (!person || !tool || !place) {
+        this.updatePuzzle36Status("Wybierz osobę, narzędzie i miejsce.");
+        return;
+      }
+
+      const isCorrect = person === "Bartek" && tool === "Lupa" && place === "Galeria";
+      if (!isCorrect) {
+        this.updatePuzzle36Status("To nie ta kombinacja. Spróbuj ponownie.");
+        this.showCheckFeedback("error", "Nie tym razem", "Ta kombinacja nie pasuje do wskazówek.");
+        return;
+      }
+
+      this.updatePuzzle36Status("Brawo! Odkryto hasło: zbrodnia.");
+      this.els.solutionInput.value = "zbrodnia";
+      this.showCheckFeedback("success", "Hasło", "zbrodnia");
     },
 
     getPuzzleHintEntries(puzzleId) {

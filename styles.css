@@ -242,6 +242,13 @@ body.puzzle19-night-sky {
   font-weight: 700;
 }
 
+.progress-chip {
+  --progress: 0%;
+  background:
+    linear-gradient(90deg, rgba(58, 143, 58, 0.28) 0 var(--progress), rgba(255, 255, 255, 0) var(--progress) 100%),
+    linear-gradient(180deg, #fff9ef 0%, #ffeccf 100%);
+}
+
 .small-btn,
 button {
   border: 1px solid var(--border);
@@ -1658,6 +1665,215 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   font-weight: 700;
 }
 
+body.puzzle36-mystery-theme {
+  background:
+    radial-gradient(circle at 16% 14%, rgba(171, 127, 78, 0.22) 0%, transparent 34%),
+    radial-gradient(circle at 85% 10%, rgba(108, 74, 48, 0.25) 0%, transparent 29%),
+    linear-gradient(180deg, #221811 0%, #332318 46%, #4b3525 100%);
+}
+
+body.puzzle36-mystery-theme .top-header {
+  background: linear-gradient(180deg, rgba(255, 247, 229, 0.96) 0%, rgba(247, 228, 196, 0.95) 100%);
+  border-color: #b78e62;
+  box-shadow: 0 12px 28px rgba(18, 11, 8, 0.34);
+}
+
+body.puzzle36-mystery-theme .floating-snout {
+  background:
+    radial-gradient(ellipse at 34% 39%, #9b563c 0 11%, transparent 12%),
+    radial-gradient(ellipse at 66% 39%, #9b563c 0 11%, transparent 12%),
+    linear-gradient(180deg, #f0b79a 0%, #dda182 100%);
+  border-color: #bb7353;
+  opacity: 0.48;
+  filter: drop-shadow(0 10px 16px rgba(38, 21, 10, 0.24));
+}
+
+body.puzzle36-mystery-theme .floating-snout::before,
+body.puzzle36-mystery-theme .floating-snout::after {
+  top: 16%;
+  width: 50%;
+  height: 42%;
+  left: 50%;
+  background: transparent;
+  border: 5px solid #2f1a10;
+  border-top: 0;
+}
+
+body.puzzle36-mystery-theme .floating-snout::before {
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0 0 0 100%;
+  transform-origin: right 100%;
+  transform: translateX(-100%) rotate(-20deg);
+  animation: puzzle36MustacheLeft 1s ease-in-out infinite;
+}
+
+body.puzzle36-mystery-theme .floating-snout::after {
+  left: 50%;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0 0 100% 0;
+  transform-origin: left 100%;
+  transform: translateX(0) rotate(20deg);
+  animation: puzzle36MustacheRight 1s ease-in-out infinite;
+}
+
+.puzzle36-wrap {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #b2885c;
+  border-radius: 0.85rem;
+  background:
+    repeating-linear-gradient(0deg, rgba(194, 156, 111, 0.12) 0 2px, transparent 2px 22px),
+    linear-gradient(180deg, #fbf0d9 0%, #f2dfc0 100%);
+  box-shadow: 0 12px 24px rgba(26, 16, 9, 0.2);
+}
+
+.puzzle36-wrap p {
+  margin: 0;
+}
+
+.puzzle36-casefile {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #bb9469;
+  border-radius: 0.55rem;
+  background: linear-gradient(180deg, #fff7e8 0%, #f7e6ca 100%);
+}
+
+.puzzle36-casefile-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  color: #7c5230;
+  font-weight: 800;
+}
+
+.puzzle36-clues {
+  margin: 0;
+  padding: 0.75rem 0.75rem 0.75rem 1.7rem;
+  color: #4a2d1a;
+  display: grid;
+  gap: 0.42rem;
+  border: 1px dashed #b08658;
+  border-radius: 0.55rem;
+  background: rgba(255, 248, 234, 0.74);
+}
+
+.puzzle36-board {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.puzzle36-panel {
+  border: 1px solid #ac7f52;
+  border-radius: 0.65rem;
+  padding: 0.55rem;
+  background: linear-gradient(180deg, #fff9ee 0%, #f4e2c8 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.puzzle36-panel-title {
+  margin: 0 0 0.45rem;
+  font-size: 0.9rem;
+  color: #4d311f;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.puzzle36-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.puzzle36-table th,
+.puzzle36-table td {
+  border: 1px solid #caab86;
+  text-align: center;
+  font-size: 0.82rem;
+  padding: 0.22rem;
+}
+
+.puzzle36-corner {
+  background: #ecd2ad;
+}
+
+.puzzle36-cell {
+  width: 100%;
+  min-height: 30px;
+  border: 1px solid #b38a5f;
+  border-radius: 0.35rem;
+  background: #fff8ec;
+  color: #4a2d1a;
+  font-weight: 700;
+  box-shadow: none;
+  transform: none;
+}
+
+.puzzle36-cell:hover,
+.puzzle36-cell:active,
+.puzzle36-cell:focus-visible {
+  transform: none;
+  box-shadow: none;
+}
+
+.puzzle36-cell.mark-x {
+  background: #f3dfdb;
+  color: #7c2d24;
+}
+
+.puzzle36-cell.mark-o {
+  background: #e1e8d4;
+  color: #3c5629;
+}
+
+.puzzle36-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+body.puzzle36-mystery-theme .puzzle36-actions .small-btn,
+body.puzzle36-mystery-theme #puzzle36GuessCheckBtn {
+  border-color: #875a31;
+  background: linear-gradient(180deg, #f4dfbb 0%, #d8b17d 100%);
+  color: #3a2617;
+}
+
+.puzzle36-guess {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: end;
+}
+
+.puzzle36-guess label {
+  display: grid;
+  gap: 0.25rem;
+  color: #4d311f;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.puzzle36-guess select {
+  border: 1px solid #b38a5f;
+  border-radius: 0.45rem;
+  padding: 0.38rem 0.45rem;
+  background: #fff7e9;
+  color: #4a2d1a;
+}
+
+.puzzle36-status {
+  color: #4d311f;
+  font-weight: 700;
+  border-left: 4px solid #875a31;
+  padding-left: 0.55rem;
+}
+
 @keyframes puzzle16-happy-pulse {
   0% {
     opacity: 0;
@@ -1781,6 +1997,11 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
     filter: drop-shadow(0 6px 10px rgba(87, 51, 21, 0.12));
   }
 
+  body.puzzle36-mystery-theme .floating-snout::before,
+  body.puzzle36-mystery-theme .floating-snout::after {
+    border-width: 4px;
+  }
+
   .s1 { width: 30px; height: 21px; }
   .s2 { width: 43px; height: 29px; }
   .s3 { width: 34px; height: 23px; }
@@ -1845,6 +2066,30 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   }
   100% {
     transform: rotate(0deg) translateY(0);
+  }
+}
+
+@keyframes puzzle36MustacheLeft {
+  0% {
+    transform: translateX(-100%) rotate(-20deg);
+  }
+  50% {
+    transform: translateX(-100%) rotate(-10deg);
+  }
+  100% {
+    transform: translateX(-100%) rotate(-20deg);
+  }
+}
+
+@keyframes puzzle36MustacheRight {
+  0% {
+    transform: translateX(0) rotate(20deg);
+  }
+  50% {
+    transform: translateX(0) rotate(10deg);
+  }
+  100% {
+    transform: translateX(0) rotate(20deg);
   }
 }
 
