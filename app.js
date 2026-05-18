@@ -37,6 +37,32 @@
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const PUZZLE_12_DEBUG_MODE = true;
   const PUZZLE_14_DEBUG_MODE = false;
+  const PAIRS_PASSWORD = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed domos";
+  const LETTER_PAIR_CATALOG = {
+    A: [["rak", "kara"], ["cel", "cela"]],
+    B: [["rak", "brak"]],
+    C: [["hełm", "Chełm"]],
+    D: [["ja", "jad"]],
+    E: [["Cezar", "czar"]],
+    F: [["frak", "rak"]],
+    G: [["ość", "gość"]],
+    H: [["całka", "chałka"]],
+    I: [["rak", "Irak"]],
+    J: [["Jezus", "Zeus"]],
+    K: [["rak", "kark"]],
+    L: [["buk", "klub"]],
+    M: [["to", "tom"]],
+    N: [["tag", "gnat"]],
+    O: [["aut", "auto"]],
+    P: [["dar", "drap"]],
+    R: [["bat", "brat"]],
+    S: [["chart", "strach"]],
+    T: [["lis", "list"]],
+    U: [["bat", "tuba"]],
+    W: [["rak", "wrak"]],
+    Y: [["ryba", "bar"]],
+    Z: [["rak", "krzak"]]
+  };
 
   // Centralized puzzle data: define title, content, solution and optional partial_solution for each puzzle (1-64)
   // Edit these to customize each puzzle
@@ -454,6 +480,7 @@
   PUZZLE_DATA[27] = {
     //TODO test and adjust hours
     title: "Zagadka 27: Zagubione w czasie",
+    work_in_progress: true,
     content: `<div class="clocks-puzzle">
   <div class="clocks-grid">
     <div class="clock-container" data-hour="7" data-letter="C">
@@ -567,6 +594,42 @@
     solution_board: null,
     solution: ""
   };
+  PUZZLE_DATA[34] = {
+    title: "Zagadka 34: Sonet",
+    work_in_progress: true,
+    content: `<div class="puzzle34-wrap" style="display:grid; gap:0.8rem; line-height:1.6; text-align:center;">
+  <p><strong>Jako fale dążące ku żwirom wybrzeży</strong></p>
+  <p><strong>tak nasze chwile śpieszą ku odległej mecie</strong></p>
+  <p><strong>każda zajmuje miejsce tej co przed nią bieży</strong></p>
+  <p><strong>i bieg jej podejmuje w odwiecznej sztafecie</strong></p>
+  <p><strong>człowiek gdy na świat przyjdzie w świetlistej orbicie</strong></p>
+  <p><strong>krąży lecz wkrótce pełznąć pocznie w wiek dojrzały</strong></p>
+  <p><strong>a odtąd przeciwności ćmią słoneczne życie</strong></p>
+  <p><strong>aż ręce ■■■■■ zniszczą co same wpierw dały</strong></p>
+  <p><strong>■■■■ wszelką młodość w końcu z powabu odziera</strong></p>
+  <p><strong>złośliwie żłobi bruzdy w najpiękniejszej twarzy</strong></p>
+  <p><strong>najrzadszy skarb natury z ochotą pożera</strong></p>
+  <p><strong>aż wszystko wokół zetnie najsroższy z kosiarzy</strong></p>
+  <p><strong>i wbrew zagładzie tylko mój wiersz ma nadzieję</strong></p>
+  <p><strong>że w nim twa chwała będzie jaśnieć jak jaśnieje</strong></p>
+  <p><strong>i wbrew zagładzie tylko mój wiersz ma nadzieję</strong></p>
+  <p><strong>że w nim twa chwała będzie jaśnieć jak jaśnieje</strong></p>
+  <p><strong>jak jaśnieje</strong></p>
+</div>`,
+    solution: "czas",
+    partial_solution: [
+      { key: "czasu", message: "Dobre słowo, ale wpisz je w podstawowej formie." }
+    ]
+  };
+  PUZZLE_DATA[35] = {
+    title: "Zagadka 35: Podobieństwa i różnice",
+    work_in_progress: true,
+    content: `<div style="display:grid; gap:0.8rem; justify-items:center; text-align:center;">
+  <p><strong>Podobieństwa i różnice</strong></p>
+  <p>Sprawdź elementy poniżej notatek: pierwszy wyraz i jego para.</p>
+</div>`,
+    solution: "przyda się później?"
+  };
   
   const App = {
     state: null,
@@ -635,6 +698,8 @@
       this.els.notesInput = document.getElementById("notesInput");
       this.els.saveIndicator = document.getElementById("saveIndicator");
       this.els.solvedCounter = document.getElementById("solvedCounter");
+      this.els.puzzlePiece1 = document.getElementById("puzzlePiece1");
+      this.els.puzzlePiece2 = document.getElementById("puzzlePiece2");
       this.els.exportProgressBtn = document.getElementById("exportProgressBtn");
       this.els.importProgressBtn = document.getElementById("importProgressBtn");
       this.els.solveAllBtn = document.getElementById("solveAllBtn");
@@ -1146,6 +1211,7 @@
       this.els.statusBadge.classList.toggle("unsolved", !puzzle.solved);
 
       this.els.puzzleContent.innerHTML = puzzleData.content;
+      this.renderPasswordPairForCurrentPuzzle();
       if (puzzleData.work_in_progress) {
         const wipBanner = document.createElement("div");
         wipBanner.className = "puzzle-wip-banner";
@@ -2535,6 +2601,96 @@
 
     getCurrentPuzzle() {
       return this.state.puzzles[String(this.state.selectedPuzzle)];
+    },
+
+    getPasswordLetterForPuzzle(puzzleId) {
+      const password = String(PAIRS_PASSWORD || "");
+      if (!password) {
+        return null;
+      }
+
+      const normalizedPuzzleId = this.normalizePuzzleId(puzzleId);
+      const passwordIndex = (normalizedPuzzleId - 1) % password.length;
+      const char = password.charAt(passwordIndex);
+      if (char === " ") {
+        return " "; // Indicate a space, so no pair will be shown
+      }
+      if (!/[A-Za-z]/.test(char)) {
+        return null;
+      }
+      return char.toUpperCase();
+    },
+
+    getRandomPairForLetter(letter) {
+      if (!letter || typeof letter !== "string") {
+        return null;
+      }
+
+      const normalizedLetter = letter.toUpperCase();
+      const allPairs = LETTER_PAIR_CATALOG[normalizedLetter];
+      if (!Array.isArray(allPairs) || allPairs.length === 0) {
+        return null;
+      }
+
+      const randomIndex = Math.floor(Math.random() * allPairs.length);
+      const selectedPair = allPairs[randomIndex];
+      if (!Array.isArray(selectedPair) || selectedPair.length < 2) {
+        return null;
+      }
+
+      return {
+        first: String(selectedPair[0]),
+        second: String(selectedPair[1])
+      };
+    },
+
+    resetPuzzlePieceCard(pieceEl, fallbackAltText) {
+      if (!pieceEl) {
+        return;
+      }
+
+      pieceEl.innerHTML = "";
+      const imageEl = document.createElement("img");
+      imageEl.src = "";
+      imageEl.alt = fallbackAltText;
+      imageEl.className = "piece-image";
+      pieceEl.appendChild(imageEl);
+    },
+
+    setPuzzlePieceCardWord(pieceEl, word) {
+      if (!pieceEl) {
+        return;
+      }
+
+      pieceEl.innerHTML = "";
+      const wordEl = document.createElement("span");
+      wordEl.className = "piece-word";
+      wordEl.textContent = word;
+      pieceEl.appendChild(wordEl);
+    },
+
+    renderPasswordPairForCurrentPuzzle() {
+      const firstPieceEl = this.els.puzzlePiece1;
+      const secondPieceEl = this.els.puzzlePiece2;
+      if (!firstPieceEl || !secondPieceEl) {
+        return;
+      }
+
+      const targetLetter = this.getPasswordLetterForPuzzle(this.state.selectedPuzzle);
+      if (targetLetter === " ") {
+        this.setPuzzlePieceCardWord(firstPieceEl, "");
+        this.setPuzzlePieceCardWord(secondPieceEl, "");
+        return;
+      }
+      const randomPair = this.getRandomPairForLetter(targetLetter);
+      if (!randomPair) {
+        this.setPuzzlePieceCardWord(firstPieceEl, "?");
+        this.setPuzzlePieceCardWord(secondPieceEl, "?");
+        return;
+      }
+
+      this.setPuzzlePieceCardWord(firstPieceEl, randomPair.first);
+      this.setPuzzlePieceCardWord(secondPieceEl, randomPair.second);
     },
 
     getExpectedSolution(puzzleId) {

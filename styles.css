@@ -1009,6 +1009,18 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   display: block;
 }
 
+.piece-word {
+  display: block;
+  max-width: 100%;
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #2a1f14;
+  word-break: break-word;
+}
+
 .puzzle-bottom {
   margin-top: 0.8rem;
   flex: 1;
