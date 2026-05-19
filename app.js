@@ -87,7 +87,10 @@
     partial_solution: [
       { key: "pocz", message: "Dobry początek! Dodaj jeszcze liter." },
       { key: "począ", message: "Bardzo blisko! Dokończ wyraz." }
-    ]
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[2] = {
     //TODO hint
@@ -98,7 +101,10 @@
     solution: "glob",
     partial_solution: [
       { key: "8079", message: "To byłoby za proste:)" }
-    ]
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[3] = {
     title: "Zagadka 3: Coś Szybkiego",
@@ -113,7 +119,10 @@
     partial_solution: [
       { key: "2", message: "Blisko! Ale liczba jest mniejsza." },
       { key: "4", message: "Blisko! Ale liczba jest większa." }
-    ]
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[4] = {
    title: "Zagadka 4: Coś tu nie pasuje...",
@@ -122,7 +131,10 @@
     partial_solution: [
       { key: "3", message: "Znaleźliśmy pierwszą cyfrę! Która druga?" },
       { key: "1", message: "To druga cyfra, ale gdzie pierwsza?" }
-    ]
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[5] = {
    title: "Zagadka 5: Bez sensu?",
@@ -134,7 +146,10 @@
 <p>4 = 6
 <p>5 = ?
 </p>`,
-    solution: "4"
+    solution: "4",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[6] = {
     title: "WIP Zagadka 6: Pianino",
@@ -157,7 +172,10 @@
   </div>
   <button type="button" id="puzzle6Reset" class="small-btn">Wyczyść melodię</button>
 </div>`,
-    solution: "fortepian"
+    solution: "fortepian",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[7] = {
     title: "Zagadka 7: Pechowy cesarz",
@@ -190,12 +208,18 @@
     partial_solution: [
       { key: "krypto", message: "Połowa drogi! Dodaj 6 liter na koniec." },
       { key: "kryptogr", message: "Bardzo blisko! Jeszcze 2 litery." }
-    ]
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[8] = {
     title: "Zagadka 8: Dziwne liczby",
     content: `<p><strong><center>43.51474950100621, 16.443521243705444</strong></p>`,
-    solution: "Split"
+    solution: "Split",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[9] = {
     title: "Zagadka 9: Będzie jakaś zniżka?",
@@ -205,7 +229,10 @@
     solution: "Rabat",
     partial_solution: [
       { key: "Maroko", message: "Prawie! Czy coś przeoczyłaś?" }
-    ]
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[10] = {
     title: "Zagadka 10: Gdzie on się podział?",
@@ -213,7 +240,10 @@
   <img src="img/dachy.png" alt="" class="puzzle10-image">
   <button type="button" class="puzzle-hotspot-btn" aria-label="Ukryty punkt na obrazku" title="Ukryty punkt na obrazku"></button>
 </div>`,
-    solution: "Filuś"
+    solution: "Filuś",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[11] = {
     title: "Zagadka 11: Czas Prawdy",
@@ -223,7 +253,10 @@
   <p><strong>Dwa filary, dwie przepaście...</strong></p>
   <p id="puzzle11RevealStatus" aria-live="polite"></p>
 </div>`,
-    solution: "todo"
+    solution: "todo",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[12] = {
     title: "Zagadka 12: Stare zamki są pełne potworów...",
@@ -254,7 +287,7 @@
 </div>`,
     solution: "weksylologia",
     partial_solution: [
-      { key: "kartografia", message: "Świetnie! Odczytałaś hasło, ale czy ono tu na prawdę ma sens?" },
+      { key: "kartografia", message: "Świetnie! Odczytałaś hasło, ale czy ono tu naprawdę ma sens?" },
       { key: "heraldyka", message: "Bardzo blisko! Poszukaj jeszcze trochę" },
       { key: "geografia", message: "Blisko! Ale chodzi o coś nieco innego" }
     ],
@@ -317,7 +350,10 @@
     </div>
   </div>
 </div>`,
-    solution: ""
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[16] = {
     title: "Zagadka 16",
@@ -387,7 +423,10 @@
     <span class="puzzle17-cell">s</span>
   </div>
 </div>`,
-    solution: "8461259"
+    solution: "8461259",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[18] = {
     title: "Zagadka 18: Memento",
@@ -442,7 +481,10 @@
     <span class="puzzle18-cell"></span>
   </div>
 </div>`,
-    solution: "pamiętaj"
+    solution: "pamiętaj",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[19] = {
     //TODO
@@ -452,12 +494,18 @@
   <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
   <p id="puzzle19MoonStatus" aria-live="polite"></p>
 </div>`,
-    solution: "TODO"
+    solution: "TODO",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[20] = {
     title: "Zagadka 20",
     content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
-    solution: "panika"
+    solution: "panika",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[21] = {
     title: "Zagadka 21: Kurczaczek",
@@ -467,7 +515,10 @@
   </div>
   <p><strong>3,141592 653589 793238 462643 383279 502884 197169 399375 105820 974944 592307 816406 286208 998628 034825 342117 067982 148086 513282 306647 093844 609550 582231 725359 408128 377606 450284 102701 938521 105559 644622 948954 930381 964428 810975 665933 446128</strong></p>
 </div>`,
-    solution: "377606"
+    solution: "377606",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
 
   PUZZLE_DATA[22] = {
@@ -477,26 +528,41 @@
   <div>Sód</div>
   <div>Lutet+Azot+Węgiel+Wodór</div>
 </div>`,
-    solution: "banan na lunch"
+    solution: "banan na lunch",
+    hint1: "Z czym kojarzą Ci się te słowa?",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[23] = {
     title: "Zagadka 23",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/belt.jpg" alt="Pasek" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
-    solution: "mars"
+    solution: "mars",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[24] = {
     title: "Zagadka 24: Łatwiej będzie na telefonie...",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/pochyl.png" alt="Podpowiedź: pochyl telefon" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
-    solution: "bezmiar"
+    solution: "bezmiar",
+    hint1: "słowo na dole jest kluczowe",
+    hint2: "na tę zagadkę musisz spojrzeć z innej perspektywy",
+    hint3: "pochyl ekran i przypatrz się obrazkowi"
   };
   PUZZLE_DATA[25] = {
     title: "Zagadka 25: Dostał się Filuś na małe ogrodzenie",
     content: `<p><strong>Gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
-    solution: "złaź sierściuchu"
+    solution: "złaź sierściuchu",
+    hint1: "tu go nie ma",
+    hint2: "tu też nie",
+    hint3: "znalazłaś? ",
+    hint4: "o kim jest ta zagadka?",
+    hint5: "rozwiązaniem jest imie"
+
   };
   PUZZLE_DATA[27] = {
     //TODO test and adjust hours
@@ -526,7 +592,10 @@
   <div id="puzzle18Letters" class="revealed-letters"></div>
   <p id="puzzle18Status" class="puzzle-status" aria-live="polite">Czekam na prawidłową godzinę...</p>
 </div>`,
-    solution: "chrono"
+    solution: "chrono",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[28] = {
     title: "WIP Zagadka 28: Gra w życie",
@@ -544,28 +613,43 @@
   </div>
   <div id="puzzle28Board" class="puzzle28-board" role="grid" aria-label="Siatka gry w życie 40 na 40"></div>
 </div>`,
-    solution: ""
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[29] = {
     title: "Zagadka 29",
     content: `<div style="display: grid; gap: 0.7rem; justify-items: center; text-align: center;">
   <p style="font-size: 300%; line-height: 1.2;"><strong>^=&gt;<br>N=Z<br>:=..<br>8=?</strong></p>
 </div>`,
-    solution: "nieskończoność"
+    solution: "nieskończoność",
+    hint1: "coś łączy te pary symboli",
+    hint2: "czy widzisz jakieś podobieństwo między prawą a lewą stroną?",
+    hint3: "symbole są bardziej podobne niż to może się zdawać na pierwszy rzut oka",
+    hint4: "90 stopni",
+    hint5: "obróć symbol o 90 stopni zgodnie z ruchem wskazówek zegara",
+    hint6: "∞"
   };
   PUZZLE_DATA[30] = {
     title: "Zagadka 30",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/numery.png" alt="Numery" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
-    solution: "360"
+    solution: "360",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[31] = {
     title: "Zagadka 31: Wzór",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/formula.png" alt="Wzór" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
-    solution: "ekosystem"
+    solution: "ekosystem",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[32] = {
     title: "Zagadka 32: Biała Roszada",
@@ -593,7 +677,10 @@
       ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
       ["♖", "♘", "♗", "", "", "♖", "♔", ""]
     ],
-    solution: ""
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[33] = {
     title: "Zagadka 33: Szach-mat!",
@@ -613,7 +700,10 @@
       ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
     ],
     solution_board: null,
-    solution: ""
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[34] = {
     title: "Zagadka 34: Sonet",
@@ -640,7 +730,10 @@
     solution: "czas",
     partial_solution: [
       { key: "czasu", message: "Dobre słowo, ale wpisz je w podstawowej formie." }
-    ]
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[35] = {
     title: "Zagadka 35: Podobieństwa i różnice",
@@ -649,16 +742,17 @@
   <p><strong>Podobieństwa i różnice</strong></p>
   <p>Sprawdź elementy poniżej notatek: pierwszy wyraz i jego para.</p>
 </div>`,
-    solution: "przyda się później?"
+    solution: "przyda się później?",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[36] = {
     title: "Zagadka 36: Mystery",
     work_in_progress: true,
     content: `<div class="puzzle36-wrap">
   <div class="puzzle36-casefile">
-    <p class="puzzle36-casefile-kicker">Archiwum detektywistyczne</p>
-    <p><strong>Sprawa: Tajemnica znikajacego artefaktu</strong></p>
-    <p>Zaznaczaj dedukcje w siatce i odtworz przebieg zdarzen jak rasowy detektyw.</p>
+    <p>TODO podmień opis!!!</p>
   </div>
 
   <ul class="puzzle36-clues">
@@ -707,7 +801,74 @@
   </div>
   <p id="puzzle36Status" class="puzzle36-status" aria-live="polite">Zaznaczaj wskazówki w siatce.</p>
 </div>`,
-    solution: "zbrodnia"
+    solution: "zbrodnia",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[37] = {
+    title: "Zagadka 37: Szkapa",
+    content: `<div class="puzzle32-wrap">
+  <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
+  <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
+</div>`,
+    starting_board: [
+      ["D", " ", " ", " ", "W", " ", " ", " "],
+      [" ", " ", "I", " ", " ", " ", "E", " "],
+      [" ", "Z", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "A", " ", " ", " ", " ", "I"],
+      ["I", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "L", " ", " ", " ", " ", "N", " "],
+      [" ", " ", " ", "N", " ", " ", " ", " "],
+      [" ", "Y", " ", " ", " ", " ", " ", "♘"]
+      
+    ],
+    solution_board: null,
+    solution: "niewidzialny",
+    hint1: "Czy wiesz jak w szachah porusza się skoczek (koń)?",
+    hint2: "Każdym ruchem wskocz na literę",
+  };
+  PUZZLE_DATA[38] = {
+    title: "Zagadka 38: Połączenia",
+    content: `<div class="puzzle38-wrap">
+  <div id="puzzle38Board" class="puzzle38-board" role="group" aria-label="Siatka czerwonych punktów"></div>
+  <button type="button" id="puzzle38Reset" class="small-btn">Resetuj połączenia</button>
+  <p id="puzzle38Status" class="puzzle38-status" aria-live="polite">Kliknij czerwone kółko, aby rozpocząć rysowanie linii.</p>
+</div>`,
+    node_labels: [
+      ["A", "B", "C", "D"],
+      ["E", "F", "G", "H"],
+      ["I", "J", "K", "L"],
+      ["M", "N", "O", "P"]
+    ],
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[39] = {
+    title: "Zagadka 39: Chroma",
+    content: `<div style="display:flex; justify-content:center; padding:0.4rem 0;">
+  <div style="font-family:'Segoe Script','Lucida Handwriting','Brush Script MT',cursive; font-size:1.45rem; line-height:1.5; color:#6d3a1f; background:#fff9ef; border:1px solid #eadfcf; border-radius:10px; padding:1rem 1.25rem; box-shadow:0 3px 10px rgba(0,0,0,0.08); text-align:center;">
+    czerwony<br>
+    +<br>
+    pomarańczowy<br>
+    +<br>
+    żółty<br>
+    +<br>
+    zielony<br>
+    +<br>
+    niebieski<br>
+    +<br>
+    indygo<br>
+    +<br>
+    fioletowy
+  </div>
+</div>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[64] = {
     title: "Zagadka 64: Na deser",
@@ -718,7 +879,8 @@
     hint2: "Gdzie najczęściej szukamy deseru w restauracji?",
     hint3: "Karta dań to inaczej...",
     hint4: "Spójrz na główne menu",
-    hint5: "TODO: Podpowiedź 5"
+    hint5: "Czy kolory nie wydają Ci się dziwne?",
+    hint6: "Kratki menu z rozwiązanymi zagadkami tworzą obrazek. Co przedstawia ten obrazek?"
   };
 
   Object.keys(PUZZLE_DATA).forEach((puzzleKey) => {
@@ -755,6 +917,7 @@
     puzzle16State: null,
     puzzle28State: null,
     puzzle32State: null,
+    puzzle38State: null,
     puzzle36State: null,
 
     els: {
@@ -1067,6 +1230,17 @@
           return;
         }
 
+        const puzzle38Node = event.target.closest(".puzzle38-node");
+        if (puzzle38Node) {
+          this.handlePuzzle38NodeClick(puzzle38Node);
+          return;
+        }
+
+        if (event.target.id === "puzzle38Reset") {
+          this.resetPuzzle38Connections();
+          return;
+        }
+
         const puzzle36Cell = event.target.closest(".puzzle36-cell");
         if (puzzle36Cell) {
           this.handlePuzzle36CellClick(puzzle36Cell);
@@ -1093,6 +1267,10 @@
         if (event.target.id === "puzzle28SpeedRange") {
           this.updatePuzzle28Speed(event.target.value);
         }
+      });
+
+      this.els.puzzleContent.addEventListener("mousemove", (event) => {
+        this.handlePuzzle38PointerMove(event);
       });
 
       this.els.notesInput.addEventListener("input", () => {
@@ -1217,6 +1395,7 @@
       this.stopPuzzle18Timer();
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
+      this.stopPuzzle38Board();
       this.stopPuzzle36Mystery();
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
@@ -1335,6 +1514,7 @@
       this.stopPuzzle18Timer();
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
+      this.stopPuzzle38Board();
       this.stopPuzzle36Mystery();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
@@ -1373,6 +1553,32 @@
         wipBanner.textContent = bannerMessage;
         this.els.puzzleContent.prepend(wipBanner);
       }
+      // --- Puzzle 34: Dynamic SVG arm rotation logic ---
+      if (id === 34) {
+        const hourInput = document.getElementById("puzzle34HourInput");
+        const minuteInput = document.getElementById("puzzle34MinuteInput");
+        const hourArm = document.getElementById("puzzle34HourArm");
+        const minuteArm = document.getElementById("puzzle34MinuteArm");
+        function updateClockArms() {
+          let hour = parseInt(hourInput.value, 10);
+          let minute = parseInt(minuteInput.value, 10);
+          if (isNaN(hour) || hour < 1 || hour > 12) hour = 1;
+          if (isNaN(minute) || minute < 0 || minute > 59) minute = 0;
+          // Calculate angles
+          // Hour: 0 at 12, 360/12 = 30 deg per hour, plus 0.5 deg per minute
+          // Minute: 0 at 12, 360/60 = 6 deg per minute
+          const hourAngle = ((hour % 12) * 30) + (minute * 0.5);
+          const minuteAngle = minute * 6;
+          hourArm.setAttribute("transform", `rotate(${hourAngle} 60 60)`);
+          minuteArm.setAttribute("transform", `rotate(${minuteAngle} 60 60)`);
+        }
+        if (hourInput && minuteInput && hourArm && minuteArm) {
+          hourInput.addEventListener("input", updateClockArms);
+          minuteInput.addEventListener("input", updateClockArms);
+          // Initialize on render
+          updateClockArms();
+        }
+      }
       this.closeHintPopup();
       this.renderHintButtons();
       this.renderPuzzleNavigationState();
@@ -1401,8 +1607,12 @@
         this.initPuzzle28Game();
       }
 
-      if (id === 32 || id === 33) {
+      if (id === 32 || id === 33 || id === 37) {
         this.initPuzzle32Board();
+      }
+
+      if (id === 38) {
+        this.initPuzzle38Board();
       }
 
       if (id === 36) {
@@ -2430,7 +2640,7 @@
     },
 
     initPuzzle32Board() {
-      if (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33) {
+      if (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33 && this.state.selectedPuzzle !== 37) {
         return;
       }
 
@@ -2509,7 +2719,7 @@
 
     handlePuzzle32SquareClick(squareEl) {
       const state = this.puzzle32State;
-      if (!state || (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33) || !squareEl) {
+      if (!state || (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33 && this.state.selectedPuzzle !== 37) || !squareEl) {
         return;
       }
 
@@ -2607,6 +2817,269 @@
       state.solutionShown = true;
       this.updatePuzzle32Status("Zumzwang");
       this.showCheckFeedback("success", "Brawo!", "Wykonałaś roszadę!");
+    },
+
+    initPuzzle38Board() {
+      if (this.state.selectedPuzzle !== 38) {
+        return;
+      }
+
+      this.stopPuzzle38Board();
+      const puzzleData = PUZZLE_DATA[this.state.selectedPuzzle] || {};
+      const boardEl = document.getElementById("puzzle38Board");
+      const statusEl = document.getElementById("puzzle38Status");
+      if (!boardEl || !statusEl) {
+        return;
+      }
+
+      const nodes = [];
+      for (let row = 0; row < 4; row += 1) {
+        for (let col = 0; col < 4; col += 1) {
+          nodes.push({
+            x: 14 + col * 24,
+            y: 14 + row * 24
+          });
+        }
+      }
+      const nodeLabels = this.normalizePuzzle38NodeLabels(puzzleData.node_labels, nodes.length);
+
+      boardEl.innerHTML = "";
+      const svgNS = "http://www.w3.org/2000/svg";
+      const linesSvg = document.createElementNS(svgNS, "svg");
+      linesSvg.setAttribute("class", "puzzle38-lines");
+      linesSvg.setAttribute("viewBox", "0 0 100 100");
+      linesSvg.setAttribute("preserveAspectRatio", "none");
+      linesSvg.setAttribute("aria-hidden", "true");
+
+      const connectionsLayer = document.createElementNS(svgNS, "g");
+      const previewLine = document.createElementNS(svgNS, "line");
+      previewLine.setAttribute("class", "puzzle38-line puzzle38-line-preview");
+      previewLine.style.display = "none";
+
+      linesSvg.appendChild(connectionsLayer);
+      linesSvg.appendChild(previewLine);
+      boardEl.appendChild(linesSvg);
+
+      nodes.forEach((node, index) => {
+        const nodeBtn = document.createElement("button");
+        const nodeLabel = nodeLabels[index] || "";
+        nodeBtn.type = "button";
+        nodeBtn.className = "puzzle38-node";
+        nodeBtn.dataset.p38Index = String(index);
+        nodeBtn.style.left = `${node.x}%`;
+        nodeBtn.style.top = `${node.y}%`;
+        nodeBtn.setAttribute("aria-label", nodeLabel ? `Punkt ${index + 1}: ${nodeLabel}` : `Punkt ${index + 1}`);
+        if (nodeLabel) {
+          const labelEl = document.createElement("span");
+          labelEl.className = "puzzle38-node-label";
+          labelEl.textContent = nodeLabel;
+          nodeBtn.appendChild(labelEl);
+        }
+        boardEl.appendChild(nodeBtn);
+      });
+
+      this.puzzle38State = {
+        boardEl,
+        statusEl,
+        nodes,
+        connectionsLayer,
+        previewLine,
+        connections: [],
+        activeFromIndex: null,
+        pointerX: null,
+        pointerY: null
+      };
+
+      this.updatePuzzle38NodeSelection();
+      this.renderPuzzle38Lines();
+      this.updatePuzzle38Status("Kliknij czerwone kółko, aby rozpocząć rysowanie linii.");
+    },
+
+    normalizePuzzle38NodeLabels(config, expectedCount) {
+      const labels = [];
+
+      if (Array.isArray(config)) {
+        if (config.length > 0 && Array.isArray(config[0])) {
+          config.forEach((row) => {
+            if (!Array.isArray(row)) {
+              return;
+            }
+
+            row.forEach((value) => {
+              labels.push(typeof value === "string" ? value : "");
+            });
+          });
+        } else {
+          config.forEach((value) => {
+            labels.push(typeof value === "string" ? value : "");
+          });
+        }
+      }
+
+      while (labels.length < expectedCount) {
+        labels.push("");
+      }
+
+      return labels.slice(0, expectedCount);
+    },
+
+    stopPuzzle38Board() {
+      this.puzzle38State = null;
+    },
+
+    resetPuzzle38Connections() {
+      const state = this.puzzle38State;
+      if (!state || this.state.selectedPuzzle !== 38) {
+        return;
+      }
+
+      state.connections = [];
+      state.activeFromIndex = null;
+      state.pointerX = null;
+      state.pointerY = null;
+      this.updatePuzzle38NodeSelection();
+      this.renderPuzzle38Lines();
+      this.updatePuzzle38Status("Wszystkie połączenia zostały usunięte.");
+    },
+
+    handlePuzzle38NodeClick(nodeEl) {
+      const state = this.puzzle38State;
+      if (!state || this.state.selectedPuzzle !== 38 || !nodeEl) {
+        return;
+      }
+
+      const index = Number(nodeEl.dataset.p38Index);
+      if (Number.isNaN(index) || index < 0 || index >= state.nodes.length) {
+        return;
+      }
+
+      if (state.activeFromIndex === null) {
+        state.activeFromIndex = index;
+        state.pointerX = state.nodes[index].x;
+        state.pointerY = state.nodes[index].y;
+        this.updatePuzzle38NodeSelection();
+        this.renderPuzzle38Lines();
+        this.updatePuzzle38Status(`Start linii ustawiony na punkcie ${index + 1}.`);
+        return;
+      }
+
+      if (state.activeFromIndex === index) {
+        state.activeFromIndex = null;
+        state.pointerX = null;
+        state.pointerY = null;
+        this.updatePuzzle38NodeSelection();
+        this.renderPuzzle38Lines();
+        this.updatePuzzle38Status("Wybór punktu startowego anulowany.");
+        return;
+      }
+
+      const fromIndex = state.activeFromIndex;
+      const connectionKey = fromIndex < index ? `${fromIndex}-${index}` : `${index}-${fromIndex}`;
+      const alreadyConnected = state.connections.some((entry) => entry.key === connectionKey);
+
+      if (!alreadyConnected) {
+        state.connections.push({ key: connectionKey, from: fromIndex, to: index });
+      }
+
+      state.activeFromIndex = null;
+      state.pointerX = null;
+      state.pointerY = null;
+      this.updatePuzzle38NodeSelection();
+      this.renderPuzzle38Lines();
+
+      this.updatePuzzle38Status(
+        alreadyConnected
+          ? `Punkty ${fromIndex + 1} i ${index + 1} są już połączone.`
+          : `Połączono punkt ${fromIndex + 1} z punktem ${index + 1}.`
+      );
+    },
+
+    handlePuzzle38PointerMove(event) {
+      const state = this.puzzle38State;
+      if (!state || this.state.selectedPuzzle !== 38 || state.activeFromIndex === null) {
+        return;
+      }
+
+      const rect = state.boardEl.getBoundingClientRect();
+      if (!rect.width || !rect.height) {
+        return;
+      }
+
+      const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+      const x = clamp(((event.clientX - rect.left) / rect.width) * 100, 0, 100);
+      const y = clamp(((event.clientY - rect.top) / rect.height) * 100, 0, 100);
+
+      state.pointerX = x;
+      state.pointerY = y;
+      this.renderPuzzle38Lines();
+    },
+
+    updatePuzzle38NodeSelection() {
+      const state = this.puzzle38State;
+      if (!state || !state.boardEl) {
+        return;
+      }
+
+      const nodes = state.boardEl.querySelectorAll(".puzzle38-node");
+      nodes.forEach((nodeEl) => {
+        const index = Number(nodeEl.dataset.p38Index);
+        nodeEl.classList.toggle("selected", index === state.activeFromIndex);
+      });
+    },
+
+    renderPuzzle38Lines() {
+      const state = this.puzzle38State;
+      if (!state || !state.connectionsLayer || !state.previewLine) {
+        return;
+      }
+
+      const svgNS = "http://www.w3.org/2000/svg";
+      state.connectionsLayer.replaceChildren();
+
+      state.connections.forEach((connection) => {
+        const fromNode = state.nodes[connection.from];
+        const toNode = state.nodes[connection.to];
+        if (!fromNode || !toNode) {
+          return;
+        }
+
+        const line = document.createElementNS(svgNS, "line");
+        line.setAttribute("class", "puzzle38-line");
+        line.setAttribute("x1", String(fromNode.x));
+        line.setAttribute("y1", String(fromNode.y));
+        line.setAttribute("x2", String(toNode.x));
+        line.setAttribute("y2", String(toNode.y));
+        state.connectionsLayer.appendChild(line);
+      });
+
+      if (state.activeFromIndex === null) {
+        state.previewLine.style.display = "none";
+        return;
+      }
+
+      const fromNode = state.nodes[state.activeFromIndex];
+      if (!fromNode) {
+        state.previewLine.style.display = "none";
+        return;
+      }
+
+      const previewX = typeof state.pointerX === "number" ? state.pointerX : fromNode.x;
+      const previewY = typeof state.pointerY === "number" ? state.pointerY : fromNode.y;
+
+      state.previewLine.setAttribute("x1", String(fromNode.x));
+      state.previewLine.setAttribute("y1", String(fromNode.y));
+      state.previewLine.setAttribute("x2", String(previewX));
+      state.previewLine.setAttribute("y2", String(previewY));
+      state.previewLine.style.display = "block";
+    },
+
+    updatePuzzle38Status(message) {
+      const state = this.puzzle38State;
+      if (!state || !state.statusEl) {
+        return;
+      }
+
+      state.statusEl.textContent = message;
     },
 
     initPuzzle36Mystery() {
