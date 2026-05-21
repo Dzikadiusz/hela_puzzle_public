@@ -26,6 +26,12 @@ body {
     linear-gradient(180deg, #fffaf0 0%, #f7ebd8 100%);
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body.puzzle19-night-sky {
   background:
     radial-gradient(2px 2px at 12% 20%, rgba(255, 255, 255, 0.9) 0 50%, transparent 52%),
@@ -516,12 +522,25 @@ textarea:focus-visible {
 
 .puzzle-content {
   border: 1px solid var(--border);
-  background: var(--panel);
+  background: #ffffff;
   border-radius: 0.85rem;
   padding: 0.8rem;
   box-shadow: 0 8px 24px rgba(83, 58, 25, 0.07);
   position: relative;
   text-align: center;
+}
+
+.puzzle-content strong {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.puzzle-content strong:hover {
+  color: var(--accent);
+}
+
+.puzzle-content strong:active {
+  opacity: 0.8;
 }
 
 .puzzle-wip-banner {
@@ -798,6 +817,25 @@ body.puzzle30-white-content .puzzle-content {
   font-weight: 700;
   color: #5b4530;
   text-align: center;
+}
+
+.puzzle27-letter {
+  margin: 0;
+  min-height: 1.2rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #5b4530;
+  opacity: 0;
+  transition: opacity 650ms ease;
+}
+
+.puzzle27-letter.show {
+  opacity: 1;
+}
+
+.puzzle27-letter.fade {
+  opacity: 0;
 }
 
 .revealed-letters {

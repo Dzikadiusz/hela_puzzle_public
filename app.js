@@ -52,14 +52,14 @@
     A: [["rak", "kara"], ["cel", "cela"]],
     B: [["rak", "brak"]],
     C: [["hełm", "Chełm"]],
-    D: [["ja", "jad"]],
+    D: [["ja", "jad"], ["Ron", "dron"]],
     E: [["Cezar", "czar"]],
     F: [["frak", "rak"]],
     G: [["ość", "gość"]],
     H: [["całka", "chałka"]],
-    I: [["rak", "Irak"]],
+    I: [["rak", "Irak"], ["Rumi", "mur"]],
     J: [["Jezus", "Zeus"]],
-    K: [["rak", "kark"]],
+    K: [["rak", "kark"], ["lato", "lotka"]],
     L: [["buk", "klub"]],
     M: [["to", "tom"]],
     N: [["tag", "gnat"]],
@@ -74,6 +74,22 @@
     Z: [["rak", "krzak"]]
   };
 
+  function formatPuzzleTitle(puzzleId, rawTitle) {
+    if (typeof rawTitle !== "string" || !rawTitle.trim()) {
+      return `Zagadka ${puzzleId}`;
+    }
+
+    const normalizedTitle = rawTitle.trim();
+    const isWorkInProgress = /^WIP\b/i.test(normalizedTitle);
+    const titleWithoutPrefix = normalizedTitle
+      .replace(/^WIP\s+/i, "")
+      .replace(/^Zagadka\s+\d+(?:\s*:\s*|\s*)/i, "")
+      .trim();
+    const baseTitle = titleWithoutPrefix ? `Zagadka ${puzzleId}: ${titleWithoutPrefix}` : `Zagadka ${puzzleId}`;
+
+    return isWorkInProgress ? `WIP ${baseTitle}` : baseTitle;
+  }
+
   // Centralized puzzle data: define title, content, solution and optional partial_solution for each puzzle (1-64)
   // Edit these to customize each puzzle
   const PUZZLE_DATA = {};
@@ -81,22 +97,29 @@
 
 //   Example: Custom puzzle data (uncomment and modify to override defaults)
   PUZZLE_DATA[1] = {
-    title: "Zagadka 1: Na Rozgrzewkę",
-    content: `<p><strong>Aby zaliczyć zagadkę musisz wymyślić rozwiązanie, wpisać je w pole powyżej  i naciśnij przycisk Sprawdź. Rozwiązanie tej zagadki to hasło: początek</strong></p>`,
+    title: "Na Rozgrzewkę",
+    content: `<p>Ta strona to zbiór łamigłówek o różnej tematyce i stopniu złożoności.</p>
+
+<p>Zagadek nie trzeba rozwiązywać po kolei, jednak niektóre z nich mogą być w pewien sposób połączone lub przydatne w rozwiązaniu innych.</p>
+
+<p>Aby zaliczyć zagadkę, trzeba wpisać odgadnięte hasło w polu na górze strony i nacisnąć przycisk obok.</p>
+
+<p>Rozwiązanie tej zagadki to hasło: początek</p>`,
     solution: "początek",
     partial_solution: [
       { key: "pocz", message: "Dobry początek! Dodaj jeszcze liter." },
       { key: "począ", message: "Bardzo blisko! Dokończ wyraz." }
     ],
-    hint1: "TODO hint 1",
+    hint1: "Ta zagadka jest trochę za prosta na podpowiedzi, co nie?",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
+    
   };
   PUZZLE_DATA[2] = {
     //TODO hint
-    title: "Zagadka 2: Na głowie",
+    title: "Na głowie",
     content: `<div style="display: grid; place-items: center;">
-  <img src="img/Z2.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
+  <img src="img/z2.jpg" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
 </div>`,
     solution: "glob",
     partial_solution: [
@@ -107,7 +130,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[3] = {
-    title: "Zagadka 3: Coś Szybkiego",
+    title: "Coś Szybkiego",
     content: `<p><strong>
 <p>STYCZEŃ = 7  
 <p>LUTY = 4  
@@ -125,7 +148,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[4] = {
-   title: "Zagadka 4: Coś tu nie pasuje...",
+    title: "Coś tu nie pasuje...",
     content: "<p><strong>2, 4, 8, 16, 31, 64, 128",
     solution: "31",
     partial_solution: [
@@ -137,7 +160,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[5] = {
-   title: "Zagadka 5: Bez sensu?",
+    title: "Bez sensu?",
         content: `<p><strong>
 <p>0 = 4
 <p>1 = 5
@@ -152,7 +175,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[6] = {
-    title: "WIP Zagadka 6: Pianino",
+    title: "WIP Pianino",
     work_in_progress: true,
     content: `<div class="piano-puzzle">
   <p><strong>Zagraj poprawną melodię, aby odkryć hasło.</strong></p>
@@ -178,7 +201,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[7] = {
-    title: "Zagadka 7: Pechowy cesarz",
+    title: "Pechowy cesarz",
     content: `<div class="caesar-helper">
   <p><strong>xelcgbtensvn</p>
   <div class="caesar-row-wrap">
@@ -214,7 +237,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[8] = {
-    title: "Zagadka 8: Dziwne liczby",
+    title: "Dziwne liczby",
     content: `<p><strong><center>43.51474950100621, 16.443521243705444</strong></p>`,
     solution: "Split",
     hint1: "TODO hint 1",
@@ -222,7 +245,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[9] = {
-    title: "Zagadka 9: Będzie jakaś zniżka?",
+    title: "Będzie jakaś zniżka?",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/shape.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
 </div>`,
@@ -235,7 +258,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[10] = {
-    title: "Zagadka 10: Gdzie on się podział?",
+    title: "Gdzie on się podział?",
     content: `<div class="puzzle10-image-wrap">
   <img src="img/dachy.png" alt="" class="puzzle10-image">
   <button type="button" class="puzzle-hotspot-btn" aria-label="Ukryty punkt na obrazku" title="Ukryty punkt na obrazku"></button>
@@ -246,7 +269,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[11] = {
-    title: "Zagadka 11: Czas Prawdy",
+    title: "Czas Prawdy",
     content: `<div class="time-lock-puzzle">
   <p><strong>Kliknij przycisk, aby poznać rozwiązanie.</strong></p>
   <button type="button" id="puzzle11RevealBtn" class="small-btn">Poznaj rozwiązanie</button>
@@ -259,7 +282,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[12] = {
-    title: "Zagadka 12: Stare zamki są pełne potworów...",
+    title: "Stare zamki są pełne potworów...",
     content: `<div class="puzzle12-image-wrap">
   <img src="img/20230610_140159.jpg" alt="" class="puzzle12-image">
   <div class="puzzle-hover-hint" title="Łeeeee, co to jest???"></div>
@@ -271,7 +294,7 @@
     hint4: "Pobaw się jasnością, kontrastem, nasyceniem..."
   };
   PUZZLE_DATA[13] = {
-    title: "Zagadka 13: Hej, ale to przecież nie są mapy!",
+    title: "Hej, ale to przecież nie są mapy!",
     content: `<div style="display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); align-items:start;">
   <img src="https://flagcdn.com/w320/ke.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
   <img src="https://flagcdn.com/w320/ao.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
@@ -301,7 +324,7 @@
 
   //TODO - finis the map!
   PUZZLE_DATA[14] = {
-    title: "Zagadka 14: Ukryte pomniki",
+    title: "Ukryte pomniki",
     content: `
       <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
         <div class="puzzle14-map-wrap">
@@ -332,7 +355,7 @@
 
   };
   PUZZLE_DATA[15] = {
-    title: "WIP Zagadka 15: Sonar",
+    title: "WIP Sonar",
     work_in_progress: true,
     content: `<div class="sonar-puzzle">
   <p><strong>Włącz sonar i naprowadź łódź podwodną na cel.</strong></p>
@@ -356,7 +379,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[16] = {
-    title: "Zagadka 16",
+    title: "",
     content: `<div class="puzzle16-container">
   <div class="puzzle16-grid" id="puzzle16Grid"></div>
   <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
@@ -371,7 +394,7 @@
     hint5: "Czytaj od zachodu"
   };
   PUZZLE_DATA[17] = {
-    title: "Zagadka 17: Zacznij od góry",
+    title: "Zacznij od góry",
     content: `<div class="puzzle17-wrap">
   <div class="puzzle17-grid" role="img" aria-label="Siatka liter 7 na 6">
     <span class="puzzle17-cell">o</span>
@@ -429,7 +452,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[18] = {
-    title: "Zagadka 18: Memento",
+    title: "Memento",
     content: `<div class="puzzle18-wrap">
   <div class="puzzle18-grid" role="img" aria-label="Siatka ze wskaźnikami 7 na 6">
     <span class="puzzle18-cell"></span>
@@ -488,10 +511,11 @@
   };
   PUZZLE_DATA[19] = {
     //TODO
-    title: "WIP Zagadka 19: Czy go słyszysz?",
+    title: "WIP Czy go słyszysz?",
     work_in_progress: true,
     content: `<div class="time-lock-puzzle">
   <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
+  <a href="https://www.ashleysheridan.co.uk/blog/CSS+Werewolf" target="_blank" rel="noopener noreferrer">CSS Werewolf</a>
   <p id="puzzle19MoonStatus" aria-live="polite"></p>
 </div>`,
     solution: "TODO",
@@ -500,7 +524,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[20] = {
-    title: "Zagadka 20",
+    title: "",
     content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
     solution: "panika",
     hint1: "TODO hint 1",
@@ -508,7 +532,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[21] = {
-    title: "Zagadka 21: Kurczaczek",
+    title: "Kurczaczek",
     content: `<div style="position: relative; display: grid; gap: 14px; place-items: center; text-align: center; padding: 0.6rem 0.9rem 2.2rem 0.9rem;">
   <div style="position: absolute; right: 0.65rem; bottom: 0.35rem; transform: rotate(-7deg); font-family: 'Segoe Script', 'Lucida Handwriting', 'Brush Script MT', cursive; font-size: 0.95rem; color: #6b4630; opacity: 0.88; letter-spacing: 0.02em; white-space: nowrap; pointer-events: none;">
     coś tu się nie zgadza...
@@ -522,7 +546,7 @@
   };
 
   PUZZLE_DATA[22] = {
-    title: "Zagadka 22: Mały głód",
+    title: "Mały głód",
     content: `<div style="display: grid; gap: 0.7em; justify-items: center; font-size: 1.18rem; line-height: 1.5;">
   <div>Bar+Sód+Azot</div>
   <div>Sód</div>
@@ -534,7 +558,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[23] = {
-    title: "Zagadka 23",
+    title: "",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/belt.jpg" alt="Pasek" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -544,7 +568,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[24] = {
-    title: "Zagadka 24: Łatwiej będzie na telefonie...",
+    title: "Łatwiej będzie na telefonie...",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/pochyl.png" alt="Podpowiedź: pochyl telefon" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -554,7 +578,7 @@
     hint3: "pochyl ekran i przypatrz się obrazkowi"
   };
   PUZZLE_DATA[25] = {
-    title: "Zagadka 25: Dostał się Filuś na małe ogrodzenie",
+    title: "Dostał się Filuś na małe ogrodzenie",
     content: `<p><strong>Gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
     solution: "złaź sierściuchu",
     hint1: "tu go nie ma",
@@ -565,46 +589,32 @@
 
   };
   PUZZLE_DATA[27] = {
-    //TODO test and adjust hours
-    title: "Zagadka 27: Zagubione w czasie",
-    work_in_progress: true,
+    title: "Chronologia",
+    second_hand_positions: [51, 30, 5, 14, 40, 23, 1],
+    second_hand_letters: ["S", "N", "H", "R", "O", "O", "C"],
     content: `<div class="clocks-puzzle">
-  <div class="clocks-grid">
-    <div class="clock-container" data-hour="7" data-letter="C">
-      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(215.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(66 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
-    </div>
-    <div class="clock-container" data-hour="10" data-letter="H">
-      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(300 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(0 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
-    </div>
-    <div class="clock-container" data-hour="12" data-letter="R">
-      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(17.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(210 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
-    </div>
-    <div class="clock-container" data-hour="12" data-letter="O">
-      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(24.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(294 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
-    </div>
-    <div class="clock-container" data-hour="2" data-letter="N">
-      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(82.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(270 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
-    </div>
-    <div class="clock-container" data-hour="5" data-letter="O">
-      <svg class="clock-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/><line x1="60" y1="60" x2="60" y2="30" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(157.5 60 60)"/><line x1="60" y1="60" x2="60" y2="12" stroke="#666" stroke-width="2" stroke-linecap="round" transform="rotate(90 60 60)"/><circle cx="60" cy="60" r="3" fill="#333"/></svg>
-    </div>
+  <div class="clock-container">
+    <svg class="clock-svg" viewBox="0 0 120 120" style="max-width: 220px;">
+      <circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/>
+      <line id="puzzle27LiveHand" x1="60" y1="60" x2="60" y2="16" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(0 60 60)"/>
+      <circle cx="60" cy="60" r="3" fill="#333"/>
+    </svg>
   </div>
-  <div id="puzzle18Letters" class="revealed-letters"></div>
-  <p id="puzzle18Status" class="puzzle-status" aria-live="polite">Czekam na prawidłową godzinę...</p>
+  <div id="puzzle27StaticClocks" class="clocks-grid"></div>
 </div>`,
-    solution: "chrono",
+    solution: "chronos",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[28] = {
-    title: "WIP Zagadka 28: Gra w życie",
+    title: "WIP Gra w życie",
     work_in_progress: true,
     content: `<div class="puzzle28-wrap">
   <p><strong>Klikaj komórki, aby je ożywić. Uruchom symulację i obserwuj kolejne pokolenia.</strong></p>
   <div class="puzzle28-controls">
-    <button type="button" id="puzzle28StartBtn" class="small-btn">Start</button>
-    <button type="button" id="puzzle28StopBtn" class="small-btn">Stop</button>
+    <button type="button" id="puzzle28ToggleBtn" class="small-btn">Start</button>
+    <button type="button" id="puzzle28StepBtn" class="small-btn">Step</button>
     <button type="button" id="puzzle28ClearBtn" class="small-btn">Clear</button>
     <button type="button" id="puzzle28RandomBtn" class="small-btn">Random</button>
     <label for="puzzle28SpeedRange" class="puzzle28-speed-label">Szybkość: <span id="puzzle28SpeedValue">6</span></label>
@@ -619,7 +629,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[29] = {
-    title: "Zagadka 29",
+    title: "",
     content: `<div style="display: grid; gap: 0.7rem; justify-items: center; text-align: center;">
   <p style="font-size: 300%; line-height: 1.2;"><strong>^=&gt;<br>N=Z<br>:=..<br>8=?</strong></p>
 </div>`,
@@ -632,7 +642,7 @@
     hint6: "∞"
   };
   PUZZLE_DATA[30] = {
-    title: "Zagadka 30",
+    title: "",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/numery.png" alt="Numery" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -642,7 +652,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[31] = {
-    title: "Zagadka 31: Wzór",
+    title: "Wzór",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/formula.png" alt="Wzór" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -652,7 +662,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[32] = {
-    title: "Zagadka 32: Biała Roszada",
+    title: "Biała Roszada",
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
@@ -683,7 +693,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[33] = {
-    title: "Zagadka 33: Szach-mat!",
+    title: "Szach-mat!",
     work_in_progress: true,
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
@@ -706,7 +716,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[34] = {
-    title: "Zagadka 34: Sonet",
+    title: "Sonet",
     work_in_progress: true,
     content: `<div class="puzzle34-wrap" style="display:grid; gap:0.8rem; line-height:1.6; text-align:center;">
   <p><strong>Jako fale dążące ku żwirom wybrzeży</strong></p>
@@ -736,7 +746,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[35] = {
-    title: "Zagadka 35: Podobieństwa i różnice",
+    title: "Podobieństwa i różnice - obrazy",
     work_in_progress: true,
     content: `<div style="display:grid; gap:0.8rem; justify-items:center; text-align:center;">
   <p><strong>Podobieństwa i różnice</strong></p>
@@ -748,7 +758,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[36] = {
-    title: "Zagadka 36: Mystery",
+    title: "Mystery",
     work_in_progress: true,
     content: `<div class="puzzle36-wrap">
   <div class="puzzle36-casefile">
@@ -807,9 +817,10 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[37] = {
-    title: "Zagadka 37: Szkapa",
+    title: "Szkapa",
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
+  <button type="button" id="puzzle37Reset" class="small-btn">Resetuj</button>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
 </div>`,
     starting_board: [
@@ -829,7 +840,8 @@
     hint2: "Każdym ruchem wskocz na literę",
   };
   PUZZLE_DATA[38] = {
-    title: "Zagadka 38: Połączenia",
+    title: "Połączenia",
+    work_in_progress: true,
     content: `<div class="puzzle38-wrap">
   <div id="puzzle38Board" class="puzzle38-board" role="group" aria-label="Siatka czerwonych punktów"></div>
   <button type="button" id="puzzle38Reset" class="small-btn">Resetuj połączenia</button>
@@ -847,7 +859,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[39] = {
-    title: "Zagadka 39: Chroma",
+    title: "Chroma",
     content: `<div style="display:flex; justify-content:center; padding:0.4rem 0;">
   <div style="font-family:'Segoe Script','Lucida Handwriting','Brush Script MT',cursive; font-size:1.45rem; line-height:1.5; color:#6d3a1f; background:#fff9ef; border:1px solid #eadfcf; border-radius:10px; padding:1rem 1.25rem; box-shadow:0 3px 10px rgba(0,0,0,0.08); text-align:center;">
     czerwony<br>
@@ -865,13 +877,115 @@
     fioletowy
   </div>
 </div>`,
+    solution: "tęcza",
+    hint1: "czy ten zestaw kolorów coś Ci przypomina?",
+    hint2: "kolorów w tym zadaniu nie mieszamy, a ustawiamy koło siebie",
+    hint3: "czy gdzieś w przyrodzie  taki zestaw kolorów występuje?"
+  };
+  PUZZLE_DATA[40] = {
+    title: "Wycieczka do Kielc",
+    // Add content, solution, and hints as needed
+    solution: "wieje",
+    hint1: "Ta zagadka wymaga wycieczki do do miast Dzika",
+    hint2: "W następnej podpowiedzi jest odpowiedź",
+    hint3: "Odpowiedź to: WIEJE"
+  };
+  PUZZLE_DATA[41] = {
+    title: "Tutorial",
+    content: `<p>W procesie rozwiązywania mogą brać udział <strong>różne</strong> elementy strony - zwracaj uwagę na <strong>każdy</strong> szczegół i miej oczy i uszy szeroko otwarte! I bój się <strong>klikać</strong> i eksperymentować.</p>`,
+    solution: "jednorożec",
+    partial_solution: [
+      { key: "różne", message: "Co ci wyjdzie" },
+      { key: "każdy", message: "Jak dodasz konia" },
+      { key: "klikać", message: "i róg?" }
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[42] = {
+    title: "Tutorial",
+    work_in_progress: true,
+    content: `<p>Zadania mają też przygotowane podpowiedzi - znajdziesz je na samym dole strony w osobnej sekcji.</p>
+<p>Zachęcam jednak, żeby korzystać z nich oszczędnie - czasem lepiej odłożyć rozwiązywanie na później i wrócić - satysfakcja z wymyślenia czegoś samemu zawsze jest większa!</p>
+<p>Może tam zajrzysz teraz?</p>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+    PUZZLE_DATA[43] = {
+    title: "Tutorial",
+    work_in_progress: true,
+    content: `<p>Do rozwiązywania zagadek czasem mogą być potrzebne zewnętrzne materiały - w większości powinna wystarczyć wikipedia, ale inne strony lub książki też mogą być przydatne.</p>
+  <p><a href="https://pl.wikipedia.org/wiki/Zagadka" target="_blank" rel="noopener noreferrer">https://pl.wikipedia.org/wiki/Zagadka</a> - zagadka literacka</p>
+  <p>Nie ma potrzeby ani sensu korzystać tu z AI - może to popsuć zabawę.</p>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+      PUZZLE_DATA[44] = {
+    title: "Tutorial: Notatki",
+    work_in_progress: true,
+    content: `<p>notatki</p>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+      PUZZLE_DATA[45] = {
+    title: "Tutorial: Błąd",
+    work_in_progress: true,
+    content: `<p>Mimo ogromnej ilości pracy, gdzieniegdzie mogą znaleźć się błędy - kiedy trafisz na coś co wydaje się nie mieć sensu, lub nie działać - daj mi znać!</p>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+   PUZZLE_DATA[46] = {
+    title: "Tłumaczenie",
+    work_in_progress: true,
+    content: `<div style="display: grid; place-items: center;">
+  <img src="img/claw.jpg" alt="Claw" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
+</div>`,
+    solution: "wejście",
+    partial_solution: [
+      { key: "entrance", message: "Dobrze, ale to nie koniec" }
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "entrance"
+  };
+    PUZZLE_DATA[47] = {
+      title: "",
+      content: `<p>Matka naszego hobbita... ale co to jest hobbit? Zdaje mi się, że wymaga to wyjaśnienia. W dzisiejszych czasach bowiem hobbitów bardzo rzadko można spotkać: nie ma ich wiele, a poza tym unikają Dużych Ludzi — jak nazywają nas. Hobbici są — czy może byli — małymi ludźmi, mniejszymi od krasnoludów — różnią się też od nich tym, że nie noszą brody — lecz znacznie większymi od liliputów. Nie uprawiają wcale albo prawie wcale czarów, z wyjątkiem chyba zwykłej, powszedniej sztuki, która pozwala im znikać bezszelestnie i błyskawicznie, kiedy duzi, niemądrzy ludzie, jak ty i ja, zabłądzą w ich pobliże, hałasując niesłychanie głośno, tak że na milę można ich usłyszeć. Hobbici są skłonni do tycia, zwłaszcza w pasie: miewają wypięte brzuchy; ubierają się kolorowo (najchętniej zielono i żółto); nie używają obuwia, ponieważ stopy ich z przyrodzenia opatrzone są twardą podeszwą i porośnięte bujnym, ciemnym, brunatnym włosem, podobnie jak głowa (zwykle kędzierzawa); mają długie, zręczne, smagłe palce i poczciwe twarze, a śmieją się dużo, basowo i serdecznie (szczególnie po obiedzie, który — w miarę możności — zjadają dwa razy dziennie). Teraz już wiecie o nich dość na początek. Jak więc mówiłem, matką naszego hobbita — to jest Bilba Bagginsa — była słynna Belladonna Tuk, jedna z trzech niespotykanych córek Starego Tuka, głowy wszystkich hobbitów mieszkających Za Wodą, czyli za rzeką, która płynęła u stóp Pagórka. Powiadano, że dawnymi czasy ten i ów Tuk brał żonę z plemienia czarodziejów (nieżyczliwi twierdzili że to były gobliny); rzeczywiście Tukowie zawsze mieli w sobie coś niezwykle hobbitciego, a od czasu do czasu zdarzało się, że ktoś z członków tego rodu wyruszał w świat szukać przygód. Taki Tuk znikał dyskretnie, a rodzina nie rozgłaszała sprawy; fakt jednak, że Tukowie nie byli tak szanowani jak Bagginsowie, chociaż niewątpliwie od nich bogatsi.</p>
+  <p>Co prawda Belladonna Tuk, odkąd została panią Bungołą Baggins, nie miewała żadnych przygód. Bungo, ojciec Bilba, zbudował dla niej (częściowo za jej posag) norę tak wspaniałą, że nie znalazłoby się nic podobnego ani pod Pagórkiem, ani za Pagórkiem, ani Za Wodą, i w tej norze mieszkali małżonkowie aż do końca swoich dni. Mimo wszystko wydaje się prawdopodobne, że Bilbo, jedyny syn Belladonny, chociaż wyglądał i zachowywał się dokładnie tak, jakby był drugim wydaniem swojego solidnego i spokojnego ojca, odziedziczył po kądzieli ziarenko dziwactwa i że to ziarenko czekało tylko na okazję, by zakiełkować. Okazja jednak się nie nadarzyła, aż Bilbo dorósł, skończył pięćdziesiąt lat czy coś koło tego, i za-</p>`,
+      solution: "",
+      hint1: "TODO hint 1",
+      hint2: "TODO hint 2",
+      hint3: "TODO hint 3"
+    };
+  PUZZLE_DATA[60] = {
+    title: "Trudne się wylosowało",
+    work_in_progress: true,
+    content: `<p><strong>Będziemy skakać po zagadkach (hints)</strong></p>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+    PUZZLE_DATA[61] = {
+    title: "Conway Script",
+    work_in_progress: true,
+    content: `TODO - zagadka będzie wymagała przetłumaczenia alfabetu za pomocą reguł Conwaya (Game of Life) na znaki którymi będzie zapisana wiadomość`,
     solution: "",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[64] = {
-    title: "Zagadka 64: Na deser",
+    title: "Na deser",
     work_in_progress: true,
     content: `<p><strong>Czy pamiętasz warzywo?</strong></p>`,
     solution: "słonecznik",
@@ -882,6 +996,15 @@
     hint5: "Czy kolory nie wydają Ci się dziwne?",
     hint6: "Kratki menu z rozwiązanymi zagadkami tworzą obrazek. Co przedstawia ten obrazek?"
   };
+//todo - this might need modification 
+  Object.keys(PUZZLE_DATA).forEach((puzzleKey) => {
+    const puzzleData = PUZZLE_DATA[puzzleKey];
+    if (!puzzleData || typeof puzzleData !== "object") {
+      return;
+    }
+
+    puzzleData.title = formatPuzzleTitle(Number(puzzleKey), puzzleData.title);
+  });
 
   Object.keys(PUZZLE_DATA).forEach((puzzleKey) => {
     const puzzleData = PUZZLE_DATA[puzzleKey];
@@ -906,7 +1029,8 @@
     meowAudio: null,
     howlAudio: null,
     sonarAudio: null,
-    puzzle18IntervalId: null,
+    puzzle27IntervalId: null,
+    puzzle27State: null,
     puzzle6PlayedNotes: [],
     puzzle6RecentNotes: [],
     puzzle7Shifts: {
@@ -1140,6 +1264,12 @@
       });
 
       this.els.puzzleContent.addEventListener("click", (event) => {
+        const boldWord = event.target.closest("strong");
+        if (boldWord) {
+          this.handleBoldWordClick(boldWord);
+          return;
+        }
+
         const puzzle14HotspotButton = event.target.closest(".puzzle14-hotspot-btn");
         if (puzzle14HotspotButton) {
           this.handlePuzzle14HotspotClick(puzzle14HotspotButton);
@@ -1198,13 +1328,13 @@
           return;
         }
 
-        if (event.target.id === "puzzle28StartBtn") {
-          this.startPuzzle28Simulation();
+        if (event.target.id === "puzzle28ToggleBtn") {
+          this.togglePuzzle28Simulation();
           return;
         }
 
-        if (event.target.id === "puzzle28StopBtn") {
-          this.stopPuzzle28Simulation();
+        if (event.target.id === "puzzle28StepBtn") {
+          this.stepPuzzle28Once();
           return;
         }
 
@@ -1227,6 +1357,11 @@
         const puzzle32Square = event.target.closest(".puzzle32-square");
         if (puzzle32Square) {
           this.handlePuzzle32SquareClick(puzzle32Square);
+          return;
+        }
+
+        if (event.target.id === "puzzle37Reset") {
+          this.resetPuzzle32Board();
           return;
         }
 
@@ -1392,7 +1527,7 @@
     showMenuView() {
       this.stopPuzzle15Simulation();
       this.stopPuzzle16Grid();
-      this.stopPuzzle18Timer();
+      this.stopPuzzle27Clock();
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
@@ -1511,7 +1646,7 @@
     renderPuzzleView() {
       this.stopPuzzle15Simulation();
       this.stopPuzzle16Grid();
-      this.stopPuzzle18Timer();
+      this.stopPuzzle27Clock();
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
@@ -1519,7 +1654,7 @@
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
       const puzzleData = PUZZLE_DATA[id] || {
-        title: `Zagadka ${id}`,
+        title: formatPuzzleTitle(id),
         content: `<p><strong>Treść zagadki dla zagadki ${id}...</strong></p>`
       };
 
@@ -1600,7 +1735,7 @@
       }
 
       if (id === 27) {
-        this.startPuzzle18Timer();
+        this.initPuzzle27Clocks();
       }
 
       if (id === 28) {
@@ -2383,58 +2518,188 @@
       }, delayMs);
     },
 
-    startPuzzle18Timer() {
+    initPuzzle27Clocks() {
       if (this.state.selectedPuzzle !== 27) {
         return;
       }
 
-      this.stopPuzzle18Timer();
-      this.updatePuzzle18Display();
-      this.puzzle18IntervalId = window.setInterval(() => {
-        this.updatePuzzle18Display();
-      }, 1000);
-    },
-
-    stopPuzzle18Timer() {
-      if (this.puzzle18IntervalId) {
-        window.clearInterval(this.puzzle18IntervalId);
-        this.puzzle18IntervalId = null;
+      this.stopPuzzle27Clock();
+      const staticClocksEl = document.getElementById("puzzle27StaticClocks");
+      if (!staticClocksEl) {
+        return;
       }
+
+      const puzzleData = PUZZLE_DATA[27] || {};
+      const configuredPositions = Array.isArray(puzzleData.second_hand_positions)
+        ? puzzleData.second_hand_positions
+        : [];
+      const configuredLetters = Array.isArray(puzzleData.second_hand_letters)
+        ? puzzleData.second_hand_letters
+        : [];
+
+      const normalizedPositions = configuredPositions.slice(0, 7).map((value) => {
+        const numericValue = Number(value);
+        if (Number.isNaN(numericValue)) {
+          return 0;
+        }
+
+        return ((Math.round(numericValue) % 60) + 60) % 60;
+      });
+
+      while (normalizedPositions.length < 7) {
+        normalizedPositions.push(0);
+      }
+
+      const normalizedLetters = configuredLetters.slice(0, 7).map((value) => {
+        if (typeof value !== "string") {
+          return "";
+        }
+
+        return value.trim().slice(0, 1).toUpperCase();
+      });
+
+      while (normalizedLetters.length < 7) {
+        normalizedLetters.push("");
+      }
+
+      staticClocksEl.innerHTML = normalizedPositions.map((secondValue, index) => {
+        const angle = secondValue * 6;
+        const letter = normalizedLetters[index];
+
+        return `<div class="clock-container">
+  <svg class="clock-svg" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="55" fill="white" stroke="#333" stroke-width="2"/>
+    <line x1="60" y1="60" x2="60" y2="16" stroke="#333" stroke-width="3" stroke-linecap="round" transform="rotate(${angle} 60 60)"/>
+    <circle cx="60" cy="60" r="3" fill="#333"/>
+  </svg>
+  <p class="puzzle27-letter" data-puzzle27-letter-index="${index}" aria-hidden="true">${letter}</p>
+</div>`;
+      }).join("");
+
+      const letterEls = Array.from(staticClocksEl.querySelectorAll("[data-puzzle27-letter-index]"));
+      this.puzzle27State = {
+        targetSeconds: normalizedPositions,
+        letterEls,
+        letterTimers: normalizedPositions.map(() => ({
+          holdTimerId: null,
+          fadeTimerId: null
+        })),
+        lastSecond: null
+      };
+
+      this.updatePuzzle27LiveClock();
+      this.startPuzzle27Clock();
     },
 
-    updatePuzzle18Display() {
+    startPuzzle27Clock() {
+      if (this.state.selectedPuzzle !== 27 || this.puzzle27IntervalId) {
+        return;
+      }
+
+      this.puzzle27IntervalId = window.setInterval(() => {
+        this.updatePuzzle27LiveClock();
+      }, 200);
+    },
+
+    stopPuzzle27Clock() {
+      if (this.puzzle27IntervalId) {
+        window.clearInterval(this.puzzle27IntervalId);
+        this.puzzle27IntervalId = null;
+      }
+
+      if (!this.puzzle27State) {
+        return;
+      }
+
+      this.puzzle27State.letterTimers.forEach((timerState, index) => {
+        if (timerState.holdTimerId) {
+          window.clearTimeout(timerState.holdTimerId);
+          timerState.holdTimerId = null;
+        }
+
+        if (timerState.fadeTimerId) {
+          window.clearTimeout(timerState.fadeTimerId);
+          timerState.fadeTimerId = null;
+        }
+
+        const letterEl = this.puzzle27State.letterEls[index];
+        if (letterEl) {
+          letterEl.classList.remove("show", "fade");
+          letterEl.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      this.puzzle27State = null;
+    },
+
+    triggerPuzzle27LetterReveal(index) {
+      const state = this.puzzle27State;
+      if (!state) {
+        return;
+      }
+
+      const letterEl = state.letterEls[index];
+      const timerState = state.letterTimers[index];
+      if (!letterEl || !timerState || !letterEl.textContent.trim()) {
+        return;
+      }
+
+      if (timerState.holdTimerId) {
+        window.clearTimeout(timerState.holdTimerId);
+      }
+      if (timerState.fadeTimerId) {
+        window.clearTimeout(timerState.fadeTimerId);
+      }
+
+      letterEl.classList.remove("fade");
+      letterEl.classList.add("show");
+      letterEl.setAttribute("aria-hidden", "false");
+
+      timerState.holdTimerId = window.setTimeout(() => {
+        letterEl.classList.add("fade");
+        letterEl.classList.remove("show");
+
+        timerState.fadeTimerId = window.setTimeout(() => {
+          letterEl.classList.remove("fade");
+          letterEl.setAttribute("aria-hidden", "true");
+          timerState.fadeTimerId = null;
+        }, 650);
+
+        timerState.holdTimerId = null;
+      }, 2000);
+    },
+
+    updatePuzzle27LiveClock() {
       if (this.state.selectedPuzzle !== 27) {
+        return;
+      }
+
+      const handEl = document.getElementById("puzzle27LiveHand");
+      if (!handEl) {
         return;
       }
 
       const now = new Date();
-      const currentHour = now.getHours();
-      const lettersEl = document.getElementById("puzzle18Letters");
-      const statusEl = document.getElementById("puzzle18Status");
-      if (!lettersEl || !statusEl) {
+      const secondValue = now.getSeconds() + (now.getMilliseconds() / 1000);
+      const handAngle = secondValue * 6;
+      handEl.setAttribute("transform", `rotate(${handAngle} 60 60)`);
+
+      const state = this.puzzle27State;
+      if (!state) {
         return;
       }
 
-      const containers = document.querySelectorAll("[data-hour][data-letter]");
-      const revealed = new Map();
+      const currentSecond = Math.floor(secondValue);
+      if (state.lastSecond === currentSecond) {
+        return;
+      }
 
-      containers.forEach((container) => {
-        const clockHour = Number(container.getAttribute("data-hour"));
-        const letter = container.getAttribute("data-letter");
-
-        if (clockHour === currentHour) {
-          revealed.set(letter, true);
+      state.lastSecond = currentSecond;
+      state.targetSeconds.forEach((targetSecond, index) => {
+        if (targetSecond === currentSecond) {
+          this.triggerPuzzle27LetterReveal(index);
         }
       });
-
-      const revealedLetters = Array.from(revealed.keys()).sort().join("");
-      lettersEl.textContent = revealedLetters;
-
-      if (revealed.size > 0) {
-        statusEl.textContent = `Liczba ujawnionych liter: ${revealed.size}/6`;
-      } else {
-        statusEl.textContent = "Czekam na prawidłową godzinę...";
-      }
     },
 
     initPuzzle28Game() {
@@ -2477,6 +2742,8 @@
         stepCounterEl,
         speedRangeEl,
         speedValueEl,
+        toggleBtnEl: document.getElementById("puzzle28ToggleBtn"),
+        stepBtnEl: document.getElementById("puzzle28StepBtn"),
         speedValue: Number(speedRangeEl.value) || 6,
         speedMs: 300,
         step: 0,
@@ -2486,6 +2753,7 @@
       this.updatePuzzle28Speed(this.puzzle28State.speedValue);
       this.renderPuzzle28Board();
       this.updatePuzzle28StepCounter();
+      this.updatePuzzle28Controls();
     },
 
     getPuzzle28SpeedMs(speedValue) {
@@ -2520,6 +2788,7 @@
       state.intervalId = window.setInterval(() => {
         this.stepPuzzle28Simulation();
       }, state.speedMs);
+      this.updatePuzzle28Controls();
     },
 
     stopPuzzle28Simulation() {
@@ -2530,6 +2799,45 @@
 
       window.clearInterval(state.intervalId);
       state.intervalId = null;
+      this.updatePuzzle28Controls();
+    },
+
+    togglePuzzle28Simulation() {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28) {
+        return;
+      }
+
+      if (state.intervalId) {
+        this.stopPuzzle28Simulation();
+      } else {
+        this.startPuzzle28Simulation();
+      }
+    },
+
+    stepPuzzle28Once() {
+      const state = this.puzzle28State;
+      if (!state || this.state.selectedPuzzle !== 28 || state.intervalId) {
+        return;
+      }
+
+      this.stepPuzzle28Simulation();
+    },
+
+    updatePuzzle28Controls() {
+      const state = this.puzzle28State;
+      if (!state) {
+        return;
+      }
+
+      const isRunning = Boolean(state.intervalId);
+      if (state.toggleBtnEl) {
+        state.toggleBtnEl.textContent = isRunning ? "Stop" : "Start";
+      }
+
+      if (state.stepBtnEl) {
+        state.stepBtnEl.disabled = isRunning;
+      }
     },
 
     clearPuzzle28Board() {
@@ -2593,11 +2901,8 @@
                 continue;
               }
 
-              const nRow = row + dRow;
-              const nCol = col + dCol;
-              if (nRow < 0 || nRow >= size || nCol < 0 || nCol >= size) {
-                continue;
-              }
+              const nRow = (row + dRow + size) % size;
+              const nCol = (col + dCol + size) % size;
 
               neighbors += cells[nRow * size + nCol];
             }
@@ -2715,6 +3020,19 @@
 
     stopPuzzle32Board() {
       this.puzzle32State = null;
+    },
+
+    resetPuzzle32Board() {
+      const state = this.puzzle32State;
+      if (!state || this.state.selectedPuzzle !== 37) {
+        return;
+      }
+
+      state.squares = state.startingSquares.slice();
+      state.selectedIndex = null;
+      state.solutionShown = false;
+      this.renderPuzzle32Board();
+      this.updatePuzzle32Status("Plansza zresetowana.");
     },
 
     handlePuzzle32SquareClick(squareEl) {
@@ -3475,7 +3793,52 @@
       if (this.els.hintRevealBtn) {
         this.els.hintRevealBtn.disabled = isRevealed;
         this.els.hintRevealBtn.textContent = isRevealed ? "Podpowiedź odkryta" : "Okryj podpowiedź";
+        this.els.hintRevealBtn.style.display = "inline-block";
       }
+
+      if (this.els.hintCloseBtn) {
+        this.els.hintCloseBtn.style.display = "block";
+      }
+    },
+
+    handleBoldWordClick(boldElement) {
+      if (!this.els.hintPopup || !this.els.hintPopupText) {
+        return;
+      }
+
+      const puzzleId = this.state.selectedPuzzle;
+      const puzzleData = PUZZLE_DATA[puzzleId];
+      if (!puzzleData || !Array.isArray(puzzleData.partial_solution)) {
+        return;
+      }
+
+      const boldText = boldElement.textContent.trim();
+      const partialSolution = puzzleData.partial_solution.find((entry) => entry.key === boldText);
+      if (!partialSolution) {
+        return;
+      }
+
+      this.activeHintContext = {
+        puzzleId,
+        hintKey: `partial_${boldText}`
+      };
+
+      if (this.els.hintPopupTitle) {
+        this.els.hintPopupTitle.textContent = "Podpowiedź";
+      }
+
+      this.els.hintPopupText.textContent = partialSolution.message;
+
+      if (this.els.hintRevealBtn) {
+        this.els.hintRevealBtn.style.display = "none";
+      }
+
+      if (this.els.hintCloseBtn) {
+        this.els.hintCloseBtn.style.display = "block";
+      }
+
+      this.els.hintPopup.classList.add("show");
+      this.els.hintPopup.setAttribute("aria-hidden", "false");
     },
 
     revealActiveHint() {
