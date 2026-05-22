@@ -35,16 +35,61 @@
 // ]
   const PUZZLE_6_NOTE_FREQUENCIES = {
     C4: 261.63,
+    "C#4": 277.18,
     D4: 293.66,
+    "D#4": 311.13,
     E4: 329.63,
     F4: 349.23,
+    "F#4": 369.99,
     G4: 392.0,
+    "G#4": 415.3,
     A4: 440.0,
+    "A#4": 466.16,
     B4: 493.88
   };
-  const PUZZLE_6_TARGET_MELODY = ["C4", "E4", "G4", "E4", "C4"];
+  const PUZZLE_6_TARGET_MELODY = ["C4", "D4", "E4", "C4", "C4", "D4", "E4", "C4", "E4", "F4", "G4"];
   const PUZZLE_6_SECRET_MELODY = ["G4", "E4", "E4", "F4", "D4", "D4", "C4", "E4", "G4"];
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  // Pixel font: each letter is a 5×5 bitmap encoded as 5 strings of "0"/"1"
+  const PIXEL_ALPHABET = {
+    A: ["01100","10010","11110","10010","10010"],
+    B: ["11100","10010","11100","10010","11100"],
+    C: ["01100","10010","10000","10010","01100"],
+    D: ["11100","10010","10010","10010","11100"],
+    E: ["11110","10000","11100","10000","11110"],
+    F: ["11110","10000","11100","10000","10000"],
+    G: ["01100","10000","10110","10010","01100"],
+    H: ["10010","10010","11110","10010","10010"],
+    I: ["11100","01000","01000","01000","11100"],
+    J: ["01110","00100","00100","10100","01000"],
+    K: ["10010","10100","11000","10100","10010"],
+    L: ["10000","10000","10000","10000","11100"],
+    M: ["10001","11011","10101","10001","10001"],
+    N: ["10010","11010","10110","10010","10010"],
+    O: ["01100","10010","10010","10010","01100"],
+    P: ["11100","10010","11100","10000","10000"],
+    Q: ["01100","10010","10010","10100","01010"],
+    R: ["11100","10010","11100","10010","10010"],
+    S: ["01110","10000","11110","00010","11100"],
+    T: ["11111","00100","00100","00100","00100"],
+    U: ["10010","10010","10010","10010","01100"],
+    V: ["10001","10001","10001","01010","00100"],
+    W: ["10001","10001","10101","10101","01010"],
+    X: ["10001","01010","00100","01010","10001"],
+    Y: ["10001","10001","01010","00100","00100"],
+    Z: ["11111","00010","00100","01000","11111"],
+    0: ["01100","10010","10110","11010","01100"],
+    1: ["01000","11000","01000","01000","11100"],
+    2: ["01100","10010","00100","01000","11110"],
+    3: ["11100","00010","01100","00010","11100"],
+    4: ["10010","10010","11110","00010","00010"],
+    5: ["11110","10000","11100","00010","11100"],
+    6: ["01100","10000","11100","10010","01100"],
+    7: ["11110","00010","00100","01000","01000"],
+    8: ["01100","10010","01100","10010","01100"],
+    9: ["01100","10010","01110","00010","01100"]
+  };
   const PUZZLE_12_DEBUG_MODE = true;
   const PUZZLE_14_DEBUG_MODE = false;
   const PAIRS_PASSWORD = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed domos";
@@ -99,7 +144,6 @@
   PUZZLE_DATA[1] = {
     title: "Na Rozgrzewkę",
     content: `<p>Ta strona to zbiór łamigłówek o różnej tematyce i stopniu złożoności.</p>
-
 <p>Zagadek nie trzeba rozwiązywać po kolei, jednak niektóre z nich mogą być w pewien sposób połączone lub przydatne w rozwiązaniu innych.</p>
 
 <p>Aby zaliczyć zagadkę, trzeba wpisać odgadnięte hasło w polu na górze strony i nacisnąć przycisk obok.</p>
@@ -175,25 +219,26 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[6] = {
-    title: "WIP Pianino",
-    work_in_progress: true,
+    title: "Frère Jacques",
     content: `<div class="piano-puzzle">
-  <p><strong>Zagraj poprawną melodię, aby odkryć hasło.</strong></p>
-  <p class="piano-instruction">Podpowiedź: zacznij od C i wróć do C po trzech kolejnych dźwiękach.</p>
-  <div class="piano-keyboard" role="group" aria-label="Klawiatura pianina">
-    <button type="button" class="piano-key" data-piano-note="C4">C</button>
-    <button type="button" class="piano-key" data-piano-note="D4">D</button>
-    <button type="button" class="piano-key" data-piano-note="E4">E</button>
-    <button type="button" class="piano-key" data-piano-note="F4">F</button>
-    <button type="button" class="piano-key" data-piano-note="G4">G</button>
-    <button type="button" class="piano-key" data-piano-note="A4">A</button>
-    <button type="button" class="piano-key" data-piano-note="B4">B</button>
-  </div>
+  <ul class="piano-keyboard set" role="group" aria-label="Klawiatura pianina">
+    <li class="white c piano-key" data-piano-note="C4" data-key-label="C" aria-label="C"></li>
+    <li class="black cs piano-key" data-piano-note="C#4" data-key-label="C#" aria-label="C sharp"></li>
+    <li class="white d piano-key" data-piano-note="D4" data-key-label="D" aria-label="D"></li>
+    <li class="black ds piano-key" data-piano-note="D#4" data-key-label="D#" aria-label="D sharp"></li>
+    <li class="white e piano-key" data-piano-note="E4" data-key-label="E" aria-label="E"></li>
+    <li class="white f piano-key" data-piano-note="F4" data-key-label="F" aria-label="F"></li>
+    <li class="black fs piano-key" data-piano-note="F#4" data-key-label="F#" aria-label="F sharp"></li>
+    <li class="white g piano-key" data-piano-note="G4" data-key-label="G" aria-label="G"></li>
+    <li class="black gs piano-key" data-piano-note="G#4" data-key-label="G#" aria-label="G sharp"></li>
+    <li class="white a piano-key" data-piano-note="A4" data-key-label="A" aria-label="A"></li>
+    <li class="black as piano-key" data-piano-note="A#4" data-key-label="A#" aria-label="A sharp"></li>
+    <li class="white b piano-key" data-piano-note="B4" data-key-label="B" aria-label="B"></li>
+  </ul>
   <div class="piano-status">
     <p id="puzzle6Progress" aria-live="polite">Postęp melodii: 0/${PUZZLE_6_TARGET_MELODY.length}</p>
     <p id="puzzle6Result" class="piano-result" aria-live="polite"></p>
   </div>
-  <button type="button" id="puzzle6Reset" class="small-btn">Wyczyść melodię</button>
 </div>`,
     solution: "fortepian",
     hint1: "TODO hint 1",
@@ -565,9 +610,10 @@
   <img src="img/belt.jpg" alt="Pasek" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
     solution: "mars",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Co mogą symbolizować te kule?",
+    hint2: "Zwróć uwagę że różnią się bardzo rozmiarem",
+    hint3: "W rzeczywistości są one duuuuuużo większe...",
+    hint4: "Nie do końca wiadmo czy czy powinniśmy uwzględniać dziewiątą..."
   };
   PUZZLE_DATA[24] = {
     title: "Łatwiej będzie na telefonie...",
@@ -605,9 +651,9 @@
   <div id="puzzle27StaticClocks" class="clocks-grid"></div>
 </div>`,
     solution: "chronos",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Żeby rozwiązać zagadkę musisz popatrzeć na nią nieco dłużej",
+    hint2: "Co wydaje się logicznym początkiem?",
+    hint3: "Zwróć uwagę na nazwę zagadki"
   };
   PUZZLE_DATA[28] = {
     title: "Magiczny Ogród",
@@ -667,9 +713,9 @@
   <img src="img/formula.png" alt="Wzór" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
     solution: "ekosystem",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Ta zagadka nie wymaga żadnych obliczeń",
+    hint2: "Nie wymaga też znajomości dziwnych symboli matematycznch lub fizycznych",
+    hint3: "Zwróć uwagę tylko na elementy, które są dla ciebie zrozumiałe"
   };
   PUZZLE_DATA[32] = {
     title: "Biała Roszada",
@@ -771,13 +817,25 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[35] = {
-    title: "Podobieństwa i różnice - obrazy",
+    title: "Podobieństwa i różnice",
     work_in_progress: true,
     content: `<div style="display:grid; gap:0.8rem; justify-items:center; text-align:center;">
   <p><strong>Podobieństwa i różnice</strong></p>
-  <p>Sprawdź elementy poniżej notatek: pierwszy wyraz i jego para.</p>
+  <p>Użyj par tak jak w elementach pod notatkami. Odczytaj litery i zbuduj hasło.</p>
+  <div style="display:grid; gap:0.35rem; text-align:left; max-width:420px; width:100%;">
+    <p><strong>dar -> drap</strong></p>
+    <p><strong>bat -> brat</strong></p>
+    <p><strong>aut -> auto</strong></p>
+    <p><strong>chart -> strach</strong></p>
+    <p><strong>rak -> Irak</strong></p>
+    <p><strong>rak -> kara</strong></p>
+    <p><strong>hełm -> Chełm</strong></p>
+    <p><strong>rak -> krzak</strong></p>
+    <p><strong>Cezar -> czar</strong></p>
+    <p><strong>rak -> kark</strong></p>
+  </div>
 </div>`,
-    solution: "przyda się później?",
+    solution: "prosiaczek",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
@@ -1002,9 +1060,15 @@
     hint3: "TODO hint 3"
   };
     PUZZLE_DATA[61] = {
-    title: "Conway Script",
+    title: "Alfabet roślin",
     work_in_progress: true,
-    content: `TODO - zagadka będzie wymagała przetłumaczenia alfabetu za pomocą reguł Conwaya (Game of Life) na znaki którymi będzie zapisana wiadomość`,
+    content: `<div class="puzzle61-wrap">
+  <p>Wpisz tekst, aby zobaczyć go w pikselowym alfabecie.</p>
+  <input type="text" id="puzzle61Input" class="puzzle61-input" placeholder="Wpisz tutaj..." autocomplete="off" spellcheck="false">
+  <div class="puzzle61-canvas-wrap">
+    <canvas id="puzzle61Canvas" class="puzzle61-canvas" aria-label="Podgląd tekstu w alfabecie pikselowym"></canvas>
+  </div>
+</div>`,
     solution: "",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
@@ -1344,11 +1408,6 @@
           return;
         }
 
-        if (event.target.id === "puzzle6Reset") {
-          this.resetPuzzle6MelodyProgress();
-          return;
-        }
-
         if (event.target.id === "puzzle7Reset") {
           this.resetPuzzle7Helper();
           return;
@@ -1563,6 +1622,7 @@
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
       this.stopPuzzle36Mystery();
+      this.stopPuzzle61();
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
       this.els.backToMenuBtn.classList.add("hidden");
@@ -1682,6 +1742,7 @@
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
       this.stopPuzzle36Mystery();
+      this.stopPuzzle61();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
       const puzzleData = PUZZLE_DATA[id] || {
@@ -1783,6 +1844,10 @@
 
       if (id === 36) {
         this.initPuzzle36Mystery();
+      }
+
+      if (id === 61) {
+        this.initPuzzle61();
       }
 
       if (puzzle.lastUpdated) {
@@ -3297,6 +3362,78 @@
 
     stopPuzzle38Board() {
       this.puzzle38State = null;
+    },
+
+    initPuzzle61() {
+      this.stopPuzzle61();
+      const inputEl = document.getElementById("puzzle61Input");
+      const canvasEl = document.getElementById("puzzle61Canvas");
+      if (!inputEl || !canvasEl) {
+        return;
+      }
+
+      const handler = () => this.renderPuzzle61Canvas();
+      inputEl.addEventListener("input", handler);
+      this.puzzle61State = { inputEl, canvasEl, handler };
+      this.renderPuzzle61Canvas();
+    },
+
+    stopPuzzle61() {
+      if (!this.puzzle61State) {
+        return;
+      }
+
+      const { inputEl, handler } = this.puzzle61State;
+      if (inputEl && handler) {
+        inputEl.removeEventListener("input", handler);
+      }
+
+      this.puzzle61State = null;
+    },
+
+    renderPuzzle61Canvas() {
+      const state = this.puzzle61State;
+      if (!state) {
+        return;
+      }
+
+      const { inputEl, canvasEl } = state;
+      const CELL = 9;
+      const LETTER_GAP = 6;
+      const ROWS = 5;
+      const COLS = 5;
+      const ON_COLOR = "#2a1f14";
+      const OFF_COLOR = "rgba(0,0,0,0.07)";
+
+      const text = inputEl.value.toUpperCase();
+      const chars = text.split("").filter((ch) => PIXEL_ALPHABET[ch]);
+
+      if (chars.length === 0) {
+        canvasEl.width = 0;
+        canvasEl.height = 0;
+        return;
+      }
+
+      const totalWidth = chars.length * COLS * CELL + (chars.length - 1) * LETTER_GAP;
+      const totalHeight = ROWS * CELL;
+
+      canvasEl.width = totalWidth;
+      canvasEl.height = totalHeight;
+
+      const ctx = canvasEl.getContext("2d");
+      ctx.clearRect(0, 0, totalWidth, totalHeight);
+
+      chars.forEach((ch, letterIndex) => {
+        const rows = PIXEL_ALPHABET[ch];
+        const xOffset = letterIndex * (COLS * CELL + LETTER_GAP);
+        rows.forEach((row, rowIndex) => {
+          for (let colIndex = 0; colIndex < row.length; colIndex += 1) {
+            const on = row[colIndex] === "1";
+            ctx.fillStyle = on ? ON_COLOR : OFF_COLOR;
+            ctx.fillRect(xOffset + colIndex * CELL, rowIndex * CELL, CELL - 1, CELL - 1);
+          }
+        });
+      });
     },
 
     resetPuzzle38Connections() {

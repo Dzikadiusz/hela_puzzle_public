@@ -575,27 +575,115 @@ body.puzzle30-white-content .puzzle-content {
 }
 
 .piano-keyboard {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(44px, 1fr));
-  gap: 0.35rem;
-  padding: 0.45rem;
-  border: 1px solid #d7cab9;
-  border-radius: 0.55rem;
-  background: linear-gradient(180deg, #fefefe 0%, #f4e8d7 100%);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 3em 0 0 3em;
+  width: min(100%, 34em);
+  height: 18.875em;
+  position: relative;
+  border: 1px solid #160801;
+  border-radius: 1em;
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5) inset, 0 1px rgba(212, 152, 125, 0.2) inset, 0 5px 15px rgba(0, 0, 0, 0.5);
+  font-size: clamp(9px, 1.8vw, 16px);
 }
 
 .piano-key {
-  min-height: 96px;
-  border: 1px solid #d8c8b5;
-  border-radius: 0.4rem;
-  background: linear-gradient(180deg, #ffffff 0%, #f7f0e6 100%);
-  font-weight: 700;
-  color: #4f3925;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  float: left;
 }
 
-.piano-key.active {
-  background: linear-gradient(180deg, #ffe9bf 0%, #ffd28b 100%);
-  transform: translateY(1px);
+.piano-key::after {
+  content: attr(data-key-label);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+  font-size: 0.78em;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.piano-keyboard .white {
+  height: 16em;
+  width: 4em;
+  z-index: 1;
+  border-left: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  border-radius: 0 0 5px 5px;
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.8) inset, 0 0 5px #ccc inset, 0 0 3px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #eee 0%, #fff 100%);
+}
+
+.piano-keyboard .white::after {
+  bottom: 0.75em;
+  color: rgba(58, 43, 29, 0.55);
+}
+
+.piano-keyboard .white.g::before {
+  content: "";
+  position: absolute;
+  bottom: 1.05em;
+  right: 0.62em;
+  width: 1.2em;
+  height: 1.3em;
+  pointer-events: none;
+  background:
+    linear-gradient(76deg, transparent 34%, rgba(92, 56, 40, 0.45) 36% 46%, transparent 48%) 0.02em 0 / 0.32em 100% no-repeat,
+    linear-gradient(76deg, transparent 34%, rgba(92, 56, 40, 0.4) 36% 46%, transparent 48%) 0.42em 0 / 0.32em 100% no-repeat,
+    linear-gradient(76deg, transparent 34%, rgba(92, 56, 40, 0.35) 36% 46%, transparent 48%) 0.82em 0 / 0.32em 100% no-repeat;
+}
+
+.piano-keyboard .white:active,
+.piano-keyboard .white.active {
+  border-top: 1px solid #777;
+  border-left: 1px solid #999;
+  border-bottom: 1px solid #999;
+  box-shadow: 2px 0 3px rgba(0, 0, 0, 0.1) inset, -5px 5px 20px rgba(0, 0, 0, 0.2) inset, 0 0 3px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #fff 0%, #e9e9e9 100%);
+}
+
+.piano-keyboard .black {
+  height: 8em;
+  width: 2em;
+  margin: 0 0 0 -1em;
+  z-index: 2;
+  border: 1px solid #000;
+  border-radius: 0 0 3px 3px;
+  box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.2) inset, 0 -5px 2px 3px rgba(0, 0, 0, 0.6) inset, 0 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(45deg, #222 0%, #555 100%);
+}
+
+.piano-keyboard .black::after {
+  bottom: 0.58em;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.66em;
+}
+
+.piano-keyboard .black:active,
+.piano-keyboard .black.active {
+  box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.2) inset, 0 -2px 2px 3px rgba(0, 0, 0, 0.6) inset, 0 1px 2px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to right, #444 0%, #222 100%);
+}
+
+.piano-keyboard .a,
+.piano-keyboard .g,
+.piano-keyboard .d,
+.piano-keyboard .e,
+.piano-keyboard .b {
+  margin: 0 0 0 -1em;
+}
+
+.piano-keyboard li:first-child {
+  border-radius: 5px 0 5px 5px;
+}
+
+.piano-keyboard li:last-child {
+  border-radius: 0 5px 5px 5px;
 }
 
 .piano-status {
@@ -1810,6 +1898,40 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   margin: 0;
 }
 
+.puzzle61-wrap {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.puzzle61-wrap p {
+  margin: 0;
+}
+
+.puzzle61-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 1rem;
+  font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+  color: var(--text);
+  background: #fff;
+}
+
+.puzzle61-canvas-wrap {
+  overflow-x: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: #f8f4ee;
+  min-height: 3.5rem;
+}
+
+.puzzle61-canvas {
+  display: block;
+  image-rendering: pixelated;
+}
+
 .puzzle38-board {
   --puzzle38-size: min(84vw, 560px);
   width: var(--puzzle38-size);
@@ -2134,7 +2256,7 @@ body.puzzle36-mystery-theme #puzzle36GuessCheckBtn {
   }
 
   .piano-keyboard {
-    grid-template-columns: repeat(4, minmax(44px, 1fr));
+    font-size: 11px;
   }
 
   .caesar-row {
