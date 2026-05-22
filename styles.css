@@ -32,6 +32,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
 body.puzzle19-night-sky {
   background:
     radial-gradient(2px 2px at 12% 20%, rgba(255, 255, 255, 0.9) 0 50%, transparent 52%),
@@ -695,7 +699,7 @@ body.puzzle30-white-content .puzzle-content {
 .sonar-field {
   position: relative;
   width: 100%;
-  min-height: 280px;
+  min-height: 1120px;
   border-radius: 0.7rem;
   border: 1px solid #b7d6da;
   overflow: hidden;
@@ -1570,7 +1574,20 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   margin: 0;
 }
 
+.puzzle28-description {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.75rem 0.8rem;
+  border: 1px solid #d8c8b5;
+  border-radius: 0.6rem;
+  background: linear-gradient(180deg, #fffdf7 0%, #f9f2e5 100%);
+}
+
 .puzzle28-controls {
+  --puzzle28-particles-duration: 2s;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1580,6 +1597,63 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   border: 1px solid #d8c8b5;
   border-radius: 0.6rem;
   background: linear-gradient(180deg, #fff9ee 0%, #f8ead8 100%);
+}
+
+.puzzle28-controls > * {
+  position: relative;
+  z-index: 1;
+}
+
+.puzzle28-controls::before,
+.puzzle28-controls::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+}
+
+.puzzle28-controls::before {
+  background:
+    radial-gradient(ellipse 16px 9px at 8% 14%, rgba(86, 168, 94, 0.45) 0 65%, rgba(86, 168, 94, 0) 70%),
+    radial-gradient(ellipse 14px 8px at 22% 41%, rgba(99, 181, 106, 0.4) 0 65%, rgba(99, 181, 106, 0) 70%),
+    radial-gradient(ellipse 19px 9px at 37% 22%, rgba(106, 156, 72, 0.38) 0 65%, rgba(106, 156, 72, 0) 70%),
+    radial-gradient(ellipse 13px 8px at 54% 62%, rgba(120, 184, 96, 0.42) 0 65%, rgba(120, 184, 96, 0) 70%),
+    radial-gradient(ellipse 18px 9px at 73% 27%, rgba(92, 172, 112, 0.38) 0 65%, rgba(92, 172, 112, 0) 70%),
+    radial-gradient(ellipse 14px 8px at 88% 48%, rgba(104, 164, 79, 0.44) 0 65%, rgba(104, 164, 79, 0) 70%),
+    radial-gradient(ellipse 16px 9px at 16% 58%, rgba(100, 176, 88, 0.4) 0 65%, rgba(100, 176, 88, 0) 70%),
+    radial-gradient(ellipse 14px 8px at 31% 70%, rgba(88, 166, 96, 0.36) 0 65%, rgba(88, 166, 96, 0) 70%),
+    radial-gradient(ellipse 19px 9px at 46% 49%, rgba(113, 183, 91, 0.42) 0 65%, rgba(113, 183, 91, 0) 70%),
+    radial-gradient(ellipse 13px 8px at 62% 16%, rgba(82, 157, 99, 0.36) 0 65%, rgba(82, 157, 99, 0) 70%),
+    radial-gradient(ellipse 18px 9px at 81% 64%, rgba(120, 170, 76, 0.4) 0 65%, rgba(120, 170, 76, 0) 70%);
+  transform: rotate(-8deg);
+}
+
+.puzzle28-controls::after {
+  background:
+    radial-gradient(ellipse 14px 8px at 14% 68%, rgba(95, 176, 101, 0.32) 0 65%, rgba(95, 176, 101, 0) 70%),
+    radial-gradient(ellipse 16px 9px at 29% 82%, rgba(126, 188, 104, 0.36) 0 65%, rgba(126, 188, 104, 0) 70%),
+    radial-gradient(ellipse 13px 8px at 47% 74%, rgba(89, 160, 95, 0.3) 0 65%, rgba(89, 160, 95, 0) 70%),
+    radial-gradient(ellipse 18px 9px at 66% 84%, rgba(112, 179, 88, 0.34) 0 65%, rgba(112, 179, 88, 0) 70%),
+    radial-gradient(ellipse 14px 8px at 82% 72%, rgba(84, 166, 109, 0.3) 0 65%, rgba(84, 166, 109, 0) 70%),
+    radial-gradient(ellipse 16px 9px at 9% 34%, rgba(109, 185, 97, 0.34) 0 65%, rgba(109, 185, 97, 0) 70%),
+    radial-gradient(ellipse 14px 8px at 24% 18%, rgba(92, 162, 88, 0.3) 0 65%, rgba(92, 162, 88, 0) 70%),
+    radial-gradient(ellipse 19px 9px at 41% 28%, rgba(116, 181, 84, 0.36) 0 65%, rgba(116, 181, 84, 0) 70%),
+    radial-gradient(ellipse 13px 8px at 58% 38%, rgba(83, 170, 109, 0.28) 0 65%, rgba(83, 170, 109, 0) 70%),
+    radial-gradient(ellipse 18px 9px at 74% 20%, rgba(128, 190, 99, 0.33) 0 65%, rgba(128, 190, 99, 0) 70%),
+    radial-gradient(ellipse 14px 8px at 90% 30%, rgba(90, 168, 104, 0.3) 0 65%, rgba(90, 168, 104, 0) 70%);
+  transform: rotate(7deg);
+}
+
+.puzzle28-controls.running::before {
+  opacity: 1;
+  animation: puzzle28LeafDriftA var(--puzzle28-particles-duration) linear infinite;
+}
+
+.puzzle28-controls.running::after {
+  opacity: 1;
+  animation: puzzle28LeafDriftB calc(var(--puzzle28-particles-duration) * 1.25) linear infinite;
 }
 
 .puzzle28-speed-label {
@@ -1634,6 +1708,30 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
 
 .puzzle28-cell.alive {
   background: #1f9d55;
+}
+
+@keyframes puzzle28LeafDriftA {
+  0% {
+    transform: translate(-20%, 24%) rotate(-12deg);
+  }
+  50% {
+    transform: translate(10%, 0%) rotate(-2deg);
+  }
+  100% {
+    transform: translate(32%, -24%) rotate(8deg);
+  }
+}
+
+@keyframes puzzle28LeafDriftB {
+  0% {
+    transform: translate(22%, -20%) rotate(9deg);
+  }
+  50% {
+    transform: translate(0%, 4%) rotate(2deg);
+  }
+  100% {
+    transform: translate(-28%, 26%) rotate(-10deg);
+  }
 }
 
 .puzzle32-wrap {
@@ -2049,7 +2147,7 @@ body.puzzle36-mystery-theme #puzzle36GuessCheckBtn {
   }
 
   .sonar-field {
-    min-height: 220px;
+    min-height: 880px;
   }
 
   .puzzle17-grid {

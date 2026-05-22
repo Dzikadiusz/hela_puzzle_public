@@ -203,7 +203,7 @@
   PUZZLE_DATA[7] = {
     title: "Pechowy cesarz",
     content: `<div class="caesar-helper">
-  <p><strong>xelcgbtensvn</p>
+  <p><strong>xelcgbtensvn</strong></p>
   <div class="caesar-row-wrap">
     <div class="caesar-row">
       <button type="button" class="caesar-shift-btn" data-caesar-row="top" data-caesar-shift="-1" aria-label="Przesun wiersz A w lewo">◀</button>
@@ -282,6 +282,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[12] = {
+    work_in_progress: true,
     title: "Stare zamki są pełne potworów...",
     content: `<div class="puzzle12-image-wrap">
   <img src="img/20230610_140159.jpg" alt="" class="puzzle12-image">
@@ -379,7 +380,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[16] = {
-    title: "",
+    title: "8x8",
     content: `<div class="puzzle16-container">
   <div class="puzzle16-grid" id="puzzle16Grid"></div>
   <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
@@ -540,9 +541,9 @@
   <p><strong>3,141592 653589 793238 462643 383279 502884 197169 399375 105820 974944 592307 816406 286208 998628 034825 342117 067982 148086 513282 306647 093844 609550 582231 725359 408128 377606 450284 102701 938521 105559 644622 948954 930381 964428 810975 665933 446128</strong></p>
 </div>`,
     solution: "377606",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Jaki dźwięk wydaje kurczaczek?",
+    hint2: "Przyjrzyj się uważnie liczbie, może znajdziesz tam coś, co przypomina ten dźwięk?",
+    hint3: "Czy zgadłaś o jaką znaną liczbę chodzi? Jeśli tak to dlaczego jest ona słynna?"
   };
 
   PUZZLE_DATA[22] = {
@@ -554,8 +555,9 @@
 </div>`,
     solution: "banan na lunch",
     hint1: "Z czym kojarzą Ci się te słowa?",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint2: "Nie obędzie się bez pomocy pewnego Rosjanina...",
+    hint3: "Jeśli znalazłaś odpowiednią tablicę, to rozwiązanie zagadki powinno być tuż przed Tobą!",
+
   };
   PUZZLE_DATA[23] = {
     title: "",
@@ -608,20 +610,28 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[28] = {
-    title: "WIP Gra w życie",
+    title: "Magiczny Ogród",
     work_in_progress: true,
-    content: `<div class="puzzle28-wrap">
-  <p><strong>Klikaj komórki, aby je ożywić. Uruchom symulację i obserwuj kolejne pokolenia.</strong></p>
+    content: `<div id="puzzle28Wrap" class="puzzle28-wrap">
   <div class="puzzle28-controls">
     <button type="button" id="puzzle28ToggleBtn" class="small-btn">Start</button>
-    <button type="button" id="puzzle28StepBtn" class="small-btn">Step</button>
-    <button type="button" id="puzzle28ClearBtn" class="small-btn">Clear</button>
-    <button type="button" id="puzzle28RandomBtn" class="small-btn">Random</button>
+    <button type="button" id="puzzle28StepBtn" class="small-btn">+1 Dzień</button>
+    <button type="button" id="puzzle28ClearBtn" class="small-btn">Reset</button>
+    <button type="button" id="puzzle28RandomBtn" class="small-btn">Zasadź losowe</button>
     <label for="puzzle28SpeedRange" class="puzzle28-speed-label">Szybkość: <span id="puzzle28SpeedValue">6</span></label>
     <input id="puzzle28SpeedRange" type="range" min="1" max="20" step="1" value="6" aria-label="Szybkość symulacji">
-    <p id="puzzle28StepCounter" class="puzzle28-step" aria-live="polite">Krok: 0</p>
+    <p id="puzzle28StepCounter" class="puzzle28-step" aria-live="polite">Dzień: 0</p>
   </div>
   <div id="puzzle28Board" class="puzzle28-board" role="grid" aria-label="Siatka gry w życie 40 na 40"></div>
+
+  <div id="puzzle28Description" class="puzzle28-description">
+    <p><strong>Przed tobą Magiczny Ogród</strong></p>
+    <p>Każde jego pole może być puste (białe) lub zarośnięte (zielone).</p>
+    <p>Puste pole, która ma dokładnie 3 zielonych sąsiadów, staje się zarośnięte następnego dnia.</p>
+    <p>Zielone pole z 2 albo 3 zielonymi sąsiadami pozostaje zarośniete kolejnego dnia;</p>
+    <p>Roślina, która ma tylko jednego lub mniej zielonych sąsiadów wysycha z samotności.</p>
+    <p>Roślina, która ma 4rech lub więcej sąsiadów, usycha z braku wody i zatłoczenia.</p>
+  </div>
 </div>`,
     solution: "",
     hint1: "TODO hint 1",
@@ -666,6 +676,7 @@
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
+  <button type="button" id="puzzle32Reset" class="small-btn">Reset</button>
 </div>`,
     starting_board: [
       ["♜", "", "♝", "♛", "♚", "♝", "", "♜"],
@@ -687,33 +698,47 @@
       ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
       ["♖", "♘", "♗", "", "", "♖", "♔", ""]
     ],
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
+    solution: "zumzwang",
+    hint1: "Czy wiesz czym jest roszada?",
+    hint2: "Jeśli wykonałaś manewr poprawnie, to rozejrzyj się dokładnie...",
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[33] = {
-    title: "Szach-mat!",
+    title: "Szach-mat w jednym ruchu!",
     work_in_progress: true,
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
+  <button type="button" id="puzzle32Reset" class="small-btn">Reset</button>
 </div>`,
     starting_board: [
-      ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
-      ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
-      ["", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", ""],
-      ["", "", "", "", "", "", "", ""],
-      ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
-      ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
+      ["♜", "", "♝", "", "", "", "", ""],
+      ["♟", "♟", "", "", "♜", "", "", "♕"],
+      ["", "", "♟", "", "♚", "", "", ""],
+      ["", "", "", "♟", "♙", "", "", ""],
+      ["", "", "", "♙", "", "", "", "♟"],
+      ["", "", "", "", "♛", "", "", ""],
+      ["♙", "♙", "", "", "", "", "♙", "♙"],
+      ["", "", "", "", "", "♖", "", "♔"]
     ],
-    solution_board: null,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    solution_board: [
+      ["♜", "", "♝", "", "", "", "", ""],
+      ["♟", "♟", "", "", "♜", "", "", ""],
+      ["", "", "♟", "", "♚", "", "", ""],
+      ["", "", "", "♟", "♙", "♕", "", ""],
+      ["", "", "", "♙", "", "", "", "♟"],
+      ["", "", "", "", "♛", "", "", ""],
+      ["♙", "♙", "", "", "", "", "♙", "♙"],
+      ["", "", "", "", "", "♖", "", "♔"]
+    ],
+    solution: "królowa",
+    partial_solution: [
+      { key: "hetman", message: "Nazwa w sumie poprawna, ale użyj polskiego odpowiednika:)" }
+    ],
+    hint1: "Musisz ruszyć się białą figurą",
+    hint2: "Ta figura jest bardzo potężna",
+    hint3: "Jest to królowa",
+    hint4: "Szach-mat w jednym ruchu oznacza, że po twoim ruchu czarny król będzie atakowany i nie będzie miał żadnego legalnego ruchu, aby się obronić."
   };
   PUZZLE_DATA[34] = {
     title: "Sonet",
@@ -958,7 +983,8 @@
     hint3: "entrance"
   };
     PUZZLE_DATA[47] = {
-      title: "",
+      title: "Brakujące słowa",
+      work_in_progress: true,
       content: `<p>Matka naszego hobbita... ale co to jest hobbit? Zdaje mi się, że wymaga to wyjaśnienia. W dzisiejszych czasach bowiem hobbitów bardzo rzadko można spotkać: nie ma ich wiele, a poza tym unikają Dużych Ludzi — jak nazywają nas. Hobbici są — czy może byli — małymi ludźmi, mniejszymi od krasnoludów — różnią się też od nich tym, że nie noszą brody — lecz znacznie większymi od liliputów. Nie uprawiają wcale albo prawie wcale czarów, z wyjątkiem chyba zwykłej, powszedniej sztuki, która pozwala im znikać bezszelestnie i błyskawicznie, kiedy duzi, niemądrzy ludzie, jak ty i ja, zabłądzą w ich pobliże, hałasując niesłychanie głośno, tak że na milę można ich usłyszeć. Hobbici są skłonni do tycia, zwłaszcza w pasie: miewają wypięte brzuchy; ubierają się kolorowo (najchętniej zielono i żółto); nie używają obuwia, ponieważ stopy ich z przyrodzenia opatrzone są twardą podeszwą i porośnięte bujnym, ciemnym, brunatnym włosem, podobnie jak głowa (zwykle kędzierzawa); mają długie, zręczne, smagłe palce i poczciwe twarze, a śmieją się dużo, basowo i serdecznie (szczególnie po obiedzie, który — w miarę możności — zjadają dwa razy dziennie). Teraz już wiecie o nich dość na początek. Jak więc mówiłem, matką naszego hobbita — to jest Bilba Bagginsa — była słynna Belladonna Tuk, jedna z trzech niespotykanych córek Starego Tuka, głowy wszystkich hobbitów mieszkających Za Wodą, czyli za rzeką, która płynęła u stóp Pagórka. Powiadano, że dawnymi czasy ten i ów Tuk brał żonę z plemienia czarodziejów (nieżyczliwi twierdzili że to były gobliny); rzeczywiście Tukowie zawsze mieli w sobie coś niezwykle hobbitciego, a od czasu do czasu zdarzało się, że ktoś z członków tego rodu wyruszał w świat szukać przygód. Taki Tuk znikał dyskretnie, a rodzina nie rozgłaszała sprawy; fakt jednak, że Tukowie nie byli tak szanowani jak Bagginsowie, chociaż niewątpliwie od nich bogatsi.</p>
   <p>Co prawda Belladonna Tuk, odkąd została panią Bungołą Baggins, nie miewała żadnych przygód. Bungo, ojciec Bilba, zbudował dla niej (częściowo za jej posag) norę tak wspaniałą, że nie znalazłoby się nic podobnego ani pod Pagórkiem, ani za Pagórkiem, ani Za Wodą, i w tej norze mieszkali małżonkowie aż do końca swoich dni. Mimo wszystko wydaje się prawdopodobne, że Bilbo, jedyny syn Belladonny, chociaż wyglądał i zachowywał się dokładnie tak, jakby był drugim wydaniem swojego solidnego i spokojnego ojca, odziedziczył po kądzieli ziarenko dziwactwa i że to ziarenko czekało tylko na okazję, by zakiełkować. Okazja jednak się nie nadarzyła, aż Bilbo dorósł, skończył pięćdziesiąt lat czy coś koło tego, i za-</p>`,
       solution: "",
@@ -1361,6 +1387,11 @@
         }
 
         if (event.target.id === "puzzle37Reset") {
+          this.resetPuzzle32Board();
+          return;
+        }
+
+        if (event.target.id === "puzzle32Reset") {
           this.resetPuzzle32Board();
           return;
         }
@@ -2739,6 +2770,7 @@
         cells,
         nextCells,
         boardEl,
+        controlsEl: document.querySelector("#puzzle28Wrap .puzzle28-controls"),
         stepCounterEl,
         speedRangeEl,
         speedValueEl,
@@ -2754,6 +2786,7 @@
       this.renderPuzzle28Board();
       this.updatePuzzle28StepCounter();
       this.updatePuzzle28Controls();
+      this.updatePuzzle28ControlsEffect();
     },
 
     getPuzzle28SpeedMs(speedValue) {
@@ -2772,6 +2805,7 @@
       state.speedMs = this.getPuzzle28SpeedMs(speedValue);
       state.speedRangeEl.value = String(speedValue);
       state.speedValueEl.textContent = String(speedValue);
+      this.updatePuzzle28ControlsEffect();
 
       if (state.intervalId) {
         this.stopPuzzle28Simulation();
@@ -2838,6 +2872,20 @@
       if (state.stepBtnEl) {
         state.stepBtnEl.disabled = isRunning;
       }
+
+      this.updatePuzzle28ControlsEffect();
+    },
+
+    updatePuzzle28ControlsEffect() {
+      const state = this.puzzle28State;
+      if (!state || !state.controlsEl) {
+        return;
+      }
+
+      const isRunning = Boolean(state.intervalId);
+      const animationDurationSeconds = Math.max(0.6, state.speedMs / 230);
+      state.controlsEl.style.setProperty("--puzzle28-particles-duration", `${animationDurationSeconds.toFixed(2)}s`);
+      state.controlsEl.classList.toggle("running", isRunning);
     },
 
     clearPuzzle28Board() {
@@ -2941,7 +2989,7 @@
         return;
       }
 
-      state.stepCounterEl.textContent = `Krok: ${state.step}`;
+      state.stepCounterEl.textContent = `Dzień: ${state.step}`;
     },
 
     initPuzzle32Board() {
@@ -3024,7 +3072,7 @@
 
     resetPuzzle32Board() {
       const state = this.puzzle32State;
-      if (!state || this.state.selectedPuzzle !== 37) {
+      if (!state || (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33 && this.state.selectedPuzzle !== 37)) {
         return;
       }
 
@@ -3133,6 +3181,12 @@
       }
 
       state.solutionShown = true;
+      if (this.state.selectedPuzzle === 33) {
+        this.updatePuzzle32Status("Szach-Mat! Która figura zapewniła ci wygraną?");
+        this.showCheckFeedback("success", "Szach-Mat!", "Która figura zapewniła ci wygraną?");
+        return;
+      }
+
       this.updatePuzzle32Status("Zumzwang");
       this.showCheckFeedback("success", "Brawo!", "Wykonałaś roszadę!");
     },
