@@ -1,6 +1,7 @@
 
   
 (() => {
+  const APP_BUILD_ID = "20260527-4-source-order";
   const TOTAL_PUZZLES = 64;
   const STORAGE_KEY = "puzzleAppState";
   // Map each puzzle (1-64) to a color from the workflow icon. When solved, displays this color.
@@ -49,6 +50,7 @@
   };
   const PUZZLE_6_TARGET_MELODY = ["C4", "D4", "E4", "C4", "C4", "D4", "E4", "C4", "E4", "F4", "G4"];
   const PUZZLE_6_SECRET_MELODY = ["G4", "E4", "E4", "F4", "D4", "D4", "C4", "E4", "G4"];
+  const PUZZLE_48_SHORT_INTERVAL_MS = 900;
   const CAESAR_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   // Pixel font: each letter is a 5×5 bitmap encoded as 5 strings of "0"/"1"
@@ -92,6 +94,26 @@
   };
   const PUZZLE_12_DEBUG_MODE = true;
   const PUZZLE_14_DEBUG_MODE = false;
+  const PUZZLE_LOGIC_KEYS = Object.freeze({
+    PIANO: "piano",
+    CAESAR: "caesar",
+    TIME_1111: "time-1111",
+    HOTSPOT_CAT: "hotspot-cat",
+    HOTSPOT_DEBUG: "hotspot-debug",
+    SONAR: "sonar",
+    COLOR_GRID: "color-grid",
+    NIGHT_SKY: "night-sky",
+    CLOCK_HANDS: "clock-hands",
+    CLOCKS: "clocks",
+    LIFE: "life",
+    CHESS_BOARD: "chess-board",
+    CHESS_MATE: "chess-mate",
+    CONNECTIONS: "connections",
+    MYSTERY: "mystery",
+    SNOUT_DAY: "snout-day",
+    PIXEL_FONT: "pixel-font",
+    WHITE_CONTENT: "white-content"
+  });
   const PAIRS_PASSWORD = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed domos";
   const LETTER_PAIR_CATALOG = {
     A: [["rak", "kara"], ["cel", "cela"]],
@@ -159,7 +181,7 @@
     hint3: "TODO hint 3"
     
   };
-  PUZZLE_DATA[2] = {
+  PUZZLE_DATA[20] = {
     //TODO hint
     title: "Na głowie",
     content: `<div style="display: grid; place-items: center;">
@@ -173,7 +195,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[3] = {
+  PUZZLE_DATA[8] = {
     title: "Coś Szybkiego",
     content: `<p><strong>
 <p>STYCZEŃ = 7  
@@ -191,7 +213,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[4] = {
+  PUZZLE_DATA[9] = {
     title: "Coś tu nie pasuje...",
     content: "<p><strong>2, 4, 8, 16, 31, 64, 128",
     solution: "31",
@@ -203,7 +225,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[5] = {
+  PUZZLE_DATA[10] = {
     title: "Bez sensu?",
         content: `<p><strong>
 <p>0 = 4
@@ -218,8 +240,10 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[6] = {
+  PUZZLE_DATA[15] = {
     title: "Frère Jacques",
+    puzzleKey: "piano-frere-jacques",
+    logicKeys: [PUZZLE_LOGIC_KEYS.PIANO],
     content: `<div class="piano-puzzle">
   <ul class="piano-keyboard set" role="group" aria-label="Klawiatura pianina">
     <li class="white c piano-key" data-piano-note="C4" data-key-label="C" aria-label="C"></li>
@@ -245,8 +269,10 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[7] = {
+  PUZZLE_DATA[18] = {
     title: "Pechowy cesarz",
+    puzzleKey: "caesar-shift",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CAESAR],
     content: `<div class="caesar-helper">
   <p><strong>xelcgbtensvn</strong></p>
   <div class="caesar-row-wrap">
@@ -281,7 +307,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[8] = {
+  PUZZLE_DATA[12] = {
     title: "Dziwne liczby",
     content: `<p><strong><center>43.51474950100621, 16.443521243705444</strong></p>`,
     solution: "Split",
@@ -289,7 +315,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[9] = {
+  PUZZLE_DATA[19] = {
     title: "Będzie jakaś zniżka?",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/shape.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
@@ -302,19 +328,23 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[10] = {
+  PUZZLE_DATA[13] = {
     title: "Gdzie on się podział?",
+    puzzleKey: "hotspot-cat",
+    logicKeys: [PUZZLE_LOGIC_KEYS.HOTSPOT_CAT],
     content: `<div class="puzzle10-image-wrap">
   <img src="img/dachy.png" alt="" class="puzzle10-image">
   <button type="button" class="puzzle-hotspot-btn" aria-label="Ukryty punkt na obrazku" title="Ukryty punkt na obrazku"></button>
 </div>`,
     solution: "Filuś",
-    hint1: "TODO hint 1",
+    hint1: "Tu go nie ma",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[11] = {
     title: "Czas Prawdy",
+    puzzleKey: "time-1111",
+    logicKeys: [PUZZLE_LOGIC_KEYS.TIME_1111],
     content: `<div class="time-lock-puzzle">
   <p><strong>Kliknij przycisk, aby poznać rozwiązanie.</strong></p>
   <button type="button" id="puzzle11RevealBtn" class="small-btn">Poznaj rozwiązanie</button>
@@ -326,8 +356,8 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[12] = {
-    title: "Widzę tę bestię",
+  PUZZLE_DATA[21] = {
+    title: "W mroku czają się bestie",
     content: `<div class="puzzle12-image-wrap">
   <img src="img/potwory.jpg" alt="" class="puzzle12-image">
   <div class="puzzle-hover-hint" title="Łeeeee, co to jest???" style="--hint-left: 6%; --hint-top: 13%;"></div>
@@ -339,7 +369,7 @@
     hint4: "Pobaw się jasnością, kontrastem, nasyceniem..."
 
   };
-  PUZZLE_DATA[13] = {
+  PUZZLE_DATA[22] = {
     title: "Hej, ale to przecież nie są mapy!",
     content: `<div style="display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); align-items:start;">
   <img src="https://flagcdn.com/w320/ke.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
@@ -369,8 +399,10 @@
   };
 
   //TODO - finis the map!
-  PUZZLE_DATA[14] = {
+  PUZZLE_DATA[23] = {
     title: "Ukryte pomniki",
+    puzzleKey: "map-hotspot-debug",
+    logicKeys: [PUZZLE_LOGIC_KEYS.HOTSPOT_DEBUG],
     content: `
       <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
         <div class="puzzle14-map-wrap">
@@ -400,11 +432,13 @@
     hint5: "Czytaj od zachodu"
 
   };
-  PUZZLE_DATA[15] = {
+  PUZZLE_DATA[24] = {
     title: "WIP Sonar",
+    puzzleKey: "sonar-wip",
+    logicKeys: [PUZZLE_LOGIC_KEYS.SONAR],
     work_in_progress: true,
     content: `<div class="sonar-puzzle">
-  <p><strong>Włącz sonar i naprowadź łódź podwodną na cel.</strong></p>
+  <p><strong>Ta zagadka jest tylko zalążkiem - możesz ją śmiało pominąć podczas testów.</strong></p>
   <div class="sonar-controls">
     <button type="button" id="puzzle15SonarToggle" class="small-btn" aria-pressed="false">Sonar: OFF</button>
     <p id="puzzle15Status" class="sonar-status" aria-live="polite">Sonar wyłączony.</p>
@@ -424,8 +458,10 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[16] = {
+  PUZZLE_DATA[14] = {
     title: "8x8",
+    puzzleKey: "color-grid-8x8",
+    logicKeys: [PUZZLE_LOGIC_KEYS.COLOR_GRID],
     content: `<div class="puzzle16-container">
   <div class="puzzle16-grid" id="puzzle16Grid"></div>
   <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
@@ -439,7 +475,7 @@
     hint4: "Coś powinno się pokazać",
     hint5: "Czytaj od zachodu"
   };
-  PUZZLE_DATA[17] = {
+  PUZZLE_DATA[25] = {
     title: "Zacznij od góry",
     content: `<div class="puzzle17-wrap">
   <div class="puzzle17-grid" role="img" aria-label="Siatka liter 7 na 6">
@@ -497,7 +533,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[18] = {
+  PUZZLE_DATA[26] = {
     title: "Memento",
     content: `<div class="puzzle18-wrap">
   <div class="puzzle18-grid" role="img" aria-label="Siatka ze wskaźnikami 7 na 6">
@@ -555,8 +591,10 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[19] = {
+  PUZZLE_DATA[28] = {
     title: "Czy go słyszysz?",
+    puzzleKey: "night-sky",
+    logicKeys: [PUZZLE_LOGIC_KEYS.NIGHT_SKY],
     content: `<div class="time-lock-puzzle">
   <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
 </div>`,
@@ -565,7 +603,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[20] = {
+  PUZZLE_DATA[29] = {
     title: "",
     content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
     solution: "panika",
@@ -573,7 +611,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[21] = {
+  PUZZLE_DATA[30] = {
     title: "Kurczaczek",
     content: `<div style="position: relative; display: grid; gap: 14px; place-items: center; text-align: center; padding: 0.6rem 0.9rem 2.2rem 0.9rem;">
   <div style="position: absolute; right: 0.65rem; bottom: 0.35rem; transform: rotate(-7deg); font-family: 'Segoe Script', 'Lucida Handwriting', 'Brush Script MT', cursive; font-size: 0.95rem; color: #6b4630; opacity: 0.88; letter-spacing: 0.02em; white-space: nowrap; pointer-events: none;">
@@ -587,7 +625,7 @@
     hint3: "Czy zgadłaś o jaką znaną liczbę chodzi? Jeśli tak to dlaczego jest ona słynna?"
   };
 
-  PUZZLE_DATA[22] = {
+  PUZZLE_DATA[31] = {
     title: "Mały głód",
     content: `<div style="display: grid; gap: 0.7em; justify-items: center; font-size: 1.18rem; line-height: 1.5;">
   <div>Bar+Sód+Azot</div>
@@ -600,7 +638,7 @@
     hint3: "Jeśli znalazłaś odpowiednią tablicę, to rozwiązanie zagadki powinno być tuż przed Tobą!",
 
   };
-  PUZZLE_DATA[23] = {
+  PUZZLE_DATA[32] = {
     title: "",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/belt.jpg" alt="Pasek" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
@@ -611,7 +649,7 @@
     hint3: "W rzeczywistości są one duuuuuużo większe...",
     hint4: "Nie do końca wiadmo czy czy powinniśmy uwzględniać dziewiątą..."
   };
-  PUZZLE_DATA[24] = {
+  PUZZLE_DATA[33] = {
     title: "Łatwiej będzie na telefonie...",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/pochyl.png" alt="Podpowiedź: pochyl telefon" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
@@ -621,7 +659,7 @@
     hint2: "na tę zagadkę musisz spojrzeć z innej perspektywy",
     hint3: "pochyl ekran i przypatrz się obrazkowi"
   };
-  PUZZLE_DATA[25] = {
+  PUZZLE_DATA[34] = {
     title: "Dostał się Filuś na małe ogrodzenie",
     content: `<p><strong>Gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
     solution: "złaź sierściuchu",
@@ -632,8 +670,10 @@
     hint5: "rozwiązaniem jest imie"
 
   };
-  PUZZLE_DATA[27] = {
+  PUZZLE_DATA[36] = {
     title: "Chronologia",
+    puzzleKey: "chronologia-clocks",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CLOCKS],
     second_hand_positions: [51, 30, 5, 14, 40, 23, 1],
     second_hand_letters: ["S", "N", "H", "R", "O", "O", "C"],
     content: `<div class="clocks-puzzle">
@@ -651,8 +691,10 @@
     hint2: "Co wydaje się logicznym początkiem?",
     hint3: "Zwróć uwagę na nazwę zagadki"
   };
-  PUZZLE_DATA[28] = {
+  PUZZLE_DATA[37] = {
     title: "Magiczny Ogród",
+    puzzleKey: "life-magic-garden",
+    logicKeys: [PUZZLE_LOGIC_KEYS.LIFE],
     work_in_progress: true,
     content: `<div id="puzzle28Wrap" class="puzzle28-wrap">
   <div class="puzzle28-controls">
@@ -680,7 +722,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[29] = {
+  PUZZLE_DATA[38] = {
     title: "",
     content: `<div style="display: grid; gap: 0.7rem; justify-items: center; text-align: center;">
   <p style="font-size: 300%; line-height: 1.2;"><strong>^=&gt;<br>N=Z<br>:=..<br>8=?</strong></p>
@@ -693,8 +735,10 @@
     hint5: "obróć symbol o 90 stopni zgodnie z ruchem wskazówek zegara",
     hint6: "∞"
   };
-  PUZZLE_DATA[30] = {
+  PUZZLE_DATA[39] = {
     title: "",
+    puzzleKey: "white-content-numbers",
+    logicKeys: [PUZZLE_LOGIC_KEYS.WHITE_CONTENT],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/numery.png" alt="Numery" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -703,7 +747,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[31] = {
+  PUZZLE_DATA[40] = {
     title: "Wzór",
     content: `<div style="display: grid; place-items: center;">
   <img src="img/formula.png" alt="Wzór" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
@@ -713,8 +757,10 @@
     hint2: "Nie wymaga też znajomości dziwnych symboli matematycznch lub fizycznych",
     hint3: "Zwróć uwagę tylko na elementy, które są dla ciebie zrozumiałe"
   };
-  PUZZLE_DATA[32] = {
+  PUZZLE_DATA[16] = {
     title: "Biała Roszada",
+    puzzleKey: "chess-castle",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD],
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
@@ -745,8 +791,10 @@
     hint2: "Jeśli wykonałaś manewr poprawnie, to rozejrzyj się dokładnie...",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[33] = {
+  PUZZLE_DATA[41] = {
     title: "Szach-mat w jednym ruchu!",
+    puzzleKey: "chess-mate-one",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD, PUZZLE_LOGIC_KEYS.CHESS_MATE],
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
@@ -781,8 +829,10 @@
     hint3: "Jest to królowa",
     hint4: "Szach-mat w jednym ruchu oznacza, że po twoim ruchu czarny król będzie atakowany i nie będzie miał żadnego legalnego ruchu, aby się obronić."
   };
-  PUZZLE_DATA[34] = {
+  PUZZLE_DATA[42] = {
     title: "Sonet",
+    puzzleKey: "clock-hands-sonet",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CLOCK_HANDS],
     work_in_progress: true,
     content: `<div class="puzzle34-wrap" style="display:grid; gap:0.8rem; line-height:1.6; text-align:center;">
   <p><strong>Jako fale dążące ku żwirom wybrzeży</strong></p>
@@ -811,7 +861,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[35] = {
+  PUZZLE_DATA[43] = {
     title: "Podobieństwa i różnice",
     work_in_progress: true,
     content: `<div style="display:grid; gap:0.8rem; justify-items:center; text-align:center;">
@@ -835,8 +885,10 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[36] = {
+  PUZZLE_DATA[44] = {
     title: "Mystery",
+    puzzleKey: "mystery-grid",
+    logicKeys: [PUZZLE_LOGIC_KEYS.MYSTERY],
     work_in_progress: true,
     content: `<div class="puzzle36-wrap">
   <div class="puzzle36-casefile">
@@ -894,8 +946,10 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[37] = {
+  PUZZLE_DATA[27] = {
     title: "Szkapa",
+    puzzleKey: "chess-knight-path",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD],
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <button type="button" id="puzzle37Reset" class="small-btn">Resetuj</button>
@@ -917,8 +971,10 @@
     hint1: "Czy wiesz jak w szachah porusza się skoczek (koń)?",
     hint2: "Każdym ruchem wskocz na literę",
   };
-  PUZZLE_DATA[38] = {
+  PUZZLE_DATA[46] = {
     title: "Połączenia",
+    puzzleKey: "connections-nodes",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CONNECTIONS],
     content: `<div class="puzzle38-wrap">
   <div id="puzzle38Boards" class="puzzle38-boards" role="group" aria-label="Sześć siatek czerwonych punktów"></div>
   <button type="button" id="puzzle38Reset" class="small-btn">Reset</button>
@@ -929,7 +985,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[39] = {
+  PUZZLE_DATA[17] = {
     title: "Chroma",
     content: `<div style="display:flex; justify-content:center; padding:0.4rem 0;">
   <div style="font-family:'Segoe Script','Lucida Handwriting','Brush Script MT',cursive; font-size:1.45rem; line-height:1.5; color:#6d3a1f; background:#fff9ef; border:1px solid #eadfcf; border-radius:10px; padding:1rem 1.25rem; box-shadow:0 3px 10px rgba(0,0,0,0.08); text-align:center;">
@@ -953,7 +1009,7 @@
     hint2: "kolorów w tym zadaniu nie mieszamy, a ustawiamy koło siebie",
     hint3: "czy gdzieś w przyrodzie  taki zestaw kolorów występuje?"
   };
-  PUZZLE_DATA[40] = {
+  PUZZLE_DATA[47] = {
     title: "Wycieczka do Kielc",
     // Add content, solution, and hints as needed
     solution: "wieje",
@@ -961,7 +1017,7 @@
     hint2: "W następnej podpowiedzi jest odpowiedź",
     hint3: "Odpowiedź to: WIEJE"
   };
-  PUZZLE_DATA[41] = {
+  PUZZLE_DATA[2] = {
     title: "Każdy szczegół się liczy",
     content: `<p>W procesie rozwiązywania mogą brać udział <strong>różne</strong> elementy strony - zwracaj uwagę na <strong>każdy</strong> szczegół i miej oczy i uszy szeroko otwarte! I bój się <strong>klikać</strong> i eksperymentować.</p>`,
     solution: "jednorożec",
@@ -974,7 +1030,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[42] = {
+  PUZZLE_DATA[3] = {
     title: "Podpowiedzi",
     work_in_progress: true,
     content: `<p>Zadania mają też przygotowane podpowiedzi - znajdziesz je na samym dole strony w osobnej sekcji.</p>
@@ -985,7 +1041,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-    PUZZLE_DATA[43] = {
+    PUZZLE_DATA[4] = {
     title: "Tutorial",
     work_in_progress: true,
     content: `<p>Do rozwiązywania zagadek czasem mogą być potrzebne zewnętrzne materiały - w większości powinna wystarczyć wikipedia, ale inne strony lub książki też mogą być przydatne.</p>
@@ -996,7 +1052,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-      PUZZLE_DATA[44] = {
+      PUZZLE_DATA[5] = {
     title: "Tutorial: Notatki",
     work_in_progress: true,
     content: `<p>notatki</p>`,
@@ -1005,7 +1061,7 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-      PUZZLE_DATA[45] = {
+      PUZZLE_DATA[6] = {
     title: "Tutorial: Błędy",
     work_in_progress: true,
     content: `<p>Mimo ogromnej ilości ppracy, godzieniegdzie momgą znaleźć się błędy - kyiedy trafisz na coś co wydaje się nie mieć sensu, lłub nie działakć - daj mi znaać!</p>`,
@@ -1013,7 +1069,7 @@
     hint1: "Coś z tym tekstem jest chyba nie tak...",
     hint2: "Sprawdź literówki i błędy w tekście"
   };
-   PUZZLE_DATA[46] = {
+  PUZZLE_DATA[48] = {
     title: "Tłumaczenie",
     work_in_progress: true,
     content: `<div style="display: grid; place-items: center;">
@@ -1027,7 +1083,7 @@
     hint2: "TODO hint 2",
     hint3: "entrance"
   };
-    PUZZLE_DATA[47] = {
+    PUZZLE_DATA[49] = {
       title: "Brakujące słowa",
       work_in_progress: true,
       content: `<p>Matka naszego hobbita... ale co to jest hobbit? Zdaje mi się, że wymaga to wyjaśnienia. W dzisiejszych czasach bowiem hobbitów bardzo rzadko można spotkać: nie ma ich wiele, a poza tym unikają Dużych Ludzi — jak nazywają nas. Hobbici są — czy może byli — małymi ludźmi, mniejszymi od krasnoludów — różnią się też od nich tym, że nie noszą brody — lecz znacznie większymi od liliputów. Nie uprawiają wcale albo prawie wcale czarów, z wyjątkiem chyba zwykłej, powszedniej sztuki, która pozwala im znikać bezszelestnie i błyskawicznie, kiedy duzi, niemądrzy ludzie, jak ty i ja, zabłądzą w ich pobliże, hałasując niesłychanie głośno, tak że na milę można ich usłyszeć. Hobbici są skłonni do tycia, zwłaszcza w pasie: miewają wypięte brzuchy; ubierają się kolorowo (najchętniej zielono i żółto); nie używają obuwia, ponieważ stopy ich z przyrodzenia opatrzone są twardą podeszwą i porośnięte bujnym, ciemnym, brunatnym włosem, podobnie jak głowa (zwykle kędzierzawa); mają długie, zręczne, smagłe palce i poczciwe twarze, a śmieją się dużo, basowo i serdecznie (szczególnie po obiedzie, który — w miarę możności — zjadają dwa razy dziennie). Teraz już wiecie o nich dość na początek. Jak więc mówiłem, matką naszego hobbita — to jest Bilba Bagginsa — była słynna Belladonna Tuk, jedna z trzech niespotykanych córek Starego Tuka, głowy wszystkich hobbitów mieszkających Za Wodą, czyli za rzeką, która płynęła u stóp Pagórka. Powiadano, że dawnymi czasy ten i ów Tuk brał żonę z plemienia czarodziejów (nieżyczliwi twierdzili że to były gobliny); rzeczywiście Tukowie zawsze mieli w sobie coś niezwykle hobbitciego, a od czasu do czasu zdarzało się, że ktoś z członków tego rodu wyruszał w świat szukać przygód. Taki Tuk znikał dyskretnie, a rodzina nie rozgłaszała sprawy; fakt jednak, że Tukowie nie byli tak szanowani jak Bagginsowie, chociaż niewątpliwie od nich bogatsi.</p>
@@ -1037,6 +1093,26 @@
       hint2: "TODO hint 2",
       hint3: "TODO hint 3"
     };
+  PUZZLE_DATA[7] = {
+    title: "Dzień Ryjka",
+    puzzleKey: "snout-day",
+    logicKeys: [PUZZLE_LOGIC_KEYS.SNOUT_DAY],
+    content: `<div class="puzzle48-wrap" style="display:grid; gap:0.65rem;">
+  <p>W procesie rozwiązywania zagadek mogą brać udział naprawdę różne elementy strony i świata zewnętrznego.</p>
+  <p>Aby rozwiązać tę zagadkę musisz:</p>
+  <ol style="margin:0; padding-left:1.2rem; display:grid; gap:0.2rem;">
+    <li>sprawdzić który dzień miesiąca mamy (nazwijmy tę liczbę X)</li>
+    <li>znaleźć ryjek w prawym górnym rogu ekranu</li>
+    <li>kliknąć go X razy</li>
+    <li>poczekać 5 sekund</li>
+  </ol>
+  <p id="puzzle48Timer" aria-live="polite"></p>
+</div>`,
+    solution: "ryjek",
+    hint1: "X to aktualny dzień miesiąca.",
+    hint2: "Ryjek jest przy tytule zagadki, w prawym górnym rogu.",
+    hint3: "Po ostatnim kliknięciu nic nie klikaj przez 5 sekund."
+  };
   PUZZLE_DATA[60] = {
     title: "Trudne się wylosowało",
     work_in_progress: true,
@@ -1048,6 +1124,8 @@
   };
     PUZZLE_DATA[61] = {
     title: "Alfabet roślin",
+      puzzleKey: "pixel-font",
+      logicKeys: [PUZZLE_LOGIC_KEYS.PIXEL_FONT],
     work_in_progress: true,
     content: `<div class="puzzle61-wrap">
   <p>Wpisz tekst, aby zobaczyć go w pikselowym alfabecie.</p>
@@ -1073,7 +1151,65 @@
     hint5: "Czy kolory nie wydają Ci się dziwne?",
     hint6: "Kratki menu z rozwiązanymi zagadkami tworzą obrazek. Co przedstawia ten obrazek?"
   };
+
+  const buildPuzzleOrderDiagnostics = () => {
+    const slotRows = [];
+    for (let slotId = 1; slotId <= TOTAL_PUZZLES; slotId += 1) {
+      const puzzle = PUZZLE_DATA[slotId];
+      slotRows.push({
+        slotId,
+        exists: Boolean(puzzle),
+        title: puzzle && typeof puzzle.title === "string" ? puzzle.title : "",
+        puzzleKey: puzzle && typeof puzzle.puzzleKey === "string" ? puzzle.puzzleKey : "",
+        hasContent: Boolean(puzzle && puzzle.content),
+        hasSolution: Boolean(puzzle && puzzle.solution)
+      });
+    }
+
+    return {
+      buildId: APP_BUILD_ID,
+      warnings: [],
+      consumedSourceSlotCount: null,
+      mappedSlotCount: Object.keys(PUZZLE_DATA).length,
+      keySlots: {
+        slot4: slotRows.find((row) => row.slotId === 4) || null,
+        slot38: slotRows.find((row) => row.slotId === 38) || null,
+        slot45: slotRows.find((row) => row.slotId === 45) || null
+      },
+      first48: slotRows.slice(0, 48),
+      all64: slotRows
+    };
+  };
+
+  window.__helaOrderDebug = () => {
+    const diagnostics = buildPuzzleOrderDiagnostics();
+    console.table(diagnostics.first48);
+    console.info("Hela build:", diagnostics.buildId);
+    return diagnostics;
+  };
+
+  console.info("Hela build loaded:", APP_BUILD_ID);
+
 //todo - this might need modification 
+  const usedPuzzleKeys = new Set();
+  Object.keys(PUZZLE_DATA).forEach((puzzleId) => {
+    const puzzleData = PUZZLE_DATA[puzzleId];
+    if (!puzzleData || typeof puzzleData !== "object") {
+      return;
+    }
+
+    if (!puzzleData.puzzleKey || typeof puzzleData.puzzleKey !== "string") {
+      return;
+    }
+
+    if (usedPuzzleKeys.has(puzzleData.puzzleKey)) {
+      console.warn(`Duplicate puzzleKey detected: ${puzzleData.puzzleKey}`);
+      return;
+    }
+
+    usedPuzzleKeys.add(puzzleData.puzzleKey);
+  });
+
   Object.keys(PUZZLE_DATA).forEach((puzzleKey) => {
     const puzzleData = PUZZLE_DATA[puzzleKey];
     if (!puzzleData || typeof puzzleData !== "object") {
@@ -1120,6 +1256,7 @@
     puzzle32State: null,
     puzzle38State: null,
     puzzle36State: null,
+    puzzle48State: null,
 
     els: {
       menuView: null,
@@ -1485,6 +1622,17 @@
         this.handlePuzzle38PointerMove(event);
       });
 
+      document.addEventListener("click", (event) => {
+        const snoutBadge = event.target.closest(".tusk-badge, .snout-badge");
+        if (!snoutBadge) {
+          return;
+        }
+
+        this.showSnoutClickIndicator(snoutBadge);
+        this.playRandomOinkSound();
+        this.handlePuzzle48SnoutClick();
+      });
+
       this.els.notesInput.addEventListener("input", () => {
         window.clearTimeout(this.notesSaveTimer);
         this.setSaveIndicator("Saving...");
@@ -1596,7 +1744,7 @@
       this.renderPuzzleView();
       this.showPuzzleView();
 
-      if (this.state.selectedPuzzle === 19) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.NIGHT_SKY)) {
         this.playHowlSound();
       }
     },
@@ -1609,6 +1757,7 @@
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
       this.stopPuzzle36Mystery();
+      this.stopPuzzle48Challenge();
       this.stopPuzzle61();
       this.els.menuView.classList.remove("hidden");
       this.els.puzzleView.classList.add("hidden");
@@ -1617,6 +1766,7 @@
       document.body.classList.remove("puzzle14-debug-mode");
       document.body.classList.remove("puzzle30-white-content");
       document.body.classList.remove("puzzle36-mystery-theme");
+      document.body.classList.remove("active-puzzle-solved");
       this.playViewEntrance(this.els.menuView);
       this.renderMenuSelectionState();
     },
@@ -1729,6 +1879,7 @@
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
       this.stopPuzzle36Mystery();
+      this.stopPuzzle48Challenge();
       this.stopPuzzle61();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
@@ -1737,10 +1888,11 @@
         content: `<p><strong>Treść zagadki dla zagadki ${id}...</strong></p>`
       };
 
-      document.body.classList.toggle("puzzle19-night-sky", id === 19);
-      document.body.classList.toggle("puzzle14-debug-mode", id === 14 && PUZZLE_14_DEBUG_MODE);
-      document.body.classList.toggle("puzzle30-white-content", id === 30);
-      document.body.classList.toggle("puzzle36-mystery-theme", id === 36);
+      document.body.classList.toggle("puzzle19-night-sky", this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.NIGHT_SKY));
+      document.body.classList.toggle("puzzle14-debug-mode", this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.HOTSPOT_DEBUG) && PUZZLE_14_DEBUG_MODE);
+      document.body.classList.toggle("puzzle30-white-content", this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.WHITE_CONTENT));
+      document.body.classList.toggle("puzzle36-mystery-theme", this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY));
+      document.body.classList.toggle("active-puzzle-solved", puzzle.solved);
 
       this.els.puzzleTitle.textContent = puzzleData.title;
       this.els.solutionInput.value = puzzle.solution;
@@ -1768,7 +1920,7 @@
         this.els.puzzleContent.prepend(wipBanner);
       }
       // --- Puzzle 34: Dynamic SVG arm rotation logic ---
-      if (id === 34) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CLOCK_HANDS)) {
         const hourInput = document.getElementById("puzzle34HourInput");
         const minuteInput = document.getElementById("puzzle34MinuteInput");
         const hourArm = document.getElementById("puzzle34HourArm");
@@ -1797,43 +1949,47 @@
       this.renderHintButtons();
       this.renderPuzzleNavigationState();
 
-      if (id === 6) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.PIANO)) {
         this.resetPuzzle6MelodyProgress();
       }
 
-      if (id === 7) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CAESAR)) {
         this.resetPuzzle7Helper();
       }
 
-      if (id === 15) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SONAR)) {
         this.initPuzzle15Simulation();
       }
 
-      if (id === 16) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.COLOR_GRID)) {
         this.initPuzzle16Grid();
       }
 
-      if (id === 27) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CLOCKS)) {
         this.initPuzzle27Clocks();
       }
 
-      if (id === 28) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE)) {
         this.initPuzzle28Game();
       }
 
-      if (id === 32 || id === 33 || id === 37) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CHESS_BOARD) || document.getElementById("puzzle32Board")) {
         this.initPuzzle32Board();
       }
 
-      if (id === 38) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS)) {
         this.initPuzzle38Board();
       }
 
-      if (id === 36) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY)) {
         this.initPuzzle36Mystery();
       }
 
-      if (id === 61) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SNOUT_DAY)) {
+        this.initPuzzle48Challenge();
+      }
+
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.PIXEL_FONT)) {
         this.initPuzzle61();
       }
 
@@ -1903,7 +2059,7 @@
     },
 
     handlePuzzle6PianoNote(note) {
-      if (this.state.selectedPuzzle !== 6) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.PIANO)) {
         return;
       }
 
@@ -2026,7 +2182,7 @@
     },
 
     handlePuzzle7Shift(rowKey, step) {
-      if (this.state.selectedPuzzle !== 7) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CAESAR)) {
         return;
       }
 
@@ -2039,7 +2195,7 @@
     },
 
     resetPuzzle7Helper() {
-      if (this.state.selectedPuzzle !== 7) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CAESAR)) {
         return;
       }
 
@@ -2055,7 +2211,7 @@
     },
 
     handlePuzzle11RevealAttempt() {
-      if (this.state.selectedPuzzle !== 11) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.TIME_1111)) {
         return;
       }
 
@@ -2111,7 +2267,7 @@
     },
 
     handlePuzzle19MoonAttempt() {
-      if (this.state.selectedPuzzle !== 19) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.NIGHT_SKY)) {
         return;
       }
 
@@ -2131,6 +2287,242 @@
 
       this.setSaveIndicator("Dzis jest pelnia! Hasło to LYKANTROPIA");
       this.showMoonPhasePopup("success", phaseView.icon, "Dzis jest pelnia! Hasło to LYKANTROPIA");
+    },
+
+    initPuzzle48Challenge() {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SNOUT_DAY)) {
+        return;
+      }
+
+      this.puzzle48State = {
+        requiredClicks: new Date().getDate(),
+        streakCount: 0,
+        lastClickAt: 0,
+        waitingTimerId: null,
+        resetTimerId: null,
+        completed: false
+      };
+
+      this.updatePuzzle48Status();
+    },
+
+    stopPuzzle48Challenge() {
+      if (!this.puzzle48State) {
+        return;
+      }
+
+      if (this.puzzle48State.waitingTimerId) {
+        window.clearTimeout(this.puzzle48State.waitingTimerId);
+      }
+
+      if (this.puzzle48State.resetTimerId) {
+        window.clearTimeout(this.puzzle48State.resetTimerId);
+      }
+
+      this.puzzle48State = null;
+    },
+
+    updatePuzzle48Status() {
+      if (!this.puzzle48State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SNOUT_DAY)) {
+        return;
+      }
+
+      const timerEl = document.getElementById("puzzle48Timer");
+
+      if (timerEl && !this.puzzle48State.waitingTimerId && !this.puzzle48State.resetTimerId) {
+        timerEl.textContent = "";
+      }
+    },
+
+    handlePuzzle48SnoutClick() {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SNOUT_DAY) || !this.puzzle48State || this.puzzle48State.completed) {
+        return;
+      }
+
+      const timerEl = document.getElementById("puzzle48Timer");
+
+      if (this.puzzle48State.resetTimerId) {
+        return;
+      }
+
+      if (this.puzzle48State.waitingTimerId) {
+        window.clearTimeout(this.puzzle48State.waitingTimerId);
+        this.puzzle48State.waitingTimerId = null;
+
+        if (timerEl) {
+          timerEl.textContent = "Za dużo kliknięć. Liczenie zresetuje się za 5 sekund.";
+        }
+
+        this.puzzle48State.resetTimerId = window.setTimeout(() => {
+          if (!this.puzzle48State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SNOUT_DAY)) {
+            return;
+          }
+
+          this.puzzle48State.resetTimerId = null;
+          this.puzzle48State.streakCount = 0;
+          this.puzzle48State.lastClickAt = 0;
+          if (timerEl) {
+            timerEl.textContent = "Możesz spróbować ponownie.";
+          }
+        }, 5000);
+
+        return;
+      }
+
+      const now = Date.now();
+      if (now - this.puzzle48State.lastClickAt <= PUZZLE_48_SHORT_INTERVAL_MS) {
+        this.puzzle48State.streakCount += 1;
+      } else {
+        this.puzzle48State.streakCount = 1;
+      }
+      this.puzzle48State.lastClickAt = now;
+
+      this.updatePuzzle48Status();
+
+      if (this.puzzle48State.streakCount > this.puzzle48State.requiredClicks) {
+        if (timerEl) {
+          timerEl.textContent = "Za dużo kliknięć. Liczenie zresetuje się za 5 sekund.";
+        }
+
+        this.puzzle48State.resetTimerId = window.setTimeout(() => {
+          if (!this.puzzle48State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SNOUT_DAY)) {
+            return;
+          }
+
+          this.puzzle48State.resetTimerId = null;
+          this.puzzle48State.streakCount = 0;
+          this.puzzle48State.lastClickAt = 0;
+          if (timerEl) {
+            timerEl.textContent = "Możesz spróbować ponownie.";
+          }
+        }, 5000);
+        return;
+      }
+
+      if (this.puzzle48State.streakCount < this.puzzle48State.requiredClicks) {
+        if (timerEl) {
+          timerEl.textContent = "Klikaj szybko, bez długich przerw.";
+        }
+        return;
+      }
+
+      if (timerEl) {
+        timerEl.textContent = "Dobrze. Teraz poczekaj 5 sekund...";
+      }
+
+      this.puzzle48State.waitingTimerId = window.setTimeout(() => {
+        if (!this.puzzle48State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SNOUT_DAY)) {
+          return;
+        }
+
+        this.puzzle48State.waitingTimerId = null;
+        this.puzzle48State.completed = true;
+
+        if (timerEl) {
+          timerEl.textContent = "Hasło to RYJEK.";
+        }
+
+        this.setSaveIndicator("Zagadka 48: warunek spełniony.");
+        this.showCheckFeedback("success", "", "rozwiązanie to RYJEK");
+      }, 5000);
+    },
+
+    showSnoutClickIndicator(snoutBadgeEl) {
+      if (!snoutBadgeEl) {
+        return;
+      }
+
+      snoutBadgeEl.classList.remove("snout-clicked");
+      void snoutBadgeEl.offsetWidth;
+      snoutBadgeEl.classList.add("snout-clicked");
+
+      window.setTimeout(() => {
+        snoutBadgeEl.classList.remove("snout-clicked");
+      }, 180);
+    },
+
+    playRandomOinkSound() {
+      const variants = [
+        { waveType: "triangle", startFrequency: 165, dipFrequency: 105, durationSeconds: 0.2, peakGain: 0.14, filterStart: 980, filterEnd: 560 },
+        { waveType: "sine", startFrequency: 192, dipFrequency: 126, durationSeconds: 0.16, peakGain: 0.12, filterStart: 900, filterEnd: 600 },
+        { waveType: "sawtooth", startFrequency: 176, dipFrequency: 96, durationSeconds: 0.22, peakGain: 0.13, filterStart: 840, filterEnd: 430 },
+        { waveType: "triangle", startFrequency: 210, dipFrequency: 142, durationSeconds: 0.14, peakGain: 0.11, filterStart: 1100, filterEnd: 700 },
+        { waveType: "square", startFrequency: 158, dipFrequency: 88, durationSeconds: 0.2, peakGain: 0.1, filterStart: 760, filterEnd: 390 },
+        { waveType: "sine", startFrequency: 202, dipFrequency: 118, durationSeconds: 0.18, peakGain: 0.125, filterStart: 980, filterEnd: 520 },
+        { waveType: "triangle", startFrequency: 184, dipFrequency: 116, durationSeconds: 0.17, peakGain: 0.118, filterStart: 920, filterEnd: 540 }
+      ];
+
+      const primary = variants[Math.floor(Math.random() * variants.length)];
+      this.playSynthOink(primary);
+
+      // Occasionally add a short follow-up grunt to make clicks feel more organic.
+      if (Math.random() < 0.28) {
+        const secondary = variants[Math.floor(Math.random() * variants.length)];
+        const delayMs = 55 + Math.floor(Math.random() * 70);
+        window.setTimeout(() => {
+          this.playSynthOink({
+            ...secondary,
+            peakGain: secondary.peakGain * 0.72,
+            durationSeconds: secondary.durationSeconds * 0.82
+          });
+        }, delayMs);
+      }
+    },
+
+    playSynthOink({
+      waveType = "triangle",
+      startFrequency = 180,
+      dipFrequency = 110,
+      durationSeconds = 0.18,
+      peakGain = 0.12,
+      filterStart = 900,
+      filterEnd = 500
+    }) {
+      const context = this.ensureAudioContext();
+      if (!context) {
+        return;
+      }
+
+      const now = context.currentTime;
+      const oscillator = context.createOscillator();
+      const subOscillator = context.createOscillator();
+      const gainNode = context.createGain();
+      const subGainNode = context.createGain();
+      const filterNode = context.createBiquadFilter();
+
+      oscillator.type = waveType;
+      oscillator.frequency.setValueAtTime(startFrequency, now);
+      oscillator.frequency.exponentialRampToValueAtTime(Math.max(45, dipFrequency), now + durationSeconds * 0.56);
+      oscillator.frequency.exponentialRampToValueAtTime(Math.max(55, dipFrequency * 1.22), now + durationSeconds * 0.98);
+
+      // A quiet sub layer makes the oink fuller and less harsh.
+      subOscillator.type = "sine";
+      subOscillator.frequency.setValueAtTime(Math.max(50, startFrequency * 0.52), now);
+      subOscillator.frequency.exponentialRampToValueAtTime(Math.max(40, dipFrequency * 0.5), now + durationSeconds * 0.9);
+
+      filterNode.type = "lowpass";
+      filterNode.frequency.setValueAtTime(filterStart, now);
+      filterNode.frequency.exponentialRampToValueAtTime(Math.max(220, filterEnd), now + durationSeconds * 0.85);
+
+      gainNode.gain.setValueAtTime(0.0001, now);
+      gainNode.gain.exponentialRampToValueAtTime(peakGain, now + durationSeconds * 0.2);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + durationSeconds);
+
+      subGainNode.gain.setValueAtTime(0.0001, now);
+      subGainNode.gain.exponentialRampToValueAtTime(peakGain * 0.36, now + durationSeconds * 0.18);
+      subGainNode.gain.exponentialRampToValueAtTime(0.0001, now + durationSeconds);
+
+      oscillator.connect(filterNode);
+      filterNode.connect(gainNode);
+      gainNode.connect(context.destination);
+
+      subOscillator.connect(subGainNode);
+      subGainNode.connect(context.destination);
+
+      oscillator.start(now);
+      subOscillator.start(now);
+      oscillator.stop(now + durationSeconds + 0.02);
+      subOscillator.stop(now + durationSeconds + 0.02);
     },
 
     showMoonPhasePopup(type, phaseIcon, labelText) {
@@ -2213,7 +2605,7 @@
     },
 
     handlePuzzle10HotspotClick() {
-      if (this.state.selectedPuzzle !== 10) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.HOTSPOT_CAT)) {
         return;
       }
 
@@ -2222,7 +2614,7 @@
     },
 
     handlePuzzle14HotspotClick(buttonEl) {
-      if (this.state.selectedPuzzle !== 14 || !buttonEl) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.HOTSPOT_DEBUG) || !buttonEl) {
         return;
       }
 
@@ -2250,7 +2642,7 @@
     },
 
     initPuzzle15Simulation() {
-      if (this.state.selectedPuzzle !== 15) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SONAR)) {
         return;
       }
 
@@ -2302,7 +2694,7 @@
 
     togglePuzzle15Sonar() {
       const sonar = this.puzzle15State;
-      if (!sonar || this.state.selectedPuzzle !== 15) {
+      if (!sonar || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SONAR)) {
         return;
       }
 
@@ -2426,7 +2818,7 @@
     },
 
     handlePuzzle16ButtonClick(btn) {
-      if (!this.puzzle16State || this.state.selectedPuzzle !== 16) {
+      if (!this.puzzle16State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.COLOR_GRID)) {
         return;
       }
 
@@ -2443,7 +2835,7 @@
     },
 
     checkPuzzle16Solution() {
-      if (!this.puzzle16State || this.state.selectedPuzzle !== 16) {
+      if (!this.puzzle16State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.COLOR_GRID)) {
         return;
       }
 
@@ -2499,7 +2891,7 @@
         celebration.classList.add("play");
 
         window.setTimeout(() => {
-          if (!this.puzzle16State || this.state.selectedPuzzle !== 16) {
+          if (!this.puzzle16State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.COLOR_GRID)) {
             return;
           }
           celebration.style.display = "none";
@@ -2510,7 +2902,7 @@
 
     updatePuzzle15Frame() {
       const sonar = this.puzzle15State;
-      if (!sonar || !sonar.enabled || this.state.selectedPuzzle !== 15) {
+      if (!sonar || !sonar.enabled || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SONAR)) {
         return;
       }
 
@@ -2551,13 +2943,13 @@
 
     schedulePuzzle15Ping(delayMs = 1100) {
       const sonar = this.puzzle15State;
-      if (!sonar || !sonar.enabled || this.state.selectedPuzzle !== 15) {
+      if (!sonar || !sonar.enabled || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SONAR)) {
         return;
       }
 
       sonar.pingTimerId = window.setTimeout(() => {
         const activeSonar = this.puzzle15State;
-        if (!activeSonar || !activeSonar.enabled || this.state.selectedPuzzle !== 15) {
+        if (!activeSonar || !activeSonar.enabled || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SONAR)) {
           return;
         }
 
@@ -2590,7 +2982,7 @@
     },
 
     initPuzzle27Clocks() {
-      if (this.state.selectedPuzzle !== 27) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CLOCKS)) {
         return;
       }
 
@@ -2600,7 +2992,7 @@
         return;
       }
 
-      const puzzleData = PUZZLE_DATA[27] || {};
+      const puzzleData = this.getPuzzleDataById(this.state.selectedPuzzle) || {};
       const configuredPositions = Array.isArray(puzzleData.second_hand_positions)
         ? puzzleData.second_hand_positions
         : [];
@@ -2663,7 +3055,7 @@
     },
 
     startPuzzle27Clock() {
-      if (this.state.selectedPuzzle !== 27 || this.puzzle27IntervalId) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CLOCKS) || this.puzzle27IntervalId) {
         return;
       }
 
@@ -2741,7 +3133,7 @@
     },
 
     updatePuzzle27LiveClock() {
-      if (this.state.selectedPuzzle !== 27) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CLOCKS)) {
         return;
       }
 
@@ -2774,7 +3166,7 @@
     },
 
     initPuzzle28Game() {
-      if (this.state.selectedPuzzle !== 28) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE)) {
         return;
       }
 
@@ -2836,7 +3228,7 @@
 
     updatePuzzle28Speed(rawValue) {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE)) {
         return;
       }
 
@@ -2855,7 +3247,7 @@
 
     startPuzzle28Simulation() {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28 || state.intervalId) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE) || state.intervalId) {
         return;
       }
 
@@ -2878,7 +3270,7 @@
 
     togglePuzzle28Simulation() {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE)) {
         return;
       }
 
@@ -2891,7 +3283,7 @@
 
     stepPuzzle28Once() {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28 || state.intervalId) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE) || state.intervalId) {
         return;
       }
 
@@ -2930,7 +3322,7 @@
 
     clearPuzzle28Board() {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE)) {
         return;
       }
 
@@ -2943,7 +3335,7 @@
 
     randomizePuzzle28Board() {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE)) {
         return;
       }
 
@@ -2958,7 +3350,7 @@
 
     togglePuzzle28Cell(cellButton) {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28 || !cellButton) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE) || !cellButton) {
         return;
       }
 
@@ -2973,7 +3365,7 @@
 
     stepPuzzle28Simulation() {
       const state = this.puzzle28State;
-      if (!state || this.state.selectedPuzzle !== 28) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.LIFE)) {
         return;
       }
 
@@ -3033,10 +3425,6 @@
     },
 
     initPuzzle32Board() {
-      if (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33 && this.state.selectedPuzzle !== 37) {
-        return;
-      }
-
       const puzzleData = PUZZLE_DATA[this.state.selectedPuzzle] || {};
       const boardEl = document.getElementById("puzzle32Board");
       const statusEl = document.getElementById("puzzle32Status");
@@ -3112,7 +3500,7 @@
 
     resetPuzzle32Board() {
       const state = this.puzzle32State;
-      if (!state || (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33 && this.state.selectedPuzzle !== 37)) {
+      if (!state) {
         return;
       }
 
@@ -3125,7 +3513,7 @@
 
     handlePuzzle32SquareClick(squareEl) {
       const state = this.puzzle32State;
-      if (!state || (this.state.selectedPuzzle !== 32 && this.state.selectedPuzzle !== 33 && this.state.selectedPuzzle !== 37) || !squareEl) {
+      if (!state || !squareEl) {
         return;
       }
 
@@ -3221,7 +3609,7 @@
       }
 
       state.solutionShown = true;
-      if (this.state.selectedPuzzle === 33) {
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CHESS_MATE)) {
         this.updatePuzzle32Status("Szach-Mat! Która figura zapewniła ci wygraną?");
         this.showCheckFeedback("success", "Szach-Mat!", "Która figura zapewniła ci wygraną?");
         return;
@@ -3232,7 +3620,7 @@
     },
 
     initPuzzle38Board() {
-      if (this.state.selectedPuzzle !== 38) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS)) {
         return;
       }
 
@@ -3457,7 +3845,7 @@
 
     resetPuzzle38Connections() {
       const state = this.puzzle38State;
-      if (!state || this.state.selectedPuzzle !== 38) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS)) {
         return;
       }
 
@@ -3475,7 +3863,7 @@
 
     handlePuzzle38NodeClick(nodeEl) {
       const state = this.puzzle38State;
-      if (!state || this.state.selectedPuzzle !== 38 || !nodeEl) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS) || !nodeEl) {
         return;
       }
 
@@ -3553,7 +3941,7 @@
       const state = this.puzzle38State;
       if (
         !state
-        || this.state.selectedPuzzle !== 38
+        || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS)
         || state.activeBoardIndex === null
       ) {
         return;
@@ -3652,7 +4040,7 @@
     },
 
     initPuzzle36Mystery() {
-      if (this.state.selectedPuzzle !== 36) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY)) {
         return;
       }
 
@@ -3739,7 +4127,7 @@
 
     handlePuzzle36CellClick(cellEl) {
       const state = this.puzzle36State;
-      if (!state || this.state.selectedPuzzle !== 36 || !cellEl) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY) || !cellEl) {
         return;
       }
 
@@ -3762,7 +4150,7 @@
 
     resetPuzzle36Mystery() {
       const state = this.puzzle36State;
-      if (!state || this.state.selectedPuzzle !== 36) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY)) {
         return;
       }
 
@@ -3862,7 +4250,7 @@
 
     checkPuzzle36Mystery() {
       const state = this.puzzle36State;
-      if (!state || this.state.selectedPuzzle !== 36) {
+      if (!state || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY)) {
         return;
       }
 
@@ -3892,7 +4280,7 @@
     },
 
     checkPuzzle36CombinationGuess() {
-      if (this.state.selectedPuzzle !== 36 || !this.puzzle36State) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY) || !this.puzzle36State) {
         return;
       }
 
@@ -4116,6 +4504,45 @@
 
     getCurrentPuzzle() {
       return this.state.puzzles[String(this.state.selectedPuzzle)];
+    },
+
+    getPuzzleDataById(puzzleId) {
+      return PUZZLE_DATA[this.normalizePuzzleId(puzzleId)] || null;
+    },
+
+    getPuzzleDataByKey(puzzleKey) {
+      if (!puzzleKey || typeof puzzleKey !== "string") {
+        return null;
+      }
+
+      const puzzleEntries = Object.values(PUZZLE_DATA);
+      for (const puzzleData of puzzleEntries) {
+        if (puzzleData && puzzleData.puzzleKey === puzzleKey) {
+          return puzzleData;
+        }
+      }
+
+      return null;
+    },
+
+    puzzleHasLogicKey(puzzleRef, logicKey) {
+      const puzzleData = typeof puzzleRef === "string"
+        ? this.getPuzzleDataByKey(puzzleRef)
+        : this.getPuzzleDataById(puzzleRef);
+      if (!puzzleData || !Array.isArray(puzzleData.logicKeys)) {
+        return false;
+      }
+
+      return puzzleData.logicKeys.includes(logicKey);
+    },
+
+    isCurrentPuzzleLogicKey(logicKey) {
+      const currentPuzzleData = this.getPuzzleDataById(this.state.selectedPuzzle);
+      if (!currentPuzzleData || !currentPuzzleData.puzzleKey) {
+        return false;
+      }
+
+      return this.puzzleHasLogicKey(currentPuzzleData.puzzleKey, logicKey);
     },
 
     getPasswordLetterForPuzzle(puzzleId) {

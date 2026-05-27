@@ -26,6 +26,17 @@ body {
     linear-gradient(180deg, #fffaf0 0%, #f7ebd8 100%);
 }
 
+body.active-puzzle-solved {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.48) 0 1.5px, transparent 1.7px) 0 0 / 26px 26px,
+    radial-gradient(circle, rgba(255, 245, 201, 0.45) 0 1.3px, transparent 1.5px) 12px 8px / 30px 30px,
+    radial-gradient(circle, rgba(255, 226, 133, 0.8) 0 1.1px, transparent 1.3px) 6px 18px / 34px 28px,
+    radial-gradient(circle at 16% 14%, rgba(255, 246, 207, 0.82) 0 15%, transparent 30%),
+    radial-gradient(circle at 84% 12%, rgba(255, 228, 146, 0.55) 0 12%, transparent 28%),
+    linear-gradient(165deg, #fff7c9 0%, #ffd24d 48%, #e4a700 100%);
+  animation: solvedSkyShimmer 3.4s linear infinite;
+}
+
 html,
 body {
   max-width: 100%;
@@ -158,7 +169,52 @@ body.puzzle19-night-sky #puzzle19MoonBtn:hover::before {
 .snout-roamer-y {
   position: absolute;
   inset: 0;
+  --snout-w: 58px;
+  --snout-h: 40px;
 }
+
+body.active-puzzle-solved .snout-roamer-y::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--snout-w) * 0.5);
+  top: calc(var(--snout-h) * -0.4);
+  width: calc(var(--snout-w) * 0.5);
+  height: calc(var(--snout-h) * 0.34);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(180deg, #fff3b5 0%, #ffd13d 52%, #de9f00 100%);
+  border: max(1px, calc(var(--snout-w) * 0.02)) solid #9b6c00;
+  border-radius: 2px 2px 3px 3px;
+  clip-path: polygon(
+    0% 100%,
+    0% 52%,
+    12% 52%,
+    20% 8%,
+    35% 52%,
+    50% 2%,
+    64% 52%,
+    79% 10%,
+    88% 52%,
+    100% 52%,
+    100% 100%
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42) inset,
+    0 3px 6px rgba(84, 52, 0, 0.28);
+  animation: crownGlint 2.4s ease-in-out infinite;
+}
+
+.snout-roamer-y.s1 { --snout-w: 42px; --snout-h: 29px; }
+.snout-roamer-y.s2 { --snout-w: 66px; --snout-h: 44px; }
+.snout-roamer-y.s3 { --snout-w: 50px; --snout-h: 34px; }
+.snout-roamer-y.s4 { --snout-w: 76px; --snout-h: 51px; }
+.snout-roamer-y.s5 { --snout-w: 38px; --snout-h: 27px; }
+.snout-roamer-y.s6 { --snout-w: 58px; --snout-h: 39px; }
+.snout-roamer-y.s7 { --snout-w: 84px; --snout-h: 56px; }
+.snout-roamer-y.s8 { --snout-w: 46px; --snout-h: 31px; }
+.snout-roamer-y.s9 { --snout-w: 71px; --snout-h: 48px; }
+.snout-roamer-y.s10 { --snout-w: 54px; --snout-h: 37px; }
 
 .floating-snout {
   position: absolute;
@@ -215,22 +271,22 @@ body.puzzle19-night-sky #puzzle19MoonBtn:hover::before {
 .y9 { animation: roamY9 14s ease-in-out infinite alternate; }
 .y10 { animation: roamY10 20s cubic-bezier(0.23, 0.74, 0.33, 0.99) infinite alternate; }
 
-.s1 { width: 42px; height: 29px; opacity: 0.3; }
-.s2 { width: 66px; height: 44px; opacity: 0.42; }
-.s3 { width: 50px; height: 34px; opacity: 0.28; }
-.s4 { width: 76px; height: 51px; opacity: 0.36; }
-.s5 { width: 38px; height: 27px; opacity: 0.25; }
-.s6 { width: 58px; height: 39px; opacity: 0.4; }
-.s7 { width: 84px; height: 56px; opacity: 0.26; }
-.s8 { width: 46px; height: 31px; opacity: 0.34; }
-.s9 { width: 71px; height: 48px; opacity: 0.3; }
-.s10 { width: 54px; height: 37px; opacity: 0.22; }
+.floating-snout.s1 { width: 42px; height: 29px; opacity: 0.3; }
+.floating-snout.s2 { width: 66px; height: 44px; opacity: 0.42; }
+.floating-snout.s3 { width: 50px; height: 34px; opacity: 0.28; }
+.floating-snout.s4 { width: 76px; height: 51px; opacity: 0.36; }
+.floating-snout.s5 { width: 38px; height: 27px; opacity: 0.25; }
+.floating-snout.s6 { width: 58px; height: 39px; opacity: 0.4; }
+.floating-snout.s7 { width: 84px; height: 56px; opacity: 0.26; }
+.floating-snout.s8 { width: 46px; height: 31px; opacity: 0.34; }
+.floating-snout.s9 { width: 71px; height: 48px; opacity: 0.3; }
+.floating-snout.s10 { width: 54px; height: 37px; opacity: 0.22; }
 
-.s1, .s3, .s5, .s8, .s10 {
+.floating-snout.s1, .floating-snout.s3, .floating-snout.s5, .floating-snout.s8, .floating-snout.s10 {
   background: #efb093;
 }
 
-.s2, .s4, .s6, .s7, .s9 {
+.floating-snout.s2, .floating-snout.s4, .floating-snout.s6, .floating-snout.s7, .floating-snout.s9 {
   background: #e5ab8e;
 }
 
@@ -419,7 +475,10 @@ textarea:focus-visible {
   background: #f4b89c;
   border: 2px solid #d18462;
   flex: 0 0 auto;
+  cursor: pointer;
+  pointer-events: auto;
   animation: snoutWiggle 3s ease-in-out infinite;
+  transition: filter 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
 }
 
 .snout-badge::before,
@@ -433,6 +492,8 @@ textarea:focus-visible {
   height: 12px;
   border-radius: 999px;
   background: #a85d40;
+  transform-origin: center;
+  transition: transform 140ms ease;
 }
 
 .snout-badge::before,
@@ -453,6 +514,61 @@ textarea:focus-visible {
 .tusk-badge::before,
 .tusk-badge::after {
   background: #6e4a24;
+}
+
+body.active-puzzle-solved .tusk-badge::before {
+  top: -13px;
+  left: 50%;
+  right: auto;
+  width: 19px;
+  height: 11px;
+  transform: translateX(-50%);
+  border-radius: 2px 2px 3px 3px;
+  background: linear-gradient(180deg, #fff3b5 0%, #ffd13d 52%, #de9f00 100%);
+  border: 1px solid #9b6c00;
+  clip-path: polygon(
+    0% 100%,
+    0% 54%,
+    12% 54%,
+    20% 8%,
+    35% 54%,
+    50% 2%,
+    64% 54%,
+    79% 10%,
+    88% 54%,
+    100% 54%,
+    100% 100%
+  );
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42) inset,
+    0 2px 5px rgba(84, 52, 0, 0.25);
+  animation: crownGlint 2.4s ease-in-out infinite;
+}
+
+body.active-puzzle-solved .tusk-badge::after {
+  top: 11px;
+  left: 14px;
+  right: auto;
+  width: 8px;
+  height: 12px;
+  border-radius: 999px;
+  background: #6e4a24;
+  box-shadow: 16px 0 0 #6e4a24;
+}
+
+.snout-badge.snout-clicked,
+.tusk-badge.snout-clicked {
+  border-color: #f3f0a8;
+  box-shadow: 0 0 0 2px rgba(255, 243, 138, 0.34), 0 0 18px rgba(255, 223, 112, 0.65);
+  filter: saturate(1.2) brightness(1.08);
+  animation: snoutWiggle 3s ease-in-out infinite, snoutPush 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.snout-badge.snout-clicked::before,
+.snout-badge.snout-clicked::after,
+.tusk-badge.snout-clicked::before,
+.tusk-badge.snout-clicked::after {
+  transform: scaleY(1.2);
 }
 
 .puzzle-grid {
@@ -683,6 +799,9 @@ body.puzzle30-white-content .puzzle-content {
 }
 
 .piano-keyboard.set {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
   padding: 0;
   width: min(100%, 28em);
   height: 16em;
@@ -693,11 +812,13 @@ body.puzzle30-white-content .puzzle-content {
 }
 
 .piano-key {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
   position: relative;
-  float: left;
+  float: none;
+  flex: 0 0 auto;
 }
 
 .piano-key::after {
@@ -780,6 +901,11 @@ body.puzzle30-white-content .puzzle-content {
 .piano-keyboard .e,
 .piano-keyboard .b {
   margin: 0 0 0 -1em;
+}
+
+.piano-keyboard .white.b {
+  top: 0;
+  margin-top: 0;
 }
 
 .piano-keyboard li:first-child {
@@ -2469,16 +2595,27 @@ body.puzzle36-mystery-theme #puzzle36GuessCheckBtn {
     border-width: 4px;
   }
 
-  .s1 { width: 30px; height: 21px; }
-  .s2 { width: 43px; height: 29px; }
-  .s3 { width: 34px; height: 23px; }
-  .s4 { width: 48px; height: 32px; }
-  .s5 { width: 28px; height: 20px; }
-  .s6 { width: 38px; height: 26px; }
-  .s7 { width: 52px; height: 35px; }
-  .s8 { width: 33px; height: 22px; }
-  .s9 { width: 46px; height: 31px; }
-  .s10 { width: 36px; height: 25px; }
+  .floating-snout.s1 { width: 30px; height: 21px; }
+  .floating-snout.s2 { width: 43px; height: 29px; }
+  .floating-snout.s3 { width: 34px; height: 23px; }
+  .floating-snout.s4 { width: 48px; height: 32px; }
+  .floating-snout.s5 { width: 28px; height: 20px; }
+  .floating-snout.s6 { width: 38px; height: 26px; }
+  .floating-snout.s7 { width: 52px; height: 35px; }
+  .floating-snout.s8 { width: 33px; height: 22px; }
+  .floating-snout.s9 { width: 46px; height: 31px; }
+  .floating-snout.s10 { width: 36px; height: 25px; }
+
+  .snout-roamer-y.s1 { --snout-w: 30px; --snout-h: 21px; }
+  .snout-roamer-y.s2 { --snout-w: 43px; --snout-h: 29px; }
+  .snout-roamer-y.s3 { --snout-w: 34px; --snout-h: 23px; }
+  .snout-roamer-y.s4 { --snout-w: 48px; --snout-h: 32px; }
+  .snout-roamer-y.s5 { --snout-w: 28px; --snout-h: 20px; }
+  .snout-roamer-y.s6 { --snout-w: 38px; --snout-h: 26px; }
+  .snout-roamer-y.s7 { --snout-w: 52px; --snout-h: 35px; }
+  .snout-roamer-y.s8 { --snout-w: 33px; --snout-h: 22px; }
+  .snout-roamer-y.s9 { --snout-w: 46px; --snout-h: 31px; }
+  .snout-roamer-y.s10 { --snout-w: 36px; --snout-h: 25px; }
 
   .check-feedback-card {
     padding: 0.85rem 0.9rem;
@@ -2533,6 +2670,51 @@ body.puzzle36-mystery-theme #puzzle36GuessCheckBtn {
   }
   100% {
     transform: rotate(0deg) translateY(0);
+  }
+}
+
+@keyframes snoutPush {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  45% {
+    transform: translateY(2px) scale(0.93);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes crownGlint {
+  0% {
+    filter: brightness(0.92);
+  }
+  48% {
+    filter: brightness(1.14);
+  }
+  100% {
+    filter: brightness(0.92);
+  }
+}
+
+@keyframes solvedSkyShimmer {
+  0% {
+    background-position:
+      0 0,
+      12px 8px,
+      6px 18px,
+      0 0,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      34px -34px,
+      -28px -22px,
+      42px -30px,
+      0 0,
+      0 0,
+      0 0;
   }
 }
 
