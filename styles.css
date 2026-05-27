@@ -49,6 +49,100 @@ body.puzzle19-night-sky {
     linear-gradient(180deg, #071120 0%, #0b1a2b 44%, #13263f 100%);
 }
 
+body.puzzle19-night-sky #puzzle19MoonBtn {
+  position: relative;
+  isolation: isolate;
+  padding: calc(0.45rem * 3) calc(0.7rem * 3);
+  border-radius: calc(0.55rem * 2.2);
+  border: 2px solid rgba(202, 220, 255, 0.82);
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #eef4ff;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(235, 244, 255, 0.28) 0 24%, rgba(235, 244, 255, 0) 48%),
+    radial-gradient(circle at 86% 84%, rgba(164, 193, 255, 0.18) 0 18%, rgba(164, 193, 255, 0) 52%),
+    linear-gradient(180deg, #4a597f 0%, #2f3b58 52%, #1e263c 100%);
+  box-shadow:
+    0 0 0 1px rgba(240, 247, 255, 0.24) inset,
+    0 0 0 4px rgba(18, 26, 44, 0.78),
+    0 14px 30px rgba(0, 0, 0, 0.6),
+    0 0 26px rgba(183, 212, 255, 0.44);
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2),
+    0 3px 7px rgba(8, 14, 24, 0.85);
+  transition:
+    transform 150ms ease,
+    box-shadow 200ms ease,
+    background-position 300ms ease,
+    filter 160ms ease;
+}
+
+body.puzzle19-night-sky #puzzle19MoonBtn::before,
+body.puzzle19-night-sky #puzzle19MoonBtn::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+body.puzzle19-night-sky #puzzle19MoonBtn::before {
+  inset: 12px;
+  background:
+    repeating-radial-gradient(circle at 24% 22%, rgba(239, 247, 255, 0.11) 0 2px, rgba(239, 247, 255, 0) 3px 10px),
+    linear-gradient(120deg, rgba(255, 255, 255, 0) 28%, rgba(235, 245, 255, 0.22) 45%, rgba(255, 255, 255, 0) 63%);
+  background-size: auto, 220% 100%;
+  background-position: 0 0, 140% 0;
+  border-radius: inherit;
+  border: 1px solid rgba(223, 236, 255, 0.32);
+  opacity: 0.82;
+}
+
+body.puzzle19-night-sky #puzzle19MoonBtn::after {
+  inset: -10px;
+  border-radius: inherit;
+  border: 1px solid rgba(210, 227, 255, 0.56);
+  box-shadow:
+    0 0 0 2px rgba(15, 24, 42, 0.62),
+    0 0 20px rgba(195, 222, 255, 0.35);
+  opacity: 0.68;
+  z-index: -1;
+}
+
+body.puzzle19-night-sky #puzzle19MoonBtn:hover {
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.12) saturate(1.08);
+  box-shadow:
+    0 0 0 1px rgba(244, 250, 255, 0.34) inset,
+    0 0 0 4px rgba(18, 26, 44, 0.78),
+    0 18px 36px rgba(0, 0, 0, 0.64),
+    0 0 40px rgba(191, 220, 255, 0.55);
+}
+
+body.puzzle19-night-sky #puzzle19MoonBtn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+body.puzzle19-night-sky #puzzle19MoonBtn:focus-visible {
+  outline: 3px solid #d9e8ff;
+  outline-offset: 4px;
+}
+
+body.puzzle19-night-sky #puzzle19MoonBtn:hover::before {
+  background-position: 0 0, -30% 0;
+}
+
+@media (max-width: 640px) {
+  body.puzzle19-night-sky #puzzle19MoonBtn {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.05rem 1.2rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+}
+
 .floating-snouts {
   position: fixed;
   inset: 0;
@@ -588,6 +682,16 @@ body.puzzle30-white-content .puzzle-content {
   font-size: clamp(9px, 1.8vw, 16px);
 }
 
+.piano-keyboard.set {
+  padding: 0;
+  width: min(100%, 28em);
+  height: 16em;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .piano-key {
   margin: 0;
   padding: 0;
@@ -983,8 +1087,8 @@ body.puzzle30-white-content .puzzle-content {
 
 .puzzle-hover-hint {
   position: absolute;
-  bottom: 15px;
-  left: 45px;
+  left: var(--hint-left, 10%);
+  top: var(--hint-top, 82%);
   width: 80px;
   height: 40px;
   cursor: help;
@@ -1898,6 +2002,28 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   margin: 0;
 }
 
+.puzzle38-boards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.28rem;
+  width: min(100%, 620px);
+  margin: 0 auto;
+}
+
+.puzzle38-board-card {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.puzzle38-map-word {
+  min-height: 1.25rem;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #5d4530;
+  letter-spacing: 0.01em;
+}
+
 .puzzle61-wrap {
   display: grid;
   gap: 0.8rem;
@@ -1933,9 +2059,8 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
 }
 
 .puzzle38-board {
-  --puzzle38-size: min(84vw, 560px);
-  width: var(--puzzle38-size);
-  aspect-ratio: 1 / 1;
+  width: clamp(102px, 64%, 142px);
+  aspect-ratio: 2 / 3;
   margin: 0 auto;
   position: relative;
   border: 2px solid #d9c7b1;

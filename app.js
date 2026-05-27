@@ -327,17 +327,17 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[12] = {
-    work_in_progress: true,
-    title: "Stare zamki są pełne potworów...",
+    title: "Widzę tę bestię",
     content: `<div class="puzzle12-image-wrap">
-  <img src="img/20230610_140159.jpg" alt="" class="puzzle12-image">
-  <div class="puzzle-hover-hint" title="Łeeeee, co to jest???"></div>
+  <img src="img/potwory.jpg" alt="" class="puzzle12-image">
+  <div class="puzzle-hover-hint" title="Łeeeee, co to jest???" style="--hint-left: 6%; --hint-top: 13%;"></div>
 </div>`,
     solution: "pająk",
     hint1: "W starych zamkach jest bardzo ciemno...",
     hint2: "Skup się na ciemniejszych obszarach zdjęcia, a może znajdziesz podpowiedź odnośnie tego gdzie szukać rozwiązania...",
     hint3: "Może jest jakiś sposób żeby wydobyć więcej informacji z tego zdjęcia?", 
     hint4: "Pobaw się jasnością, kontrastem, nasyceniem..."
+
   };
   PUZZLE_DATA[13] = {
     title: "Hej, ale to przecież nie są mapy!",
@@ -556,15 +556,11 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[19] = {
-    //TODO
-    title: "WIP Czy go słyszysz?",
-    work_in_progress: true,
+    title: "Czy go słyszysz?",
     content: `<div class="time-lock-puzzle">
   <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
-  <a href="https://www.ashleysheridan.co.uk/blog/CSS+Werewolf" target="_blank" rel="noopener noreferrer">CSS Werewolf</a>
-  <p id="puzzle19MoonStatus" aria-live="polite"></p>
 </div>`,
-    solution: "TODO",
+    solution: "lykantropia",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
@@ -751,7 +747,6 @@
   };
   PUZZLE_DATA[33] = {
     title: "Szach-mat w jednym ruchu!",
-    work_in_progress: true,
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
@@ -924,19 +919,12 @@
   };
   PUZZLE_DATA[38] = {
     title: "Połączenia",
-    work_in_progress: true,
     content: `<div class="puzzle38-wrap">
-  <div id="puzzle38Board" class="puzzle38-board" role="group" aria-label="Siatka czerwonych punktów"></div>
-  <button type="button" id="puzzle38Reset" class="small-btn">Resetuj połączenia</button>
+  <div id="puzzle38Boards" class="puzzle38-boards" role="group" aria-label="Sześć siatek czerwonych punktów"></div>
+  <button type="button" id="puzzle38Reset" class="small-btn">Reset</button>
   <p id="puzzle38Status" class="puzzle38-status" aria-live="polite">Kliknij czerwone kółko, aby rozpocząć rysowanie linii.</p>
 </div>`,
-    node_labels: [
-      ["A", "B", "C", "D"],
-      ["E", "F", "G", "H"],
-      ["I", "J", "K", "L"],
-      ["M", "N", "O", "P"]
-    ],
-    solution: "",
+    solution: "kierat",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
@@ -974,7 +962,7 @@
     hint3: "Odpowiedź to: WIEJE"
   };
   PUZZLE_DATA[41] = {
-    title: "Tutorial",
+    title: "Każdy szczegół się liczy",
     content: `<p>W procesie rozwiązywania mogą brać udział <strong>różne</strong> elementy strony - zwracaj uwagę na <strong>każdy</strong> szczegół i miej oczy i uszy szeroko otwarte! I bój się <strong>klikać</strong> i eksperymentować.</p>`,
     solution: "jednorożec",
     partial_solution: [
@@ -987,7 +975,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[42] = {
-    title: "Tutorial",
+    title: "Podpowiedzi",
     work_in_progress: true,
     content: `<p>Zadania mają też przygotowane podpowiedzi - znajdziesz je na samym dole strony w osobnej sekcji.</p>
 <p>Zachęcam jednak, żeby korzystać z nich oszczędnie - czasem lepiej odłożyć rozwiązywanie na później i wrócić - satysfakcja z wymyślenia czegoś samemu zawsze jest większa!</p>
@@ -1018,13 +1006,12 @@
     hint3: "TODO hint 3"
   };
       PUZZLE_DATA[45] = {
-    title: "Tutorial: Błąd",
+    title: "Tutorial: Błędy",
     work_in_progress: true,
-    content: `<p>Mimo ogromnej ilości pracy, gdzieniegdzie mogą znaleźć się błędy - kiedy trafisz na coś co wydaje się nie mieć sensu, lub nie działać - daj mi znać!</p>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    content: `<p>Mimo ogromnej ilości ppracy, godzieniegdzie momgą znaleźć się błędy - kyiedy trafisz na coś co wydaje się nie mieć sensu, lłub nie działakć - daj mi znaać!</p>`,
+    solution: "pomyłka",
+    hint1: "Coś z tym tekstem jest chyba nie tak...",
+    hint2: "Sprawdź literówki i błędy w tekście"
   };
    PUZZLE_DATA[46] = {
     title: "Tłumaczenie",
@@ -2128,25 +2115,13 @@
         return;
       }
 
-      const statusEl = document.getElementById("puzzle19MoonStatus");
       const phase = this.getMoonPhaseFraction(new Date());
-      const illuminationPercent = Math.round(((1 - Math.cos(2 * Math.PI * phase)) / 2) * 100);
       const phaseView = this.getMoonPhaseRepresentation(phase);
-      const phaseText = `${phaseView.icon} ${phaseView.label} (${illuminationPercent}%)`;
-
-      if (statusEl) {
-        statusEl.textContent = `Aktualna faza Ksiezyca: ${phaseText}`;
-      }
 
       if (!this.isFullMoon()) {
-        const message = `To jeszcze nie pelnia. ${phaseText}`;
-        this.setSaveIndicator("Przycisk aktywny tylko podczas pelni.");
+        this.setSaveIndicator("To jeszcze nie czas...");
         this.showMoonPhasePopup("error", phaseView.icon, "To jeszcze nie czas...");
         return;
-      }
-
-      if (statusEl) {
-        statusEl.textContent = `Pelnia! ${phaseText}`;
       }
 
       const solution = this.getExpectedSolution(19);
@@ -2154,8 +2129,8 @@
         this.els.solutionInput.value = solution;
       }
 
-      this.setSaveIndicator("Pelnia wykryta.");
-      this.showMoonPhasePopup("success", phaseView.icon, "Dzis jest pelnia!");
+      this.setSaveIndicator("Dzis jest pelnia! Hasło to LYKANTROPIA");
+      this.showMoonPhasePopup("success", phaseView.icon, "Dzis jest pelnia! Hasło to LYKANTROPIA");
     },
 
     showMoonPhasePopup(type, phaseIcon, labelText) {
@@ -3262,102 +3237,146 @@
       }
 
       this.stopPuzzle38Board();
-      const puzzleData = PUZZLE_DATA[this.state.selectedPuzzle] || {};
-      const boardEl = document.getElementById("puzzle38Board");
+      const boardsHostEl = document.getElementById("puzzle38Boards");
       const statusEl = document.getElementById("puzzle38Status");
-      if (!boardEl || !statusEl) {
+      if (!boardsHostEl || !statusEl) {
         return;
       }
 
-      const nodes = [];
-      for (let row = 0; row < 4; row += 1) {
-        for (let col = 0; col < 4; col += 1) {
-          nodes.push({
-            x: 14 + col * 24,
-            y: 14 + row * 24
-          });
+      const boardConfigs = [
+        {
+          nodeLabelRows: ["AA", "LT", "AA"],
+          wordLabel: "la la la la"
+        },
+        {
+          nodeLabelRows: ["TE", "OR", "KA"],
+          wordLabel: "kot"
+        },
+        {
+          nodeLabelRows: ["LK", "AM", "SĘ"],
+          wordLabel: "ma klasę"
+        },
+        {
+          nodeLabelRows: ["ZC", "KA", "ES"],
+          wordLabel: "skacze"
+        },
+        {
+          nodeLabelRows: ["TÓ", "AN", "SŁ"],
+          wordLabel: "na stół"
+        },
+        {
+          nodeLabelRows: ["KAT", "XCU", "ZHM"],
+          wordLabel: "ach tak"
         }
-      }
-      const nodeLabels = this.normalizePuzzle38NodeLabels(puzzleData.node_labels, nodes.length);
+      ];
+      const boardCount = boardConfigs.length;
+      const createGridNodes = (rows, cols, leftPercent, topPercent, stepX, stepY) => {
+        const points = [];
+        for (let row = 0; row < rows; row += 1) {
+          for (let col = 0; col < cols; col += 1) {
+            points.push({
+              x: leftPercent + col * stepX,
+              y: topPercent + row * stepY
+            });
+          }
+        }
+        return points;
+      };
 
-      boardEl.innerHTML = "";
+      boardsHostEl.innerHTML = "";
       const svgNS = "http://www.w3.org/2000/svg";
-      const linesSvg = document.createElementNS(svgNS, "svg");
-      linesSvg.setAttribute("class", "puzzle38-lines");
-      linesSvg.setAttribute("viewBox", "0 0 100 100");
-      linesSvg.setAttribute("preserveAspectRatio", "none");
-      linesSvg.setAttribute("aria-hidden", "true");
+      const boards = [];
+      const fragment = document.createDocumentFragment();
 
-      const connectionsLayer = document.createElementNS(svgNS, "g");
-      const previewLine = document.createElementNS(svgNS, "line");
-      previewLine.setAttribute("class", "puzzle38-line puzzle38-line-preview");
-      previewLine.style.display = "none";
+      for (let boardIndex = 0; boardIndex < boardCount; boardIndex += 1) {
+        const boardConfig = boardConfigs[boardIndex] || {};
+        const boardCardEl = document.createElement("section");
+        boardCardEl.className = "puzzle38-board-card";
 
-      linesSvg.appendChild(connectionsLayer);
-      linesSvg.appendChild(previewLine);
-      boardEl.appendChild(linesSvg);
+        const boardEl = document.createElement("div");
+        boardEl.className = "puzzle38-board";
+        boardEl.dataset.p38Board = String(boardIndex);
+        boardEl.setAttribute("role", "group");
+        boardEl.setAttribute("aria-label", `Siatka ${boardIndex + 1}`);
 
-      nodes.forEach((node, index) => {
-        const nodeBtn = document.createElement("button");
-        const nodeLabel = nodeLabels[index] || "";
-        nodeBtn.type = "button";
-        nodeBtn.className = "puzzle38-node";
-        nodeBtn.dataset.p38Index = String(index);
-        nodeBtn.style.left = `${node.x}%`;
-        nodeBtn.style.top = `${node.y}%`;
-        nodeBtn.setAttribute("aria-label", nodeLabel ? `Punkt ${index + 1}: ${nodeLabel}` : `Punkt ${index + 1}`);
-        if (nodeLabel) {
+        const linesSvg = document.createElementNS(svgNS, "svg");
+        linesSvg.setAttribute("class", "puzzle38-lines");
+        linesSvg.setAttribute("viewBox", "0 0 100 100");
+        linesSvg.setAttribute("preserveAspectRatio", "none");
+        linesSvg.setAttribute("aria-hidden", "true");
+
+        const connectionsLayer = document.createElementNS(svgNS, "g");
+        const previewLine = document.createElementNS(svgNS, "line");
+        previewLine.setAttribute("class", "puzzle38-line puzzle38-line-preview");
+        previewLine.style.display = "none";
+
+        linesSvg.appendChild(connectionsLayer);
+        linesSvg.appendChild(previewLine);
+        boardEl.appendChild(linesSvg);
+
+        const boardNodes = boardIndex === boardCount - 1
+          ? createGridNodes(3, 3, 18, 18, 32, 32)
+          : createGridNodes(3, 2, 28, 18, 44, 32);
+
+        const configuredNodeLabels = Array.isArray(boardConfig.nodeLabelRows)
+          ? boardConfig.nodeLabelRows.flatMap((rowText) => {
+            return typeof rowText === "string" ? Array.from(rowText) : [];
+          })
+          : [];
+        const nodeLabels = configuredNodeLabels.length === boardNodes.length
+          ? configuredNodeLabels
+          : boardNodes.map((_, labelIndex) => String(labelIndex + 1));
+
+        boardNodes.forEach((node, nodeIndex) => {
+          const nodeBtn = document.createElement("button");
+          nodeBtn.type = "button";
+          nodeBtn.className = "puzzle38-node";
+          nodeBtn.dataset.p38Board = String(boardIndex);
+          nodeBtn.dataset.p38Index = String(nodeIndex);
+          const nodeLabel = nodeLabels[nodeIndex] || "";
+          nodeBtn.style.left = `${node.x}%`;
+          nodeBtn.style.top = `${node.y}%`;
+          nodeBtn.setAttribute("aria-label", `Siatka ${boardIndex + 1}, punkt ${nodeIndex + 1}: ${nodeLabel}`);
+
           const labelEl = document.createElement("span");
           labelEl.className = "puzzle38-node-label";
           labelEl.textContent = nodeLabel;
           nodeBtn.appendChild(labelEl);
-        }
-        boardEl.appendChild(nodeBtn);
-      });
+
+          boardEl.appendChild(nodeBtn);
+        });
+
+        const mapWordEl = document.createElement("p");
+        mapWordEl.className = "puzzle38-map-word";
+        mapWordEl.textContent = typeof boardConfig.wordLabel === "string" ? boardConfig.wordLabel : "";
+
+        boardCardEl.appendChild(boardEl);
+        boardCardEl.appendChild(mapWordEl);
+        fragment.appendChild(boardCardEl);
+
+        boards.push({
+          boardEl,
+          nodes: boardNodes,
+          connectionsLayer,
+          previewLine,
+          connections: [],
+          activeFromIndex: null,
+          pointerX: null,
+          pointerY: null
+        });
+      }
+
+      boardsHostEl.appendChild(fragment);
 
       this.puzzle38State = {
-        boardEl,
         statusEl,
-        nodes,
-        connectionsLayer,
-        previewLine,
-        connections: [],
-        activeFromIndex: null,
-        pointerX: null,
-        pointerY: null
+        boards,
+        activeBoardIndex: null
       };
 
       this.updatePuzzle38NodeSelection();
       this.renderPuzzle38Lines();
       this.updatePuzzle38Status("Kliknij czerwone kółko, aby rozpocząć rysowanie linii.");
-    },
-
-    normalizePuzzle38NodeLabels(config, expectedCount) {
-      const labels = [];
-
-      if (Array.isArray(config)) {
-        if (config.length > 0 && Array.isArray(config[0])) {
-          config.forEach((row) => {
-            if (!Array.isArray(row)) {
-              return;
-            }
-
-            row.forEach((value) => {
-              labels.push(typeof value === "string" ? value : "");
-            });
-          });
-        } else {
-          config.forEach((value) => {
-            labels.push(typeof value === "string" ? value : "");
-          });
-        }
-      }
-
-      while (labels.length < expectedCount) {
-        labels.push("");
-      }
-
-      return labels.slice(0, expectedCount);
     },
 
     stopPuzzle38Board() {
@@ -3442,10 +3461,13 @@
         return;
       }
 
-      state.connections = [];
-      state.activeFromIndex = null;
-      state.pointerX = null;
-      state.pointerY = null;
+      state.boards.forEach((boardState) => {
+        boardState.connections = [];
+        boardState.activeFromIndex = null;
+        boardState.pointerX = null;
+        boardState.pointerY = null;
+      });
+      state.activeBoardIndex = null;
       this.updatePuzzle38NodeSelection();
       this.renderPuzzle38Lines();
       this.updatePuzzle38Status("Wszystkie połączenia zostały usunięte.");
@@ -3457,59 +3479,92 @@
         return;
       }
 
+      const boardIndex = Number(nodeEl.dataset.p38Board);
       const index = Number(nodeEl.dataset.p38Index);
-      if (Number.isNaN(index) || index < 0 || index >= state.nodes.length) {
+      if (
+        Number.isNaN(boardIndex)
+        || boardIndex < 0
+        || boardIndex >= state.boards.length
+        || Number.isNaN(index)
+        || index < 0
+      ) {
         return;
       }
 
-      if (state.activeFromIndex === null) {
-        state.activeFromIndex = index;
-        state.pointerX = state.nodes[index].x;
-        state.pointerY = state.nodes[index].y;
+      const boardState = state.boards[boardIndex];
+      if (!boardState || index >= boardState.nodes.length) {
+        return;
+      }
+
+      if (state.activeBoardIndex !== null && state.activeBoardIndex !== boardIndex) {
+        const previousBoard = state.boards[state.activeBoardIndex];
+        if (previousBoard) {
+          previousBoard.activeFromIndex = null;
+          previousBoard.pointerX = null;
+          previousBoard.pointerY = null;
+        }
+      }
+      state.activeBoardIndex = boardIndex;
+
+      if (boardState.activeFromIndex === null) {
+        boardState.activeFromIndex = index;
+        boardState.pointerX = boardState.nodes[index].x;
+        boardState.pointerY = boardState.nodes[index].y;
         this.updatePuzzle38NodeSelection();
         this.renderPuzzle38Lines();
-        this.updatePuzzle38Status(`Start linii ustawiony na punkcie ${index + 1}.`);
+        this.updatePuzzle38Status(`Siatka ${boardIndex + 1}: start linii ustawiony na punkcie ${index + 1}.`);
         return;
       }
 
-      if (state.activeFromIndex === index) {
-        state.activeFromIndex = null;
-        state.pointerX = null;
-        state.pointerY = null;
+      if (boardState.activeFromIndex === index) {
+        boardState.activeFromIndex = null;
+        boardState.pointerX = null;
+        boardState.pointerY = null;
+        state.activeBoardIndex = null;
         this.updatePuzzle38NodeSelection();
         this.renderPuzzle38Lines();
-        this.updatePuzzle38Status("Wybór punktu startowego anulowany.");
+        this.updatePuzzle38Status(`Siatka ${boardIndex + 1}: wybór punktu startowego anulowany.`);
         return;
       }
 
-      const fromIndex = state.activeFromIndex;
+      const fromIndex = boardState.activeFromIndex;
       const connectionKey = fromIndex < index ? `${fromIndex}-${index}` : `${index}-${fromIndex}`;
-      const alreadyConnected = state.connections.some((entry) => entry.key === connectionKey);
+      const alreadyConnected = boardState.connections.some((entry) => entry.key === connectionKey);
 
       if (!alreadyConnected) {
-        state.connections.push({ key: connectionKey, from: fromIndex, to: index });
+        boardState.connections.push({ key: connectionKey, from: fromIndex, to: index });
       }
 
-      state.activeFromIndex = null;
-      state.pointerX = null;
-      state.pointerY = null;
+      boardState.activeFromIndex = null;
+      boardState.pointerX = null;
+      boardState.pointerY = null;
+      state.activeBoardIndex = null;
       this.updatePuzzle38NodeSelection();
       this.renderPuzzle38Lines();
 
       this.updatePuzzle38Status(
         alreadyConnected
-          ? `Punkty ${fromIndex + 1} i ${index + 1} są już połączone.`
-          : `Połączono punkt ${fromIndex + 1} z punktem ${index + 1}.`
+          ? `Siatka ${boardIndex + 1}: punkty ${fromIndex + 1} i ${index + 1} są już połączone.`
+          : `Siatka ${boardIndex + 1}: połączono punkt ${fromIndex + 1} z punktem ${index + 1}.`
       );
     },
 
     handlePuzzle38PointerMove(event) {
       const state = this.puzzle38State;
-      if (!state || this.state.selectedPuzzle !== 38 || state.activeFromIndex === null) {
+      if (
+        !state
+        || this.state.selectedPuzzle !== 38
+        || state.activeBoardIndex === null
+      ) {
         return;
       }
 
-      const rect = state.boardEl.getBoundingClientRect();
+      const boardState = state.boards[state.activeBoardIndex];
+      if (!boardState || boardState.activeFromIndex === null) {
+        return;
+      }
+
+      const rect = boardState.boardEl.getBoundingClientRect();
       if (!rect.width || !rect.height) {
         return;
       }
@@ -3518,68 +3573,73 @@
       const x = clamp(((event.clientX - rect.left) / rect.width) * 100, 0, 100);
       const y = clamp(((event.clientY - rect.top) / rect.height) * 100, 0, 100);
 
-      state.pointerX = x;
-      state.pointerY = y;
+      boardState.pointerX = x;
+      boardState.pointerY = y;
       this.renderPuzzle38Lines();
     },
 
     updatePuzzle38NodeSelection() {
       const state = this.puzzle38State;
-      if (!state || !state.boardEl) {
+      if (!state || !Array.isArray(state.boards)) {
         return;
       }
 
-      const nodes = state.boardEl.querySelectorAll(".puzzle38-node");
-      nodes.forEach((nodeEl) => {
-        const index = Number(nodeEl.dataset.p38Index);
-        nodeEl.classList.toggle("selected", index === state.activeFromIndex);
+      state.boards.forEach((boardState, boardIndex) => {
+        const nodes = boardState.boardEl.querySelectorAll(".puzzle38-node");
+        nodes.forEach((nodeEl) => {
+          const index = Number(nodeEl.dataset.p38Index);
+          const isSelected = boardIndex === state.activeBoardIndex && index === boardState.activeFromIndex;
+          nodeEl.classList.toggle("selected", isSelected);
+        });
       });
     },
 
     renderPuzzle38Lines() {
       const state = this.puzzle38State;
-      if (!state || !state.connectionsLayer || !state.previewLine) {
+      if (!state || !Array.isArray(state.boards)) {
         return;
       }
 
       const svgNS = "http://www.w3.org/2000/svg";
-      state.connectionsLayer.replaceChildren();
+      state.boards.forEach((boardState) => {
+        boardState.connectionsLayer.replaceChildren();
 
-      state.connections.forEach((connection) => {
-        const fromNode = state.nodes[connection.from];
-        const toNode = state.nodes[connection.to];
-        if (!fromNode || !toNode) {
+        boardState.connections.forEach((connection) => {
+          const fromNode = boardState.nodes[connection.from];
+          const toNode = boardState.nodes[connection.to];
+          if (!fromNode || !toNode) {
+            return;
+          }
+
+          const line = document.createElementNS(svgNS, "line");
+          line.setAttribute("class", "puzzle38-line");
+          line.setAttribute("x1", String(fromNode.x));
+          line.setAttribute("y1", String(fromNode.y));
+          line.setAttribute("x2", String(toNode.x));
+          line.setAttribute("y2", String(toNode.y));
+          boardState.connectionsLayer.appendChild(line);
+        });
+
+        if (boardState.activeFromIndex === null) {
+          boardState.previewLine.style.display = "none";
           return;
         }
 
-        const line = document.createElementNS(svgNS, "line");
-        line.setAttribute("class", "puzzle38-line");
-        line.setAttribute("x1", String(fromNode.x));
-        line.setAttribute("y1", String(fromNode.y));
-        line.setAttribute("x2", String(toNode.x));
-        line.setAttribute("y2", String(toNode.y));
-        state.connectionsLayer.appendChild(line);
+        const fromNode = boardState.nodes[boardState.activeFromIndex];
+        if (!fromNode) {
+          boardState.previewLine.style.display = "none";
+          return;
+        }
+
+        const previewX = typeof boardState.pointerX === "number" ? boardState.pointerX : fromNode.x;
+        const previewY = typeof boardState.pointerY === "number" ? boardState.pointerY : fromNode.y;
+
+        boardState.previewLine.setAttribute("x1", String(fromNode.x));
+        boardState.previewLine.setAttribute("y1", String(fromNode.y));
+        boardState.previewLine.setAttribute("x2", String(previewX));
+        boardState.previewLine.setAttribute("y2", String(previewY));
+        boardState.previewLine.style.display = "block";
       });
-
-      if (state.activeFromIndex === null) {
-        state.previewLine.style.display = "none";
-        return;
-      }
-
-      const fromNode = state.nodes[state.activeFromIndex];
-      if (!fromNode) {
-        state.previewLine.style.display = "none";
-        return;
-      }
-
-      const previewX = typeof state.pointerX === "number" ? state.pointerX : fromNode.x;
-      const previewY = typeof state.pointerY === "number" ? state.pointerY : fromNode.y;
-
-      state.previewLine.setAttribute("x1", String(fromNode.x));
-      state.previewLine.setAttribute("y1", String(fromNode.y));
-      state.previewLine.setAttribute("x2", String(previewX));
-      state.previewLine.setAttribute("y2", String(previewY));
-      state.previewLine.style.display = "block";
     },
 
     updatePuzzle38Status(message) {
@@ -4112,7 +4172,7 @@
       pieceEl.appendChild(imageEl);
     },
 
-    setPuzzlePieceCardWord(pieceEl, word) {
+    setPuzzlePieceCardText(pieceEl, text) {
       if (!pieceEl) {
         return;
       }
@@ -4120,8 +4180,92 @@
       pieceEl.innerHTML = "";
       const wordEl = document.createElement("span");
       wordEl.className = "piece-word";
-      wordEl.textContent = word;
+      wordEl.textContent = text;
       pieceEl.appendChild(wordEl);
+    },
+
+    getPuzzlePieceImageCandidates(word) {
+      const trimmedWord = typeof word === "string" ? word.trim() : "";
+      if (!trimmedWord) {
+        return [];
+      }
+
+      const baseNames = [
+        trimmedWord,
+        trimmedWord.toLowerCase(),
+        trimmedWord.normalize("NFC")
+      ];
+
+      const uniqueBaseNames = [...new Set(baseNames.filter(Boolean))];
+      const extensions = ["jpg", "jpeg", "png", "webp"];
+      const imageSources = [];
+
+      uniqueBaseNames.forEach((baseName) => {
+        extensions.forEach((extension) => {
+          imageSources.push(`img/obrazy/${encodeURIComponent(baseName)}.${extension}`);
+        });
+      });
+
+      return imageSources;
+    },
+
+    setPuzzlePieceCardImageOrWord(pieceEl, word) {
+      if (!pieceEl) {
+        return;
+      }
+
+      const normalizedWord = typeof word === "string" ? word.trim() : "";
+      if (!normalizedWord) {
+        this.setPuzzlePieceCardText(pieceEl, "");
+        return;
+      }
+
+      const imageCandidates = this.getPuzzlePieceImageCandidates(normalizedWord);
+      if (imageCandidates.length === 0) {
+        this.setPuzzlePieceCardText(pieceEl, normalizedWord);
+        return;
+      }
+
+      pieceEl.dataset.pendingPieceWord = normalizedWord;
+
+      const tryCandidateAt = (candidateIndex) => {
+        if (pieceEl.dataset.pendingPieceWord !== normalizedWord) {
+          return;
+        }
+
+        if (candidateIndex >= imageCandidates.length) {
+          this.setPuzzlePieceCardText(pieceEl, normalizedWord);
+          return;
+        }
+
+        const candidateSrc = imageCandidates[candidateIndex];
+        const probeImage = new Image();
+
+        probeImage.onload = () => {
+          if (pieceEl.dataset.pendingPieceWord !== normalizedWord) {
+            return;
+          }
+
+          pieceEl.innerHTML = "";
+          const imageEl = document.createElement("img");
+          imageEl.src = candidateSrc;
+          imageEl.alt = normalizedWord;
+          imageEl.className = "piece-image";
+          pieceEl.appendChild(imageEl);
+        };
+
+        probeImage.onerror = () => {
+          tryCandidateAt(candidateIndex + 1);
+        };
+
+        probeImage.src = candidateSrc;
+      };
+
+      tryCandidateAt(0);
+    },
+
+    setPuzzlePieceCardWord(pieceEl, word) {
+      this.setPuzzlePieceCardImageOrWord(pieceEl, word);
     },
 
     renderPasswordPairForCurrentPuzzle() {
