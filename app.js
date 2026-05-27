@@ -1,7 +1,7 @@
 
   
 (() => {
-  const APP_BUILD_ID = "20260527-4-source-order";
+  const APP_BUILD_ID = "20260527-10-fanfare-fix";
   const TOTAL_PUZZLES = 64;
   const STORAGE_KEY = "puzzleAppState";
   // Map each puzzle (1-64) to a color from the workflow icon. When solved, displays this color.
@@ -165,6 +165,7 @@
 //   Example: Custom puzzle data (uncomment and modify to override defaults)
   PUZZLE_DATA[1] = {
     title: "Na Rozgrzewkę",
+    logicKeys: ["puzzle-1"],
     content: `<p>Ta strona to zbiór łamigłówek o różnej tematyce i stopniu złożoności.</p>
 <p>Zagadek nie trzeba rozwiązywać po kolei, jednak niektóre z nich mogą być w pewien sposób połączone lub przydatne w rozwiązaniu innych.</p>
 
@@ -177,26 +178,88 @@
       { key: "począ", message: "Bardzo blisko! Dokończ wyraz." }
     ],
     hint1: "Ta zagadka jest trochę za prosta na podpowiedzi, co nie?",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint2: "Nie no, już bez przesady...",
+    hint3: "Chyba musisz przeczytać uważniej ten tekst",
+    hint4: "Odpowiedź to POMOC"
     
   };
-  PUZZLE_DATA[20] = {
-    //TODO hint
-    title: "Na głowie",
-    content: `<div style="display: grid; place-items: center;">
-  <img src="img/z2.jpg" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
-</div>`,
-    solution: "glob",
+  PUZZLE_DATA[2] = {
+    title: "Każdy szczegół się liczy",
+    logicKeys: ["puzzle-2"],
+    content: `<p>W procesie rozwiązywania mogą brać udział <strong>różne</strong> elementy strony - zwracaj uwagę na <strong>każdy</strong> szczegół i miej oczy i uszy szeroko otwarte! I bój się <strong>klikać</strong> i eksperymentować.</p>`,
+    solution: "jednorożec",
     partial_solution: [
-      { key: "8079", message: "To byłoby za proste:)" }
+      { key: "różne", message: "Co ci wyjdzie" },
+      { key: "każdy", message: "Jak dodasz konia" },
+      { key: "klikać", message: "i róg?" }
     ],
+    hint1: "spróbuj poklikać w różne miejsca na stronie",
+    hint2: "szczególnie te najtłustsze",
+    hint3: "pogrubiony tekst!"
+  };
+  PUZZLE_DATA[3] = {
+    title: "Podpowiedzi",
+    logicKeys: ["puzzle-3"],
+    content: `<p>Zadania mają też przygotowane podpowiedzi - znajdziesz je na samym dole strony w osobnej sekcji.</p>
+<p>Zachęcam jednak, żeby korzystać z nich oszczędnie - czasem lepiej odłożyć rozwiązywanie na później i wrócić - satysfakcja z wymyślenia czegoś samemu zawsze jest większa!</p>
+`,
+    solution: "",
+    hint1: "To nie jest przycisk który ci się przyda",
+    hint2: "Ten też nie",
+    hint3: "Ani ten"
+  };
+    PUZZLE_DATA[4] = {
+    title: "Tutorial",
+    logicKeys: ["puzzle-4"],
+    work_in_progress: true,
+    content: `<p>Do rozwiązywania zagadek czasem mogą być potrzebne zewnętrzne materiały - w większości powinna wystarczyć wikipedia, ale inne strony lub książki też mogą być przydatne.</p>
+  <p><a href="https://pl.wikipedia.org/wiki/Zagadka" target="_blank" rel="noopener noreferrer">https://pl.wikipedia.org/wiki/Zagadka</a> - zagadka literacka</p>
+  <p>Nie ma potrzeby ani sensu korzystać tu z AI - może to popsuć zabawę.</p>`,
+    solution: "",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
+      PUZZLE_DATA[5] = {
+    title: "Notatki",
+    logicKeys: ["puzzle-5"],
+    content: `<p>Dla ułatwienia przy każdej zagadce możesz zrobić sobie notatki w oknie poniżej. Powinny się one zapisywać automatycznie, ale podobnie jak rozwiązania zagadek - zapis postępu ma miejsce tylko na konretnym urządzeniu - jeśli otworzysz stronę na innym telefonie/komputrze/tablecie będzie trzeba podawać rozwiązania i robić notatki od nowa.</p>`,
+    solution: "dziennik",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+      PUZZLE_DATA[6] = {
+    title: "Błędy",
+    logicKeys: ["puzzle-6"],
+    content: `<p>Mimo ogromnej ilości ppracy, godzieniegdzie momgą znaleźć się błędy - kyiedy trafisz na coś co wydaje się nie mieć sensu, lłub nie działakć - daj mi znaać!</p>`,
+    solution: "pomyłka",
+    hint1: "Coś z tym tekstem jest chyba nie tak...",
+    hint2: "Sprawdź literówki i błędy w tekście"
+  };
+  PUZZLE_DATA[7] = {
+    title: "Dzień Ryjka",
+    puzzleKey: "snout-day",
+    logicKeys: [PUZZLE_LOGIC_KEYS.SNOUT_DAY, "puzzle-7"],
+    content: `<div class="puzzle48-wrap" style="display:grid; gap:0.65rem;">
+  <p>W procesie rozwiązywania zagadek mogą brać udział naprawdę różne elementy strony i świata zewnętrznego.</p>
+  <p>Aby rozwiązać tę zagadkę musisz:</p>
+  <ol style="margin:0; padding-left:1.2rem; display:grid; gap:0.2rem;">
+    <li>sprawdzić który dzień miesiąca mamy (nazwijmy tę liczbę X)</li>
+    <li>znaleźć Ryjka</li>
+    <li>kliknąć go X razy</li>
+    <li>poczekać 5 sekund</li>
+  </ol>
+  <p id="puzzle48Timer" aria-live="polite"></p>
+</div>`,
+    solution: "ryjek",
+    hint1: "X to aktualny dzień miesiąca.",
+    hint2: "Ryjek jest przy tytule zagadki, w prawym górnym rogu.",
+    hint3: "Po ostatnim kliknięciu nic nie klikaj przez 5 sekund."
+  };
   PUZZLE_DATA[8] = {
     title: "Coś Szybkiego",
+    logicKeys: ["puzzle-8"],
     content: `<p><strong>
 <p>STYCZEŃ = 7  
 <p>LUTY = 4  
@@ -215,6 +278,7 @@
   };
   PUZZLE_DATA[9] = {
     title: "Coś tu nie pasuje...",
+    logicKeys: ["puzzle-9"],
     content: "<p><strong>2, 4, 8, 16, 31, 64, 128",
     solution: "31",
     partial_solution: [
@@ -227,6 +291,7 @@
   };
   PUZZLE_DATA[10] = {
     title: "Bez sensu?",
+    logicKeys: ["puzzle-10"],
         content: `<p><strong>
 <p>0 = 4
 <p>1 = 5
@@ -240,10 +305,64 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
+  PUZZLE_DATA[11] = {
+    title: "Czas Prawdy",
+    puzzleKey: "time-1111",
+    logicKeys: [PUZZLE_LOGIC_KEYS.TIME_1111, "puzzle-11"],
+    content: `<div class="time-lock-puzzle">
+  <p><strong>Kliknij przycisk, aby poznać rozwiązanie.</strong></p>
+  <button type="button" id="puzzle11RevealBtn" class="small-btn">Poznaj rozwiązanie</button>
+  <p><strong>Dwa filary, dwie przepaście...</strong></p>
+  <p id="puzzle11RevealStatus" aria-live="polite"></p>
+</div>`,
+    solution: "todo",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[12] = {
+    title: "Dziwne liczby",
+    logicKeys: ["puzzle-12"],
+    content: `<p><strong><center>43.51474950100621, 16.443521243705444</strong></p>`,
+    solution: "Split",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[13] = {
+    title: "Gdzie on się podział?",
+    puzzleKey: "hotspot-cat",
+    logicKeys: [PUZZLE_LOGIC_KEYS.HOTSPOT_CAT, "puzzle-13"],
+    content: `<div class="puzzle10-image-wrap">
+  <img src="img/dachy.png" alt="" class="puzzle10-image">
+  <button type="button" class="puzzle-hotspot-btn" aria-label="Ukryty punkt na obrazku" title="Ukryty punkt na obrazku"></button>
+</div>`,
+    solution: "Filuś",
+    hint1: "Tu go nie ma",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[14] = {
+    title: "8x8",
+    puzzleKey: "color-grid-8x8",
+    logicKeys: [PUZZLE_LOGIC_KEYS.COLOR_GRID, "puzzle-14"],
+    content: `<div class="puzzle16-container">
+  <div class="puzzle16-grid" id="puzzle16Grid"></div>
+  <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
+    <div class="puzzle16-happy-bg"></div>
+  </div>
+</div>`,
+    solution: "dynia",
+    hint1: "Czy potrafisz rozpoznać te pomniki?",
+    hint2: "Czy wiesz gdzie się znajdują?",
+    hint3: "Spróbuj zlokalizować je na mapie.",
+    hint4: "Coś powinno się pokazać",
+    hint5: "Czytaj od zachodu"
+  };
   PUZZLE_DATA[15] = {
     title: "Frère Jacques",
     puzzleKey: "piano-frere-jacques",
-    logicKeys: [PUZZLE_LOGIC_KEYS.PIANO],
+    logicKeys: [PUZZLE_LOGIC_KEYS.PIANO, "puzzle-15"],
     content: `<div class="piano-puzzle">
   <ul class="piano-keyboard set" role="group" aria-label="Klawiatura pianina">
     <li class="white c piano-key" data-piano-note="C4" data-key-label="C" aria-label="C"></li>
@@ -269,10 +388,69 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
+  PUZZLE_DATA[16] = {
+    title: "Biała Roszada",
+    puzzleKey: "chess-castle",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD, "puzzle-16"],
+    content: `<div class="puzzle32-wrap">
+  <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
+  <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
+  <button type="button" id="puzzle32Reset" class="small-btn">Reset</button>
+</div>`,
+    starting_board: [
+      ["♜", "", "♝", "♛", "♚", "♝", "", "♜"],
+      ["", "", "♟", "♟", "♟", "♟", "♟", "♟"],
+      ["", "♟", "♞", "", "", "", "", "♞"],
+      ["♟", "", "", "", "", "", "", ""],
+      ["", "", "", "", "♙", "", "", ""],
+      ["", "", "", "♗", "", "", "", "♘"],
+      ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
+      ["♖", "♘", "♗", "", "♔", "", "", "♖"]
+    ],
+    solution_board: [
+      ["♜", "", "♝", "♛", "♚", "♝", "", "♜"],
+      ["", "", "♟", "♟", "♟", "♟", "♟", "♟"],
+      ["", "♟", "♞", "", "", "", "", "♞"],
+      ["♟", "", "", "", "", "", "", ""],
+      ["", "", "", "", "♙", "", "", ""],
+      ["", "", "", "♗", "", "", "", "♘"],
+      ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
+      ["♖", "♘", "♗", "", "", "♖", "♔", ""]
+    ],
+    solution: "zumzwang",
+    hint1: "Czy wiesz czym jest roszada?",
+    hint2: "Jeśli wykonałaś manewr poprawnie, to rozejrzyj się dokładnie...",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[17] = {
+    title: "Chroma",
+    logicKeys: ["puzzle-17"],
+    content: `<div style="display:flex; justify-content:center; padding:0.4rem 0;">
+  <div style="font-family:'Segoe Script','Lucida Handwriting','Brush Script MT',cursive; font-size:1.45rem; line-height:1.5; color:#6d3a1f; background:#fff9ef; border:1px solid #eadfcf; border-radius:10px; padding:1rem 1.25rem; box-shadow:0 3px 10px rgba(0,0,0,0.08); text-align:center;">
+    czerwony<br>
+    +<br>
+    pomarańczowy<br>
+    +<br>
+    żółty<br>
+    +<br>
+    zielony<br>
+    +<br>
+    niebieski<br>
+    +<br>
+    indygo<br>
+    +<br>
+    fioletowy
+  </div>
+</div>`,
+    solution: "tęcza",
+    hint1: "czy ten zestaw kolorów coś Ci przypomina?",
+    hint2: "kolorów w tym zadaniu nie mieszamy, a ustawiamy koło siebie",
+    hint3: "czy gdzieś w przyrodzie  taki zestaw kolorów występuje?"
+  };
   PUZZLE_DATA[18] = {
     title: "Pechowy cesarz",
     puzzleKey: "caesar-shift",
-    logicKeys: [PUZZLE_LOGIC_KEYS.CAESAR],
+    logicKeys: [PUZZLE_LOGIC_KEYS.CAESAR, "puzzle-18"],
     content: `<div class="caesar-helper">
   <p><strong>xelcgbtensvn</strong></p>
   <div class="caesar-row-wrap">
@@ -307,16 +485,9 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[12] = {
-    title: "Dziwne liczby",
-    content: `<p><strong><center>43.51474950100621, 16.443521243705444</strong></p>`,
-    solution: "Split",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
-  };
   PUZZLE_DATA[19] = {
     title: "Będzie jakaś zniżka?",
+    logicKeys: ["puzzle-19"],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/shape.png" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
 </div>`,
@@ -328,36 +499,24 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[13] = {
-    title: "Gdzie on się podział?",
-    puzzleKey: "hotspot-cat",
-    logicKeys: [PUZZLE_LOGIC_KEYS.HOTSPOT_CAT],
-    content: `<div class="puzzle10-image-wrap">
-  <img src="img/dachy.png" alt="" class="puzzle10-image">
-  <button type="button" class="puzzle-hotspot-btn" aria-label="Ukryty punkt na obrazku" title="Ukryty punkt na obrazku"></button>
+  PUZZLE_DATA[20] = {
+    //TODO hint
+    title: "Na głowie",
+    logicKeys: ["puzzle-20"],
+    content: `<div style="display: grid; place-items: center;">
+  <img src="img/z2.jpg" alt="" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 4px;">
 </div>`,
-    solution: "Filuś",
-    hint1: "Tu go nie ma",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
-  };
-  PUZZLE_DATA[11] = {
-    title: "Czas Prawdy",
-    puzzleKey: "time-1111",
-    logicKeys: [PUZZLE_LOGIC_KEYS.TIME_1111],
-    content: `<div class="time-lock-puzzle">
-  <p><strong>Kliknij przycisk, aby poznać rozwiązanie.</strong></p>
-  <button type="button" id="puzzle11RevealBtn" class="small-btn">Poznaj rozwiązanie</button>
-  <p><strong>Dwa filary, dwie przepaście...</strong></p>
-  <p id="puzzle11RevealStatus" aria-live="polite"></p>
-</div>`,
-    solution: "todo",
+    solution: "glob",
+    partial_solution: [
+      { key: "8079", message: "To byłoby za proste:)" }
+    ],
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[21] = {
     title: "W mroku czają się bestie",
+    logicKeys: ["puzzle-21"],
     content: `<div class="puzzle12-image-wrap">
   <img src="img/potwory.jpg" alt="" class="puzzle12-image">
   <div class="puzzle-hover-hint" title="Łeeeee, co to jest???" style="--hint-left: 6%; --hint-top: 13%;"></div>
@@ -371,6 +530,7 @@
   };
   PUZZLE_DATA[22] = {
     title: "Hej, ale to przecież nie są mapy!",
+    logicKeys: ["puzzle-22"],
     content: `<div style="display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); align-items:start;">
   <img src="https://flagcdn.com/w320/ke.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
   <img src="https://flagcdn.com/w320/ao.png" alt="" style="width:100%; height:auto; display:block; border-radius:4px; border:1px solid #d8c8b5;">
@@ -397,12 +557,10 @@
 
 
   };
-
-  //TODO - finis the map!
   PUZZLE_DATA[23] = {
     title: "Ukryte pomniki",
     puzzleKey: "map-hotspot-debug",
-    logicKeys: [PUZZLE_LOGIC_KEYS.HOTSPOT_DEBUG],
+    logicKeys: [PUZZLE_LOGIC_KEYS.HOTSPOT_DEBUG, "puzzle-23"],
     content: `
       <div style="display: flex; flex-direction: column; align-items: center; gap: 24px;">
         <div class="puzzle14-map-wrap">
@@ -433,50 +591,22 @@
 
   };
   PUZZLE_DATA[24] = {
-    title: "WIP Sonar",
-    puzzleKey: "sonar-wip",
-    logicKeys: [PUZZLE_LOGIC_KEYS.SONAR],
-    work_in_progress: true,
-    content: `<div class="sonar-puzzle">
-  <p><strong>Ta zagadka jest tylko zalążkiem - możesz ją śmiało pominąć podczas testów.</strong></p>
-  <div class="sonar-controls">
-    <button type="button" id="puzzle15SonarToggle" class="small-btn" aria-pressed="false">Sonar: OFF</button>
-    <p id="puzzle15Status" class="sonar-status" aria-live="polite">Sonar wyłączony.</p>
-  </div>
-  <div id="puzzle15Field" class="sonar-field" role="img" aria-label="Pole sonaru z łodzią podwodną i celem">
-    <div id="puzzle15Target" class="sonar-target" aria-hidden="true"></div>
-    <div id="puzzle15Submarine" class="sonar-submarine" aria-hidden="true">
-      <span class="sonar-submarine-tower"></span>
-      <span class="sonar-submarine-tail"></span>
-      <span class="sonar-submarine-window w1"></span>
-      <span class="sonar-submarine-window w2"></span>
-    </div>
-  </div>
+    title: "",
+    logicKeys: ["puzzle-38"],
+    content: `<div style="display: grid; gap: 0.7rem; justify-items: center; text-align: center;">
+  <p style="font-size: 300%; line-height: 1.2;"><strong>^=&gt;<br>N=Z<br>:=..<br>8=?</strong></p>
 </div>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
-  };
-  PUZZLE_DATA[14] = {
-    title: "8x8",
-    puzzleKey: "color-grid-8x8",
-    logicKeys: [PUZZLE_LOGIC_KEYS.COLOR_GRID],
-    content: `<div class="puzzle16-container">
-  <div class="puzzle16-grid" id="puzzle16Grid"></div>
-  <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
-    <div class="puzzle16-happy-bg"></div>
-  </div>
-</div>`,
-    solution: "dynia",
-    hint1: "Czy potrafisz rozpoznać te pomniki?",
-    hint2: "Czy wiesz gdzie się znajdują?",
-    hint3: "Spróbuj zlokalizować je na mapie.",
-    hint4: "Coś powinno się pokazać",
-    hint5: "Czytaj od zachodu"
+    solution: "nieskończoność",
+    hint1: "coś łączy te pary symboli",
+    hint2: "czy widzisz jakieś podobieństwo między prawą a lewą stroną?",
+    hint3: "symbole są bardziej podobne niż to może się zdawać na pierwszy rzut oka",
+    hint4: "90 stopni",
+    hint5: "obróć symbol o 90 stopni zgodnie z ruchem wskazówek zegara",
+    hint6: "∞"
   };
   PUZZLE_DATA[25] = {
     title: "Zacznij od góry",
+    logicKeys: ["puzzle-25"],
     content: `<div class="puzzle17-wrap">
   <div class="puzzle17-grid" role="img" aria-label="Siatka liter 7 na 6">
     <span class="puzzle17-cell">o</span>
@@ -535,6 +665,7 @@
   };
   PUZZLE_DATA[26] = {
     title: "Memento",
+    logicKeys: ["puzzle-26"],
     content: `<div class="puzzle18-wrap">
   <div class="puzzle18-grid" role="img" aria-label="Siatka ze wskaźnikami 7 na 6">
     <span class="puzzle18-cell"></span>
@@ -591,10 +722,35 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
+  PUZZLE_DATA[27] = {
+    title: "Szkapa",
+    puzzleKey: "chess-knight-path",
+    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD, "puzzle-27"],
+    content: `<div class="puzzle32-wrap">
+  <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
+  <button type="button" id="puzzle37Reset" class="small-btn">Resetuj</button>
+  <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
+</div>`,
+    starting_board: [
+      ["D", " ", " ", " ", "W", " ", " ", " "],
+      [" ", " ", "I", " ", " ", " ", "E", " "],
+      [" ", "Z", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "A", " ", " ", " ", " ", "I"],
+      ["I", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "L", " ", " ", " ", " ", "N", " "],
+      [" ", " ", " ", "N", " ", " ", " ", " "],
+      [" ", "Y", " ", " ", " ", " ", " ", "♘"]
+      
+    ],
+    solution_board: null,
+    solution: "niewidzialny",
+    hint1: "Czy wiesz jak w szachah porusza się skoczek (koń)?",
+    hint2: "Każdym ruchem wskocz na literę",
+  };
   PUZZLE_DATA[28] = {
     title: "Czy go słyszysz?",
     puzzleKey: "night-sky",
-    logicKeys: [PUZZLE_LOGIC_KEYS.NIGHT_SKY],
+    logicKeys: [PUZZLE_LOGIC_KEYS.NIGHT_SKY, "puzzle-28"],
     content: `<div class="time-lock-puzzle">
   <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
 </div>`,
@@ -605,6 +761,7 @@
   };
   PUZZLE_DATA[29] = {
     title: "",
+    logicKeys: ["puzzle-29"],
     content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
     solution: "panika",
     hint1: "TODO hint 1",
@@ -613,6 +770,7 @@
   };
   PUZZLE_DATA[30] = {
     title: "Kurczaczek",
+    logicKeys: ["puzzle-30"],
     content: `<div style="position: relative; display: grid; gap: 14px; place-items: center; text-align: center; padding: 0.6rem 0.9rem 2.2rem 0.9rem;">
   <div style="position: absolute; right: 0.65rem; bottom: 0.35rem; transform: rotate(-7deg); font-family: 'Segoe Script', 'Lucida Handwriting', 'Brush Script MT', cursive; font-size: 0.95rem; color: #6b4630; opacity: 0.88; letter-spacing: 0.02em; white-space: nowrap; pointer-events: none;">
     coś tu się nie zgadza...
@@ -627,6 +785,7 @@
 
   PUZZLE_DATA[31] = {
     title: "Mały głód",
+    logicKeys: ["puzzle-31"],
     content: `<div style="display: grid; gap: 0.7em; justify-items: center; font-size: 1.18rem; line-height: 1.5;">
   <div>Bar+Sód+Azot</div>
   <div>Sód</div>
@@ -640,6 +799,7 @@
   };
   PUZZLE_DATA[32] = {
     title: "",
+    logicKeys: ["puzzle-32"],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/belt.jpg" alt="Pasek" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -651,6 +811,7 @@
   };
   PUZZLE_DATA[33] = {
     title: "Łatwiej będzie na telefonie...",
+    logicKeys: ["puzzle-33"],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/pochyl.png" alt="Podpowiedź: pochyl telefon" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -661,6 +822,7 @@
   };
   PUZZLE_DATA[34] = {
     title: "Dostał się Filuś na małe ogrodzenie",
+    logicKeys: ["puzzle-34"],
     content: `<p><strong>Gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
     solution: "złaź sierściuchu",
     hint1: "tu go nie ma",
@@ -673,7 +835,7 @@
   PUZZLE_DATA[36] = {
     title: "Chronologia",
     puzzleKey: "chronologia-clocks",
-    logicKeys: [PUZZLE_LOGIC_KEYS.CLOCKS],
+    logicKeys: [PUZZLE_LOGIC_KEYS.CLOCKS, "puzzle-36"],
     second_hand_positions: [51, 30, 5, 14, 40, 23, 1],
     second_hand_letters: ["S", "N", "H", "R", "O", "O", "C"],
     content: `<div class="clocks-puzzle">
@@ -694,7 +856,7 @@
   PUZZLE_DATA[37] = {
     title: "Magiczny Ogród",
     puzzleKey: "life-magic-garden",
-    logicKeys: [PUZZLE_LOGIC_KEYS.LIFE],
+    logicKeys: [PUZZLE_LOGIC_KEYS.LIFE, "puzzle-37"],
     work_in_progress: true,
     content: `<div id="puzzle28Wrap" class="puzzle28-wrap">
   <div class="puzzle28-controls">
@@ -723,22 +885,35 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[38] = {
-    title: "",
-    content: `<div style="display: grid; gap: 0.7rem; justify-items: center; text-align: center;">
-  <p style="font-size: 300%; line-height: 1.2;"><strong>^=&gt;<br>N=Z<br>:=..<br>8=?</strong></p>
+    title: "WIP Sonar",
+    puzzleKey: "sonar-wip",
+    logicKeys: [PUZZLE_LOGIC_KEYS.SONAR, "puzzle-24"],
+    work_in_progress: true,
+    content: `<div class="sonar-puzzle">
+  <p><strong>Ta zagadka jest tylko zalążkiem - możesz ją śmiało pominąć podczas testów.</strong></p>
+  <div class="sonar-controls">
+    <button type="button" id="puzzle15SonarToggle" class="small-btn" aria-pressed="false">Sonar: OFF</button>
+    <p id="puzzle15Status" class="sonar-status" aria-live="polite">Sonar wyłączony.</p>
+  </div>
+  <div id="puzzle15Field" class="sonar-field" role="img" aria-label="Pole sonaru z łodzią podwodną i celem">
+    <div id="puzzle15Target" class="sonar-target" aria-hidden="true"></div>
+    <div id="puzzle15Submarine" class="sonar-submarine" aria-hidden="true">
+      <span class="sonar-submarine-tower"></span>
+      <span class="sonar-submarine-tail"></span>
+      <span class="sonar-submarine-window w1"></span>
+      <span class="sonar-submarine-window w2"></span>
+    </div>
+  </div>
 </div>`,
-    solution: "nieskończoność",
-    hint1: "coś łączy te pary symboli",
-    hint2: "czy widzisz jakieś podobieństwo między prawą a lewą stroną?",
-    hint3: "symbole są bardziej podobne niż to może się zdawać na pierwszy rzut oka",
-    hint4: "90 stopni",
-    hint5: "obróć symbol o 90 stopni zgodnie z ruchem wskazówek zegara",
-    hint6: "∞"
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[39] = {
     title: "",
     puzzleKey: "white-content-numbers",
-    logicKeys: [PUZZLE_LOGIC_KEYS.WHITE_CONTENT],
+    logicKeys: [PUZZLE_LOGIC_KEYS.WHITE_CONTENT, "puzzle-39"],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/numery.png" alt="Numery" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -749,6 +924,7 @@
   };
   PUZZLE_DATA[40] = {
     title: "Wzór",
+    logicKeys: ["puzzle-40"],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/formula.png" alt="Wzór" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -757,44 +933,10 @@
     hint2: "Nie wymaga też znajomości dziwnych symboli matematycznch lub fizycznych",
     hint3: "Zwróć uwagę tylko na elementy, które są dla ciebie zrozumiałe"
   };
-  PUZZLE_DATA[16] = {
-    title: "Biała Roszada",
-    puzzleKey: "chess-castle",
-    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD],
-    content: `<div class="puzzle32-wrap">
-  <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
-  <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
-  <button type="button" id="puzzle32Reset" class="small-btn">Reset</button>
-</div>`,
-    starting_board: [
-      ["♜", "", "♝", "♛", "♚", "♝", "", "♜"],
-      ["", "", "♟", "♟", "♟", "♟", "♟", "♟"],
-      ["", "♟", "♞", "", "", "", "", "♞"],
-      ["♟", "", "", "", "", "", "", ""],
-      ["", "", "", "", "♙", "", "", ""],
-      ["", "", "", "♗", "", "", "", "♘"],
-      ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
-      ["♖", "♘", "♗", "", "♔", "", "", "♖"]
-    ],
-    solution_board: [
-      ["♜", "", "♝", "♛", "♚", "♝", "", "♜"],
-      ["", "", "♟", "♟", "♟", "♟", "♟", "♟"],
-      ["", "♟", "♞", "", "", "", "", "♞"],
-      ["♟", "", "", "", "", "", "", ""],
-      ["", "", "", "", "♙", "", "", ""],
-      ["", "", "", "♗", "", "", "", "♘"],
-      ["♙", "♙", "♙", "♙", "♕", "♙", "♙", "♙"],
-      ["♖", "♘", "♗", "", "", "♖", "♔", ""]
-    ],
-    solution: "zumzwang",
-    hint1: "Czy wiesz czym jest roszada?",
-    hint2: "Jeśli wykonałaś manewr poprawnie, to rozejrzyj się dokładnie...",
-    hint3: "TODO hint 3"
-  };
   PUZZLE_DATA[41] = {
     title: "Szach-mat w jednym ruchu!",
     puzzleKey: "chess-mate-one",
-    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD, PUZZLE_LOGIC_KEYS.CHESS_MATE],
+    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD, PUZZLE_LOGIC_KEYS.CHESS_MATE, "puzzle-41"],
     content: `<div class="puzzle32-wrap">
   <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
   <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
@@ -832,7 +974,7 @@
   PUZZLE_DATA[42] = {
     title: "Sonet",
     puzzleKey: "clock-hands-sonet",
-    logicKeys: [PUZZLE_LOGIC_KEYS.CLOCK_HANDS],
+    logicKeys: [PUZZLE_LOGIC_KEYS.CLOCK_HANDS, "puzzle-42"],
     work_in_progress: true,
     content: `<div class="puzzle34-wrap" style="display:grid; gap:0.8rem; line-height:1.6; text-align:center;">
   <p><strong>Jako fale dążące ku żwirom wybrzeży</strong></p>
@@ -863,21 +1005,52 @@
   };
   PUZZLE_DATA[43] = {
     title: "Podobieństwa i różnice",
+    logicKeys: ["puzzle-43"],
     work_in_progress: true,
     content: `<div style="display:grid; gap:0.8rem; justify-items:center; text-align:center;">
   <p><strong>Podobieństwa i różnice</strong></p>
   <p>Użyj par tak jak w elementach pod notatkami. Odczytaj litery i zbuduj hasło.</p>
-  <div style="display:grid; gap:0.35rem; text-align:left; max-width:420px; width:100%;">
-    <p><strong>dar -> drap</strong></p>
-    <p><strong>bat -> brat</strong></p>
-    <p><strong>aut -> auto</strong></p>
-    <p><strong>chart -> strach</strong></p>
-    <p><strong>rak -> Irak</strong></p>
-    <p><strong>rak -> kara</strong></p>
-    <p><strong>hełm -> Chełm</strong></p>
-    <p><strong>rak -> krzak</strong></p>
-    <p><strong>Cezar -> czar</strong></p>
-    <p><strong>rak -> kark</strong></p>
+  <div id="puzzle43Pairs" style="display:grid; gap:0.45rem; width:100%; max-width:560px;">
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="dar"></div>
+      <div class="puzzle-piece" data-puzzle43-word="drap"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="bat"></div>
+      <div class="puzzle-piece" data-puzzle43-word="brat"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="aut"></div>
+      <div class="puzzle-piece" data-puzzle43-word="auto"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="chart"></div>
+      <div class="puzzle-piece" data-puzzle43-word="strach"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="rak"></div>
+      <div class="puzzle-piece" data-puzzle43-word="Irak"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="rak"></div>
+      <div class="puzzle-piece" data-puzzle43-word="kara"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="hełm"></div>
+      <div class="puzzle-piece" data-puzzle43-word="Chełm"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="rak"></div>
+      <div class="puzzle-piece" data-puzzle43-word="krzak"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="Cezar"></div>
+      <div class="puzzle-piece" data-puzzle43-word="czar"></div>
+    </div>
+    <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
+      <div class="puzzle-piece" data-puzzle43-word="rak"></div>
+      <div class="puzzle-piece" data-puzzle43-word="kark"></div>
+    </div>
   </div>
 </div>`,
     solution: "prosiaczek",
@@ -888,7 +1061,7 @@
   PUZZLE_DATA[44] = {
     title: "Mystery",
     puzzleKey: "mystery-grid",
-    logicKeys: [PUZZLE_LOGIC_KEYS.MYSTERY],
+    logicKeys: [PUZZLE_LOGIC_KEYS.MYSTERY, "puzzle-44"],
     work_in_progress: true,
     content: `<div class="puzzle36-wrap">
   <div class="puzzle36-casefile">
@@ -946,35 +1119,10 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[27] = {
-    title: "Szkapa",
-    puzzleKey: "chess-knight-path",
-    logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD],
-    content: `<div class="puzzle32-wrap">
-  <div id="puzzle32Board" class="puzzle32-board" role="grid" aria-label="Szachownica 8 na 8"></div>
-  <button type="button" id="puzzle37Reset" class="small-btn">Resetuj</button>
-  <p id="puzzle32Status" class="puzzle32-status" aria-live="polite">Kliknij pole z figurą, aby rozpocząć ruch.</p>
-</div>`,
-    starting_board: [
-      ["D", " ", " ", " ", "W", " ", " ", " "],
-      [" ", " ", "I", " ", " ", " ", "E", " "],
-      [" ", "Z", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "A", " ", " ", " ", " ", "I"],
-      ["I", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "L", " ", " ", " ", " ", "N", " "],
-      [" ", " ", " ", "N", " ", " ", " ", " "],
-      [" ", "Y", " ", " ", " ", " ", " ", "♘"]
-      
-    ],
-    solution_board: null,
-    solution: "niewidzialny",
-    hint1: "Czy wiesz jak w szachah porusza się skoczek (koń)?",
-    hint2: "Każdym ruchem wskocz na literę",
-  };
   PUZZLE_DATA[46] = {
     title: "Połączenia",
     puzzleKey: "connections-nodes",
-    logicKeys: [PUZZLE_LOGIC_KEYS.CONNECTIONS],
+    logicKeys: [PUZZLE_LOGIC_KEYS.CONNECTIONS, "puzzle-46"],
     content: `<div class="puzzle38-wrap">
   <div id="puzzle38Boards" class="puzzle38-boards" role="group" aria-label="Sześć siatek czerwonych punktów"></div>
   <button type="button" id="puzzle38Reset" class="small-btn">Reset</button>
@@ -985,93 +1133,19 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
-  PUZZLE_DATA[17] = {
-    title: "Chroma",
-    content: `<div style="display:flex; justify-content:center; padding:0.4rem 0;">
-  <div style="font-family:'Segoe Script','Lucida Handwriting','Brush Script MT',cursive; font-size:1.45rem; line-height:1.5; color:#6d3a1f; background:#fff9ef; border:1px solid #eadfcf; border-radius:10px; padding:1rem 1.25rem; box-shadow:0 3px 10px rgba(0,0,0,0.08); text-align:center;">
-    czerwony<br>
-    +<br>
-    pomarańczowy<br>
-    +<br>
-    żółty<br>
-    +<br>
-    zielony<br>
-    +<br>
-    niebieski<br>
-    +<br>
-    indygo<br>
-    +<br>
-    fioletowy
-  </div>
-</div>`,
-    solution: "tęcza",
-    hint1: "czy ten zestaw kolorów coś Ci przypomina?",
-    hint2: "kolorów w tym zadaniu nie mieszamy, a ustawiamy koło siebie",
-    hint3: "czy gdzieś w przyrodzie  taki zestaw kolorów występuje?"
-  };
   PUZZLE_DATA[47] = {
     title: "Wycieczka do Kielc",
+    work_in_progress: true,
+    logicKeys: ["puzzle-47"],
     // Add content, solution, and hints as needed
     solution: "wieje",
     hint1: "Ta zagadka wymaga wycieczki do do miast Dzika",
     hint2: "W następnej podpowiedzi jest odpowiedź",
     hint3: "Odpowiedź to: WIEJE"
   };
-  PUZZLE_DATA[2] = {
-    title: "Każdy szczegół się liczy",
-    content: `<p>W procesie rozwiązywania mogą brać udział <strong>różne</strong> elementy strony - zwracaj uwagę na <strong>każdy</strong> szczegół i miej oczy i uszy szeroko otwarte! I bój się <strong>klikać</strong> i eksperymentować.</p>`,
-    solution: "jednorożec",
-    partial_solution: [
-      { key: "różne", message: "Co ci wyjdzie" },
-      { key: "każdy", message: "Jak dodasz konia" },
-      { key: "klikać", message: "i róg?" }
-    ],
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
-  };
-  PUZZLE_DATA[3] = {
-    title: "Podpowiedzi",
-    work_in_progress: true,
-    content: `<p>Zadania mają też przygotowane podpowiedzi - znajdziesz je na samym dole strony w osobnej sekcji.</p>
-<p>Zachęcam jednak, żeby korzystać z nich oszczędnie - czasem lepiej odłożyć rozwiązywanie na później i wrócić - satysfakcja z wymyślenia czegoś samemu zawsze jest większa!</p>
-<p>Może tam zajrzysz teraz?</p>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
-  };
-    PUZZLE_DATA[4] = {
-    title: "Tutorial",
-    work_in_progress: true,
-    content: `<p>Do rozwiązywania zagadek czasem mogą być potrzebne zewnętrzne materiały - w większości powinna wystarczyć wikipedia, ale inne strony lub książki też mogą być przydatne.</p>
-  <p><a href="https://pl.wikipedia.org/wiki/Zagadka" target="_blank" rel="noopener noreferrer">https://pl.wikipedia.org/wiki/Zagadka</a> - zagadka literacka</p>
-  <p>Nie ma potrzeby ani sensu korzystać tu z AI - może to popsuć zabawę.</p>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
-  };
-      PUZZLE_DATA[5] = {
-    title: "Tutorial: Notatki",
-    work_in_progress: true,
-    content: `<p>notatki</p>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
-  };
-      PUZZLE_DATA[6] = {
-    title: "Tutorial: Błędy",
-    work_in_progress: true,
-    content: `<p>Mimo ogromnej ilości ppracy, godzieniegdzie momgą znaleźć się błędy - kyiedy trafisz na coś co wydaje się nie mieć sensu, lłub nie działakć - daj mi znaać!</p>`,
-    solution: "pomyłka",
-    hint1: "Coś z tym tekstem jest chyba nie tak...",
-    hint2: "Sprawdź literówki i błędy w tekście"
-  };
   PUZZLE_DATA[48] = {
     title: "Tłumaczenie",
-    work_in_progress: true,
+    logicKeys: ["puzzle-48"],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/claw.jpg" alt="Claw" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
 </div>`,
@@ -1079,12 +1153,13 @@
     partial_solution: [
       { key: "entrance", message: "Dobrze, ale to nie koniec" }
     ],
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "entrance"
+    hint1: "Co przypomina ci dolna część obrazka?",
+    hint2: "Czy znasz jakiś przedmiot z symbolami na prostokątnach?",
+    hint3: "Prawie na pewno patrzysz właśnie na ten przedmiot lub jego część"
   };
     PUZZLE_DATA[49] = {
       title: "Brakujące słowa",
+    logicKeys: ["puzzle-49"],
       work_in_progress: true,
       content: `<p>Matka naszego hobbita... ale co to jest hobbit? Zdaje mi się, że wymaga to wyjaśnienia. W dzisiejszych czasach bowiem hobbitów bardzo rzadko można spotkać: nie ma ich wiele, a poza tym unikają Dużych Ludzi — jak nazywają nas. Hobbici są — czy może byli — małymi ludźmi, mniejszymi od krasnoludów — różnią się też od nich tym, że nie noszą brody — lecz znacznie większymi od liliputów. Nie uprawiają wcale albo prawie wcale czarów, z wyjątkiem chyba zwykłej, powszedniej sztuki, która pozwala im znikać bezszelestnie i błyskawicznie, kiedy duzi, niemądrzy ludzie, jak ty i ja, zabłądzą w ich pobliże, hałasując niesłychanie głośno, tak że na milę można ich usłyszeć. Hobbici są skłonni do tycia, zwłaszcza w pasie: miewają wypięte brzuchy; ubierają się kolorowo (najchętniej zielono i żółto); nie używają obuwia, ponieważ stopy ich z przyrodzenia opatrzone są twardą podeszwą i porośnięte bujnym, ciemnym, brunatnym włosem, podobnie jak głowa (zwykle kędzierzawa); mają długie, zręczne, smagłe palce i poczciwe twarze, a śmieją się dużo, basowo i serdecznie (szczególnie po obiedzie, który — w miarę możności — zjadają dwa razy dziennie). Teraz już wiecie o nich dość na początek. Jak więc mówiłem, matką naszego hobbita — to jest Bilba Bagginsa — była słynna Belladonna Tuk, jedna z trzech niespotykanych córek Starego Tuka, głowy wszystkich hobbitów mieszkających Za Wodą, czyli za rzeką, która płynęła u stóp Pagórka. Powiadano, że dawnymi czasy ten i ów Tuk brał żonę z plemienia czarodziejów (nieżyczliwi twierdzili że to były gobliny); rzeczywiście Tukowie zawsze mieli w sobie coś niezwykle hobbitciego, a od czasu do czasu zdarzało się, że ktoś z członków tego rodu wyruszał w świat szukać przygód. Taki Tuk znikał dyskretnie, a rodzina nie rozgłaszała sprawy; fakt jednak, że Tukowie nie byli tak szanowani jak Bagginsowie, chociaż niewątpliwie od nich bogatsi.</p>
   <p>Co prawda Belladonna Tuk, odkąd została panią Bungołą Baggins, nie miewała żadnych przygód. Bungo, ojciec Bilba, zbudował dla niej (częściowo za jej posag) norę tak wspaniałą, że nie znalazłoby się nic podobnego ani pod Pagórkiem, ani za Pagórkiem, ani Za Wodą, i w tej norze mieszkali małżonkowie aż do końca swoich dni. Mimo wszystko wydaje się prawdopodobne, że Bilbo, jedyny syn Belladonny, chociaż wyglądał i zachowywał się dokładnie tak, jakby był drugim wydaniem swojego solidnego i spokojnego ojca, odziedziczył po kądzieli ziarenko dziwactwa i że to ziarenko czekało tylko na okazję, by zakiełkować. Okazja jednak się nie nadarzyła, aż Bilbo dorósł, skończył pięćdziesiąt lat czy coś koło tego, i za-</p>`,
@@ -1093,28 +1168,9 @@
       hint2: "TODO hint 2",
       hint3: "TODO hint 3"
     };
-  PUZZLE_DATA[7] = {
-    title: "Dzień Ryjka",
-    puzzleKey: "snout-day",
-    logicKeys: [PUZZLE_LOGIC_KEYS.SNOUT_DAY],
-    content: `<div class="puzzle48-wrap" style="display:grid; gap:0.65rem;">
-  <p>W procesie rozwiązywania zagadek mogą brać udział naprawdę różne elementy strony i świata zewnętrznego.</p>
-  <p>Aby rozwiązać tę zagadkę musisz:</p>
-  <ol style="margin:0; padding-left:1.2rem; display:grid; gap:0.2rem;">
-    <li>sprawdzić który dzień miesiąca mamy (nazwijmy tę liczbę X)</li>
-    <li>znaleźć ryjek w prawym górnym rogu ekranu</li>
-    <li>kliknąć go X razy</li>
-    <li>poczekać 5 sekund</li>
-  </ol>
-  <p id="puzzle48Timer" aria-live="polite"></p>
-</div>`,
-    solution: "ryjek",
-    hint1: "X to aktualny dzień miesiąca.",
-    hint2: "Ryjek jest przy tytule zagadki, w prawym górnym rogu.",
-    hint3: "Po ostatnim kliknięciu nic nie klikaj przez 5 sekund."
-  };
   PUZZLE_DATA[60] = {
     title: "Trudne się wylosowało",
+    logicKeys: ["puzzle-60"],
     work_in_progress: true,
     content: `<p><strong>Będziemy skakać po zagadkach (hints)</strong></p>`,
     solution: "",
@@ -1125,7 +1181,7 @@
     PUZZLE_DATA[61] = {
     title: "Alfabet roślin",
       puzzleKey: "pixel-font",
-      logicKeys: [PUZZLE_LOGIC_KEYS.PIXEL_FONT],
+      logicKeys: [PUZZLE_LOGIC_KEYS.PIXEL_FONT, "puzzle-61"],
     work_in_progress: true,
     content: `<div class="puzzle61-wrap">
   <p>Wpisz tekst, aby zobaczyć go w pikselowym alfabecie.</p>
@@ -1141,6 +1197,7 @@
   };
   PUZZLE_DATA[64] = {
     title: "Na deser",
+    logicKeys: ["puzzle-64"],
     work_in_progress: true,
     content: `<p><strong>Czy pamiętasz warzywo?</strong></p>`,
     solution: "słonecznik",
@@ -1152,7 +1209,7 @@
     hint6: "Kratki menu z rozwiązanymi zagadkami tworzą obrazek. Co przedstawia ten obrazek?"
   };
 
-  const buildPuzzleOrderDiagnostics = () => {
+const buildPuzzleOrderDiagnostics = () => {
     const slotRows = [];
     for (let slotId = 1; slotId <= TOTAL_PUZZLES; slotId += 1) {
       const puzzle = PUZZLE_DATA[slotId];
@@ -1241,6 +1298,7 @@
     audioContext: null,
     meowAudio: null,
     howlAudio: null,
+    fanfareAudio: null,
     sonarAudio: null,
     puzzle27IntervalId: null,
     puzzle27State: null,
@@ -1403,6 +1461,7 @@
         this.state.puzzles[String(this.state.selectedPuzzle)] = puzzle;
         this.saveState();
         this.renderPuzzleView();
+        this.playFanfareSound();
         this.showCheckFeedback(
           "success",
           "BRAWO!",
@@ -1634,6 +1693,27 @@
       });
 
       this.els.notesInput.addEventListener("input", () => {
+        // Puzzle 5: Check for exactly 200 characters
+        if (this.state.selectedPuzzle === 5 && this.els.notesInput.value.length === 200) {
+          if (this.els.hintPopup) {
+            if (this.els.hintPopupTitle) {
+              this.els.hintPopupTitle.textContent = "";
+            }
+            if (this.els.hintPopupText) {
+              this.els.hintPopupText.textContent = "DZIENNIK";
+            }
+            if (this.els.hintRevealBtn) {
+              this.els.hintRevealBtn.style.display = "none";
+            }
+            if (this.els.hintCloseBtn) {
+              this.els.hintCloseBtn.style.display = "block";
+            }
+            this.els.hintPopup.classList.add("show");
+            this.els.hintPopup.setAttribute("aria-hidden", "false");
+            this.activeHintContext = null;
+          }
+        }
+
         window.clearTimeout(this.notesSaveTimer);
         this.setSaveIndicator("Saving...");
 
@@ -1898,6 +1978,13 @@
       this.els.solutionInput.value = puzzle.solution;
       this.els.notesInput.value = puzzle.notes;
 
+      // Puzzle 5: Custom placeholder
+      if (id === 5) {
+        this.els.notesInput.placeholder = "Wpisz tu dokładnie 200 znaków...";
+      } else {
+        this.els.notesInput.placeholder = "Tu możesz wpisywać swoje notatki do zagadki...";
+      }
+
       this.els.markSolvedBtn.textContent = puzzle.solved
         ? "Oznacz jako Nierozwiązane"
         : "Sprawdź / Oznacz jako Rozwiązane";
@@ -1908,6 +1995,7 @@
 
       this.els.puzzleContent.innerHTML = puzzleData.content;
       this.renderPasswordPairForCurrentPuzzle();
+      this.renderPuzzle43WordPairs();
       if (puzzleData.work_in_progress) {
         const wipBanner = document.createElement("div");
         wipBanner.className = "puzzle-wip-banner";
@@ -2600,6 +2688,45 @@
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(() => {
           // Ignore blocked autoplay or missing codec errors.
+        });
+      }
+    },
+
+    playFanfareSound() {
+      if (!this.fanfareAudio) {
+        this.fanfareAudio = new Audio("sounds/fanfare.mp3");
+        this.fanfareAudio.preload = "auto";
+      }
+
+      this.fanfareAudio.currentTime = 0;
+      const playPromise = this.fanfareAudio.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          const context = this.ensureAudioContext();
+          if (!context) {
+            return;
+          }
+
+          const now = context.currentTime;
+          const notes = [523.25, 659.25, 783.99, 1046.5];
+          notes.forEach((frequency, index) => {
+            const oscillator = context.createOscillator();
+            const gainNode = context.createGain();
+            const start = now + (index * 0.09);
+            const end = start + 0.22;
+
+            oscillator.type = "triangle";
+            oscillator.frequency.setValueAtTime(frequency, start);
+
+            gainNode.gain.setValueAtTime(0.0001, start);
+            gainNode.gain.linearRampToValueAtTime(0.1, start + 0.03);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, end);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(context.destination);
+            oscillator.start(start);
+            oscillator.stop(end);
+          });
         });
       }
     },
@@ -4355,13 +4482,14 @@
 
       const puzzleId = this.state.selectedPuzzle;
       const hints = this.getPuzzleHintEntries(puzzleId);
+      const hasPuzzle3BonusButton = puzzleId === 3;
       this.els.hintsButtons.innerHTML = "";
 
       if (this.els.hintsEmpty) {
-        this.els.hintsEmpty.classList.toggle("hidden", hints.length > 0);
+        this.els.hintsEmpty.classList.toggle("hidden", hints.length > 0 || hasPuzzle3BonusButton);
       }
 
-      if (hints.length === 0) {
+      if (hints.length === 0 && !hasPuzzle3BonusButton) {
         return;
       }
 
@@ -4380,6 +4508,15 @@
         fragment.appendChild(button);
       });
 
+      if (hasPuzzle3BonusButton) {
+        const notHintButton = document.createElement("button");
+        notHintButton.type = "button";
+        notHintButton.className = "hint-btn";
+        notHintButton.dataset.hintKey = "puzzle3-not-hint";
+        notHintButton.textContent = "To nie jest podpowiedź";
+        fragment.appendChild(notHintButton);
+      }
+
       this.els.hintsButtons.appendChild(fragment);
     },
 
@@ -4389,6 +4526,30 @@
       }
 
       const puzzleId = this.state.selectedPuzzle;
+      if (puzzleId === 3 && hintKey === "puzzle3-not-hint") {
+        this.activeHintContext = null;
+
+        if (this.els.hintPopupTitle) {
+          this.els.hintPopupTitle.textContent = "To nie jest podpowiedź";
+        }
+
+        if (this.els.hintPopupText) {
+          this.els.hintPopupText.textContent = "zajrzyj do podpowiedzi nr 4 w Zagadce 1";
+        }
+
+        if (this.els.hintRevealBtn) {
+          this.els.hintRevealBtn.style.display = "none";
+        }
+
+        if (this.els.hintCloseBtn) {
+          this.els.hintCloseBtn.style.display = "block";
+        }
+
+        this.els.hintPopup.classList.add("show");
+        this.els.hintPopup.setAttribute("aria-hidden", "false");
+        return;
+      }
+
       const hints = this.getPuzzleHintEntries(puzzleId);
       const hint = hints.find((entry) => entry.key === hintKey);
       if (!hint) {
@@ -4719,6 +4880,22 @@
       this.setPuzzlePieceCardWord(secondPieceEl, randomPair.second);
     },
 
+    renderPuzzle43WordPairs() {
+      if (this.state.selectedPuzzle !== 43 || !this.els.puzzleContent) {
+        return;
+      }
+
+      const wordSlots = this.els.puzzleContent.querySelectorAll("[data-puzzle43-word]");
+      if (!wordSlots || wordSlots.length === 0) {
+        return;
+      }
+
+      wordSlots.forEach((slotEl) => {
+        const word = slotEl.dataset.puzzle43Word || "";
+        this.setPuzzlePieceCardImageOrWord(slotEl, word);
+      });
+    },
+
     getExpectedSolution(puzzleId) {
       const puzzleData = PUZZLE_DATA[puzzleId];
       if (!puzzleData || typeof puzzleData.solution !== "string") {
@@ -4871,6 +5048,7 @@
       }
       this.saveState();
       this.renderPuzzleView();
+      this.playFanfareSound();
       this.setSaveIndicator("[DEBUG] Wszystkie zagadki oznaczone jako rozwiązane.");
     },
 
