@@ -131,7 +131,7 @@
     M: [["to", "tom"]],
     N: [["tag", "gnat"]],
     O: [["aut", "auto"]],
-    P: [["dar", "drap"]],
+    P: [["ra", "rap"]],
     R: [["bat", "brat"]],
     S: [["chart", "strach"]],
     T: [["lis", "list"]],
@@ -389,7 +389,7 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[16] = {
-    title: "Biała Roszada",
+    title: "Roszada",
     puzzleKey: "chess-castle",
     logicKeys: [PUZZLE_LOGIC_KEYS.CHESS_BOARD, "puzzle-16"],
     content: `<div class="puzzle32-wrap">
@@ -420,7 +420,6 @@
     solution: "zumzwang",
     hint1: "Czy wiesz czym jest roszada?",
     hint2: "Jeśli wykonałaś manewr poprawnie, to rozejrzyj się dokładnie...",
-    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[17] = {
     title: "Chroma",
@@ -1008,8 +1007,6 @@
     logicKeys: ["puzzle-43"],
     work_in_progress: true,
     content: `<div style="display:grid; gap:0.8rem; justify-items:center; text-align:center;">
-  <p><strong>Podobieństwa i różnice</strong></p>
-  <p>Użyj par tak jak w elementach pod notatkami. Odczytaj litery i zbuduj hasło.</p>
   <div id="puzzle43Pairs" style="display:grid; gap:0.45rem; width:100%; max-width:560px;">
     <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
       <div class="puzzle-piece" data-puzzle43-word="dar"></div>
@@ -1289,6 +1286,27 @@ const buildPuzzleOrderDiagnostics = () => {
 
     
   });
+
+  for (let slotId = 1; slotId <= TOTAL_PUZZLES; slotId += 1) {
+    const puzzleData = PUZZLE_DATA[slotId];
+
+    if (!puzzleData) {
+      PUZZLE_DATA[slotId] = {
+        title: formatPuzzleTitle(slotId),
+        work_in_progress: true
+      };
+      continue;
+    }
+
+    if (typeof puzzleData !== "object") {
+      continue;
+    }
+
+    const isUndefinedPuzzle = !puzzleData.content && !puzzleData.solution;
+    if (isUndefinedPuzzle) {
+      puzzleData.work_in_progress = true;
+    }
+  }
   
   const App = {
     state: null,
