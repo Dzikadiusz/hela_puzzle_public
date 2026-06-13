@@ -112,7 +112,38 @@
     MYSTERY: "mystery",
     SNOUT_DAY: "snout-day",
     PIXEL_FONT: "pixel-font",
+    SPRITE_FOX: "sprite-fox",
     WHITE_CONTENT: "white-content"
+  });
+  const PUZZLE_35_ANIMATIONS = Object.freeze({
+    idle_front: { row: 0, frames: 4, fps: 5 },
+    idle_back: { row: 1, frames: 4, fps: 5 },
+    idle_left: { row: 2, frames: 4, fps: 5 },
+    idle_right: { row: 3, frames: 4, fps: 5 },
+    walk_front: { row: 4, frames: 6, fps: 9 },
+    walk_back: { row: 5, frames: 6, fps: 9 },
+    walk_left: { row: 6, frames: 6, fps: 9 },
+    walk_right: { row: 7, frames: 6, fps: 9 },
+    hurt_front: { row: 8, frames: 4, fps: 7 },
+    hurt_back: { row: 9, frames: 4, fps: 7 },
+    hurt_left: { row: 10, frames: 4, fps: 7 },
+    hurt_right: { row: 11, frames: 4, fps: 7 },
+    run_front: { row: 12, frames: 6, fps: 12 },
+    run_back: { row: 13, frames: 6, fps: 12 },
+    run_left: { row: 14, frames: 6, fps: 12 },
+    run_right: { row: 15, frames: 6, fps: 12 },
+    death_front: { row: 16, frames: 6, fps: 8 },
+    death_back: { row: 17, frames: 6, fps: 8 },
+    death_left: { row: 18, frames: 6, fps: 8 },
+    death_right: { row: 19, frames: 6, fps: 8 }
+  });
+  const PUZZLE_35_SHEET_LAYOUT = Object.freeze({
+    startX: 196,
+    startY: 20,
+    frameWidth: 57,
+    frameHeight: 58,
+    rowStep: 76,
+    colStep: 58
   });
   const PAIRS_PASSWORD = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed domos";
   const LETTER_PAIR_CATALOG = {
@@ -306,6 +337,8 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[11] = {
+
+    wip: true,
     title: "Czas Prawdy",
     puzzleKey: "time-1111",
     logicKeys: [PUZZLE_LOGIC_KEYS.TIME_1111, "puzzle-11"],
@@ -480,9 +513,9 @@
       { key: "krypto", message: "Połowa drogi! Dodaj 6 liter na koniec." },
       { key: "kryptogr", message: "Bardzo blisko! Jeszcze 2 litery." }
     ],
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Poczytaj https://pl.wikipedia.org/wiki/Szyfr_Cezara",
+    hint2: "Użyj suwaka by odszyfrować tekst",
+    hint3: "Prawdidłowe przesunięcie to 0 u góry i 13 na dole"
   };
   PUZZLE_DATA[19] = {
     title: "Będzie jakaś zniżka?",
@@ -581,7 +614,7 @@
         </div>
       </div>
     `,
-    solution: "pomnik",
+    solution: "marmur",
     hint1: "Czy potrafisz rozpoznać te pomniki?",
     hint2: "Czy wiesz gdzie się znajdują?",
     hint3: "Spróbuj zlokalizować je na mapie.",
@@ -717,9 +750,10 @@
   </div>
 </div>`,
     solution: "pamiętaj",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "do rozwiazania tej zagadki potrzebujesz jeszcze innej",
+    hint2: "która zagadka wygląda podobnie do tej?",
+    hint3: "nie musisz szukać daleko",
+    hint4: "spróbuj szybko przeskakiwać pomiędzy tymi dwoma zagadkami",
   };
   PUZZLE_DATA[27] = {
     title: "Szkapa",
@@ -754,16 +788,15 @@
   <button type="button" id="puzzle19MoonBtn" class="small-btn">Spróbuj rozwiązać</button>
 </div>`,
     solution: "lykantropia",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "tej zagadki nie da się rozwiązać każdego dnia",
+    hint2: "zaczekaja na odpowiednią noc"
   };
   PUZZLE_DATA[29] = {
     title: "",
     logicKeys: ["puzzle-29"],
     content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
     solution: "panika",
-    hint1: "TODO hint 1",
+    hint1: "Co oznacza ISBN?",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
@@ -776,6 +809,7 @@
   </div>
   <p><strong>3,141592 653589 793238 462643 383279 502884 197169 399375 105820 974944 592307 816406 286208 998628 034825 342117 067982 148086 513282 306647 093844 609550 582231 725359 408128 377606 450284 102701 938521 105559 644622 948954 930381 964428 810975 665933 446128</strong></p>
 </div>`,
+// /todo add partial solution
     solution: "377606",
     hint1: "Jaki dźwięk wydaje kurczaczek?",
     hint2: "Przyjrzyj się uważnie liczbie, może znajdziesz tam coś, co przypomina ten dźwięk?",
@@ -797,7 +831,7 @@
 
   };
   PUZZLE_DATA[32] = {
-    title: "",
+    title: "Może powinno ich być 9?",
     logicKeys: ["puzzle-32"],
     content: `<div style="display: grid; place-items: center;">
   <img src="img/belt.jpg" alt="Pasek" style="width: 100%; max-width: 560px; height: auto; display: block; border-radius: 8px;">
@@ -806,7 +840,7 @@
     hint1: "Co mogą symbolizować te kule?",
     hint2: "Zwróć uwagę że różnią się bardzo rozmiarem",
     hint3: "W rzeczywistości są one duuuuuużo większe...",
-    hint4: "Nie do końca wiadmo czy czy powinniśmy uwzględniać dziewiątą..."
+    hint4: "Szukamy nazwy tej czarnej, która w rzeczywistości jest czerwona"
   };
   PUZZLE_DATA[33] = {
     title: "Łatwiej będzie na telefonie...",
@@ -830,6 +864,36 @@
     hint4: "o kim jest ta zagadka?",
     hint5: "rozwiązaniem jest imie"
 
+  };
+  PUZZLE_DATA[35] = {
+    work_in_progress: true,
+    title: "Lisek - demo animacji",
+    puzzleKey: "fox-sprite-demo",
+    logicKeys: [PUZZLE_LOGIC_KEYS.SPRITE_FOX, "puzzle-35"],
+    content: `<div class="puzzle35-wrap">
+  <p><strong>Demo animacji z arkusza sprite'ów lisa.</strong></p>
+  <p>Wgraj arkusz jako <code>img/fox-spritesheet.png</code>, aby uruchomić podgląd wszystkich sekwencji.</p>
+
+  <div class="puzzle35-controls">
+    <label for="puzzle35AnimSelect">Animacja</label>
+    <select id="puzzle35AnimSelect" class="puzzle35-select" aria-label="Wybierz animację lisa"></select>
+
+    <label for="puzzle35SpeedRange">Tempo: <span id="puzzle35SpeedValue">100%</span></label>
+    <input id="puzzle35SpeedRange" type="range" min="50" max="200" step="5" value="100" aria-label="Tempo animacji lisa">
+
+    <button type="button" id="puzzle35PlayBtn" class="small-btn" aria-pressed="true">Pauza</button>
+    <button type="button" id="puzzle35DirectionBtn" class="small-btn" aria-pressed="false">Tryb: pętla</button>
+  </div>
+
+  <div class="puzzle35-stage">
+    <canvas id="puzzle35Canvas" class="puzzle35-canvas" width="232" height="232" aria-label="Podgląd animacji sprite lisa"></canvas>
+    <p id="puzzle35Status" class="puzzle35-status" aria-live="polite">Ładowanie...</p>
+  </div>
+</div>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
   };
   PUZZLE_DATA[36] = {
     title: "Chronologia",
@@ -971,28 +1035,52 @@
     hint4: "Szach-mat w jednym ruchu oznacza, że po twoim ruchu czarny król będzie atakowany i nie będzie miał żadnego legalnego ruchu, aby się obronić."
   };
   PUZZLE_DATA[42] = {
-    title: "Sonet",
+    title: "Ocenzurowany Sonet",
     puzzleKey: "clock-hands-sonet",
     logicKeys: [PUZZLE_LOGIC_KEYS.CLOCK_HANDS, "puzzle-42"],
     work_in_progress: true,
-    content: `<div class="puzzle34-wrap" style="display:grid; gap:0.8rem; line-height:1.6; text-align:center;">
-  <p><strong>Jako fale dążące ku żwirom wybrzeży</strong></p>
-  <p><strong>tak nasze chwile śpieszą ku odległej mecie</strong></p>
-  <p><strong>każda zajmuje miejsce tej co przed nią bieży</strong></p>
-  <p><strong>i bieg jej podejmuje w odwiecznej sztafecie</strong></p>
-  <p><strong>człowiek gdy na świat przyjdzie w świetlistej orbicie</strong></p>
-  <p><strong>krąży lecz wkrótce pełznąć pocznie w wiek dojrzały</strong></p>
-  <p><strong>a odtąd przeciwności ćmią słoneczne życie</strong></p>
-  <p><strong>aż ręce ■■■■■ zniszczą co same wpierw dały</strong></p>
-  <p><strong>■■■■ wszelką młodość w końcu z powabu odziera</strong></p>
-  <p><strong>złośliwie żłobi bruzdy w najpiękniejszej twarzy</strong></p>
-  <p><strong>najrzadszy skarb natury z ochotą pożera</strong></p>
-  <p><strong>aż wszystko wokół zetnie najsroższy z kosiarzy</strong></p>
-  <p><strong>i wbrew zagładzie tylko mój wiersz ma nadzieję</strong></p>
-  <p><strong>że w nim twa chwała będzie jaśnieć jak jaśnieje</strong></p>
-  <p><strong>i wbrew zagładzie tylko mój wiersz ma nadzieję</strong></p>
-  <p><strong>że w nim twa chwała będzie jaśnieć jak jaśnieje</strong></p>
-  <p><strong>jak jaśnieje</strong></p>
+    content: `<div class="puzzle42-wrap">
+  <div class="puzzle42-sonnet">
+    <p><strong><span class="puzzle42-highlight">J</span>ako fale dążące ku żwirom wybrzeży</strong></p>
+    <p><strong>tak nasze chwile śpieszą ku odle<span class="puzzle42-highlight">g</span>łej mecie</strong></p>
+    <p><strong>każda zajmuje miejsce tej co pr<span class="puzzle42-highlight">z</span>ed nią bieży</strong></p>
+    <p><strong>i <span class="puzzle42-highlight">b</span>ieg jej podejmuje w odwiecznej sztafecie</strong></p>
+    <p><strong>człowiek gdy na świat przyjdzie w świe<span class="puzzle42-highlight">t</span>listej orbicie</strong></p>
+    <p><strong>krąży lecz wkrótce pełznąć pocznie w wiek dojrz<span class="puzzle42-highlight">a</span>ły</strong></p>
+    <p><strong>a odtąd przeciwności ćmią słoneczne życi<span class="puzzle42-highlight">e</span></strong></p>
+    <p><strong>aż ręce ■■■■<span class="puzzle42-highlight">u</span> zniszczą co same wpierw dały</strong></p>
+    <p><strong>■■■■ wszelką młodość w końcu z powabu odzie<span class="puzzle42-highlight">r</span>a</strong></p>
+    <p><strong>złośliwie żłobi bruzdy w najpiękniejszej twarz<span class="puzzle42-highlight">y</span></strong></p>
+    <p><strong><span class="puzzle42-highlight">n</span>ajrzadszy skarb natury z ochotą pożera</strong></p>
+    <p><strong>aż wszystko wokół z<span class="puzzle42-highlight">e</span>tnie najsroższy z kosiarzy</strong></p>
+    <p><strong>i wbrew zagładzie tylko <span class="puzzle42-highlight">m</span>ój wiersz ma nadzieję</strong></p>
+    <p><strong>że w nim twa c<span class="puzzle42-highlight">h</span>wała będzie jaśnieć jak jaśnieje</strong></p>
+  </div>
+  <div class="puzzle42-clock-panel">
+    <div class="puzzle42-clock-grid" aria-label="Pięć zegarów">
+      <div class="puzzle42-clock" role="img" aria-label="Godzina 3:00">
+        <div class="puzzle42-arm puzzle42-arm-hour" style="transform: translateX(-50%) rotate(90deg);"></div>
+        <div class="puzzle42-arm puzzle42-arm-minute" style="transform: translateX(-50%) rotate(0deg);"></div>
+      </div>
+      <div class="puzzle42-clock" role="img" aria-label="Godzina 12:00">
+        <div class="puzzle42-arm puzzle42-arm-hour" style="transform: translateX(-50%) rotate(0deg);"></div>
+        <div class="puzzle42-arm puzzle42-arm-minute" style="transform: translateX(-50%) rotate(0deg);"></div>
+      </div>
+      <div class="puzzle42-clock" role="img" aria-label="Godzina 2:00">
+        <div class="puzzle42-arm puzzle42-arm-hour" style="transform: translateX(-50%) rotate(60deg);"></div>
+        <div class="puzzle42-arm puzzle42-arm-minute" style="transform: translateX(-50%) rotate(0deg);"></div>
+      </div>
+      <div class="puzzle42-clock" role="img" aria-label="Godzina 6:00">
+        <div class="puzzle42-arm puzzle42-arm-hour" style="transform: translateX(-50%) rotate(180deg);"></div>
+        <div class="puzzle42-arm puzzle42-arm-minute" style="transform: translateX(-50%) rotate(0deg);"></div>
+      </div>
+      <div class="puzzle42-clock" role="img" aria-label="Godzina 9:00">
+        <div class="puzzle42-arm puzzle42-arm-hour" style="transform: translateX(-50%) rotate(270deg);"></div>
+        <div class="puzzle42-arm puzzle42-arm-minute" style="transform: translateX(-50%) rotate(0deg);"></div>
+      </div>
+    </div>
+  </div>
+  <p class="puzzle42-note">Znajdź oryginał!</p>
 </div>`,
     solution: "czas",
     partial_solution: [
@@ -1116,6 +1204,74 @@
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
+  PUZZLE_DATA[45] = {
+    title: "Poczuj to",
+    logicKeys: ["puzzle-45"],
+    content: `<div class="puzzle45-wrap" id="puzzle45Wrap">
+  <label for="puzzle45SwitchInput" id="puzzle45Switch" class="puzzle45-switch-wrap" aria-label="Przełącz światło">
+    <input type="checkbox" id="puzzle45SwitchInput" name="puzzle45SwitchInput" class="puzzle45-light-switch">
+    <div class="puzzle45-panel" aria-hidden="true">
+      <div class="puzzle45-overlay"></div>
+      <div class="puzzle45-switch-hole">
+        <div class="puzzle45-switch-groove">
+          <div class="puzzle45-switch-body">
+            <div class="puzzle45-shadow-box top"><div class="puzzle45-shadow top"></div></div>
+            <div class="puzzle45-shadow-box bottom"><div class="puzzle45-shadow bottom"></div></div>
+            <div class="puzzle45-top"><div class="puzzle45-top-outset"></div></div>
+            <div class="puzzle45-bottom"><div class="puzzle45-bottom-outset"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </label>
+  <div id="puzzle45Word" class="puzzle45-word puzzle45-word-hidden" aria-hidden="true">
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot on"></span><span class="dot on"></span>
+      <span class="dot off"></span><span class="dot on"></span>
+      <span class="dot off"></span><span class="dot off"></span>
+    </div>
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot on"></span><span class="dot off"></span>
+      <span class="dot off"></span><span class="dot off"></span>
+      <span class="dot off"></span><span class="dot off"></span>
+    </div>
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot on"></span><span class="dot off"></span>
+      <span class="dot on"></span><span class="dot on"></span>
+      <span class="dot on"></span><span class="dot off"></span>
+    </div>
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot on"></span><span class="dot off"></span>
+      <span class="dot off"></span><span class="dot off"></span>
+      <span class="dot on"></span><span class="dot off"></span>
+    </div>
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot on"></span><span class="dot on"></span>
+      <span class="dot off"></span><span class="dot on"></span>
+      <span class="dot on"></span><span class="dot off"></span>
+    </div>
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot on"></span><span class="dot off"></span>
+      <span class="dot off"></span><span class="dot on"></span>
+      <span class="dot off"></span><span class="dot off"></span>
+    </div>
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot off"></span><span class="dot on"></span>
+      <span class="dot on"></span><span class="dot off"></span>
+      <span class="dot on"></span><span class="dot off"></span>
+    </div>
+    <div class="puzzle45-cell" aria-hidden="true">
+      <span class="dot off"></span><span class="dot on"></span>
+      <span class="dot on"></span><span class="dot off"></span>
+      <span class="dot on"></span><span class="dot off"></span>
+    </div>
+  </div>
+</div>`,
+    solution: "Darkness",
+    hint1: "Co można czytać przy zgaszonym świetle?",
+    hint2: "Mowa o pewnym rodzaju alfabetu",
+    hint3: "Braille"
+  };
   PUZZLE_DATA[46] = {
     title: "Połączenia",
     puzzleKey: "connections-nodes",
@@ -1165,6 +1321,104 @@
       hint2: "TODO hint 2",
       hint3: "TODO hint 3"
     };
+  PUZZLE_DATA[50] = {
+    title: "Statki?",
+    logicKeys: ["puzzle-50"],
+    content: `<div id="puzzle50Wrap" class="puzzle50-wrap">
+  <div class="puzzle50-coords puzzle50-coords-top">a2, b1, b3, c1, c2, c3, c15, c19, d1, d3, d15, d16, d18, d19, e5, e6, e7, e15, e17, e19, f5, f8, f10, f11, f15, f19, g1, g2, g3, g5, g6, g7, g10, g12, g15, g19, h1, h3, h5, h8, h10, h11, i1, i3, i5, i6, i7, i10, i12, j1, j3, j10, j12, j14, j15, j16, j17, k1, k2, k3, k17, l15, l16, m14, m19, n3, n14, n15, n16, n17, n19, o2, o4, o19, p1, p5, p19, q1, q5, q16, q19, r1, r2, r3, r4, r5, r17, r18, s1, s5, t1, t5</div>
+  <div id="puzzle50Grid" class="puzzle50-grid" role="grid" aria-label="Siatka 20 na 19"></div>
+  <div class="puzzle50-coords puzzle50-coords-bottom">a2, b1, b3, c1, c2, c3, c15, c19, d1, d3, d15, d16, d18, d19, e5, e6, e7, e15, e17, e19, f5, f8, f10, f11, f15, f19, g1, g2, g3, g5, g6, g7, g10, g12, g15, g19, h1, h3, h5, h8, h10, h11, i1, i3, i5, i6, i7, i10, i12, j1, j3, j10, j12, j14, j15, j16, j17, k1, k2, k3, k17, l15, l16, m14, m19, n3, n14, n15, n16, n17, n19, o2, o4, o19, p1, p5, p19, q1, q5, q16, q19, r1, r2, r3, r4, r5, r17, r18, s1, s5, t1, t5</div>
+  <label for="puzzle50ActiveCells" class="puzzle50-active-label">Aktywne pola</label>
+  <textarea id="puzzle50ActiveCells" class="puzzle50-active" rows="3" readonly placeholder="Np. e15, f15, f16"></textarea>
+</div>`,
+    solution: "AMBROZJA",
+    hint1: "Początek powinien być prosty - spójrz na podane koordynaty",
+    hint2: "Żeby rozwiązać zagadkę musisz wyklikać wszystkie podane pola",
+    hint3: "Czy już widzisz w co składają się komórki? Czy da się je jakoś logicznie poukładać?",
+    hint4: "A co jeśli spróbujesz od góry do dołu?"
+  };
+  PUZZLE_DATA[51] = {
+    title: "Białe - Czarne",
+    logicKeys: ["puzzle-51"],
+    content: `<div class="puzzle51-wrap">
+  <div class="puzzle51-side puzzle51-left" aria-label="Prawa strona par wyrazów">
+    <p class="puzzle51-row">ciężki</p>
+    <p class="puzzle51-row">dominujący</p>
+    <p class="puzzle51-row">mokry</p>
+    <p class="puzzle51-row">miękki</p>
+    <p class="puzzle51-row">left</p>
+    <p class="puzzle51-row">zamknięty</p>
+  </div>
+  <div class="puzzle51-side puzzle51-right" aria-label="Pola na litery lewej strony par wyrazów">
+    <p class="puzzle51-row puzzle51-slots"><input class="puzzle51-slot puzzle51-slot-first" type="text" maxlength="1" inputmode="text" aria-label="Litera 1"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 2"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 3"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 4"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 5"></p>
+    <p class="puzzle51-row puzzle51-slots"><input class="puzzle51-slot puzzle51-slot-first" type="text" maxlength="1" inputmode="text" aria-label="Litera 1"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 2"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 3"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 4"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 5"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 6"></p>
+    <p class="puzzle51-row puzzle51-slots"><input class="puzzle51-slot puzzle51-slot-first" type="text" maxlength="1" inputmode="text" aria-label="Litera 1"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 2"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 3"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 4"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 5"></p>
+    <p class="puzzle51-row puzzle51-slots"><input class="puzzle51-slot puzzle51-slot-first" type="text" maxlength="1" inputmode="text" aria-label="Litera 1"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 2"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 3"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 4"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 5"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 6"></p>
+    <p class="puzzle51-row puzzle51-slots"><input class="puzzle51-slot puzzle51-slot-first" type="text" maxlength="1" inputmode="text" aria-label="Litera 1"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 2"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 3"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 4"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 5"></p>
+    <p class="puzzle51-row puzzle51-slots"><input class="puzzle51-slot puzzle51-slot-first" type="text" maxlength="1" inputmode="text" aria-label="Litera 1"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 2"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 3"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 4"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 5"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 6"><input class="puzzle51-slot" type="text" maxlength="1" inputmode="text" aria-label="Litera 7"></p>
+  </div>
+</div>`,
+    solution: "LUSTRO",
+    hint1: "Lewa strona bardzo rózni się od prawej",
+    hint2: "Dodaj przeciwieństwa",
+    hint3: "Odczytaj pierwsze litery"
+  };
+  PUZZLE_DATA[52] = {
+    title: "O-O",
+    logicKeys: ["puzzle-52"],
+    content: `<div class="puzzle52-wrap">
+  <div id="puzzle52Grid" class="puzzle52-grid" role="grid" aria-label="Siatka losowych cyfr od 0 do 9"></div>
+</div>`,
+    solution: "",
+    hint1: "Skup się na tym czego nie ma",
+    hint2: "I obróć głowę w prawo",
+    hint3: "Czy potrafisz odczytać litery stworzony z pustych pól?",
+    hint4: "Są obrócone o 90 stopni w prawo"
+  };
+  PUZZLE_DATA[53] = {
+    title: "Poemat też ma!",
+    logicKeys: ["puzzle-53"],
+    content: `<div class="puzzle53-wrap">
+  <img src="img/e.jpg" alt="" class="puzzle53-image">
+  <p class="puzzle53-poem">Panny mają tego dwie<br>Jedną ma pani<br>Nie mają tego święci<br>Ale maja wybrani...</p>
+</div>`,
+    solution: "n",
+    partial_solution: [
+      { key: "literka n", message: "wystarczy sama litera:)",
+        key: "litera n", message: "wystarczy sama litera:)"
+       }
+    ],
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[54] = {
+    work_in_progress: true,
+    title: "Koło słów",
+    logicKeys: ["puzzle-54"],
+    content: `<div class="puzzle54-wrap">
+  <div id="puzzle54Circle" class="puzzle54-circle" role="list" aria-label="Koło 12 trzyliterowych słów"></div>
+</div>`,
+    circleWords: ["KOT", "LIS", "SOW", "RYŚ", "BÓR", "DOM", "LAS", "NOC", "DYM", "MAK", "SER", "MUR"],
+    solution: "",
+    hint1: "Zwróć uwagę na układ słów na okręgu",
+    hint2: "Każde słowo ma 3 litery",
+    hint3: "Słowa są rozstawione co 30 stopni"
+  };
+  PUZZLE_DATA[58] = {
+    title: "Tylko cyfry",
+    logicKeys: ["puzzle-58"],
+    content: `<div class="puzzle58-wrap">
+  <div id="puzzle58Grid" class="puzzle58-grid" role="grid" aria-label="Siatka losowych cyfr od 1 do 9"></div>
+</div>`,
+    solution: "kot",
+    partial_solution: [
+      { key: "kotek", message: "wystarczy \"kot\":)" },
+    ],
+    hint1: "Wartości można klikać - może to pomóc w rozwiązaniu (ale nie jest konieczne)",
+    hint2: "Tytuł zagadki jest mylący",
+    hint3: "Są tu też litery - czy potrafisz je znaleźć?"
+  };
   PUZZLE_DATA[60] = {
     title: "Trudne się wylosowało",
     logicKeys: ["puzzle-60"],
@@ -1333,6 +1587,9 @@ const buildPuzzleOrderDiagnostics = () => {
     puzzle38State: null,
     puzzle36State: null,
     puzzle48State: null,
+    puzzle35State: null,
+    puzzle50State: null,
+    puzzle58State: null,
 
     els: {
       menuView: null,
@@ -1687,11 +1944,18 @@ const buildPuzzleOrderDiagnostics = () => {
           this.checkPuzzle36CombinationGuess();
           return;
         }
+
       });
 
       this.els.puzzleContent.addEventListener("input", (event) => {
         if (event.target.id === "puzzle28SpeedRange") {
           this.updatePuzzle28Speed(event.target.value);
+        }
+      });
+
+      this.els.puzzleContent.addEventListener("change", (event) => {
+        if (event.target.id === "puzzle45SwitchInput") {
+          this.handlePuzzle45SwitchChange(event.target.checked);
         }
       });
 
@@ -1848,6 +2112,7 @@ const buildPuzzleOrderDiagnostics = () => {
     },
 
     showMenuView() {
+      this.stopPuzzle35();
       this.stopPuzzle15Simulation();
       this.stopPuzzle16Grid();
       this.stopPuzzle27Clock();
@@ -1970,6 +2235,7 @@ const buildPuzzleOrderDiagnostics = () => {
     },
 
     renderPuzzleView() {
+      this.stopPuzzle35();
       this.stopPuzzle15Simulation();
       this.stopPuzzle16Grid();
       this.stopPuzzle27Clock();
@@ -1979,6 +2245,8 @@ const buildPuzzleOrderDiagnostics = () => {
       this.stopPuzzle36Mystery();
       this.stopPuzzle48Challenge();
       this.stopPuzzle61();
+      this.stopPuzzle50();
+      this.stopPuzzle58();
       const id = this.state.selectedPuzzle;
       const puzzle = this.getCurrentPuzzle();
       const puzzleData = PUZZLE_DATA[id] || {
@@ -1990,6 +2258,7 @@ const buildPuzzleOrderDiagnostics = () => {
       document.body.classList.toggle("puzzle14-debug-mode", this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.HOTSPOT_DEBUG) && PUZZLE_14_DEBUG_MODE);
       document.body.classList.toggle("puzzle30-white-content", this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.WHITE_CONTENT));
       document.body.classList.toggle("puzzle36-mystery-theme", this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY));
+      document.body.classList.toggle("puzzle51-contrast-mode", this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-51"));
       document.body.classList.toggle("active-puzzle-solved", puzzle.solved);
 
       this.els.puzzleTitle.textContent = puzzleData.title;
@@ -2031,18 +2300,28 @@ const buildPuzzleOrderDiagnostics = () => {
         const minuteInput = document.getElementById("puzzle34MinuteInput");
         const hourArm = document.getElementById("puzzle34HourArm");
         const minuteArm = document.getElementById("puzzle34MinuteArm");
+        const rotateClockArm = (armEl, angle) => {
+          if (!armEl) {
+            return;
+          }
+          if (typeof SVGElement !== "undefined" && armEl instanceof SVGElement) {
+            armEl.setAttribute("transform", `rotate(${angle} 60 60)`);
+            return;
+          }
+          armEl.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+        };
         function updateClockArms() {
           let hour = parseInt(hourInput.value, 10);
           let minute = parseInt(minuteInput.value, 10);
           if (isNaN(hour) || hour < 1 || hour > 12) hour = 1;
           if (isNaN(minute) || minute < 0 || minute > 59) minute = 0;
           // Calculate angles
-          // Hour: 0 at 12, 360/12 = 30 deg per hour, plus 0.5 deg per minute
+          // Hour: 0 at 12, 360/12 = 30 deg per hour (full-hour steps only)
           // Minute: 0 at 12, 360/60 = 6 deg per minute
-          const hourAngle = ((hour % 12) * 30) + (minute * 0.5);
+          const hourAngle = (hour % 12) * 30;
           const minuteAngle = minute * 6;
-          hourArm.setAttribute("transform", `rotate(${hourAngle} 60 60)`);
-          minuteArm.setAttribute("transform", `rotate(${minuteAngle} 60 60)`);
+          rotateClockArm(hourArm, hourAngle);
+          rotateClockArm(minuteArm, minuteAngle);
         }
         if (hourInput && minuteInput && hourArm && minuteArm) {
           hourInput.addEventListener("input", updateClockArms);
@@ -2097,6 +2376,30 @@ const buildPuzzleOrderDiagnostics = () => {
 
       if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.PIXEL_FONT)) {
         this.initPuzzle61();
+      }
+
+      if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SPRITE_FOX)) {
+        this.initPuzzle35();
+      }
+
+      if (this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-45")) {
+        this.initPuzzle45();
+      }
+
+      if (this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-50")) {
+        this.initPuzzle50();
+      }
+
+      if (this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-52")) {
+        this.initPuzzle52();
+      }
+
+      if (this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-54")) {
+        this.initPuzzle54();
+      }
+
+      if (this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-58")) {
+        this.initPuzzle58();
       }
 
       if (puzzle.lastUpdated) {
@@ -2438,6 +2741,424 @@ const buildPuzzleOrderDiagnostics = () => {
       if (timerEl && !this.puzzle48State.waitingTimerId && !this.puzzle48State.resetTimerId) {
         timerEl.textContent = "";
       }
+    },
+
+    initPuzzle45() {
+      const wrap = document.getElementById("puzzle45Wrap");
+      const switchInput = document.getElementById("puzzle45SwitchInput");
+      const word = document.getElementById("puzzle45Word");
+      if (!wrap || !switchInput || !word) {
+        return;
+      }
+
+      switchInput.checked = false;
+      this.applyPuzzle45LightingState(false);
+    },
+
+    handlePuzzle45SwitchChange(isOn) {
+      if (!this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-45")) {
+        return;
+      }
+
+      this.applyPuzzle45LightingState(Boolean(isOn));
+    },
+
+    applyPuzzle45LightingState(lightsOff) {
+      const wrap = document.getElementById("puzzle45Wrap");
+      const word = document.getElementById("puzzle45Word");
+      const description = document.getElementById("puzzle45Description");
+      const switchInput = document.getElementById("puzzle45SwitchInput");
+      if (!wrap || !word || !switchInput) {
+        return;
+      }
+
+      wrap.classList.toggle("lights-off", lightsOff);
+      switchInput.checked = lightsOff;
+      word.classList.toggle("puzzle45-word-hidden", !lightsOff);
+      word.setAttribute("aria-hidden", lightsOff ? "false" : "true");
+
+      if (description) {
+        description.textContent = lightsOff
+          ? "Opis zniknął w mroku. Braille stał się widoczny."
+          : "Zgaś światło, aby odsłonić wiadomość zapisaną alfabetem Braille'a.";
+      }
+    },
+
+    initPuzzle50() {
+      this.stopPuzzle50();
+      if (!this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-50")) {
+        return;
+      }
+
+      const gridEl = document.getElementById("puzzle50Grid");
+      const activeEl = document.getElementById("puzzle50ActiveCells");
+      if (!gridEl || !activeEl) {
+        return;
+      }
+
+      const ROWS = 20;
+      const COLS = 19;
+      const rowLabel = (rowIndex) => String.fromCharCode(97 + rowIndex);
+      const makeCellCode = (rowIndex, colIndex) => `${rowLabel(rowIndex)}${colIndex + 1}`;
+
+      const activeCodes = new Set();
+      const updateActiveOutput = () => {
+        const sorted = Array.from(activeCodes).sort((left, right) => {
+          const leftRow = left.charCodeAt(0);
+          const rightRow = right.charCodeAt(0);
+          if (leftRow !== rightRow) {
+            return leftRow - rightRow;
+          }
+
+          return Number(left.slice(1)) - Number(right.slice(1));
+        });
+        activeEl.value = sorted.join(", ");
+      };
+
+      const fragment = document.createDocumentFragment();
+
+      const corner = document.createElement("div");
+      corner.className = "puzzle50-corner";
+      corner.setAttribute("aria-hidden", "true");
+      fragment.appendChild(corner);
+
+      for (let colIndex = 0; colIndex < COLS; colIndex += 1) {
+        const colLabelEl = document.createElement("div");
+        colLabelEl.className = "puzzle50-col-label";
+        colLabelEl.textContent = String(colIndex + 1);
+        colLabelEl.setAttribute("aria-hidden", "true");
+        fragment.appendChild(colLabelEl);
+      }
+
+      for (let rowIndex = 0; rowIndex < ROWS; rowIndex += 1) {
+        const rowLabelEl = document.createElement("div");
+        rowLabelEl.className = "puzzle50-row-label";
+        rowLabelEl.textContent = rowLabel(rowIndex);
+        rowLabelEl.setAttribute("aria-hidden", "true");
+        fragment.appendChild(rowLabelEl);
+
+        for (let colIndex = 0; colIndex < COLS; colIndex += 1) {
+          const cellCode = makeCellCode(rowIndex, colIndex);
+          const cellBtn = document.createElement("button");
+          cellBtn.type = "button";
+          cellBtn.className = "puzzle50-cell";
+          cellBtn.dataset.cellCode = cellCode;
+          cellBtn.setAttribute("aria-label", `Pole ${cellCode}`);
+          cellBtn.setAttribute("aria-pressed", "false");
+          fragment.appendChild(cellBtn);
+        }
+      }
+
+      gridEl.innerHTML = "";
+      gridEl.appendChild(fragment);
+
+      const wrapCoordinates = (containerEl) => {
+        if (!containerEl) return;
+        const text = containerEl.textContent;
+        const coordinates = text.split(',').map(c => c.trim()).filter(c => c);
+        const fragment2 = document.createDocumentFragment();
+        coordinates.forEach((coord, idx) => {
+          const span = document.createElement('span');
+          span.className = 'puzzle50-coord-item';
+          span.dataset.cellCode = coord;
+          span.textContent = coord;
+          fragment2.appendChild(span);
+          if (idx < coordinates.length - 1) {
+            fragment2.appendChild(document.createTextNode(', '));
+          }
+        });
+        containerEl.innerHTML = '';
+        containerEl.appendChild(fragment2);
+      };
+
+      const coordTopEl = document.querySelector('.puzzle50-coords-top');
+      const coordBottomEl = document.querySelector('.puzzle50-coords-bottom');
+      wrapCoordinates(coordTopEl);
+      wrapCoordinates(coordBottomEl);
+
+      const onGridClick = (event) => {
+        const cell = event.target.closest(".puzzle50-cell");
+        if (!cell || !gridEl.contains(cell)) {
+          return;
+        }
+
+        const code = cell.dataset.cellCode;
+        if (!code) {
+          return;
+        }
+
+        const isActive = cell.classList.toggle("active");
+        cell.setAttribute("aria-pressed", isActive ? "true" : "false");
+
+        const coordSpans = document.querySelectorAll(`[data-cell-code="${code}"]`);
+        coordSpans.forEach(span => {
+          if (span.classList) {
+            span.classList.toggle('active', isActive);
+          }
+        });
+
+        if (isActive) {
+          activeCodes.add(code);
+        } else {
+          activeCodes.delete(code);
+        }
+
+        updateActiveOutput();
+      };
+
+      gridEl.addEventListener("click", onGridClick);
+      this.puzzle50State = {
+        gridEl,
+        onGridClick
+      };
+
+      updateActiveOutput();
+    },
+
+    stopPuzzle50() {
+      if (!this.puzzle50State) {
+        return;
+      }
+
+      if (this.puzzle50State.gridEl && this.puzzle50State.onGridClick) {
+        this.puzzle50State.gridEl.removeEventListener("click", this.puzzle50State.onGridClick);
+      }
+
+      this.puzzle50State = null;
+    },
+
+    initPuzzle52() {
+      if (!this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-52")) {
+        return;
+      }
+
+      const gridEl = document.getElementById("puzzle52Grid");
+      if (!gridEl) {
+        return;
+      }
+
+      const ROWS = 30;
+      const COLS = 30;
+      const LETTER_HEIGHT = 9;
+      const LETTER_PATTERNS = {
+        T: [
+          "11111",
+          "00100",
+          "00100",
+          "00100",
+          "00100",
+          "00100",
+          "00100",
+          "00100",
+          "00100"
+        ],
+        L: [
+          "10000",
+          "10000",
+          "10000",
+          "10000",
+          "10000",
+          "10000",
+          "10000",
+          "10000",
+          "11111"
+        ],
+        E: [
+          "11111",
+          "10000",
+          "10000",
+          "10000",
+          "11111",
+          "10000",
+          "10000",
+          "10000",
+          "11111"
+        ],
+        N: [
+          "10001",
+          "11001",
+          "10101",
+          "10101",
+          "10011",
+          "10011",
+          "10101",
+          "10101",
+          "10001"
+        ]
+      };
+      const letterLayout = [
+        { char: "T", top: 2, left: 2 },
+        { char: "L", top: 6, left: 9 },
+        { char: "E", top: 12, left: 16 },
+        { char: "N", top: 16, left: 23 }
+      ];
+      const emptyCells = new Set();
+
+      letterLayout.forEach(({ char, top, left }) => {
+        const pattern = LETTER_PATTERNS[char];
+        if (!pattern || pattern.length !== LETTER_HEIGHT) {
+          return;
+        }
+
+        pattern.forEach((rowBits, rowOffset) => {
+          for (let colOffset = 0; colOffset < rowBits.length; colOffset += 1) {
+            if (rowBits[colOffset] !== "1") {
+              continue;
+            }
+
+            const row = top + rowOffset;
+            const col = left + colOffset;
+            if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
+              continue;
+            }
+
+            emptyCells.add(`${row},${col}`);
+          }
+        });
+      });
+
+      const sourceGrid = Array.from({ length: ROWS }, (_, row) => {
+        return Array.from({ length: COLS }, (_, col) => {
+          return emptyCells.has(`${row},${col}`) ? "" : String(Math.floor(Math.random() * 10));
+        });
+      });
+
+      const fragment = document.createDocumentFragment();
+
+      for (let index = 0; index < ROWS * COLS; index += 1) {
+        const displayRow = Math.floor(index / COLS);
+        const displayCol = index % COLS;
+        const sourceRow = ROWS - 1 - displayCol;
+        const sourceCol = displayRow;
+        const cellEl = document.createElement("span");
+        cellEl.className = "puzzle52-cell";
+        cellEl.setAttribute("role", "gridcell");
+        cellEl.textContent = sourceGrid[sourceRow][sourceCol];
+        fragment.appendChild(cellEl);
+      }
+
+      gridEl.innerHTML = "";
+      gridEl.appendChild(fragment);
+    },
+
+    initPuzzle58() {
+      this.stopPuzzle58();
+      if (!this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-58")) {
+        return;
+      }
+
+      const gridEl = document.getElementById("puzzle58Grid");
+      if (!gridEl) {
+        return;
+      }
+
+      const ROWS = 30;
+      const COLS = 30;
+      const TOTAL_CELLS = ROWS * COLS;
+      const HIDDEN_SENTENCE = "Hasłem jest zwierze które robi miau!";
+
+      // Remove spaces and spread characters in ascending cell order across the full grid.
+      const sentenceChars = HIDDEN_SENTENCE.replace(/\s/g, "").split("");
+      const sentencePositions = sentenceChars.map((_, i) => Math.floor(((i + 1) * TOTAL_CELLS) / (sentenceChars.length + 1)));
+
+      // Deterministic numeric filler so the grid layout is fixed.
+      const gridData = Array.from({ length: TOTAL_CELLS }, (_, index) => String(((index * 7 + 3) % 9) + 1));
+      sentencePositions.forEach((position, i) => {
+        gridData[position] = sentenceChars[i];
+      });
+
+      const ACTIVE_COLORS = [
+        { bg: "#d64545", fg: "#ffffff" }, // red
+        { bg: "#2f67d8", fg: "#ffffff" }, // blue
+        { bg: "#e07a24", fg: "#ffffff" }, // orange
+        { bg: "#2f7f2f", fg: "#ffffff" }, // green
+        { bg: "#d8d8d8", fg: "#1b1b1b" }, // light-grey
+        { bg: "#1f9b98", fg: "#ffffff" }  // teal
+      ];
+      let nextActiveColorIndex = 0;
+      const fragment = document.createDocumentFragment();
+
+      for (let index = 0; index < TOTAL_CELLS; index += 1) {
+        const cellEl = document.createElement("button");
+        cellEl.type = "button";
+        cellEl.className = "puzzle58-cell";
+        cellEl.setAttribute("role", "gridcell");
+        cellEl.setAttribute("aria-pressed", "false");
+        cellEl.textContent = gridData[index];
+        fragment.appendChild(cellEl);
+      }
+
+      gridEl.innerHTML = "";
+      gridEl.appendChild(fragment);
+
+      const onGridClick = (event) => {
+        const cell = event.target.closest(".puzzle58-cell");
+        if (!cell || !gridEl.contains(cell)) {
+          return;
+        }
+
+        const isActive = cell.classList.toggle("active");
+        cell.setAttribute("aria-pressed", isActive ? "true" : "false");
+
+        if (isActive) {
+          const color = ACTIVE_COLORS[nextActiveColorIndex % ACTIVE_COLORS.length];
+          nextActiveColorIndex += 1;
+          cell.style.setProperty("--puzzle58-active-bg", color.bg);
+          cell.style.setProperty("--puzzle58-active-fg", color.fg);
+        } else {
+          cell.style.removeProperty("--puzzle58-active-bg");
+          cell.style.removeProperty("--puzzle58-active-fg");
+        }
+      };
+
+      gridEl.addEventListener("click", onGridClick);
+      this.puzzle58State = {
+        gridEl,
+        onGridClick
+      };
+    },
+
+    stopPuzzle58() {
+      if (!this.puzzle58State) {
+        return;
+      }
+
+      if (this.puzzle58State.gridEl && this.puzzle58State.onGridClick) {
+        this.puzzle58State.gridEl.removeEventListener("click", this.puzzle58State.onGridClick);
+      }
+
+      this.puzzle58State = null;
+    },
+
+    initPuzzle54() {
+      if (!this.puzzleHasLogicKey(this.state.selectedPuzzle, "puzzle-54")) {
+        return;
+      }
+
+      const circleEl = document.getElementById("puzzle54Circle");
+      if (!circleEl) {
+        return;
+      }
+
+      const puzzleData = PUZZLE_DATA[54] || {};
+      const sourceWords = Array.isArray(puzzleData.circleWords) ? puzzleData.circleWords : [];
+      const words = sourceWords.slice(0, 12).map((word) => String(word || "").trim().slice(0, 3).toUpperCase());
+      while (words.length < 12) {
+        words.push("---");
+      }
+
+      const fragment = document.createDocumentFragment();
+      words.forEach((word, index) => {
+        const wordEl = document.createElement("span");
+        wordEl.className = "puzzle54-word";
+        wordEl.setAttribute("role", "listitem");
+        wordEl.style.setProperty("--angle", `${index * 30}deg`);
+        wordEl.textContent = word;
+        fragment.appendChild(wordEl);
+      });
+
+      circleEl.innerHTML = "";
+      circleEl.appendChild(fragment);
     },
 
     handlePuzzle48SnoutClick() {
@@ -3914,6 +4635,211 @@ const buildPuzzleOrderDiagnostics = () => {
 
     stopPuzzle38Board() {
       this.puzzle38State = null;
+    },
+
+    initPuzzle35() {
+      this.stopPuzzle35();
+
+      const selectEl = document.getElementById("puzzle35AnimSelect");
+      const speedRangeEl = document.getElementById("puzzle35SpeedRange");
+      const speedValueEl = document.getElementById("puzzle35SpeedValue");
+      const playBtnEl = document.getElementById("puzzle35PlayBtn");
+      const directionBtnEl = document.getElementById("puzzle35DirectionBtn");
+      const canvasEl = document.getElementById("puzzle35Canvas");
+      const statusEl = document.getElementById("puzzle35Status");
+
+      if (!selectEl || !speedRangeEl || !speedValueEl || !playBtnEl || !directionBtnEl || !canvasEl || !statusEl) {
+        return;
+      }
+
+      const entries = Object.keys(PUZZLE_35_ANIMATIONS);
+      const optionsFragment = document.createDocumentFragment();
+      entries.forEach((key) => {
+        const optionEl = document.createElement("option");
+        optionEl.value = key;
+        optionEl.textContent = key;
+        optionsFragment.appendChild(optionEl);
+      });
+      selectEl.innerHTML = "";
+      selectEl.appendChild(optionsFragment);
+      selectEl.value = "run_right";
+
+      const sheetImage = new Image();
+      sheetImage.decoding = "async";
+      sheetImage.src = "img/fox-spritesheet.png";
+
+      const state = {
+        selectEl,
+        speedRangeEl,
+        speedValueEl,
+        playBtnEl,
+        directionBtnEl,
+        canvasEl,
+        statusEl,
+        sheetImage,
+        isSheetReady: false,
+        isPlaying: true,
+        pingPong: false,
+        animationKey: "run_right",
+        frameIndex: 0,
+        frameDirection: 1,
+        speedMultiplier: 1,
+        frameTimer: 0,
+        lastTick: performance.now(),
+        rafId: null,
+        handlers: {}
+      };
+
+      const drawFrame = () => {
+        const ctx = state.canvasEl.getContext("2d");
+        if (!ctx) {
+          return;
+        }
+
+        const cw = state.canvasEl.width;
+        const ch = state.canvasEl.height;
+        ctx.clearRect(0, 0, cw, ch);
+
+        if (!state.isSheetReady) {
+          ctx.fillStyle = "#21170f";
+          ctx.fillRect(0, 0, cw, ch);
+          ctx.fillStyle = "#f6e9d6";
+          ctx.font = "700 15px Trebuchet MS, Segoe UI, Tahoma, sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText("Brak pliku img/fox-spritesheet.png", cw / 2, ch / 2 - 10);
+          ctx.font = "500 12px Trebuchet MS, Segoe UI, Tahoma, sans-serif";
+          ctx.fillText("Dodaj arkusz i odśwież zagadkę 35.", cw / 2, ch / 2 + 14);
+          return;
+        }
+
+        const anim = PUZZLE_35_ANIMATIONS[state.animationKey];
+        if (!anim) {
+          return;
+        }
+
+        const sourceX = PUZZLE_35_SHEET_LAYOUT.startX + state.frameIndex * PUZZLE_35_SHEET_LAYOUT.colStep;
+        const sourceY = PUZZLE_35_SHEET_LAYOUT.startY + anim.row * PUZZLE_35_SHEET_LAYOUT.rowStep;
+        const sw = PUZZLE_35_SHEET_LAYOUT.frameWidth;
+        const sh = PUZZLE_35_SHEET_LAYOUT.frameHeight;
+        const pixelScale = 4;
+        const dw = sw * pixelScale;
+        const dh = sh * pixelScale;
+        const dx = Math.floor((cw - dw) / 2);
+        const dy = Math.floor((ch - dh) / 2);
+
+        ctx.imageSmoothingEnabled = false;
+        ctx.fillStyle = "#100d0a";
+        ctx.fillRect(0, 0, cw, ch);
+        ctx.drawImage(state.sheetImage, sourceX, sourceY, sw, sh, dx, dy, dw, dh);
+      };
+
+      const tick = (timestamp) => {
+        if (!this.puzzle35State || this.puzzle35State !== state) {
+          return;
+        }
+
+        const deltaMs = Math.max(0, timestamp - state.lastTick);
+        state.lastTick = timestamp;
+
+        if (state.isPlaying) {
+          const anim = PUZZLE_35_ANIMATIONS[state.animationKey];
+          const fps = Math.max(1, anim.fps * state.speedMultiplier);
+          const frameDurationMs = 1000 / fps;
+          state.frameTimer += deltaMs;
+
+          while (state.frameTimer >= frameDurationMs) {
+            state.frameTimer -= frameDurationMs;
+
+            if (state.pingPong) {
+              state.frameIndex += state.frameDirection;
+              if (state.frameIndex >= anim.frames - 1 || state.frameIndex <= 0) {
+                state.frameDirection *= -1;
+                state.frameIndex = Math.min(anim.frames - 1, Math.max(0, state.frameIndex));
+              }
+            } else {
+              state.frameIndex = (state.frameIndex + 1) % anim.frames;
+            }
+          }
+        }
+
+        drawFrame();
+        state.rafId = window.requestAnimationFrame(tick);
+      };
+
+      state.handlers.onSelect = () => {
+        state.animationKey = state.selectEl.value;
+        state.frameIndex = 0;
+        state.frameDirection = 1;
+        state.frameTimer = 0;
+        const anim = PUZZLE_35_ANIMATIONS[state.animationKey];
+        state.statusEl.textContent = `Aktywna animacja: ${state.animationKey} (${anim.frames} klatek).`;
+        drawFrame();
+      };
+
+      state.handlers.onSpeed = () => {
+        const value = Number(state.speedRangeEl.value);
+        state.speedMultiplier = value / 100;
+        state.speedValueEl.textContent = `${value}%`;
+      };
+
+      state.handlers.onPlayToggle = () => {
+        state.isPlaying = !state.isPlaying;
+        state.playBtnEl.textContent = state.isPlaying ? "Pauza" : "Graj";
+        state.playBtnEl.setAttribute("aria-pressed", state.isPlaying ? "true" : "false");
+      };
+
+      state.handlers.onDirectionToggle = () => {
+        state.pingPong = !state.pingPong;
+        state.directionBtnEl.textContent = state.pingPong ? "Tryb: ping-pong" : "Tryb: pętla";
+        state.directionBtnEl.setAttribute("aria-pressed", state.pingPong ? "true" : "false");
+      };
+
+      selectEl.addEventListener("change", state.handlers.onSelect);
+      speedRangeEl.addEventListener("input", state.handlers.onSpeed);
+      playBtnEl.addEventListener("click", state.handlers.onPlayToggle);
+      directionBtnEl.addEventListener("click", state.handlers.onDirectionToggle);
+
+      state.handlers.onImageLoad = () => {
+        state.isSheetReady = true;
+        state.statusEl.textContent = "Arkusz sprite'ów załadowany. Możesz testować wszystkie sekwencje.";
+        drawFrame();
+      };
+
+      state.handlers.onImageError = () => {
+        state.isSheetReady = false;
+        state.statusEl.textContent = "Nie znaleziono pliku img/fox-spritesheet.png. Dodaj go do folderu img.";
+        drawFrame();
+      };
+
+      sheetImage.addEventListener("load", state.handlers.onImageLoad);
+      sheetImage.addEventListener("error", state.handlers.onImageError);
+
+      state.handlers.onSpeed();
+      state.handlers.onSelect();
+
+      state.lastTick = performance.now();
+      state.rafId = window.requestAnimationFrame(tick);
+      this.puzzle35State = state;
+    },
+
+    stopPuzzle35() {
+      const state = this.puzzle35State;
+      if (!state) {
+        return;
+      }
+
+      if (state.rafId) {
+        window.cancelAnimationFrame(state.rafId);
+      }
+
+      state.selectEl.removeEventListener("change", state.handlers.onSelect);
+      state.speedRangeEl.removeEventListener("input", state.handlers.onSpeed);
+      state.playBtnEl.removeEventListener("click", state.handlers.onPlayToggle);
+      state.directionBtnEl.removeEventListener("click", state.handlers.onDirectionToggle);
+      state.sheetImage.removeEventListener("load", state.handlers.onImageLoad);
+      state.sheetImage.removeEventListener("error", state.handlers.onImageError);
+
+      this.puzzle35State = null;
     },
 
     initPuzzle61() {
