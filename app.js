@@ -1405,6 +1405,44 @@
     hint2: "Każde słowo ma 3 litery",
     hint3: "Słowa są rozstawione co 30 stopni"
   };
+  PUZZLE_DATA[55] = {
+    title: "Kierunki",
+    logicKeys: ["puzzle-55"],
+    content: `<div class="puzzle55-scene">
+  <div class="puzzle55-lines" aria-label="Sekwencja kierunków">
+    <p><strong>góra</strong></p>
+    <p><strong>góra</strong></p>
+    <p><strong>góra</strong></p>
+    <p><strong>prawo</strong></p>
+    <p><strong>prawo</strong></p>
+    <p><strong>góra</strong></p>
+    <p><strong>góra</strong></p>
+    <p><strong>lewo</strong></p>
+    <p><strong>dół</strong></p>
+    <p><strong>lewo</strong></p>
+    <p><strong>góra</strong></p>
+    <p><strong>góra</strong></p>
+    <p><strong>lewo</strong></p>
+    <p><strong>dół</strong></p>
+    <p><strong>dół</strong></p>
+    <p><strong>dół</strong></p>
+    <p><strong>dół</strong></p>
+    <p><strong>lewo</strong></p>
+    <p><strong>góra</strong></p>
+    <p><strong>lewo</strong></p>
+    <p><strong>dół</strong></p>
+    <p><strong>dół</strong></p>
+    <p><strong>prawo</strong></p>
+    <p><strong>prawo</strong></p>
+    <p><strong>dół</strong></p>
+  </div>
+</div>`,
+    solution: "kaktus",
+    hint1: "przyda się tu karta i ołówek",
+    hint2: "wybierz punkt startowy i podążaj za instrukcjami",
+    hint3: "nie jesteś pewna co symbolizuje naryswany kształt? Okno zagadki może nieco podpowiedzieć",
+    hint4: "wyobraź sobie, że pokrywają go kolce"
+  };
   PUZZLE_DATA[58] = {
     title: "Tylko cyfry",
     logicKeys: ["puzzle-58"],

@@ -2918,6 +2918,45 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
   text-transform: uppercase;
 }
 
+.puzzle55-scene {
+  position: relative;
+  overflow: hidden;
+  width: min(100%, 460px);
+  margin: 0 auto;
+  border-radius: 0.8rem;
+  padding: 1rem 0.95rem 2.8rem;
+  background:
+    radial-gradient(circle at 86% 14%, rgba(255, 226, 80, 0.98) 0 11%, rgba(255, 197, 46, 0.92) 11.5% 18%, rgba(255, 151, 0, 0.42) 24%, rgba(255, 136, 0, 0) 33%),
+    linear-gradient(180deg, #71c9ff 0%, #9fdbff 36%, #d8f0ff 74%, #eaf8ff 100%);
+  box-shadow: inset 0 0 0 1px rgba(133, 98, 44, 0.18), 0 11px 24px rgba(57, 84, 107, 0.17);
+}
+
+.puzzle55-scene::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: -1.1rem;
+  height: 4.6rem;
+  background:
+    radial-gradient(120% 80% at 12% 12%, rgba(247, 224, 163, 0.9) 0 26%, rgba(247, 224, 163, 0) 68%),
+    radial-gradient(130% 85% at 74% 8%, rgba(232, 197, 123, 0.8) 0 24%, rgba(232, 197, 123, 0) 70%),
+    linear-gradient(180deg, #f3d796 0%, #e8c97e 52%, #dbb666 100%);
+  border-radius: 58% 42% 0 0 / 34% 34% 0 0;
+}
+
+.puzzle55-lines {
+  position: relative;
+  z-index: 1;
+}
+
+.puzzle55-lines p {
+  margin: 0;
+  line-height: 1.35;
+  color: #1f2f3a;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
 .puzzle58-wrap {
   display: flex;
   justify-content: center;
@@ -3031,6 +3070,19 @@ body.puzzle14-debug-mode .puzzle14-hotspot-btn::after {
 
   .puzzle54-word {
     font-size: clamp(0.73rem, 2.7vw, 0.95rem);
+  }
+
+  .puzzle55-scene {
+    padding: 0.85rem 0.75rem 2.4rem;
+    border-radius: 0.65rem;
+  }
+
+  .puzzle55-scene::after {
+    height: 3.9rem;
+  }
+
+  .puzzle55-lines p {
+    line-height: 1.3;
   }
 
   .puzzle58-cell {
