@@ -1410,31 +1410,31 @@
     logicKeys: ["puzzle-55"],
     content: `<div class="puzzle55-scene">
   <div class="puzzle55-lines" aria-label="Sekwencja kierunków">
-    <p><strong>góra</strong></p>
-    <p><strong>góra</strong></p>
-    <p><strong>góra</strong></p>
-    <p><strong>prawo</strong></p>
-    <p><strong>prawo</strong></p>
-    <p><strong>góra</strong></p>
-    <p><strong>góra</strong></p>
-    <p><strong>lewo</strong></p>
-    <p><strong>dół</strong></p>
-    <p><strong>lewo</strong></p>
-    <p><strong>góra</strong></p>
-    <p><strong>góra</strong></p>
-    <p><strong>lewo</strong></p>
-    <p><strong>dół</strong></p>
-    <p><strong>dół</strong></p>
-    <p><strong>dół</strong></p>
-    <p><strong>dół</strong></p>
-    <p><strong>lewo</strong></p>
-    <p><strong>góra</strong></p>
-    <p><strong>lewo</strong></p>
-    <p><strong>dół</strong></p>
-    <p><strong>dół</strong></p>
-    <p><strong>prawo</strong></p>
-    <p><strong>prawo</strong></p>
-    <p><strong>dół</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>→</strong></p>
+    <p><strong>→</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>←</strong></p>
+    <p><strong>↓</strong></p>
+    <p><strong>←</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>←</strong></p>
+    <p><strong>↓</strong></p>
+    <p><strong>↓</strong></p>
+    <p><strong>↓</strong></p>
+    <p><strong>↓</strong></p>
+    <p><strong>←</strong></p>
+    <p><strong>↑</strong></p>
+    <p><strong>←</strong></p>
+    <p><strong>↓</strong></p>
+    <p><strong>↓</strong></p>
+    <p><strong>→</strong></p>
+    <p><strong>→</strong></p>
+    <p><strong>↓</strong></p>
   </div>
 </div>`,
     solution: "kaktus",
@@ -1442,6 +1442,34 @@
     hint2: "wybierz punkt startowy i podążaj za instrukcjami",
     hint3: "nie jesteś pewna co symbolizuje naryswany kształt? Okno zagadki może nieco podpowiedzieć",
     hint4: "wyobraź sobie, że pokrywają go kolce"
+  };
+  PUZZLE_DATA[56] = {
+    title: "Gimnastyka",
+    logicKeys: ["puzzle-56"],
+    content: `<div class="puzzle56-wrap" aria-label="Wiadomość zapisana alfabetem Morse'a">
+  <img src="img/walrus%20sitting.jpg" alt="Siedzący mors" class="puzzle56-walrus">
+  <div class="puzzle56-word" role="list" aria-label="Słowo pierwsze">
+    <span class="puzzle56-letter" role="listitem"><img src="img/dot.png" alt="kropka"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"><img src="img/dot.png" alt="kropka"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/line.png" alt="kreska"><img src="img/dot.png" alt="kropka"><img src="img/line.png" alt="kreska"><img src="img/dot.png" alt="kropka"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"><img src="img/dot.png" alt="kropka"><img src="img/dot.png" alt="kropka"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/line.png" alt="kreska"><img src="img/dot.png" alt="kropka"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/line.png" alt="kreska"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/dot.png" alt="kropka"><img src="img/line.png" alt="kreska"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/dot.png" alt="kropka"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"></span>
+  </div>
+  <div class="puzzle56-word" role="list" aria-label="Słowo drugie">
+    <span class="puzzle56-letter" role="listitem"><img src="img/line.png" alt="kreska"><img src="img/line.png" alt="kreska"></span>
+    <span class="puzzle56-letter" role="listitem"><img src="img/dot.png" alt="kropka"><img src="img/dot.png" alt="kropka"></span>
+  </div>
+</div>`,
+    solution: "poczytaj mi",
+    partial_solution: [
+      { key: "poczytajmi", message: "dodaj odstęp między słowami" }
+    ],
+    hint1: "To zapis alfabetem Morse'a",
+    hint2: "kropka to krótki sygnał, kreska to długi",
+    hint3: "Odczytaj najpierw pierwsze słowo"
   };
   PUZZLE_DATA[58] = {
     title: "Tylko cyfry",
