@@ -128,6 +128,7 @@
     { key: "right", label: "prawo" }
   ]);
   const PUZZLE_35_AUTOPLAY_STEP_MS = 1400;
+  // todo change the password
   const PAIRS_PASSWORD = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed domos";
   const LETTER_PAIR_CATALOG = {
     A: [["rak", "kara"], ["cel", "cela"]],
@@ -1421,8 +1422,44 @@
     logicKeys: ["puzzle-54"],
     content: `<div class="puzzle54-wrap">
   <div id="puzzle54Circle" class="puzzle54-circle" role="list" aria-label="Koło 12 trzyliterowych słów"></div>
+  <div class="puzzle54-times-wrap" aria-label="Godziny dla par słów">
+    <p class="puzzle54-times-title">Godziny</p>
+    <ul id="puzzle54Times" class="puzzle54-times"></ul>
+  </div>
+  <div class="puzzle54-icon-grid-wrap">
+    <div id="puzzle54IconGrid" class="puzzle54-icon-grid" role="group" aria-label="Siatka ikon"></div>
+    <p id="puzzle54GridStatus" class="puzzle54-grid-status" aria-live="polite"></p>
+  </div>
 </div>`,
-    circleWords: ["KOT", "LIS", "SOW", "RYŚ", "BÓR", "DOM", "LAS", "NOC", "DYM", "MAK", "SER", "MUR"],
+    circleWords: ["kot", "oca", "arg", "kar", "ma", "on", "so", "ona", "sna", "las", "let", "kor"],
+    timePairs: [
+      ["Kot", "Let"],
+      ["Let", "ARG"],
+      ["Arg", "on"],
+      ["Kar", "Oca"],
+      ["Ma", "Kar"],
+      ["Las", "So"],
+      ["So", "Sna"],
+      ["Kor", "ona"]
+    ],
+    iconItems: [
+      { icon: "🥩", label: "kotlet", correct: true },
+      { icon: "🌙", label: "Księżyc", correct: false },
+      { icon: "💤", label: "sen", correct: true },
+      { icon: "🐱", label: "Kot", correct: false },
+      { icon: "Ar", label: "Symbol Argonu", correct: true, isText: true },
+      { icon: "🍝", label: "Makaron", correct: true },
+      { icon: "🌻", label: "Słonecznik", correct: false },
+      { icon: "👑", label: "Korona", correct: true },
+      { icon: "🪢", label: "Lasso", correct: true },
+      { icon: "🎸", label: "Gitara", correct: false },
+      { icon: "🌲", label: "Sosna", correct: true },
+      { icon: "🦊", label: "Lis", correct: false },
+      { icon: "🐎", label: "karoca", correct: true },
+      { icon: "🍕", label: "Pizza", correct: false },
+      { icon: "🎭", label: "Maska", correct: false },
+      { icon: "🍌", label: "Banan", correct: false }
+    ],
     solution: "",
     hint1: "Zwróć uwagę na układ słów na okręgu",
     hint2: "Każde słowo ma 3 litery",
@@ -3526,6 +3563,7 @@ const buildPuzzleOrderDiagnostics = () => {
       }
 
       const circleEl = document.getElementById("puzzle54Circle");
+      const timesEl = document.getElementById("puzzle54Times");
       if (!circleEl) {
         return;
       }
@@ -3549,6 +3587,125 @@ const buildPuzzleOrderDiagnostics = () => {
 
       circleEl.innerHTML = "";
       circleEl.appendChild(fragment);
+
+      if (!timesEl) {
+        return;
+      }
+
+      const pairSource = Array.isArray(puzzleData.timePairs) ? puzzleData.timePairs : [];
+      const normalizeWord = (value) => String(value || "").trim().slice(0, 3).toUpperCase();
+      const wordToIndex = new Map();
+      words.forEach((word, index) => {
+        if (!wordToIndex.has(word)) {
+          wordToIndex.set(word, index);
+        }
+      });
+
+      const formatHour = (index) => {
+        const hour = index === 0 ? 12 : index;
+        return String(hour).padStart(2, "0");
+      };
+
+      const formatMinute = (index) => {
+        return String((index * 5) % 60).padStart(2, "0");
+      };
+
+      const timeFragment = document.createDocumentFragment();
+      pairSource.forEach((pair) => {
+        if (!Array.isArray(pair) || pair.length < 2) {
+          return;
+        }
+
+        const fromWord = normalizeWord(pair[0]);
+        const toWord = normalizeWord(pair[1]);
+        const fromIndex = wordToIndex.has(fromWord) ? wordToIndex.get(fromWord) : null;
+        const toIndex = wordToIndex.has(toWord) ? wordToIndex.get(toWord) : null;
+        const baseTime = fromIndex === null || toIndex === null
+          ? "--:--"
+          : `${formatHour(fromIndex)}:${formatMinute(toIndex)}`;
+        const timeText = baseTime === "04:15" ? "04:15:20" : baseTime;
+
+        const itemEl = document.createElement("li");
+        itemEl.className = "puzzle54-time-item";
+        itemEl.textContent = timeText;
+        timeFragment.appendChild(itemEl);
+      });
+
+      timesEl.innerHTML = "";
+      timesEl.appendChild(timeFragment);
+
+      const iconGridEl = document.getElementById("puzzle54IconGrid");
+      const gridStatusEl = document.getElementById("puzzle54GridStatus");
+
+      if (iconGridEl) {
+        const iconItemsData = Array.isArray(puzzleData.iconItems) ? puzzleData.iconItems : [];
+        const toggled = new Set();
+        const correctIndexes = new Set();
+        iconItemsData.forEach((item, pos) => {
+          if (item.correct) {
+            correctIndexes.add(pos);
+          }
+        });
+
+        const iconFragment = document.createDocumentFragment();
+        iconItemsData.forEach((item, pos) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "puzzle54-icon-btn";
+          btn.dataset.pos = String(pos);
+          btn.setAttribute("aria-pressed", "false");
+          btn.setAttribute("aria-label", item.label);
+
+          const iconSpan = document.createElement("span");
+          iconSpan.className = item.isText ? "puzzle54-icon-text" : "puzzle54-icon-emoji";
+          iconSpan.textContent = item.icon;
+          iconSpan.setAttribute("aria-hidden", "true");
+
+          const labelSpan = document.createElement("span");
+          labelSpan.className = "puzzle54-icon-label";
+          labelSpan.textContent = item.label;
+
+          btn.appendChild(iconSpan);
+          btn.appendChild(labelSpan);
+          iconFragment.appendChild(btn);
+        });
+
+        iconGridEl.innerHTML = "";
+        iconGridEl.appendChild(iconFragment);
+
+        iconGridEl.addEventListener("click", (event) => {
+          const btn = event.target.closest(".puzzle54-icon-btn");
+          if (!btn || !iconGridEl.contains(btn)) {
+            return;
+          }
+
+          const pos = Number(btn.dataset.pos);
+          if (Number.isNaN(pos)) {
+            return;
+          }
+
+          const isActive = btn.classList.toggle("active");
+          btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+
+          if (isActive) {
+            toggled.add(pos);
+          } else {
+            toggled.delete(pos);
+          }
+
+          const allCorrect = toggled.size === correctIndexes.size
+            && Array.from(correctIndexes).every((ci) => toggled.has(ci));
+
+          if (allCorrect) {
+            this.showCheckFeedback("success", "Brawo!", "Znalazłaś wszystkie właściwe ikony!");
+            if (gridStatusEl) {
+              gridStatusEl.textContent = "Brawo! Wszystkie właściwe ikony zostały wybrane!";
+            }
+          } else if (gridStatusEl) {
+            gridStatusEl.textContent = "";
+          }
+        });
+      }
     },
 
     handlePuzzle48SnoutClick() {
