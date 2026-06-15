@@ -115,36 +115,19 @@
     SPRITE_FOX: "sprite-fox",
     WHITE_CONTENT: "white-content"
   });
-  const PUZZLE_35_ANIMATIONS = Object.freeze({
-    idle_front: { row: 0, frames: 4, fps: 5 },
-    idle_back: { row: 1, frames: 4, fps: 5 },
-    idle_left: { row: 2, frames: 4, fps: 5 },
-    idle_right: { row: 3, frames: 4, fps: 5 },
-    walk_front: { row: 4, frames: 6, fps: 9 },
-    walk_back: { row: 5, frames: 6, fps: 9 },
-    walk_left: { row: 6, frames: 6, fps: 9 },
-    walk_right: { row: 7, frames: 6, fps: 9 },
-    hurt_front: { row: 8, frames: 4, fps: 7 },
-    hurt_back: { row: 9, frames: 4, fps: 7 },
-    hurt_left: { row: 10, frames: 4, fps: 7 },
-    hurt_right: { row: 11, frames: 4, fps: 7 },
-    run_front: { row: 12, frames: 6, fps: 12 },
-    run_back: { row: 13, frames: 6, fps: 12 },
-    run_left: { row: 14, frames: 6, fps: 12 },
-    run_right: { row: 15, frames: 6, fps: 12 },
-    death_front: { row: 16, frames: 6, fps: 8 },
-    death_back: { row: 17, frames: 6, fps: 8 },
-    death_left: { row: 18, frames: 6, fps: 8 },
-    death_right: { row: 19, frames: 6, fps: 8 }
-  });
-  const PUZZLE_35_SHEET_LAYOUT = Object.freeze({
-    startX: 196,
-    startY: 20,
-    frameWidth: 57,
-    frameHeight: 58,
-    rowStep: 76,
-    colStep: 58
-  });
+  const PUZZLE_35_STATES = Object.freeze([
+    { key: "idle", label: "idle (4 klatki)" },
+    { key: "walk", label: "walk (6 klatek)" },
+    { key: "run", label: "run (6 klatek)" },
+    { key: "death", label: "death (5 klatek)" }
+  ]);
+  const PUZZLE_35_DIRECTIONS = Object.freeze([
+    { key: "down", label: "dol" },
+    { key: "up", label: "gora" },
+    { key: "left", label: "lewo" },
+    { key: "right", label: "prawo" }
+  ]);
+  const PUZZLE_35_AUTOPLAY_STEP_MS = 1400;
   const PAIRS_PASSWORD = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed domos";
   const LETTER_PAIR_CATALOG = {
     A: [["rak", "kara"], ["cel", "cela"]],
@@ -240,16 +223,17 @@
     hint3: "Ani ten"
   };
     PUZZLE_DATA[4] = {
-    title: "Tutorial",
+    title: "Szukaj i czytaj",
     logicKeys: ["puzzle-4"],
-    work_in_progress: true,
     content: `<p>Do rozwiązywania zagadek czasem mogą być potrzebne zewnętrzne materiały - w większości powinna wystarczyć wikipedia, ale inne strony lub książki też mogą być przydatne.</p>
-  <p><a href="https://pl.wikipedia.org/wiki/Zagadka" target="_blank" rel="noopener noreferrer">https://pl.wikipedia.org/wiki/Zagadka</a> - zagadka literacka</p>
-  <p>Nie ma potrzeby ani sensu korzystać tu z AI - może to popsuć zabawę.</p>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    <p>Aby rozwiązać tę zagadkę należy sprawdzić jak miał na imię bohater, który zgładził smoka Fafnira</p>
+    <p>Nie ma potrzeby ani sensu korzystać tu z AI - może to popsuć zabawę.</p>`,
+    solution: "Sigurd",
+    partial_solution: [
+      { key: "Zygfryd", message: "Blisko, ale chodzi o inną formę tego imienia" }
+    ],
+    hint1: "https://pl.wikipedia.org/wiki/Fafnir",
+    hint2: "nie no, bez przesady - to jest proste:)",
   };
       PUZZLE_DATA[5] = {
     title: "Notatki",
@@ -858,42 +842,35 @@
     logicKeys: ["puzzle-34"],
     content: `<p><strong>Gdzieś zgubiłaś instrument? Jak go znajdziesz, zacznij od G</strong></p>`,
     solution: "złaź sierściuchu",
-    hint1: "tu go nie ma",
-    hint2: "tu też nie",
-    hint3: "znalazłaś? ",
+    hint1: "musisz odwiedzić jedną z poprzednich zagadek",
+    hint2: "Tytuł zagadki jest kluczowy - jak inaczej możnaby to powiedzieć?",
+    hint3: "wlazł?",
     hint4: "o kim jest ta zagadka?",
     hint5: "rozwiązaniem jest imie"
 
   };
   PUZZLE_DATA[35] = {
-    work_in_progress: true,
-    title: "Lisek - demo animacji",
-    puzzleKey: "fox-sprite-demo",
+    title: "Tropienie dzika",
+    wip: true,
+    puzzleKey: "boar-animations-demo",
     logicKeys: [PUZZLE_LOGIC_KEYS.SPRITE_FOX, "puzzle-35"],
     content: `<div class="puzzle35-wrap">
-  <p><strong>Demo animacji z arkusza sprite'ów lisa.</strong></p>
-  <p>Wgraj arkusz jako <code>img/fox-spritesheet.png</code>, aby uruchomić podgląd wszystkich sekwencji.</p>
-
-  <div class="puzzle35-controls">
-    <label for="puzzle35AnimSelect">Animacja</label>
-    <select id="puzzle35AnimSelect" class="puzzle35-select" aria-label="Wybierz animację lisa"></select>
-
-    <label for="puzzle35SpeedRange">Tempo: <span id="puzzle35SpeedValue">100%</span></label>
-    <input id="puzzle35SpeedRange" type="range" min="50" max="200" step="5" value="100" aria-label="Tempo animacji lisa">
-
-    <button type="button" id="puzzle35PlayBtn" class="small-btn" aria-pressed="true">Pauza</button>
-    <button type="button" id="puzzle35DirectionBtn" class="small-btn" aria-pressed="false">Tryb: pętla</button>
-  </div>
-
-  <div class="puzzle35-stage">
-    <canvas id="puzzle35Canvas" class="puzzle35-canvas" width="232" height="232" aria-label="Podgląd animacji sprite lisa"></canvas>
-    <p id="puzzle35Status" class="puzzle35-status" aria-live="polite">Ładowanie...</p>
+  <div class="puzzle35-letter-wrap">
+    <p>Dzik wszedł do lasu od północy - klikaj pola, aby odtworzyć właściwą ścieżkę.</p>
+    <div id="puzzle35LetterGrid" class="puzzle35-letter-grid" role="grid" aria-label="Siatka 7 na 7"></div>
+    <p id="puzzle35Status" class="puzzle35-status" aria-live="polite">Krok 0/18</p>
+    <p id="puzzle35TrailMessage" class="puzzle35-status" aria-live="polite">Znajdź leże dzika.</p>
   </div>
 </div>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    solution: "Sus scrofa",
+    partial_solution: [
+      { key: "Susscrofa", message: "A gdzie spacja?" },
+      { key: "fera", message: "szukamy pełnej nazwy łacińskiej - wikipedia pomoże:)" }
+    ],
+    hint1: "musisz sprawdzić którędy poszedł dzik - klikaj na litery by sprawdzić jego kolejny krok",
+    hint2: "zagadka wymaga prób i błędów - możesz zapisywać kroki aby uniknąć powtarzeania pomyłek",
+    hint3: "odczytaj wiadomość stworzoną przez ścieżkę i użyj innej zagadki by znaleźć rozwiązanie",
+    hint4: "pamiętasz szyfr Cezara?"
   };
   PUZZLE_DATA[36] = {
     title: "Chronologia",
@@ -948,26 +925,74 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[38] = {
-    title: "WIP Sonar",
-    puzzleKey: "sonar-wip",
-    logicKeys: [PUZZLE_LOGIC_KEYS.SONAR, "puzzle-24"],
+    title: "Labirynt",
+    logicKeys: ["puzzle-38"],
     work_in_progress: true,
-    content: `<div class="sonar-puzzle">
-  <p><strong>Ta zagadka jest tylko zalążkiem - możesz ją śmiało pominąć podczas testów.</strong></p>
-  <div class="sonar-controls">
-    <button type="button" id="puzzle15SonarToggle" class="small-btn" aria-pressed="false">Sonar: OFF</button>
-    <p id="puzzle15Status" class="sonar-status" aria-live="polite">Sonar wyłączony.</p>
-  </div>
-  <div id="puzzle15Field" class="sonar-field" role="img" aria-label="Pole sonaru z łodzią podwodną i celem">
-    <div id="puzzle15Target" class="sonar-target" aria-hidden="true"></div>
-    <div id="puzzle15Submarine" class="sonar-submarine" aria-hidden="true">
-      <span class="sonar-submarine-tower"></span>
-      <span class="sonar-submarine-tail"></span>
-      <span class="sonar-submarine-window w1"></span>
-      <span class="sonar-submarine-window w2"></span>
+    content: `<div class="p38-wrap">
+  <canvas id="puzzle38Canvas" class="p38-canvas" aria-label="Mapa tuneli z pojazdem"></canvas>
+  <div class="p38-controls" aria-label="Sterowanie pojazdem">
+    <div class="p38-ctrl-row">
+      <button id="p38CCW" class="p38-btn" type="button" aria-label="Obróć w lewo">↺</button>
+      <button id="p38Fwd" class="p38-btn p38-btn-fwd" type="button" aria-label="Naprzód">▲</button>
+      <button id="p38CW"  class="p38-btn" type="button" aria-label="Obróć w prawo">↻</button>
+    </div>
+    <div class="p38-ctrl-row">
+      <span class="p38-spacer"></span>
+      <button id="p38Bwd" class="p38-btn" type="button" aria-label="Wstecz">▼</button>
+      <span class="p38-spacer"></span>
     </div>
   </div>
-</div>`,
+</div>
+<style>
+.p38-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.p38-canvas {
+  width: 100%;
+  max-width: 700px;
+  border: 2px solid #2a5442;
+  border-radius: 4px;
+  display: block;
+  image-rendering: crisp-edges;
+}
+.p38-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+.p38-ctrl-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.p38-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 6px;
+  border: 2px solid #5a8a70;
+  background: #1e3a2f;
+  color: #d4af8f;
+  font-size: 1.3rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+.p38-btn:active, .p38-btn.active {
+  background: #2a5442;
+}
+.p38-btn-fwd {
+  background: #264a38;
+}
+.p38-spacer {
+  width: 3rem;
+  height: 3rem;
+  display: inline-block;
+}
+</style>`,
     solution: "",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
@@ -1038,7 +1063,6 @@
     title: "Ocenzurowany Sonet",
     puzzleKey: "clock-hands-sonet",
     logicKeys: [PUZZLE_LOGIC_KEYS.CLOCK_HANDS, "puzzle-42"],
-    work_in_progress: true,
     content: `<div class="puzzle42-wrap">
   <div class="puzzle42-sonnet">
     <p><strong><span class="puzzle42-highlight">J</span>ako fale dążące ku żwirom wybrzeży</strong></p>
@@ -1082,13 +1106,12 @@
   </div>
   <p class="puzzle42-note">Znajdź oryginał!</p>
 </div>`,
-    solution: "czas",
-    partial_solution: [
-      { key: "czasu", message: "Dobre słowo, ale wpisz je w podstawowej formie." }
-    ],
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    solution: "zegar",
+  
+    hint1: "ta zagadka ma kilka etapów - najpierw warto znaleźć oryginał tekstu i sprawdzić czego w nim brakuje - to będzie podpowiedź.",
+    hint2: "teraz skup się na symbolach poniżej - czym one mogą być? ocenzurowane słowa podpowiedzą.",
+    hint3: "Teraz odczytuj wartości wskazywane przez symbole na dole. Na co te te liczby mogą wskazywać? Może coś w tekście?",
+    hint4: "Pierwszy symbol wskazuje na 3, a przez to na literę Z"
   };
   PUZZLE_DATA[43] = {
     title: "Podobieństwa i różnice",
@@ -1467,9 +1490,294 @@
     partial_solution: [
       { key: "poczytajmi", message: "dodaj odstęp między słowami" }
     ],
-    hint1: "To zapis alfabetem Morse'a",
-    hint2: "kropka to krótki sygnał, kreska to długi",
-    hint3: "Odczytaj najpierw pierwsze słowo"
+    hint1: "Co przypominają ci pozy w których ustawione są zwierzątka?",
+    hint2: "Czy jest jakiś alfabet, który wykorzystuje takie symbole?",
+    hint3: "Nazwa zwierzaka jest dużą podpowiedzią"
+  };
+  PUZZLE_DATA[57] = {
+    wip: true,
+    // dodaj mały list który będzie zawierał kod!
+    title: "List w ciemnościach",
+    logicKeys: ["puzzle-57"],
+    content: `<div class="puzzle57-wrap">
+  <div class="puzzle57-audio-controls" aria-label="Sterowanie muzyką">
+    <button type="button" id="puzzle57PlayBtn" class="puzzle57-audio-btn" aria-label="Odtwórz" title="Odtwórz">▶</button>
+    <button type="button" id="puzzle57PauseBtn" class="puzzle57-audio-btn" aria-label="Pauza" title="Pauza">⏸</button>
+    <button type="button" id="puzzle57StopBtn" class="puzzle57-audio-btn" aria-label="Zatrzymaj" title="Zatrzymaj">■</button>
+  </div>
+  <article class="puzzle57-noir">
+    <p>Hela znalazła list tam, gdzie nikt rozsądny by nie zajrzał —<br>
+    między podartymi zeszytami i gazetami.<br>
+    Papier był chłodny, obcy, pachniał deszczem i tajemnicą.</p>
+    
+    <p>Usiadła i zaczęła czytać. Powoli, uważnie.<br>
+    Za pierwszym razem wszystko wyglądało zwyczajnie.<br>
+    Za drugim — już nie.</p>
+    
+    <p>Słowa były zbyt równe, zbyt spokojne.<br>
+    Jakby pod tekstem było drugie dno.<br>
+    Zatrzymała się.<br>
+    Coś było nie tak.</p>
+    
+    <p>Pod palcami poczuła dziwne nierówności.<br>
+    Odwróciła kartkę i zobaczyła pośpieszne nabazgrane zestawy liczb.<br>
+    Ukryta wiadomość była blisko. Czuła to.</p>
+    
+    <p>Na dole kartki widniało nazwisko.</p>
+    
+    <p>Zmarszczyła brwi.<br>
+    Brzmiało obco. Obco i niewygodnie.<br>
+    <em>Takie nazwiska coś znaczą.</em><br>
+    <em>Takie nazwiska się sprawdza.</em></p>
+  </article>
+  <div class="puzzle57-letter">
+    <div class="puzzle57-letter-container" id="puzzle57LetterContainer">
+      <div class="puzzle57-page puzzle57-page-front">
+        <p>Wszystko jest w porządku</p>
+        <p>Noc jest ciepła i spokojna</p>
+        <p>A miasto wydaje się spać</p>
+        <p>Wdycham letnie powietrze</p>
+        <p>I słucham muzyki z klubów nad rzeką</p>
+        <p>Pójdę spać s<b>p</b>okojny</p>
+        <div class="puzzle57-signature">Ottendorfa</div>
+      </div>
+      <div class="puzzle57-page puzzle57-page-back">
+        <p><strong>6-3-2</strong></p>
+        <p>2-1-2</p>
+        <p>3-2-1</p>
+        <p>1-4-2</p>
+        <p>2-1-1</p>
+        <p>6-3-8</p>
+        <div class="puzzle57-signature" style="text-align: right;">szyfr</div>
+      </div>
+    </div>
+  </div>
+  <button type="button" id="puzzle57FlipBtn" class="puzzle57-flip-btn" aria-label="Odwróć list">Odwróć ▶</button>
+</div>
+<style>
+.puzzle57-wrap {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(139, 115, 85, 0.5);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  min-height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.puzzle57-audio-controls {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.puzzle57-audio-btn {
+  border: 1px solid #8b7355;
+  background: rgba(28, 28, 28, 0.85);
+  color: #d4af8f;
+  border-radius: 4px;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.puzzle57-audio-btn:hover {
+  background: rgba(46, 46, 46, 0.95);
+}
+
+.puzzle57-noir {
+  font-family: 'Georgia', 'Garamond', serif;
+  color: #d4af8f;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  max-width: 600px;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.puzzle57-noir p {
+  margin: 1.5rem 0;
+  line-height: 1.9;
+}
+
+.puzzle57-noir p:first-child {
+  margin-top: 0;
+}
+
+.puzzle57-highlight {
+  color: #c9932e;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.puzzle57-noir em {
+  font-style: italic;
+  color: #b89968;
+  letter-spacing: 0.3px;
+}
+
+.puzzle57-letter {
+  position: relative;
+  width: 320px;
+  height: 420px;
+  margin-top: 2rem;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.puzzle57-letter-container {
+  width: 320px;
+  height: 420px;
+  position: relative;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.puzzle57-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(200, 190, 170, 0.95) 0%, rgba(210, 200, 180, 0.95) 100%);
+  border: 1px solid #8b7355;
+  border-radius: 2px;
+  padding: 2rem;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+  font-family: 'Georgia', 'Garamond', serif;
+  overflow: hidden;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+  margin: 0;
+}
+
+.puzzle57-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, transparent 24%, rgba(139, 115, 85, 0.05) 25%, rgba(139, 115, 85, 0.05) 26%, transparent 27%, transparent 74%, rgba(139, 115, 85, 0.05) 75%, rgba(139, 115, 85, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(rgba(139, 115, 85, 0.03) 1px, transparent 1px);
+  background-size: 100% 1.8rem, 100% 1.8rem;
+  pointer-events: none;
+}
+
+.puzzle57-page-front {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #3d2817;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.puzzle57-page-front p {
+  margin: 1rem 0;
+  text-align: left;
+  font-style: italic;
+}
+
+.puzzle57-page-back {
+  background: linear-gradient(90deg, rgba(220, 210, 190, 0.95) 0%, rgba(215, 205, 185, 0.95) 100%);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #3d2817;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.puzzle57-page-back p {
+  margin: 1rem 0;
+  text-align: left;
+  font-style: italic;
+}
+
+.puzzle57-letter-container.flipped .puzzle57-page-front {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition-delay: 0s, 0.45s;
+}
+
+.puzzle57-letter-container.flipped .puzzle57-page-back {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.puzzle57-flip-btn {
+  background: rgba(139, 115, 85, 0.7);
+  border: 1px solid #8b7355;
+  color: #d4af8f;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.puzzle57-flip-btn:hover {
+  background: rgba(139, 115, 85, 1);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(212, 175, 143, 0.3);
+}
+
+.puzzle57-flip-btn:active {
+  transform: scale(0.95);
+}
+
+.puzzle57-signature {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-style: italic;
+  color: #3d2817;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+</style>`,
+    solution: "",
+    hint1: "Skup się na liście - on wystraczy do rozwiązania zagadki",
+    hint2: "Tę zagadkę można zacząć na kilka sposobów - ja proponuję zwrócić uwagę na pogrubione teksty w liście...",
+    hint3: "Drugim sposobem jest poszukanie informacji na temat nazwiska",
   };
   PUZZLE_DATA[58] = {
     title: "Tylko cyfry",
@@ -1638,6 +1946,7 @@ const buildPuzzleOrderDiagnostics = () => {
     howlAudio: null,
     fanfareAudio: null,
     sonarAudio: null,
+    noirAudio: null,
     puzzle27IntervalId: null,
     puzzle27State: null,
     puzzle6PlayedNotes: [],
@@ -2167,18 +2476,29 @@ const buildPuzzleOrderDiagnostics = () => {
     },
 
     openPuzzle(puzzleId) {
+      const previousPuzzle = this.state.selectedPuzzle;
       this.state.selectedPuzzle = this.normalizePuzzleId(puzzleId);
       this.saveState();
       this.renderPuzzleView();
       this.showPuzzleView();
 
+      if (previousPuzzle === 57) {
+        this.stopPuzzle57();
+      }
+
       if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.NIGHT_SKY)) {
         this.playHowlSound();
+      }
+
+      if (this.state.selectedPuzzle === 57) {
+        this.playNoirSound();
+        this.initPuzzle57Audio();
       }
     },
 
     showMenuView() {
       this.stopPuzzle35();
+      this.stopPuzzle57();
       this.stopPuzzle15Simulation();
       this.stopPuzzle16Grid();
       this.stopPuzzle27Clock();
@@ -2429,6 +2749,10 @@ const buildPuzzleOrderDiagnostics = () => {
       }
 
       if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS)) {
+        this.initPuzzle38Board();
+      }
+
+      if (document.getElementById("puzzle38Canvas")) {
         this.initPuzzle38Board();
       }
 
@@ -3497,6 +3821,93 @@ const buildPuzzleOrderDiagnostics = () => {
       }
     },
 
+    playNoirSound() {
+      if (!this.noirAudio) {
+        this.noirAudio = new Audio("sounds/noir.mp3");
+        this.noirAudio.preload = "auto";
+      }
+
+      this.noirAudio.volume = 1;
+      this.noirAudio.currentTime = 0;
+      const playPromise = this.noirAudio.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          // Ignore blocked autoplay or missing codec errors.
+        });
+      }
+    },
+
+    stopPuzzle57() {
+      if (!this.noirAudio) {
+        return;
+      }
+
+      const fadeOutDuration = 500; // milliseconds
+      const startVolume = this.noirAudio.volume;
+      const startTime = Date.now();
+
+      const fadeInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = elapsed / fadeOutDuration;
+
+        if (progress >= 1) {
+          this.noirAudio.volume = 0;
+          this.noirAudio.pause();
+          clearInterval(fadeInterval);
+        } else {
+          this.noirAudio.volume = startVolume * (1 - progress);
+        }
+      }, 20);
+    },
+
+    initPuzzle57Audio() {
+      const playBtn = document.getElementById("puzzle57PlayBtn");
+      const pauseBtn = document.getElementById("puzzle57PauseBtn");
+      const stopBtn = document.getElementById("puzzle57StopBtn");
+      const flipBtn = document.getElementById("puzzle57FlipBtn");
+      if (!playBtn || !pauseBtn || !stopBtn) {
+        return;
+      }
+
+      playBtn.onclick = () => {
+        if (!this.noirAudio) {
+          this.playNoirSound();
+          return;
+        }
+
+        this.noirAudio.volume = 1;
+        const playPromise = this.noirAudio.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {
+            // Ignore blocked autoplay or missing codec errors.
+          });
+        }
+      };
+
+      pauseBtn.onclick = () => {
+        if (this.noirAudio) {
+          this.noirAudio.pause();
+        }
+      };
+
+      stopBtn.onclick = () => {
+        if (this.noirAudio) {
+          this.noirAudio.pause();
+          this.noirAudio.currentTime = 0;
+          this.noirAudio.volume = 1;
+        }
+      };
+
+      if (flipBtn) {
+        flipBtn.onclick = () => {
+          const container = document.getElementById("puzzle57LetterContainer");
+          if (container) {
+            container.classList.toggle("flipped");
+          }
+        };
+      }
+    },
+
     playFanfareSound() {
       if (!this.fanfareAudio) {
         this.fanfareAudio = new Audio("sounds/fanfare.mp3");
@@ -4552,340 +4963,578 @@ const buildPuzzleOrderDiagnostics = () => {
     },
 
     initPuzzle38Board() {
-      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS)) {
+      const canvas = document.getElementById("puzzle38Canvas");
+      if (!canvas) {
         return;
       }
 
       this.stopPuzzle38Board();
-      const boardsHostEl = document.getElementById("puzzle38Boards");
-      const statusEl = document.getElementById("puzzle38Status");
-      if (!boardsHostEl || !statusEl) {
-        return;
-      }
 
-      const boardConfigs = [
-        {
-          nodeLabelRows: ["AA", "LT", "AA"],
-          wordLabel: "la la la la"
-        },
-        {
-          nodeLabelRows: ["TE", "OR", "KA"],
-          wordLabel: "kot"
-        },
-        {
-          nodeLabelRows: ["LK", "AM", "SĘ"],
-          wordLabel: "ma klasę"
-        },
-        {
-          nodeLabelRows: ["ZC", "KA", "ES"],
-          wordLabel: "skacze"
-        },
-        {
-          nodeLabelRows: ["TÓ", "AN", "SŁ"],
-          wordLabel: "na stół"
-        },
-        {
-          nodeLabelRows: ["KAT", "XCU", "ZHM"],
-          wordLabel: "ach tak"
+      const ctx = canvas.getContext("2d");
+      const LW = 700;
+      const LH = 500;
+      canvas.width = LW;
+      canvas.height = LH;
+
+      // Seeded pseudo-random for deterministic cave walls
+      const seededRng = (seed) => {
+        let s = seed;
+        return () => {
+          s = (s * 1664525 + 1013904223) & 0xffffffff;
+          return (s >>> 0) / 0xffffffff;
+        };
+      };
+      const rng = seededRng(42);
+
+      // Build organic cave polygon by perturbing rect vertices
+      const cavePolygon = (x, y, w, h, steps, jitter) => {
+        const pts = [];
+        for (let i = 0; i <= steps; i += 1) {
+          const t = i / steps;
+          pts.push({ x: x + t * w + (rng() - 0.5) * jitter, y: y + (rng() - 0.5) * jitter });
         }
+        for (let i = 1; i <= steps; i += 1) {
+          const t = i / steps;
+          pts.push({ x: x + w + (rng() - 0.5) * jitter, y: y + t * h + (rng() - 0.5) * jitter });
+        }
+        for (let i = 1; i <= steps; i += 1) {
+          const t = i / steps;
+          pts.push({ x: x + w - t * w + (rng() - 0.5) * jitter, y: y + h + (rng() - 0.5) * jitter });
+        }
+        for (let i = 1; i < steps; i += 1) {
+          const t = i / steps;
+          pts.push({ x: x + (rng() - 0.5) * jitter, y: y + h - t * h + (rng() - 0.5) * jitter });
+        }
+        return pts;
+      };
+
+      const skeletons = [
+        // Entry + top spine
+        { x: 305, y: 0,   w: 90,  h: 80 },
+        { x: 325, y: 70,  w: 50,  h: 110 },
+
+        // Upper split (left/right)
+        { x: 180, y: 150, w: 180, h: 50 },
+        { x: 340, y: 150, w: 200, h: 50 },
+
+        // Side shafts
+        { x: 170, y: 180, w: 50,  h: 170 },
+        { x: 490, y: 180, w: 50,  h: 170 },
+
+        // Mid ring / cross
+        { x: 100, y: 245, w: 500, h: 60 },
+        { x: 320, y: 245, w: 60,  h: 220 },
+
+        // Lower spread
+        { x: 110, y: 360, w: 270, h: 50 },
+        { x: 350, y: 360, w: 240, h: 50 },
+
+        // Far side columns and connectors
+        { x: 80,  y: 95,  w: 50,  h: 320 },
+        { x: 560, y: 95,  w: 50,  h: 320 },
+        { x: 130, y: 95,  w: 130, h: 45 },
+        { x: 440, y: 95,  w: 120, h: 45 },
+        { x: 225, y: 410, w: 255, h: 45 },
       ];
-      const boardCount = boardConfigs.length;
-      const createGridNodes = (rows, cols, leftPercent, topPercent, stepX, stepY) => {
-        const points = [];
-        for (let row = 0; row < rows; row += 1) {
-          for (let col = 0; col < cols; col += 1) {
-            points.push({
-              x: leftPercent + col * stepX,
-              y: topPercent + row * stepY
-            });
+
+      const chambers = [
+        { x: 350, y: 95,  r: 38 },
+        { x: 190, y: 175, r: 34 },
+        { x: 510, y: 175, r: 34 },
+        { x: 350, y: 275, r: 44 },
+        { x: 190, y: 275, r: 38 },
+        { x: 510, y: 275, r: 38 },
+        { x: 350, y: 385, r: 42 },
+      ];
+
+      const cavePolygons = skeletons.map(s => cavePolygon(s.x, s.y, s.w, s.h, 9, 16));
+
+      const inTunnel = (px, py) => {
+        const inRect = skeletons.some((t) => px >= t.x && px <= t.x + t.w && py >= t.y && py <= t.y + t.h);
+        if (inRect) {
+          return true;
+        }
+        return chambers.some((c) => {
+          const dx = px - c.x;
+          const dy = py - c.y;
+          return dx * dx + dy * dy <= c.r * c.r;
+        });
+      };
+
+      const VESSEL_R = 12;
+      const circleInTunnel = (cx, cy) => {
+        const N = 16;
+        for (let i = 0; i < N; i += 1) {
+          const a = (i / N) * Math.PI * 2;
+          if (!inTunnel(cx + Math.cos(a) * VESSEL_R, cy + Math.sin(a) * VESSEL_R)) {
+            return false;
           }
         }
-        return points;
+        return true;
       };
 
-      boardsHostEl.innerHTML = "";
-      const svgNS = "http://www.w3.org/2000/svg";
-      const boards = [];
-      const fragment = document.createDocumentFragment();
-
-      for (let boardIndex = 0; boardIndex < boardCount; boardIndex += 1) {
-        const boardConfig = boardConfigs[boardIndex] || {};
-        const boardCardEl = document.createElement("section");
-        boardCardEl.className = "puzzle38-board-card";
-
-        const boardEl = document.createElement("div");
-        boardEl.className = "puzzle38-board";
-        boardEl.dataset.p38Board = String(boardIndex);
-        boardEl.setAttribute("role", "group");
-        boardEl.setAttribute("aria-label", `Siatka ${boardIndex + 1}`);
-
-        const linesSvg = document.createElementNS(svgNS, "svg");
-        linesSvg.setAttribute("class", "puzzle38-lines");
-        linesSvg.setAttribute("viewBox", "0 0 100 100");
-        linesSvg.setAttribute("preserveAspectRatio", "none");
-        linesSvg.setAttribute("aria-hidden", "true");
-
-        const connectionsLayer = document.createElementNS(svgNS, "g");
-        const previewLine = document.createElementNS(svgNS, "line");
-        previewLine.setAttribute("class", "puzzle38-line puzzle38-line-preview");
-        previewLine.style.display = "none";
-
-        linesSvg.appendChild(connectionsLayer);
-        linesSvg.appendChild(previewLine);
-        boardEl.appendChild(linesSvg);
-
-        const boardNodes = boardIndex === boardCount - 1
-          ? createGridNodes(3, 3, 18, 18, 32, 32)
-          : createGridNodes(3, 2, 28, 18, 44, 32);
-
-        const configuredNodeLabels = Array.isArray(boardConfig.nodeLabelRows)
-          ? boardConfig.nodeLabelRows.flatMap((rowText) => {
-            return typeof rowText === "string" ? Array.from(rowText) : [];
-          })
-          : [];
-        const nodeLabels = configuredNodeLabels.length === boardNodes.length
-          ? configuredNodeLabels
-          : boardNodes.map((_, labelIndex) => String(labelIndex + 1));
-
-        boardNodes.forEach((node, nodeIndex) => {
-          const nodeBtn = document.createElement("button");
-          nodeBtn.type = "button";
-          nodeBtn.className = "puzzle38-node";
-          nodeBtn.dataset.p38Board = String(boardIndex);
-          nodeBtn.dataset.p38Index = String(nodeIndex);
-          const nodeLabel = nodeLabels[nodeIndex] || "";
-          nodeBtn.style.left = `${node.x}%`;
-          nodeBtn.style.top = `${node.y}%`;
-          nodeBtn.setAttribute("aria-label", `Siatka ${boardIndex + 1}, punkt ${nodeIndex + 1}: ${nodeLabel}`);
-
-          const labelEl = document.createElement("span");
-          labelEl.className = "puzzle38-node-label";
-          labelEl.textContent = nodeLabel;
-          nodeBtn.appendChild(labelEl);
-
-          boardEl.appendChild(nodeBtn);
-        });
-
-        const mapWordEl = document.createElement("p");
-        mapWordEl.className = "puzzle38-map-word";
-        mapWordEl.textContent = typeof boardConfig.wordLabel === "string" ? boardConfig.wordLabel : "";
-
-        boardCardEl.appendChild(boardEl);
-        boardCardEl.appendChild(mapWordEl);
-        fragment.appendChild(boardCardEl);
-
-        boards.push({
-          boardEl,
-          nodes: boardNodes,
-          connectionsLayer,
-          previewLine,
-          connections: [],
-          activeFromIndex: null,
-          pointerX: null,
-          pointerY: null
-        });
-      }
-
-      boardsHostEl.appendChild(fragment);
-
-      this.puzzle38State = {
-        statusEl,
-        boards,
-        activeBoardIndex: null
+      const vessel = {
+        x: 350,
+        y: 35,
+        angle: 0,
+        speed: 0,
+        maxSpeed: 2.5,
+        accel: 0.1,
+        friction: 0.96,
+        rotSpeed: 0.05
       };
 
-      this.updatePuzzle38NodeSelection();
-      this.renderPuzzle38Lines();
-      this.updatePuzzle38Status("Kliknij czerwone kółko, aby rozpocząć rysowanie linii.");
+      const keys = { fwd: false, bwd: false, cw: false, ccw: false };
+
+      const bindBtn = (id, key) => {
+        const btn = document.getElementById(id);
+        if (!btn) {
+          return;
+        }
+        const down = () => { keys[key] = true; btn.classList.add("active"); };
+        const up   = () => { keys[key] = false; btn.classList.remove("active"); };
+        btn.addEventListener("mousedown",  down);
+        btn.addEventListener("touchstart", down, { passive: true });
+        btn.addEventListener("mouseup",    up);
+        btn.addEventListener("mouseleave", up);
+        btn.addEventListener("touchend",   up);
+      };
+
+      bindBtn("p38CCW", "ccw");
+      bindBtn("p38CW",  "cw");
+      bindBtn("p38Fwd", "fwd");
+      bindBtn("p38Bwd", "bwd");
+
+      const drawCavePath = (pts) => {
+        ctx.beginPath();
+        const mid0x = (pts[0].x + pts[pts.length - 1].x) / 2;
+        const mid0y = (pts[0].y + pts[pts.length - 1].y) / 2;
+        ctx.moveTo(mid0x, mid0y);
+        for (let i = 0; i < pts.length; i += 1) {
+          const curr = pts[i];
+          const next = pts[(i + 1) % pts.length];
+          ctx.quadraticCurveTo(curr.x, curr.y, (curr.x + next.x) / 2, (curr.y + next.y) / 2);
+        }
+        ctx.closePath();
+      };
+
+      const draw = () => {
+        ctx.clearRect(0, 0, LW, LH);
+
+        // Rock background
+        const rockGrad = ctx.createLinearGradient(0, 0, LW, LH);
+        rockGrad.addColorStop(0,   "#111a20");
+        rockGrad.addColorStop(0.5, "#0d1618");
+        rockGrad.addColorStop(1,   "#0a1210");
+        ctx.fillStyle = rockGrad;
+        ctx.fillRect(0, 0, LW, LH);
+
+        // Cave passages (irregular corridors)
+        cavePolygons.forEach((pts) => {
+          const caveGrad = ctx.createLinearGradient(0, 0, 0, LH);
+          caveGrad.addColorStop(0,   "#243d30");
+          caveGrad.addColorStop(0.5, "#1c3026");
+          caveGrad.addColorStop(1,   "#162820");
+          ctx.fillStyle = caveGrad;
+          drawCavePath(pts);
+          ctx.fill();
+          ctx.strokeStyle = "rgba(60, 120, 80, 0.35)";
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+          ctx.strokeStyle = "rgba(0, 0, 0, 0.45)";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        });
+
+        // Cave chambers (organic rooms)
+        chambers.forEach((c) => {
+          const g = ctx.createRadialGradient(c.x - c.r * 0.2, c.y - c.r * 0.2, c.r * 0.25, c.x, c.y, c.r);
+          g.addColorStop(0, "#2a4738");
+          g.addColorStop(0.65, "#1e3529");
+          g.addColorStop(1, "#162820");
+
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+
+          ctx.strokeStyle = "rgba(60, 120, 80, 0.35)";
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+
+          ctx.strokeStyle = "rgba(0, 0, 0, 0.45)";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        });
+
+        // Stalactites
+        ctx.fillStyle = "rgba(10, 18, 14, 0.7)";
+        for (let i = 0; i < 18; i += 1) {
+          const bx = 30 + i * 37 + Math.sin(i * 1.7) * 8;
+          if (!inTunnel(bx, 4)) {
+            continue;
+          }
+          const len = 6 + Math.sin(i * 2.3) * 4;
+          ctx.beginPath();
+          ctx.moveTo(bx - 5, 4);
+          ctx.lineTo(bx + 5, 4);
+          ctx.lineTo(bx, 4 + len);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        // Vessel
+        ctx.beginPath();
+        ctx.arc(vessel.x, vessel.y, VESSEL_R, 0, Math.PI * 2);
+        const vg = ctx.createRadialGradient(vessel.x - 3, vessel.y - 3, 2, vessel.x, vessel.y, VESSEL_R);
+        vg.addColorStop(0, "#f0d0a8");
+        vg.addColorStop(1, "#b8894a");
+        ctx.fillStyle = vg;
+        ctx.fill();
+        ctx.strokeStyle = "#7a4f20";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Orientation line
+        const tip = VESSEL_R + 7;
+        ctx.beginPath();
+        ctx.moveTo(vessel.x, vessel.y);
+        ctx.lineTo(vessel.x + Math.cos(vessel.angle) * tip, vessel.y + Math.sin(vessel.angle) * tip);
+        ctx.strokeStyle = "#e74c3c";
+        ctx.lineWidth = 3;
+        ctx.lineCap = "round";
+        ctx.stroke();
+      };
+
+      const update = () => {
+        if (keys.cw)  { vessel.angle += vessel.rotSpeed; }
+        if (keys.ccw) { vessel.angle -= vessel.rotSpeed; }
+
+        if (keys.fwd) {
+          vessel.speed = Math.min(vessel.speed + vessel.accel, vessel.maxSpeed);
+        } else if (keys.bwd) {
+          vessel.speed = Math.max(vessel.speed - vessel.accel, -vessel.maxSpeed * 0.6);
+        } else {
+          vessel.speed *= vessel.friction;
+        }
+
+        if (Math.abs(vessel.speed) < 0.01) {
+          vessel.speed = 0;
+        }
+
+        const nx = vessel.x + Math.cos(vessel.angle) * vessel.speed;
+        const ny = vessel.y + Math.sin(vessel.angle) * vessel.speed;
+
+        if (circleInTunnel(nx, ny)) {
+          vessel.x = nx;
+          vessel.y = ny;
+        } else {
+          vessel.speed *= -0.8;
+        }
+      };
+
+      let rafId = null;
+      const loop = () => {
+        update();
+        draw();
+        rafId = requestAnimationFrame(loop);
+      };
+
+      loop();
+      this.puzzle38State = { rafId, keys };
     },
 
     stopPuzzle38Board() {
+      if (this.puzzle38State && this.puzzle38State.rafId) {
+        cancelAnimationFrame(this.puzzle38State.rafId);
+      }
       this.puzzle38State = null;
     },
 
     initPuzzle35() {
-      this.stopPuzzle35();
-
-      const selectEl = document.getElementById("puzzle35AnimSelect");
-      const speedRangeEl = document.getElementById("puzzle35SpeedRange");
-      const speedValueEl = document.getElementById("puzzle35SpeedValue");
-      const playBtnEl = document.getElementById("puzzle35PlayBtn");
-      const directionBtnEl = document.getElementById("puzzle35DirectionBtn");
-      const canvasEl = document.getElementById("puzzle35Canvas");
-      const statusEl = document.getElementById("puzzle35Status");
-
-      if (!selectEl || !speedRangeEl || !speedValueEl || !playBtnEl || !directionBtnEl || !canvasEl || !statusEl) {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.SPRITE_FOX)) {
         return;
       }
 
-      const entries = Object.keys(PUZZLE_35_ANIMATIONS);
-      const optionsFragment = document.createDocumentFragment();
-      entries.forEach((key) => {
-        const optionEl = document.createElement("option");
-        optionEl.value = key;
-        optionEl.textContent = key;
-        optionsFragment.appendChild(optionEl);
+      this.stopPuzzle35();
+
+      const gridEl = document.getElementById("puzzle35LetterGrid");
+      const messageEl = document.getElementById("puzzle35TrailMessage");
+      const statusEl = document.getElementById("puzzle35Status");
+
+      if (!gridEl || !messageEl || !statusEl) {
+        return;
+      }
+
+      const GRID_SIZE = 7;
+      const TOTAL = GRID_SIZE * GRID_SIZE;
+      const START_INDEX = Math.floor(GRID_SIZE / 2);
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const ACORN_ICON = "🌰";
+      const targetPhrase = "YNPVAFXN ANMJN QMVXN";
+      const pathDirections = [
+        "D", "L", "L", "D", "D", "D", "R", "R", "U", "R", "R", "D", "D", "D", "L", "L", "L", "L", "L"
+      ];
+      const targetLetters = targetPhrase.replace(/\s+/g, "").split("");
+
+      const dirDelta = {
+        U: { row: -1, col: 0, key: "up" },
+        D: { row: 1, col: 0, key: "down" },
+        L: { row: 0, col: -1, key: "left" },
+        R: { row: 0, col: 1, key: "right" }
+      };
+
+      const trailPath = [{ row: 0, col: START_INDEX }];
+      const usedCells = new Set([`0:${START_INDEX}`]);
+      for (const step of pathDirections) {
+        const delta = dirDelta[step];
+        const prev = trailPath[trailPath.length - 1];
+        const next = { row: prev.row + delta.row, col: prev.col + delta.col };
+        if (next.row < 0 || next.row >= GRID_SIZE || next.col < 0 || next.col >= GRID_SIZE) {
+          return;
+        }
+
+        const key = `${next.row}:${next.col}`;
+        if (usedCells.has(key)) {
+          return;
+        }
+
+        usedCells.add(key);
+        trailPath.push(next);
+      }
+
+      const trailIndexes = trailPath.slice(1).map((step) => (step.row * GRID_SIZE) + step.col);
+      if (trailIndexes.length !== targetLetters.length + 1) {
+        return;
+      }
+      const acornIndex = trailIndexes[trailIndexes.length - 1];
+
+      const letters = Array.from({ length: TOTAL }, () => {
+        const idx = Math.floor(Math.random() * alphabet.length);
+        return alphabet[idx];
       });
-      selectEl.innerHTML = "";
-      selectEl.appendChild(optionsFragment);
-      selectEl.value = "run_right";
 
-      const sheetImage = new Image();
-      sheetImage.decoding = "async";
-      sheetImage.src = "img/fox-spritesheet.png";
+      for (let i = 0; i < targetLetters.length; i += 1) {
+        letters[trailIndexes[i]] = targetLetters[i];
+      }
+      letters[acornIndex] = "";
 
-      const state = {
-        selectEl,
-        speedRangeEl,
-        speedValueEl,
-        playBtnEl,
-        directionBtnEl,
-        canvasEl,
-        statusEl,
-        sheetImage,
-        isSheetReady: false,
-        isPlaying: true,
-        pingPong: false,
-        animationKey: "run_right",
-        frameIndex: 0,
-        frameDirection: 1,
-        speedMultiplier: 1,
-        frameTimer: 0,
-        lastTick: performance.now(),
-        rafId: null,
-        handlers: {}
+      const fragment = document.createDocumentFragment();
+      for (let index = 0; index < TOTAL; index += 1) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "puzzle35-letter-cell";
+        button.dataset.index = String(index);
+        button.dataset.char = letters[index];
+        button.setAttribute("role", "gridcell");
+        if (index === START_INDEX) {
+          button.textContent = "";
+          button.dataset.char = "";
+        } else if (index === acornIndex) {
+          button.textContent = ACORN_ICON;
+          button.dataset.char = ACORN_ICON;
+        } else {
+          button.textContent = letters[index];
+        }
+        fragment.appendChild(button);
+      }
+
+      gridEl.innerHTML = "";
+      gridEl.appendChild(fragment);
+
+      const selected = new Set();
+      const listenerDisposers = [];
+      let trailStep = 0;
+
+      const resolveSpriteSrc = (stateKey, directionKey) => {
+        return `img/boar_${directionKey}_${stateKey}.gif`;
       };
 
-      const drawFrame = () => {
-        const ctx = state.canvasEl.getContext("2d");
-        if (!ctx) {
-          return;
+      const getDirectionFromDelta = (fromIndex, toIndex) => {
+        const fromRow = Math.floor(fromIndex / GRID_SIZE);
+        const fromCol = fromIndex % GRID_SIZE;
+        const toRow = Math.floor(toIndex / GRID_SIZE);
+        const toCol = toIndex % GRID_SIZE;
+
+        if (toRow < fromRow) {
+          return "up";
         }
-
-        const cw = state.canvasEl.width;
-        const ch = state.canvasEl.height;
-        ctx.clearRect(0, 0, cw, ch);
-
-        if (!state.isSheetReady) {
-          ctx.fillStyle = "#21170f";
-          ctx.fillRect(0, 0, cw, ch);
-          ctx.fillStyle = "#f6e9d6";
-          ctx.font = "700 15px Trebuchet MS, Segoe UI, Tahoma, sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText("Brak pliku img/fox-spritesheet.png", cw / 2, ch / 2 - 10);
-          ctx.font = "500 12px Trebuchet MS, Segoe UI, Tahoma, sans-serif";
-          ctx.fillText("Dodaj arkusz i odśwież zagadkę 35.", cw / 2, ch / 2 + 14);
-          return;
+        if (toRow > fromRow) {
+          return "down";
         }
-
-        const anim = PUZZLE_35_ANIMATIONS[state.animationKey];
-        if (!anim) {
-          return;
+        if (toCol < fromCol) {
+          return "left";
         }
-
-        const sourceX = PUZZLE_35_SHEET_LAYOUT.startX + state.frameIndex * PUZZLE_35_SHEET_LAYOUT.colStep;
-        const sourceY = PUZZLE_35_SHEET_LAYOUT.startY + anim.row * PUZZLE_35_SHEET_LAYOUT.rowStep;
-        const sw = PUZZLE_35_SHEET_LAYOUT.frameWidth;
-        const sh = PUZZLE_35_SHEET_LAYOUT.frameHeight;
-        const pixelScale = 4;
-        const dw = sw * pixelScale;
-        const dh = sh * pixelScale;
-        const dx = Math.floor((cw - dw) / 2);
-        const dy = Math.floor((ch - dh) / 2);
-
-        ctx.imageSmoothingEnabled = false;
-        ctx.fillStyle = "#100d0a";
-        ctx.fillRect(0, 0, cw, ch);
-        ctx.drawImage(state.sheetImage, sourceX, sourceY, sw, sh, dx, dy, dw, dh);
+        return "right";
       };
 
-      const tick = (timestamp) => {
-        if (!this.puzzle35State || this.puzzle35State !== state) {
+      const mountBoarAtIndex = (index, directionKey, stateKey = "walk") => {
+        gridEl.querySelectorAll(".puzzle35-letter-cell").forEach((cell) => {
+          cell.textContent = cell.dataset.char || "";
+        });
+        gridEl.querySelectorAll(".puzzle35-boar-cell").forEach((cell) => {
+          cell.classList.remove("puzzle35-boar-cell");
+        });
+        gridEl.querySelectorAll(".puzzle35-boar-sprite").forEach((sprite) => {
+          sprite.remove();
+        });
+
+        const targetCell = gridEl.querySelector(`.puzzle35-letter-cell[data-index=\"${index}\"]`);
+        if (!targetCell) {
           return;
         }
 
-        const deltaMs = Math.max(0, timestamp - state.lastTick);
-        state.lastTick = timestamp;
+        targetCell.classList.add("puzzle35-boar-cell");
+        targetCell.textContent = "";
+        const boarSprite = document.createElement("img");
+        boarSprite.className = "puzzle35-boar-sprite";
+        boarSprite.alt = "Dzik";
+        boarSprite.src = resolveSpriteSrc(stateKey, directionKey);
+        targetCell.appendChild(boarSprite);
+      };
 
-        if (state.isPlaying) {
-          const anim = PUZZLE_35_ANIMATIONS[state.animationKey];
-          const fps = Math.max(1, anim.fps * state.speedMultiplier);
-          const frameDurationMs = 1000 / fps;
-          state.frameTimer += deltaMs;
+      const formatTrail = (trail) => {
+        if (trail.length <= 8) {
+          return trail;
+        }
+        if (trail.length <= 13) {
+          return `${trail.slice(0, 8)} ${trail.slice(8)}`;
+        }
+        return `${trail.slice(0, 8)} ${trail.slice(8, 13)} ${trail.slice(13)}`;
+      };
 
-          while (state.frameTimer >= frameDurationMs) {
-            state.frameTimer -= frameDurationMs;
+      const getTrailText = () => {
+        return trailIndexes
+          .filter((index) => selected.has(index))
+          .map((index) => letters[index])
+          .join("");
+      };
 
-            if (state.pingPong) {
-              state.frameIndex += state.frameDirection;
-              if (state.frameIndex >= anim.frames - 1 || state.frameIndex <= 0) {
-                state.frameDirection *= -1;
-                state.frameIndex = Math.min(anim.frames - 1, Math.max(0, state.frameIndex));
-              }
-            } else {
-              state.frameIndex = (state.frameIndex + 1) % anim.frames;
-            }
+      const updateTrailHighlights = () => {
+        gridEl.querySelectorAll(".puzzle35-letter-cell").forEach((cellEl) => {
+          cellEl.classList.remove("active");
+          cellEl.style.removeProperty("--puzzle35-active-bg");
+          cellEl.style.removeProperty("--puzzle35-active-fg");
+        });
+
+        if (trailStep <= 0) {
+          return;
+        }
+
+        const fullTrailSequence = [START_INDEX, ...trailIndexes];
+        const revealedIndexes = fullTrailSequence.slice(0, trailStep + 1);
+        const maxOrder = Math.max(1, fullTrailSequence.length - 1);
+
+        revealedIndexes.forEach((visitedIndex) => {
+          const visitedCell = gridEl.querySelector(`.puzzle35-letter-cell[data-index=\"${visitedIndex}\"]`);
+          if (!visitedCell) {
+            return;
           }
+
+          const order = fullTrailSequence.indexOf(visitedIndex);
+          const ratio = order / maxOrder;
+          const hue = Math.round(120 * (1 - ratio));
+          visitedCell.style.setProperty("--puzzle35-active-bg", `hsl(${hue} 72% 36%)`);
+          visitedCell.style.setProperty("--puzzle35-active-fg", "#ffffff");
+          visitedCell.classList.add("active");
+        });
+      };
+
+      const stepBoarTrail = () => {
+        if (trailStep >= trailIndexes.length) {
+          return false;
         }
 
-        drawFrame();
-        state.rafId = window.requestAnimationFrame(tick);
+        const nextIndex = trailIndexes[trailStep];
+        const prevIndex = trailStep > 0 ? trailIndexes[trailStep - 1] : START_INDEX;
+        const direction = getDirectionFromDelta(prevIndex, nextIndex);
+
+        mountBoarAtIndex(nextIndex, direction, "walk");
+        selected.add(nextIndex);
+
+        trailStep += 1;
+        updateTrailHighlights();
+        const trail = formatTrail(getTrailText());
+        if (trailStep >= trailIndexes.length) {
+          const completionMessage = "Znalazłaś leże dzika, a w nim wiadomość: Odszyfruj ścieżkę z Cezarem";
+          messageEl.textContent = completionMessage;
+          statusEl.textContent = `Ścieżka: ${trail}`;
+          this.showCheckFeedback("success", "Leże dzika", completionMessage);
+        } else {
+          messageEl.textContent = `Ścieżka: ${trail}`;
+          statusEl.textContent = `Krok ${trailStep}/${trailIndexes.length}`;
+        }
+
+        return true;
       };
 
-      state.handlers.onSelect = () => {
-        state.animationKey = state.selectEl.value;
-        state.frameIndex = 0;
-        state.frameDirection = 1;
-        state.frameTimer = 0;
-        const anim = PUZZLE_35_ANIMATIONS[state.animationKey];
-        state.statusEl.textContent = `Aktywna animacja: ${state.animationKey} (${anim.frames} klatek).`;
-        drawFrame();
+      const resetTrail = () => {
+        selected.clear();
+        trailStep = 0;
+        mountBoarAtIndex(START_INDEX, "down", "idle");
+        updateTrailHighlights();
+        messageEl.textContent = "Znajdź leże dzika.";
+        statusEl.textContent = `Krok 0/${trailIndexes.length}`;
       };
 
-      state.handlers.onSpeed = () => {
-        const value = Number(state.speedRangeEl.value);
-        state.speedMultiplier = value / 100;
-        state.speedValueEl.textContent = `${value}%`;
+      const onGridClick = (event) => {
+        const cell = event.target.closest(".puzzle35-letter-cell");
+        if (!cell || !gridEl.contains(cell)) {
+          return;
+        }
+
+        const index = Number(cell.dataset.index);
+        if (Number.isNaN(index)) {
+          return;
+        }
+
+        if (index === START_INDEX) {
+          return;
+        }
+
+        if (index === trailIndexes[trailStep]) {
+          stepBoarTrail();
+          return;
+        }
+
+        if (selected.has(index)) {
+          statusEl.textContent = "To pole już zostało użyte na ścieżce.";
+          return;
+        }
+
+        const expectedIndex = trailIndexes[trailStep];
+        const expectedCell = gridEl.querySelector(`.puzzle35-letter-cell[data-index=\"${expectedIndex}\"]`);
+        if (expectedCell) {
+          expectedCell.classList.add("active");
+          window.setTimeout(() => {
+            if (!this.puzzle35State) {
+              return;
+            }
+            expectedCell.classList.remove("active");
+          }, 220);
+        }
+
+        resetTrail();
+        this.showCheckFeedback("error", "Zgubiłaś trop", "Zacznij od nowa");
       };
 
-      state.handlers.onPlayToggle = () => {
-        state.isPlaying = !state.isPlaying;
-        state.playBtnEl.textContent = state.isPlaying ? "Pauza" : "Graj";
-        state.playBtnEl.setAttribute("aria-pressed", state.isPlaying ? "true" : "false");
+      gridEl.addEventListener("click", onGridClick);
+      listenerDisposers.push(() => gridEl.removeEventListener("click", onGridClick));
+      resetTrail();
+
+      this.puzzle35State = {
+        gridEl,
+        messageEl,
+        statusEl,
+        letters,
+        selected,
+        trailIndexes,
+        onGridClick,
+        resetTrail,
+        listenerDisposers,
+        walkTimeoutIds: [],
+        autoplayIntervalId: null
       };
-
-      state.handlers.onDirectionToggle = () => {
-        state.pingPong = !state.pingPong;
-        state.directionBtnEl.textContent = state.pingPong ? "Tryb: ping-pong" : "Tryb: pętla";
-        state.directionBtnEl.setAttribute("aria-pressed", state.pingPong ? "true" : "false");
-      };
-
-      selectEl.addEventListener("change", state.handlers.onSelect);
-      speedRangeEl.addEventListener("input", state.handlers.onSpeed);
-      playBtnEl.addEventListener("click", state.handlers.onPlayToggle);
-      directionBtnEl.addEventListener("click", state.handlers.onDirectionToggle);
-
-      state.handlers.onImageLoad = () => {
-        state.isSheetReady = true;
-        state.statusEl.textContent = "Arkusz sprite'ów załadowany. Możesz testować wszystkie sekwencje.";
-        drawFrame();
-      };
-
-      state.handlers.onImageError = () => {
-        state.isSheetReady = false;
-        state.statusEl.textContent = "Nie znaleziono pliku img/fox-spritesheet.png. Dodaj go do folderu img.";
-        drawFrame();
-      };
-
-      sheetImage.addEventListener("load", state.handlers.onImageLoad);
-      sheetImage.addEventListener("error", state.handlers.onImageError);
-
-      state.handlers.onSpeed();
-      state.handlers.onSelect();
-
-      state.lastTick = performance.now();
-      state.rafId = window.requestAnimationFrame(tick);
-      this.puzzle35State = state;
     },
 
     stopPuzzle35() {
@@ -4894,22 +5543,37 @@ const buildPuzzleOrderDiagnostics = () => {
         return;
       }
 
-      if (state.rafId) {
-        window.cancelAnimationFrame(state.rafId);
+      if (Array.isArray(state.walkTimeoutIds)) {
+        state.walkTimeoutIds.forEach((timeoutId) => {
+          window.clearTimeout(timeoutId);
+        });
       }
 
-      state.selectEl.removeEventListener("change", state.handlers.onSelect);
-      state.speedRangeEl.removeEventListener("input", state.handlers.onSpeed);
-      state.playBtnEl.removeEventListener("click", state.handlers.onPlayToggle);
-      state.directionBtnEl.removeEventListener("click", state.handlers.onDirectionToggle);
-      state.sheetImage.removeEventListener("load", state.handlers.onImageLoad);
-      state.sheetImage.removeEventListener("error", state.handlers.onImageError);
+      if (state.autoplayIntervalId) {
+        window.clearInterval(state.autoplayIntervalId);
+      }
+
+      if (typeof state.stopAutoplay === "function") {
+        state.stopAutoplay();
+      }
+
+      if (state.gridEl && state.onGridClick) {
+        state.gridEl.removeEventListener("click", state.onGridClick);
+      }
+
+      if (Array.isArray(state.listenerDisposers)) {
+        state.listenerDisposers.forEach((dispose) => {
+          if (typeof dispose === "function") {
+            dispose();
+          }
+        });
+      }
 
       this.puzzle35State = null;
     },
 
     initPuzzle61() {
-      this.stopPuzzle61();
+
       const inputEl = document.getElementById("puzzle61Input");
       const canvasEl = document.getElementById("puzzle61Canvas");
       if (!inputEl || !canvasEl) {
@@ -5492,14 +6156,13 @@ const buildPuzzleOrderDiagnostics = () => {
 
       const puzzleId = this.state.selectedPuzzle;
       const hints = this.getPuzzleHintEntries(puzzleId);
-      const hasPuzzle3BonusButton = puzzleId === 3;
       this.els.hintsButtons.innerHTML = "";
 
       if (this.els.hintsEmpty) {
-        this.els.hintsEmpty.classList.toggle("hidden", hints.length > 0 || hasPuzzle3BonusButton);
+        this.els.hintsEmpty.classList.toggle("hidden", hints.length > 0);
       }
 
-      if (hints.length === 0 && !hasPuzzle3BonusButton) {
+      if (hints.length === 0) {
         return;
       }
 
@@ -5518,15 +6181,6 @@ const buildPuzzleOrderDiagnostics = () => {
         fragment.appendChild(button);
       });
 
-      if (hasPuzzle3BonusButton) {
-        const notHintButton = document.createElement("button");
-        notHintButton.type = "button";
-        notHintButton.className = "hint-btn";
-        notHintButton.dataset.hintKey = "puzzle3-not-hint";
-        notHintButton.textContent = "To nie jest podpowiedź";
-        fragment.appendChild(notHintButton);
-      }
-
       this.els.hintsButtons.appendChild(fragment);
     },
 
@@ -5536,30 +6190,6 @@ const buildPuzzleOrderDiagnostics = () => {
       }
 
       const puzzleId = this.state.selectedPuzzle;
-      if (puzzleId === 3 && hintKey === "puzzle3-not-hint") {
-        this.activeHintContext = null;
-
-        if (this.els.hintPopupTitle) {
-          this.els.hintPopupTitle.textContent = "To nie jest podpowiedź";
-        }
-
-        if (this.els.hintPopupText) {
-          this.els.hintPopupText.textContent = "zajrzyj do podpowiedzi nr 4 w Zagadce 1";
-        }
-
-        if (this.els.hintRevealBtn) {
-          this.els.hintRevealBtn.style.display = "none";
-        }
-
-        if (this.els.hintCloseBtn) {
-          this.els.hintCloseBtn.style.display = "block";
-        }
-
-        this.els.hintPopup.classList.add("show");
-        this.els.hintPopup.setAttribute("aria-hidden", "false");
-        return;
-      }
-
       const hints = this.getPuzzleHintEntries(puzzleId);
       const hint = hints.find((entry) => entry.key === hintKey);
       if (!hint) {
@@ -5597,12 +6227,12 @@ const buildPuzzleOrderDiagnostics = () => {
       if (this.els.hintPopupText) {
         this.els.hintPopupText.textContent = isRevealed
           ? hint.text
-          : "Ta podpowiedź jest ukryta. Kliknij \"Okryj podpowiedź\", aby ją zobaczyć.";
+          : "Ta podpowiedź jest ukryta. Kliknij \"Pokaż podpowiedź\", aby ją zobaczyć.";
       }
 
       if (this.els.hintRevealBtn) {
         this.els.hintRevealBtn.disabled = isRevealed;
-        this.els.hintRevealBtn.textContent = isRevealed ? "Podpowiedź odkryta" : "Okryj podpowiedź";
+        this.els.hintRevealBtn.textContent = isRevealed ? "Podpowiedź odkryta" : "Pokaż podpowiedź";
         this.els.hintRevealBtn.style.display = "inline-block";
       }
 
@@ -5660,6 +6290,31 @@ const buildPuzzleOrderDiagnostics = () => {
       this.saveState();
       this.renderHintButtons();
       this.refreshActiveHintPopup();
+    },
+
+    openMessagePopup(title, message) {
+      if (!this.els.hintPopup || !this.els.hintPopupText) {
+        return;
+      }
+
+      this.activeHintContext = null;
+
+      if (this.els.hintPopupTitle) {
+        this.els.hintPopupTitle.textContent = title || "Informacja";
+      }
+
+      this.els.hintPopupText.textContent = message || "";
+
+      if (this.els.hintRevealBtn) {
+        this.els.hintRevealBtn.style.display = "none";
+      }
+
+      if (this.els.hintCloseBtn) {
+        this.els.hintCloseBtn.style.display = "block";
+      }
+
+      this.els.hintPopup.classList.add("show");
+      this.els.hintPopup.setAttribute("aria-hidden", "false");
     },
 
     closeHintPopup() {
@@ -5891,17 +6546,18 @@ const buildPuzzleOrderDiagnostics = () => {
     },
 
     renderPuzzle43WordPairs() {
-      if (this.state.selectedPuzzle !== 43 || !this.els.puzzleContent) {
+      const pairSlots = this.els.puzzleContent
+        ? this.els.puzzleContent.querySelectorAll("[data-puzzle43-word]")
+        : [];
+
+      if (!pairSlots || pairSlots.length === 0) {
         return;
       }
 
-      const wordSlots = this.els.puzzleContent.querySelectorAll("[data-puzzle43-word]");
-      if (!wordSlots || wordSlots.length === 0) {
-        return;
-      }
-
-      wordSlots.forEach((slotEl) => {
-        const word = slotEl.dataset.puzzle43Word || "";
+      pairSlots.forEach((slotEl) => {
+        const word = typeof slotEl.dataset.puzzle43Word === "string"
+          ? slotEl.dataset.puzzle43Word.trim()
+          : "";
         this.setPuzzlePieceCardImageOrWord(slotEl, word);
       });
     },
@@ -6058,7 +6714,6 @@ const buildPuzzleOrderDiagnostics = () => {
       }
       this.saveState();
       this.renderPuzzleView();
-      this.playFanfareSound();
       this.setSaveIndicator("[DEBUG] Wszystkie zagadki oznaczone jako rozwiązane.");
     },
 
