@@ -366,16 +366,55 @@
     logicKeys: [PUZZLE_LOGIC_KEYS.COLOR_GRID, "puzzle-14"],
     content: `<div class="puzzle16-container">
   <div class="puzzle16-grid" id="puzzle16Grid"></div>
-  <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;">
-    <div class="puzzle16-happy-bg"></div>
+  <div id="puzzle16Celebration" class="puzzle16-celebration" style="display: none;" aria-hidden="true">
+    <div class="puzzle16-spooky-scene">
+      <div class="p16-moon"></div>
+
+      <div class="p16-clouds p16-cloud1"><div></div><div></div></div>
+      <div class="p16-clouds p16-cloud2"><div></div><div></div></div>
+      <div class="p16-clouds p16-cloud3"><div></div><div></div></div>
+      <div class="p16-clouds p16-cloud4"><div></div><div></div></div>
+      <div class="p16-clouds p16-cloud5"><div></div><div></div></div>
+
+      <div class="p16-smoke"><div></div></div>
+
+      <div class="p16-tree p16-tree1"></div>
+      <div class="p16-tree p16-tree2"></div>
+      <div class="p16-tree p16-tree3"></div>
+      <div class="p16-tree p16-tree4"></div>
+      <div class="p16-tree p16-tree5"></div>
+
+      <div class="p16-dancing-line">
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-rounded-eyes"></div><div class="p16-rounded-eyes"></div><div class="p16-mean-mouth"></div>
+        </div>
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-eye"></div><div class="p16-eye p16-eye-right"></div><div class="p16-bb-mouth"></div>
+        </div>
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-rounded-eyes p16-baby-eyes"></div><div class="p16-rounded-eyes p16-baby-eyes"></div><div class="p16-mean-mouth"></div>
+        </div>
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-rounded-eyes"></div><div class="p16-rounded-eyes"></div><div class="p16-rounded-mouth"></div>
+        </div>
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-eye"></div><div class="p16-eye p16-eye-right"></div><div class="p16-bb-mouth"></div>
+        </div>
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-rounded-eyes"></div><div class="p16-rounded-eyes"></div><div class="p16-mean-mouth"></div>
+        </div>
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-eye"></div><div class="p16-eye p16-eye-right"></div><div class="p16-bb-mouth"></div>
+        </div>
+        <div class="p16-pumpkin">
+          <div class="p16-stem"></div><div class="p16-heart"></div><div class="p16-rounded-eyes p16-baby-eyes"></div><div class="p16-rounded-eyes p16-baby-eyes"></div><div class="p16-mean-mouth"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>`,
     solution: "dynia",
-    hint1: "Czy potrafisz rozpoznać te pomniki?",
-    hint2: "Czy wiesz gdzie się znajdują?",
-    hint3: "Spróbuj zlokalizować je na mapie.",
-    hint4: "Coś powinno się pokazać",
-    hint5: "Czytaj od zachodu"
+    hint1: "Jest to warzywo:)",
   };
   PUZZLE_DATA[15] = {
     title: "Frère Jacques",
@@ -402,9 +441,9 @@
   </div>
 </div>`,
     solution: "fortepian",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Licznik postępu na dole pomoże ci znaleźć odpowiednią tonację",
+    hint2: "Tytuł też może pomóc",
+    hint3: "Jeśli powtarzanie sprawia problem, możesz zanotować odpowiednie klawisze w notatkach"
   };
   PUZZLE_DATA[16] = {
     title: "Roszada",
@@ -495,8 +534,6 @@
 </div>`,
     solution: "kryptografia",
     partial_solution: [
-      { key: "krypto", message: "Połowa drogi! Dodaj 6 liter na koniec." },
-      { key: "kryptogr", message: "Bardzo blisko! Jeszcze 2 litery." }
     ],
     hint1: "Poczytaj https://pl.wikipedia.org/wiki/Szyfr_Cezara",
     hint2: "Użyj suwaka by odszyfrować tekst",
@@ -510,11 +547,10 @@
 </div>`,
     solution: "Rabat",
     partial_solution: [
-      { key: "Maroko", message: "Prawie! Czy coś przeoczyłaś?" }
+      { key: "Maroko", message: "Prawie! Ale przyjrzyj się uważniej obrazkowi" }
     ],
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Co może symbolizować ten kształt?",
+    hint2: "Czy na obrazku jest jakiś szczegół który może być istotny?",
   };
   PUZZLE_DATA[20] = {
     //TODO hint
@@ -527,9 +563,8 @@
     partial_solution: [
       { key: "8079", message: "To byłoby za proste:)" }
     ],
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "Tytuł jest sporą podowiedzią",
+    hint2: "To nie są liczby:)",
   };
   PUZZLE_DATA[21] = {
     title: "W mroku czają się bestie",
@@ -676,7 +711,7 @@
   </div>
 </div>`,
     solution: "8461259",
-    hint1: "TODO hint 1",
+    hint1: "czy widzisz tu jakieś słowo?",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
@@ -778,6 +813,7 @@
   };
   PUZZLE_DATA[29] = {
     title: "",
+    wip: true,
     logicKeys: ["puzzle-29"],
     content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
     solution: "panika",
@@ -1830,6 +1866,14 @@
     hint2: "Tytuł zagadki jest mylący",
     hint3: "Są tu też litery - czy potrafisz je znaleźć?"
   };
+PUZZLE_DATA[59] = {
+    title: "Piosenka z dziurami",
+    logicKeys: ["puzzle-59"],
+    work_in_progress: true,
+    content: `<p><strong>Wiele operacji przetworzeń słowa (odwrócenie, dodanie litery, odejmowanie itd)</strong></p>`,
+};
+
+
   PUZZLE_DATA[60] = {
     title: "Trudne się wylosowało",
     logicKeys: ["puzzle-60"],
@@ -1852,6 +1896,16 @@
     <canvas id="puzzle61Canvas" class="puzzle61-canvas" aria-label="Podgląd tekstu w alfabecie pikselowym"></canvas>
   </div>
 </div>`,
+    solution: "",
+    hint1: "TODO hint 1",
+    hint2: "TODO hint 2",
+    hint3: "TODO hint 3"
+  };
+  PUZZLE_DATA[62] = {
+    title: "Dużo operacji na Stringu",
+    logicKeys: ["puzzle-62"],
+    work_in_progress: true,
+    content: `<p><strong>Wiele operacji przetworzeń słowa (odwrócenie, dodanie litery, odejmowanie itd)</strong></p>`,
     solution: "",
     hint1: "TODO hint 1",
     hint2: "TODO hint 2",
@@ -2964,7 +3018,7 @@ const buildPuzzleOrderDiagnostics = () => {
 
       const resultEl = document.getElementById("puzzle6Result");
       if (resultEl) {
-        resultEl.textContent = `Rozwiązanie odkryte: ${solution}`;
+        resultEl.textContent = "Rozwiązanie odkryte: fortepian";
       }
 
       this.setSaveIndicator("Sekwencja poprawna! Hasło zostało ujawnione.");
@@ -4376,9 +4430,10 @@ const buildPuzzleOrderDiagnostics = () => {
         container.classList.toggle("puzzle16-solved", Boolean(isSolved));
       }
 
-      if (!isSolved && celebration) {
-        celebration.classList.remove("play");
-        celebration.style.display = "none";
+      if (celebration) {
+        celebration.classList.toggle("play", Boolean(isSolved));
+        celebration.style.display = isSolved ? "block" : "none";
+        celebration.setAttribute("aria-hidden", isSolved ? "false" : "true");
       }
     },
 
@@ -4389,14 +4444,6 @@ const buildPuzzleOrderDiagnostics = () => {
         celebration.style.display = "block";
         void celebration.offsetWidth;
         celebration.classList.add("play");
-
-        window.setTimeout(() => {
-          if (!this.puzzle16State || !this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.COLOR_GRID)) {
-            return;
-          }
-          celebration.style.display = "none";
-          celebration.classList.remove("play");
-        }, 900);
       }
     },
 
