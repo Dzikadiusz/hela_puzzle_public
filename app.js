@@ -2051,6 +2051,7 @@ const buildPuzzleOrderDiagnostics = () => {
     puzzle28State: null,
     puzzle32State: null,
     puzzle38State: null,
+    puzzle38LabyrinthState: null,
     puzzle36State: null,
     puzzle48State: null,
     puzzle35State: null,
@@ -2596,6 +2597,7 @@ const buildPuzzleOrderDiagnostics = () => {
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
+      this.stopPuzzle38Labyrinth();
       this.stopPuzzle36Mystery();
       this.stopPuzzle48Challenge();
       this.stopPuzzle61();
@@ -2719,6 +2721,7 @@ const buildPuzzleOrderDiagnostics = () => {
       this.stopPuzzle28Simulation();
       this.stopPuzzle32Board();
       this.stopPuzzle38Board();
+      this.stopPuzzle38Labyrinth();
       this.stopPuzzle36Mystery();
       this.stopPuzzle48Challenge();
       this.stopPuzzle61();
@@ -2844,7 +2847,7 @@ const buildPuzzleOrderDiagnostics = () => {
       }
 
       if (document.getElementById("puzzle38Canvas")) {
-        this.initPuzzle38Board();
+        this.initPuzzle38Labyrinth();
       }
 
       if (this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.MYSTERY)) {
@@ -5167,12 +5170,164 @@ const buildPuzzleOrderDiagnostics = () => {
     },
 
     initPuzzle38Board() {
+      if (!this.isCurrentPuzzleLogicKey(PUZZLE_LOGIC_KEYS.CONNECTIONS)) {
+        return;
+      }
+
+      this.stopPuzzle38Board();
+      const boardsHostEl = document.getElementById("puzzle38Boards");
+      const statusEl = document.getElementById("puzzle38Status");
+      if (!boardsHostEl || !statusEl) {
+        return;
+      }
+
+      const boardConfigs = [
+        {
+          nodeLabelRows: ["AA", "LT", "AA"],
+          wordLabel: "la la la la"
+        },
+        {
+          nodeLabelRows: ["TE", "OR", "KA"],
+          wordLabel: "kot"
+        },
+        {
+          nodeLabelRows: ["LK", "AM", "SĘ"],
+          wordLabel: "ma klasę"
+        },
+        {
+          nodeLabelRows: ["ZC", "KA", "ES"],
+          wordLabel: "skacze"
+        },
+        {
+          nodeLabelRows: ["TÓ", "AN", "SŁ"],
+          wordLabel: "na stół"
+        },
+        {
+          nodeLabelRows: ["KAT", "XCU", "ZHM"],
+          wordLabel: "ach tak"
+        }
+      ];
+      const boardCount = boardConfigs.length;
+      const createGridNodes = (rows, cols, leftPercent, topPercent, stepX, stepY) => {
+        const points = [];
+        for (let row = 0; row < rows; row += 1) {
+          for (let col = 0; col < cols; col += 1) {
+            points.push({
+              x: leftPercent + col * stepX,
+              y: topPercent + row * stepY
+            });
+          }
+        }
+        return points;
+      };
+
+      boardsHostEl.innerHTML = "";
+      const svgNS = "http://www.w3.org/2000/svg";
+      const boards = [];
+      const fragment = document.createDocumentFragment();
+
+      for (let boardIndex = 0; boardIndex < boardCount; boardIndex += 1) {
+        const boardConfig = boardConfigs[boardIndex] || {};
+        const boardCardEl = document.createElement("section");
+        boardCardEl.className = "puzzle38-board-card";
+
+        const boardEl = document.createElement("div");
+        boardEl.className = "puzzle38-board";
+        boardEl.dataset.p38Board = String(boardIndex);
+        boardEl.setAttribute("role", "group");
+        boardEl.setAttribute("aria-label", `Siatka ${boardIndex + 1}`);
+
+        const linesSvg = document.createElementNS(svgNS, "svg");
+        linesSvg.setAttribute("class", "puzzle38-lines");
+        linesSvg.setAttribute("viewBox", "0 0 100 100");
+        linesSvg.setAttribute("preserveAspectRatio", "none");
+        linesSvg.setAttribute("aria-hidden", "true");
+
+        const connectionsLayer = document.createElementNS(svgNS, "g");
+        const previewLine = document.createElementNS(svgNS, "line");
+        previewLine.setAttribute("class", "puzzle38-line puzzle38-line-preview");
+        previewLine.style.display = "none";
+
+        linesSvg.appendChild(connectionsLayer);
+        linesSvg.appendChild(previewLine);
+        boardEl.appendChild(linesSvg);
+
+        const boardNodes = boardIndex === boardCount - 1
+          ? createGridNodes(3, 3, 18, 18, 32, 32)
+          : createGridNodes(3, 2, 28, 18, 44, 32);
+
+        const configuredNodeLabels = Array.isArray(boardConfig.nodeLabelRows)
+          ? boardConfig.nodeLabelRows.flatMap((rowText) => {
+            return typeof rowText === "string" ? Array.from(rowText) : [];
+          })
+          : [];
+        const nodeLabels = configuredNodeLabels.length === boardNodes.length
+          ? configuredNodeLabels
+          : boardNodes.map((_, labelIndex) => String(labelIndex + 1));
+
+        boardNodes.forEach((node, nodeIndex) => {
+          const nodeBtn = document.createElement("button");
+          nodeBtn.type = "button";
+          nodeBtn.className = "puzzle38-node";
+          nodeBtn.dataset.p38Board = String(boardIndex);
+          nodeBtn.dataset.p38Index = String(nodeIndex);
+          const nodeLabel = nodeLabels[nodeIndex] || "";
+          nodeBtn.style.left = `${node.x}%`;
+          nodeBtn.style.top = `${node.y}%`;
+          nodeBtn.setAttribute("aria-label", `Siatka ${boardIndex + 1}, punkt ${nodeIndex + 1}: ${nodeLabel}`);
+
+          const labelEl = document.createElement("span");
+          labelEl.className = "puzzle38-node-label";
+          labelEl.textContent = nodeLabel;
+          nodeBtn.appendChild(labelEl);
+
+          boardEl.appendChild(nodeBtn);
+        });
+
+        const mapWordEl = document.createElement("p");
+        mapWordEl.className = "puzzle38-map-word";
+        mapWordEl.textContent = typeof boardConfig.wordLabel === "string" ? boardConfig.wordLabel : "";
+
+        boardCardEl.appendChild(boardEl);
+        boardCardEl.appendChild(mapWordEl);
+        fragment.appendChild(boardCardEl);
+
+        boards.push({
+          boardEl,
+          nodes: boardNodes,
+          connectionsLayer,
+          previewLine,
+          connections: [],
+          activeFromIndex: null,
+          pointerX: null,
+          pointerY: null
+        });
+      }
+
+      boardsHostEl.appendChild(fragment);
+
+      this.puzzle38State = {
+        statusEl,
+        boards,
+        activeBoardIndex: null
+      };
+
+      this.updatePuzzle38NodeSelection();
+      this.renderPuzzle38Lines();
+      this.updatePuzzle38Status("Kliknij czerwone kółko, aby rozpocząć rysowanie linii.");
+    },
+
+    stopPuzzle38Board() {
+      this.puzzle38State = null;
+    },
+
+    initPuzzle38Labyrinth() {
       const canvas = document.getElementById("puzzle38Canvas");
       if (!canvas) {
         return;
       }
 
-      this.stopPuzzle38Board();
+      this.stopPuzzle38Labyrinth();
 
       const ctx = canvas.getContext("2d");
       const LW = 700;
@@ -5445,14 +5600,14 @@ const buildPuzzleOrderDiagnostics = () => {
       };
 
       loop();
-      this.puzzle38State = { rafId, keys };
+      this.puzzle38LabyrinthState = { rafId, keys };
     },
 
-    stopPuzzle38Board() {
-      if (this.puzzle38State && this.puzzle38State.rafId) {
-        cancelAnimationFrame(this.puzzle38State.rafId);
+    stopPuzzle38Labyrinth() {
+      if (this.puzzle38LabyrinthState && this.puzzle38LabyrinthState.rafId) {
+        cancelAnimationFrame(this.puzzle38LabyrinthState.rafId);
       }
-      this.puzzle38State = null;
+      this.puzzle38LabyrinthState = null;
     },
 
     initPuzzle35() {
