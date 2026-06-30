@@ -1151,9 +1151,8 @@
     hint4: "Pierwszy symbol wskazuje na 3, a przez to na literę Z"
   };
   PUZZLE_DATA[43] = {
-    title: "Podobieństwa i różnice",
+    title: "Jedna różnica",
     logicKeys: ["puzzle-43"],
-    work_in_progress: true,
     content: `<div style="display:grid; gap:0.8rem; justify-items:center; text-align:center;">
   <div id="puzzle43Pairs" style="display:grid; gap:0.45rem; width:100%; max-width:560px;">
     <div style="display:flex; gap:0.6rem; justify-content:center; align-items:center; width:max-content; margin:0 auto;">
@@ -1199,18 +1198,23 @@
   </div>
 </div>`,
     solution: "prosiaczek",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "zrobienie notatek może pomóc",
+    hint2: "Znajdź coś co różni te pary",
+    hint3: "nie skupiaj się na obrazkach a tym co symbolizują"
   };
   PUZZLE_DATA[44] = {
     title: "Mystery",
     puzzleKey: "mystery-grid",
     logicKeys: [PUZZLE_LOGIC_KEYS.MYSTERY, "puzzle-44"],
-    work_in_progress: true,
     content: `<div class="puzzle36-wrap">
   <div class="puzzle36-casefile">
-    <p>TODO podmień opis!!!</p>
+      <p><strong>Znajdź sprawcę! Ustal narzędzie i miejsce .</strong></p>
+  <p><em>Wczorajszej nocy w na terenie posiadłości Rodziny Kwikertonów zabito Sir Prosiaczka Penningswortha.</em></p>
+  <p><em>Ciało znaleziono w fontannie na dziedzińcu, jednak wszystko wskazuje na to że morderstwo zostało dokonane gdzie indziej.</em></p>
+  <p><em>Ustalono czas zbrodni na północ i jedynymi osobami, które nie miały alibi byli Ada, Bartek i Celina.</em></p>
+  <p><em>Każda z tych osób mogła mieć przy sobie jedno z trzech narzędzi: klucz, lupę lub babeczkę - jedno z nich zostało użyte w zbrodni.
+  Do wyboru mamy trzy miejsca zbrodni: bibliotekę, galerię i wieżę. Każda z podejrzanych osób znajdowała się o północy w innym pomieszczeniu.
+  Twój asystent śledczy ustalił też poniżesze fakty:</em></p>
   </div>
 
   <ul class="puzzle36-clues">
@@ -1260,7 +1264,7 @@
   <p id="puzzle36Status" class="puzzle36-status" aria-live="polite">Zaznaczaj wskazówki w siatce.</p>
 </div>`,
     solution: "zbrodnia",
-    hint1: "TODO hint 1",
+    hint1: "Tabelka może pomóc w dedukcji - użyj jej!",
     hint2: "TODO hint 2",
     hint3: "TODO hint 3"
   };
