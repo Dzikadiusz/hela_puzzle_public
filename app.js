@@ -217,8 +217,9 @@
     logicKeys: ["puzzle-3"],
     content: `<p>Zadania mają też przygotowane podpowiedzi - znajdziesz je na samym dole strony w osobnej sekcji.</p>
 <p>Zachęcam jednak, żeby korzystać z nich oszczędnie - czasem lepiej odłożyć rozwiązywanie na później i wrócić - satysfakcja z wymyślenia czegoś samemu zawsze jest większa!</p>
+<p>W przypadku tej zagadki jednak, odpowiedź znajdziesz w czwartej podpowiedzi Zagadki 1</p>
 `,
-    solution: "",
+    solution: "pomoc",
     hint1: "To nie jest przycisk który ci się przyda",
     hint2: "Ten też nie",
     hint3: "Ani ten"
@@ -818,8 +819,7 @@
     content: `<p><strong>W tej chwili w wagonie zaczela sie [...]</strong></p><p>ISBN 9788324033331, strona 169</p>`,
     solution: "panika",
     hint1: "Co oznacza ISBN?",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint2: "Poszukaj odpowiedniej książki"
   };
   PUZZLE_DATA[30] = {
     title: "Kurczaczek",
@@ -934,8 +934,10 @@
     title: "Magiczny Ogród",
     puzzleKey: "life-magic-garden",
     logicKeys: [PUZZLE_LOGIC_KEYS.LIFE, "puzzle-37"],
-    work_in_progress: true,
     content: `<div id="puzzle28Wrap" class="puzzle28-wrap">
+
+
+    
   <div class="puzzle28-controls">
     <button type="button" id="puzzle28ToggleBtn" class="small-btn">Start</button>
     <button type="button" id="puzzle28StepBtn" class="small-btn">+1 Dzień</button>
@@ -954,17 +956,24 @@
     <p>Zielone pole z 2 albo 3 zielonymi sąsiadami pozostaje zarośniete kolejnego dnia;</p>
     <p>Roślina, która ma tylko jednego lub mniej zielonych sąsiadów wysycha z samotności.</p>
     <p>Roślina, która ma 4rech lub więcej sąsiadów, usycha z braku wody i zatłoczenia.</p>
+    <p>------------------------------------------</p>
+    <p>Zasadziłem te kwiaty na środku ogrodu. Po ___ dniach umarły...</p>
+
+        
+
+    <img src="img/garden.png" alt="Kwiaty" style="width: 100%;  height: auto; display: block; border-radius: 8px;">
+
+
   </div>
 </div>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    solution: "130",
+    hint1: "Nie musisz rozumieć jak działa ogród - wystarczy, że zasadzisz prawidłowo kwiaty i będziesz obserwować",
+    hint2: "Używaj resetu, prędkości i +1 dnia - ta kombinacja pozwoli ci znaleźć rozwiązanie",
+    hint3: "Rozwiązanie zapisz cyfrą"
   };
   PUZZLE_DATA[38] = {
     title: "Labirynt",
     logicKeys: ["puzzle-38"],
-    work_in_progress: true,
     content: `<div class="p38-wrap">
   <canvas id="puzzle38Canvas" class="p38-canvas" aria-label="Mapa tuneli z pojazdem"></canvas>
   <div class="p38-controls" aria-label="Sterowanie pojazdem">
@@ -1871,49 +1880,119 @@
     hint3: "Są tu też litery - czy potrafisz je znaleźć?"
   };
 PUZZLE_DATA[59] = {
-    title: "Piosenka z dziurami",
+    title: "Kilka zmian",
     logicKeys: ["puzzle-59"],
-    work_in_progress: true,
-    content: `<p><strong>Wiele operacji przetworzeń słowa (odwrócenie, dodanie litery, odejmowanie itd)</strong></p>`,
+    content:
+     `<p><strong>RA -> +OB -> LUSTRO -> POLSKI -> CEZAR 0,9 -> wyrzuć M-> (123 przestaw 312) -> ???</p>`
+    ,
+ 
 };
 
 
   PUZZLE_DATA[60] = {
     title: "Trudne się wylosowało",
     logicKeys: ["puzzle-60"],
-    work_in_progress: true,
     content: `<p><strong>Będziemy skakać po zagadkach (hints)</strong></p>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    solution: "tir",
+    hint1: "Zacznij od słowa RA i po kolei przeprowadzaj operacje wymienione w ciągu",
+    hint2: "Będzie trzeba dodawać, przestawiać i odejmować litery a także tłumczayć i deszyfrować",
   };
     PUZZLE_DATA[61] = {
     title: "Alfabet roślin",
       puzzleKey: "pixel-font",
       logicKeys: [PUZZLE_LOGIC_KEYS.PIXEL_FONT, "puzzle-61"],
-    work_in_progress: true,
     content: `<div class="puzzle61-wrap">
   <p>Wpisz tekst, aby zobaczyć go w pikselowym alfabecie.</p>
   <input type="text" id="puzzle61Input" class="puzzle61-input" placeholder="Wpisz tutaj..." autocomplete="off" spellcheck="false">
   <div class="puzzle61-canvas-wrap">
     <canvas id="puzzle61Canvas" class="puzzle61-canvas" aria-label="Podgląd tekstu w alfabecie pikselowym"></canvas>
   </div>
-</div>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+  <p>Wśród kwiatów zauważyłem coś dziwnego - Te które przypominały początkowo litery, po 3 dniach zmieniały się w dziwne symbole - każdy symbol dojrzewał osobno. Nad ogrodem znalazłem tę dziwną wiadomość - czy kwiaty próbują mi coś powiedzieć?</p>
+   
+<div style="display: flex; gap: 5px;">
+    <img src="img/conway/A.png">
+    <img src="img/conway/M.png">
+    <img src="img/conway/B.png">
+    <img src="img/conway/R.png">
+    <img src="img/conway/O.png">
+    <img src="img/conway/Z.png">
+    <img src="img/conway/J.png">
+    <img src="img/conway/A.png">
+</div>
+
+  </div>`,
+    solution: "ambrozja",
+    hint1: "Ta zagadka nie jest trudna ale wymaga trochę pracy użyj liter zapisanych w pikselowym alfabecie i zasadź je w ogrodzie i zobacz w co zmienią się po 3 dniach",
+    hint2: "Pamiętaj by sadzić jedną literę na raz i rób to na środku ogrodu",
+    hint3: "Możesz w ten sposób przetłumaczyć cały alfabet na język roślin - wtedy dasz radę odczytać wiadomość",
+    hint4: "Pierwsza litera to A - sprawdź czy tłumaczysz symbole poprawnie"
   };
   PUZZLE_DATA[62] = {
-    title: "Dużo operacji na Stringu",
+    title: "Gdy brakuje słów...",
     logicKeys: ["puzzle-62"],
-    work_in_progress: true,
-    content: `<p><strong>Wiele operacji przetworzeń słowa (odwrócenie, dodanie litery, odejmowanie itd)</strong></p>`,
-    solution: "",
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    content:
+    
+    `
+    
+<audio controls>
+    <source src="sounds/brak.mp3" type="audio/mpeg">
+</audio>
+
+<div style="
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #f5f5f5;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.8;
+    white-space: pre-line;
+    font-size: 1.1rem;
+">
+W starych szufladach kurzy się czas,
+a ja szukam śladów, których nie zna nikt z nas.
+Czy noc ukryła odpowiedź pod warstwą mgły?
+Zgubione wspomnienia wracają tylko w sny.
+
+<strong style="color:#ffd700;">
+Może wiesz, gdzie chowają się sekrety dni,
+gdzie cisza zapisuje niewypowiedziane łzy.
+Patrzę w cienie, które prowadzą mnie przez mrok,
+a każdy krok odsłania kolejny zamknięty rok.
+</strong>
+
+Tak wiele pytań niesie wiatr po pustych ulicach,
+jakie znaczenie mają znaki na starych tablicach?
+Słyszę opowieść, co w ścianach od dawna śpi,
+jak zagubione serce, które nie umie już żyć.
+
+<strong style="color:#ffd700;">
+Może wiesz, gdzie chowają się sekrety dni,
+gdzie cisza zapisuje niewypowiedziane łzy.
+Patrzę w cienie, które prowadzą mnie przez mrok,
+a każdy krok odsłania kolejny zamknięty rok.
+</strong>
+
+W oddali samotne zwierze patrzy w bladą dal,
+jakby znało odpowiedzi i mój najcięższy żal.
+Tak cicho przemijają godziny pośród mgieł,
+a czasem ktoś tupie za ścianą — czy to tylko sen?
+
+Pragnę znaleźć prawdę, choć świat ją skrywa i
+delikatnie chowa ją przed oczami mymi.
+Może się odnajdzie tam, gdzie kończy się skupienie,
+w zakurzonych słowach pozostawionych w cieniu.
+
+Jak dawna wiadomość zamknięta skorupie,
+czeka na odkrycie, choć nikt o niej nie mówi.
+A gdy zniknie ostatni ślad i zgaśnie każdy trop,
+zrozumiem, że tajemnice żyją głęboko pod nocą.
+</div>
+`,
+    solution: "żółw",
+    hint1: "Posłuchaj uważnie - czy coś się nie zgadza?",
+    hint2: "W piosence brakuje słów",
+    hint3: "Z brakujących fragmentów złóż zagadkę"
   };
   PUZZLE_DATA[64] = {
     title: "Na deser",
@@ -5447,6 +5526,18 @@ const buildPuzzleOrderDiagnostics = () => {
         rotSpeed: 0.05
       };
 
+const checkpoints = [
+  { x: 220, y: 115, visited: false }, // upper left
+  { x: 480, y: 115, visited: false }, // upper right
+  { x: 190, y: 275, visited: false }, // middle left
+  { x: 510, y: 275, visited: false }, // middle right
+  { x: 350, y: 385, visited: false },  // bottom chamber
+  { x: 440, y: 430, visited: false }  // last 
+];
+
+const CHECKPOINT_RADIUS = 12;
+let labyrinthSolved = false;
+
       const keys = { fwd: false, bwd: false, cw: false, ccw: false };
 
       const bindBtn = (id, key) => {
@@ -5599,13 +5690,64 @@ const buildPuzzleOrderDiagnostics = () => {
       let rafId = null;
       const loop = () => {
         update();
+        
+checkpoints.forEach((cp) => {
+  if (cp.visited) {
+    return;
+  }
+
+  const dx = vessel.x - cp.x;
+  const dy = vessel.y - cp.y;
+
+  if (Math.hypot(dx, dy) <= CHECKPOINT_RADIUS + VESSEL_R) {
+    cp.visited = true;
+  }
+});
+
+if (
+  !labyrinthSolved &&
+  checkpoints.every(cp => cp.visited)
+) {
+  labyrinthSolved = true;
+
+  this.showCheckFeedback("success", "Brawo!", "Rozwiązanie to: minotaur")
+  // setTimeout(() => {
+  //   alert("Rozwiązanie to: minotaur");
+  // }, 100);
+}
+
         draw();
+        
+checkpoints.forEach((cp) => {
+  ctx.beginPath();
+  ctx.arc(
+    cp.x,
+    cp.y,
+    CHECKPOINT_RADIUS,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fillStyle = cp.visited
+    ? "#2ecc71"
+    : "#f1c40f";
+
+  ctx.fill();
+
+  ctx.strokeStyle = "#111";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+});
+
         rafId = requestAnimationFrame(loop);
       };
 
       loop();
       this.puzzle38LabyrinthState = { rafId, keys };
+      
     },
+
+    
 
     stopPuzzle38Labyrinth() {
       if (this.puzzle38LabyrinthState && this.puzzle38LabyrinthState.rafId) {
