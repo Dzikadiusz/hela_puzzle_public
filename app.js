@@ -129,7 +129,7 @@
   ]);
   const PUZZLE_35_AUTOPLAY_STEP_MS = 1400;
   // todo change the password
-  const PAIRS_PASSWORD = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed domos";
+  const PAIRS_PASSWORD = "May you ever appear where you are most needed and least expected";
   const LETTER_PAIR_CATALOG = {
     A: [["rak", "kara"], ["cel", "cela"]],
     B: [["rak", "brak"]],
@@ -1449,7 +1449,7 @@
     hint4: "Są obrócone o 90 stopni w prawo"
   };
   PUZZLE_DATA[53] = {
-    title: "Poemat też ma!",
+    title: "A poemat nie ma!",
     logicKeys: ["puzzle-53"],
     content: `<div class="puzzle53-wrap">
   <img src="img/e.jpg" alt="" class="puzzle53-image">
@@ -1461,9 +1461,9 @@
         key: "litera n", message: "wystarczy sama litera:)"
        }
     ],
-    hint1: "TODO hint 1",
-    hint2: "TODO hint 2",
-    hint3: "TODO hint 3"
+    hint1: "zagadka jest podchwytliwa",
+    hint2: "Skup się na słowach a nie ich znaczeniu",
+    hint3: "literki:)"
   };
   PUZZLE_DATA[54] = {
     work_in_progress: true,
@@ -1993,6 +1993,22 @@ zrozumiem, że tajemnice żyją głęboko pod nocą.
     hint1: "Posłuchaj uważnie - czy coś się nie zgadza?",
     hint2: "W piosence brakuje słów",
     hint3: "Z brakujących fragmentów złóż zagadkę"
+  };
+    PUZZLE_DATA[63] = {
+    title: "Od początku do końca",
+    logicKeys: ["puzzle-63"],
+    content: `<p><strong>By dojść do słów ukrytych w cieniu,</strong></p>
+<p><strong>Wróć do zagadek i spójrz w skupieniu.</strong></p>
+<p><strong>Szukaj dwóch rzeczy, co bez znaczenia były,</strong></p>
+<p><strong>Choć od początku obok wskazówek się kryły.</strong></p>
+<p><strong>Gdy je połączysz w jedną całość śmiało,</strong></p>
+<p><strong>Odkryjesz słowa — lecz skąd pochodzą?</strong></p>`,
+    solution: "Hobbit",
+    hint1: "Odwiedź wszystkie zagadki - jest  w nich coś czego do tej pory nie używaliśmy",
+    hint2: "Spójrz na dolną część strony",
+    hint3: "Teraz skup się na zależnościach między elementami - co je łączy, a co je odróżnia?",
+    hint4: "Z każdej pary wyciągniesz jedną literę",
+    hint4: "Skąd pochodzi to zdanie?"    
   };
   PUZZLE_DATA[64] = {
     title: "Na deser",
