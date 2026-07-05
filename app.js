@@ -1360,14 +1360,10 @@
     hint3: "TODO hint 3"
   };
   PUZZLE_DATA[47] = {
-    title: "Wycieczka do Kielc",
-    work_in_progress: true,
+    title: "Odpowiedź to numer data urodzenia Jagody w formacie DDMMRR",
     logicKeys: ["puzzle-47"],
     // Add content, solution, and hints as needed
-    solution: "wieje",
-    hint1: "Ta zagadka wymaga wycieczki do do miast Dzika",
-    hint2: "W następnej podpowiedzi jest odpowiedź",
-    hint3: "Odpowiedź to: WIEJE"
+    solution: "06072024",
   };
   PUZZLE_DATA[48] = {
     title: "Tłumaczenie",
@@ -1386,13 +1382,20 @@
     PUZZLE_DATA[49] = {
       title: "Brakujące słowa",
     logicKeys: ["puzzle-49"],
-      work_in_progress: true,
-      content: `<p>Matka naszego hobbita... ale co to jest hobbit? Zdaje mi się, że wymaga to wyjaśnienia. W dzisiejszych czasach bowiem hobbitów bardzo rzadko można spotkać: nie ma ich wiele, a poza tym unikają Dużych Ludzi — jak nazywają nas. Hobbici są — czy może byli — małymi ludźmi, mniejszymi od krasnoludów — różnią się też od nich tym, że nie noszą brody — lecz znacznie większymi od liliputów. Nie uprawiają wcale albo prawie wcale czarów, z wyjątkiem chyba zwykłej, powszedniej sztuki, która pozwala im znikać bezszelestnie i błyskawicznie, kiedy duzi, niemądrzy ludzie, jak ty i ja, zabłądzą w ich pobliże, hałasując niesłychanie głośno, tak że na milę można ich usłyszeć. Hobbici są skłonni do tycia, zwłaszcza w pasie: miewają wypięte brzuchy; ubierają się kolorowo (najchętniej zielono i żółto); nie używają obuwia, ponieważ stopy ich z przyrodzenia opatrzone są twardą podeszwą i porośnięte bujnym, ciemnym, brunatnym włosem, podobnie jak głowa (zwykle kędzierzawa); mają długie, zręczne, smagłe palce i poczciwe twarze, a śmieją się dużo, basowo i serdecznie (szczególnie po obiedzie, który — w miarę możności — zjadają dwa razy dziennie). Teraz już wiecie o nich dość na początek. Jak więc mówiłem, matką naszego hobbita — to jest Bilba Bagginsa — była słynna Belladonna Tuk, jedna z trzech niespotykanych córek Starego Tuka, głowy wszystkich hobbitów mieszkających Za Wodą, czyli za rzeką, która płynęła u stóp Pagórka. Powiadano, że dawnymi czasy ten i ów Tuk brał żonę z plemienia czarodziejów (nieżyczliwi twierdzili że to były gobliny); rzeczywiście Tukowie zawsze mieli w sobie coś niezwykle hobbitciego, a od czasu do czasu zdarzało się, że ktoś z członków tego rodu wyruszał w świat szukać przygód. Taki Tuk znikał dyskretnie, a rodzina nie rozgłaszała sprawy; fakt jednak, że Tukowie nie byli tak szanowani jak Bagginsowie, chociaż niewątpliwie od nich bogatsi.</p>
-  <p>Co prawda Belladonna Tuk, odkąd została panią Bungołą Baggins, nie miewała żadnych przygód. Bungo, ojciec Bilba, zbudował dla niej (częściowo za jej posag) norę tak wspaniałą, że nie znalazłoby się nic podobnego ani pod Pagórkiem, ani za Pagórkiem, ani Za Wodą, i w tej norze mieszkali małżonkowie aż do końca swoich dni. Mimo wszystko wydaje się prawdopodobne, że Bilbo, jedyny syn Belladonny, chociaż wyglądał i zachowywał się dokładnie tak, jakby był drugim wydaniem swojego solidnego i spokojnego ojca, odziedziczył po kądzieli ziarenko dziwactwa i że to ziarenko czekało tylko na okazję, by zakiełkować. Okazja jednak się nie nadarzyła, aż Bilbo dorósł, skończył pięćdziesiąt lat czy coś koło tego, i za-</p>`,
-      solution: "",
-      hint1: "TODO hint 1",
-      hint2: "TODO hint 2",
-      hint3: "TODO hint 3"
+      content: 
+      `
+   
+<p>I tolerate the moon and stars,</p>
+
+<p>I can't abide the sun,</p>
+
+<p>Banish me with torch light.</p>
+
+<p>And you'll see me turn and run.</p>
+
+  <p></p>`,
+      solution: "darkness",
+      hint1: "not a shadow",
     };
   PUZZLE_DATA[50] = {
     title: "Statki?",
@@ -1466,7 +1469,6 @@
     hint3: "literki:)"
   };
   PUZZLE_DATA[54] = {
-    work_in_progress: true,
     title: "Koło słów",
     logicKeys: ["puzzle-54"],
     content: `<div class="puzzle54-wrap">
@@ -2002,19 +2004,17 @@ zrozumiem, że tajemnice żyją głęboko pod nocą.
 <p><strong>Szukaj dwóch rzeczy, co bez znaczenia były,</strong></p>
 <p><strong>Choć od początku obok wskazówek się kryły.</strong></p>
 <p><strong>Gdy je połączysz w jedną całość śmiało,</strong></p>
-<p><strong>Odkryjesz słowa — lecz skąd pochodzą?</strong></p>`,
+<p><strong>Odkryjesz słowa — lecz kto je powiedział?</strong></p>`
+,
     solution: "Hobbit",
-    hint1: "Odwiedź wszystkie zagadki - jest  w nich coś czego do tej pory nie używaliśmy",
-    hint2: "Spójrz na dolną część strony",
-    hint3: "Teraz skup się na zależnościach między elementami - co je łączy, a co je odróżnia?",
-    hint4: "Z każdej pary wyciągniesz jedną literę",
-    hint4: "Skąd pochodzi to zdanie?"    
+    hint1: "Odwiedź wszystkie zagadki - jest  w nich coś. Coś podobnego do zagadki 43",
+    hint2: "Będzie trzeba dodawać, przestawiać i odejmować litery a także tłumczayć i deszyfrować",
+    
   };
   PUZZLE_DATA[64] = {
     title: "Na deser",
     logicKeys: ["puzzle-64"],
-    work_in_progress: true,
-    content: `<p><strong>Czy pamiętasz warzywo?</strong></p>`,
+    content: `<p><strong>Rozwiąż wiele zagadek i spójrz na nie wszystkie. I pamiętaj o dyni</strong></p>`,
     solution: "słonecznik",
     hint1: "Tej zagadki nie da się rozwiązać bez ukończenia większości poprzednich",
     hint2: "Gdzie najczęściej szukamy deseru w restauracji?",
